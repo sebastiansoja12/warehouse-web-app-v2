@@ -1,5 +1,6 @@
 package com.warehouse.warehouse.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,8 +20,12 @@ public class Paczka {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID orderId;
+    private int orderId;
 
+    @JsonProperty("kodPaczki")
+    private String kodPaczki;
+
+    @JsonProperty("isCustom")
     private boolean isCustom;
 
     @ManyToOne(fetch = LAZY)
