@@ -27,4 +27,8 @@ public class PaczkaController {
     public Paczka getPaczkaByKodPaczki(@PathVariable String kodPaczki){
         return paczkaService.findByKodPaczki(kodPaczki);
     }
+    @PutMapping("/{kodPaczki}")
+    public void updatePaczkaByKodPaczki(@RequestBody Paczka paczka, @PathVariable String kodPaczki){
+         paczkaService.update(paczka, kodPaczki);
+    }
 }

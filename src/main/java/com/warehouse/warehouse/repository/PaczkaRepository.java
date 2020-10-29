@@ -14,5 +14,4 @@ public interface PaczkaRepository extends JpaRepository<Paczka,Long> {
 
     List<Paczka> findAll();
     Optional<Paczka> findByKodPaczki(String kodPaczki);
-
 }

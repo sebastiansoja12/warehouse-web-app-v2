@@ -4,14 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class PaczkaRequest {
 
-    private UUID orderId;
+    private int orderId;
     private boolean isCustom;
 
 }

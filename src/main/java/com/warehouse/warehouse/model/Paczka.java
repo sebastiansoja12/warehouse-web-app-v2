@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.util.UUID;
 
 import static javax.persistence.FetchType.LAZY;
@@ -28,8 +29,11 @@ public class Paczka {
     @JsonProperty("isCustom")
     private boolean isCustom;
 
+    @JsonProperty("username")
     @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    @JoinColumn(name = "username", referencedColumnName = "username")
     private User user;
+
+    private Instant createdAt;
 
 }
