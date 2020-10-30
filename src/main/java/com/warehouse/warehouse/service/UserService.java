@@ -23,13 +23,6 @@ public class UserService {
     @Autowired
     private final UserRepository userRepository;
 
-
-    @Transactional
-    public User addUser(User user){
-        return userRepository.save(user);
-    }
-
-
     @Transactional(readOnly = true)
     public List<User> findAll(){
         return userRepository.findAll();

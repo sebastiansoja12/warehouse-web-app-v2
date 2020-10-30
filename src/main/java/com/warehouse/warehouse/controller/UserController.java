@@ -17,10 +17,6 @@ public class UserController {
 private final UserService userService;
 
 
-@PostMapping
-public User addUser(@RequestBody User user){
-    return  userService.addUser(user);
-}
     @GetMapping("/all")
     public List<User> getAll(){
         return userService.findAll();
