@@ -17,14 +17,14 @@ import static javax.persistence.FetchType.LAZY;
 @NoArgsConstructor
 @Entity
 @Builder
-public class Paczka {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int orderId;
 
-    @JsonProperty("kodPaczki")
-    private String kodPaczki;
+    @JsonProperty("productCode")
+    private String productCode;
 
     @JsonProperty("isCustom")
     private boolean isCustom;

@@ -1,8 +1,6 @@
 package com.warehouse.warehouse.controller;
 
-import com.warehouse.warehouse.model.Paczka;
 import com.warehouse.warehouse.model.User;
-import com.warehouse.warehouse.service.PaczkaService;
 import com.warehouse.warehouse.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;

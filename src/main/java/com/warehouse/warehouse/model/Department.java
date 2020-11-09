@@ -1,7 +1,6 @@
 package com.warehouse.warehouse.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,7 +33,7 @@ public class Department {
     private String departmentCode;
 
     @OneToOne(fetch = LAZY)
-    private Paczka paczka;
+    private Product product;
 
 
 }

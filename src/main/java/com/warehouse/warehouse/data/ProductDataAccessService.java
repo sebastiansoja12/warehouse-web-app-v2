@@ -1,31 +1,27 @@
 package com.warehouse.warehouse.data;
 
-import com.warehouse.warehouse.model.Paczka;
-import com.warehouse.warehouse.model.User;
+import com.warehouse.warehouse.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 
 @Repository
-public class PaczkaDataAccessService {
+public class ProductDataAccessService {
 
     @Autowired
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public PaczkaDataAccessService(JdbcTemplate jdbcTemplate) {
+    public ProductDataAccessService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
 
 
-    int insertStudent(UUID studentId, Paczka paczka) {
+    int insertStudent(UUID studentId, Product product) {
         String sql = "" +
                 "INSERT INTO student (" +
                 " student_id, " +

@@ -1,16 +1,19 @@
 package com.warehouse.warehouse.dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PaczkaRequest {
+public class AuthenticationResponse {
+    private String authenticationToken;
 
-    private int orderId;
-    private boolean isCustom;
+    private String username;
+
 
 }
