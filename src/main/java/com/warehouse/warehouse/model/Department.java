@@ -33,7 +33,7 @@ public class Department {
     private String departmentCode;
 
     @OneToOne(fetch = LAZY)
-    private Product product;
+    private Parcel parcel;
 
 
 }

@@ -17,21 +17,20 @@ import static javax.persistence.FetchType.LAZY;
 @NoArgsConstructor
 @Entity
 @Builder
-public class Product {
+public class Parcel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int orderId;
+    private int parcelId;
 
-    @JsonProperty("productCode")
-    private String productCode;
+    @JsonProperty("parcelCode")
+    private String parcelCode;
 
     @JsonProperty("isCustom")
     private boolean isCustom;
 
-    @JsonProperty("username")
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "username", referencedColumnName = "username")
+    @ManyToOne
+    @JoinColumn(name="username", nullable=false)
     private User user;
 
     private Instant createdAt;

@@ -1,6 +1,7 @@
 package com.warehouse.warehouse.model;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +12,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.time.Instant;
+import java.util.Set;
 import java.util.UUID;
 
 import static javax.persistence.FetchType.LAZY;
@@ -46,8 +48,11 @@ public class User {
     private String email;
 
     @NotEmpty(message="Role is required")
+    @JsonProperty("role")
     private String role;
 
+    @OneToMany(mappedBy="user")
+    private Set<Parcel> parcels;
 
     private boolean enabled;
 

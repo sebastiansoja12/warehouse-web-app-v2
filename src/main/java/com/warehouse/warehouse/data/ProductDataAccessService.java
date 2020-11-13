@@ -1,6 +1,6 @@
 package com.warehouse.warehouse.data;
 
-import com.warehouse.warehouse.model.Product;
+import com.warehouse.warehouse.model.Parcel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -21,7 +21,7 @@ public class ProductDataAccessService {
 
 
 
-    int insertStudent(UUID studentId, Product product) {
+    int insertStudent(UUID studentId, Parcel parcel) {
         String sql = "" +
                 "INSERT INTO student (" +
                 " student_id, " +

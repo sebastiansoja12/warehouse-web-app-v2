@@ -14,8 +14,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.*;
 import java.security.cert.CertificateException;
-import java.sql.Date;
 import java.time.Instant;
+import java.util.Date;
 
 import static io.jsonwebtoken.Jwts.parser;
 import static java.util.Date.from;
@@ -23,6 +23,7 @@ import static java.util.Date.from;
 @Service
 public class JwtProvider {
     private KeyStore keyStore;
+    @Value("900000")
     private Long jwtExpirationInMillis;
 
     @PostConstruct
@@ -32,13 +33,14 @@ public class JwtProvider {
             InputStream resourceAsStream = getClass().getResourceAsStream("/springblog.jks");
             keyStore.load(resourceAsStream, "secret".toCharArray());
         } catch (KeyStoreException | CertificateException | NoSuchAlgorithmException | IOException e) {
-            throw new WarehouseException("Exception occurred while loading keystore", e);
+            throw new WarehouseException("Exception occurred while loading keystore");
         }
+
 
     }
 
     public String generateToken(Authentication authentication) {
-        User principal = (User) authentication.getPrincipal();
+        org.springframework.security.core.userdetails.User principal = (User) authentication.getPrincipal();
         return Jwts.builder()
                 .setSubject(principal.getUsername())
                 .setIssuedAt(from(Instant.now()))
@@ -47,20 +49,12 @@ public class JwtProvider {
                 .compact();
     }
 
-    public String generateTokenWithUserName(String username) {
-        return Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(from(Instant.now()))
-                .signWith(getPrivateKey())
-                .setExpiration(Date.from(Instant.now().plusMillis(jwtExpirationInMillis)))
-                .compact();
-    }
 
     private PrivateKey getPrivateKey() {
         try {
             return (PrivateKey) keyStore.getKey("springblog", "secret".toCharArray());
         } catch (KeyStoreException | NoSuchAlgorithmException | UnrecoverableKeyException e) {
-            throw new WarehouseException("Exception occured while retrieving public key from keystore", e);
+            throw new WarehouseException("Exception occured while retrieving public key from keystore");
         }
     }
 

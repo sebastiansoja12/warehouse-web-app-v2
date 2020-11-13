@@ -1,6 +1,6 @@
 package com.warehouse.warehouse.repository;
 
-import com.warehouse.warehouse.model.Product;
+import com.warehouse.warehouse.model.Parcel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,8 +9,8 @@ import java.util.Optional;
 
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product,Long> {
+public interface ParcelRepository extends JpaRepository<Parcel,Long> {
 
-    List<Product> findAll();
-    Optional<Product> findByProductCode(String productCode);
+    List<Parcel> findAll();
+    Optional<Parcel> findByParcelCode(String parcelCode);
 }

@@ -49,6 +49,7 @@ private final JwtProvider jwtProvider;
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setFirstName(registerRequest.getFirstName());
         user.setLastName(registerRequest.getLastName());
+        user.setRole(registerRequest.getRole());
         user.setEnabled(false);
 
         userRepository.save(user);
