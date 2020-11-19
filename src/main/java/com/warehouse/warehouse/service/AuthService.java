@@ -67,7 +67,6 @@ private final JwtProvider jwtProvider;
         VerificationToken verificationToken = new VerificationToken();
         verificationToken.setToken(token);
         verificationToken.setUser(user);
-
         verificationTokenRepository.save(verificationToken);
         return token;
     }
@@ -75,7 +74,7 @@ private final JwtProvider jwtProvider;
     @Transactional
     void fetchUserAndEnable(VerificationToken verificationToken) {
         String username = verificationToken.getUser().getUsername();
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new WarehouseMailException("User not found with name - " + username));
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new WarehouseMailException("Uzytkownik nie znaleziony o nazwie - " + username));
         user.setEnabled(true);
         userRepository.save(user);
     }
@@ -83,7 +82,7 @@ private final JwtProvider jwtProvider;
 
     public void verifyAccount(String token){
         Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(token);
-        fetchUserAndEnable(verificationToken.orElseThrow(() -> new WarehouseMailException("Invalid Token")));
+        fetchUserAndEnable(verificationToken.orElseThrow(() -> new WarehouseMailException("Nieprawidlowy Token")));
     }
 
     public AuthenticationResponse login(LoginRequest loginRequest) {

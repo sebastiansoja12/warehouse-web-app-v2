@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
 import static javax.persistence.FetchType.LAZY;
@@ -21,18 +22,20 @@ public class Parcel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int parcelId;
+    private int id;
 
-    @JsonProperty("parcelCode")
+
+    @JsonProperty("kodPaczki")
     private String parcelCode;
 
-    @JsonProperty("isCustom")
+    @JsonProperty("czyStandardowa")
     private boolean isCustom;
 
-    @ManyToOne
-    @JoinColumn(name="username", nullable=false)
-    private User user;
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "id")
+    private Depot depot;
 
-    private Instant createdAt;
+
+
 
 }

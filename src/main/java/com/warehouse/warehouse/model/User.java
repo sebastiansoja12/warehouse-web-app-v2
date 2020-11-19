@@ -12,6 +12,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.time.Instant;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -31,29 +32,29 @@ public class User {
     @GeneratedValue(strategy=AUTO)
     private int userId;
 
-    @NotBlank(message="Username cannot be empty")
+    @JsonProperty("nazwaUzytkownika")
     private String username;
 
-    @NotBlank(message="Password cannot be empty")
+    @JsonProperty("haslo")
     private String password;
 
-  //  @NotBlank(message="First name cannot be empty")
+
+    @JsonProperty("imie")
     private String firstName;
 
-  //  @NotBlank(message="Last name cannot be empty")
+    @JsonProperty("nazwisko")
     private String lastName;
 
     @Email
-    @NotEmpty(message="Email is required")
     private String email;
 
-    @NotEmpty(message="Role is required")
-    @JsonProperty("role")
+    @NotEmpty(message="Rola jest wymagana")
+    @JsonProperty("rola")
     private String role;
 
-    @OneToMany(mappedBy="user")
-    private Set<Parcel> parcels;
 
+
+    @JsonProperty("czyAktywowane")
     private boolean enabled;
 
 

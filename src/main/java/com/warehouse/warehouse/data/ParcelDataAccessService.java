@@ -9,13 +9,13 @@ import java.util.UUID;
 
 
 @Repository
-public class ProductDataAccessService {
+public class ParcelDataAccessService {
 
     @Autowired
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public ProductDataAccessService(JdbcTemplate jdbcTemplate) {
+    public ParcelDataAccessService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

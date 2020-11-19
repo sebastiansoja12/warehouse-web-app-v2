@@ -18,8 +18,8 @@ public class ParcelController {
     private final ParcelService parcelService;
 
     @PostMapping
-    public Parcel addPaczka(@RequestBody LoginRequest loginRequest, @RequestBody Parcel parcel){
-        return parcelService.save( loginRequest, parcel);
+    public Parcel addPaczka( @RequestBody Parcel parcel){
+        return parcelService.save(parcel);
     }
     @GetMapping("/all")
     public List<Parcel> getAll(){
