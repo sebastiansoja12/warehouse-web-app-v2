@@ -6,13 +6,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.AUTO;
-
+import static javax.persistence.GenerationType.IDENTITY;
 
 
 @Data
@@ -24,7 +26,7 @@ import static javax.persistence.GenerationType.AUTO;
 public class DepotInformation {
 
     @Id
-    @GeneratedValue(strategy=AUTO)
+    @GeneratedValue()
     private Long id;
 
     @JsonProperty("miasto")
@@ -38,4 +40,6 @@ public class DepotInformation {
 
     @JsonProperty("kodOddzialu")
     private String depotCode;
+
+
 }

@@ -29,7 +29,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class User {
 
     @Id
-    @GeneratedValue(strategy=AUTO)
+    @GeneratedValue()
     private int userId;
 
     @JsonProperty("nazwaUzytkownika")

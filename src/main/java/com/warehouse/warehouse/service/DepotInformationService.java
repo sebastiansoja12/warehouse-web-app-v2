@@ -6,6 +6,7 @@ import com.warehouse.warehouse.repository.DepotInformationRepository;
 import com.warehouse.warehouse.repository.DepotRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -18,13 +19,11 @@ import java.util.List;
 public class DepotInformationService {
 
     private final DepotInformationRepository depotInformationRepository;
-    private final DepotRepository depotRepository;
 
-    @Transactional
+
+     @Transactional
     public DepotInformation save(DepotInformation depotInformation){
-        Depot depot = new Depot();
-        depot.setDepotInformation(depotInformation);
-        depotRepository.save(depot);
+
         return depotInformationRepository.save(depotInformation);
     }
 

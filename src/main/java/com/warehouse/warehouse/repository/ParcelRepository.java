@@ -13,4 +13,6 @@ public interface ParcelRepository extends JpaRepository<Parcel,Long> {
 
     List<Parcel> findAll();
     Optional<Parcel> findByParcelCode(String parcelCode);
+
+
 }

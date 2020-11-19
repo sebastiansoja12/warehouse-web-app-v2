@@ -8,12 +8,11 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/depots")
 public class DepotInformationController {
 
     private final DepotInformationService depotInformationService;
 
-    @PostMapping
+    @PostMapping("/api/depots/information")
     public DepotInformation addDepotInformation(@RequestBody DepotInformation depotInformation){
         return depotInformationService.save(depotInformation);
     }
