@@ -58,5 +58,10 @@ public class User {
     private boolean enabled;
 
 
+    public User(String username){
+        this.username= username;
+    }
+
+
 }
 

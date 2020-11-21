@@ -28,7 +28,7 @@ public class DepotService {
     }
 
     @org.springframework.transaction.annotation.Transactional(readOnly = true)
-    public List<Depot> findAllDepotByParcelId( UUID id) {
+    public List<Depot> findAllDepotByParcelId(UUID id) {
         return depotRepository.findByParcelId(id);
     }
 

@@ -1,8 +1,6 @@
 package com.warehouse.warehouse.service;
 
 import com.warehouse.warehouse.data.ParcelDataAccessService;
-import com.warehouse.warehouse.dto.AuthenticationResponse;
-import com.warehouse.warehouse.dto.LoginRequest;
 import com.warehouse.warehouse.model.Depot;
 import com.warehouse.warehouse.model.DepotInformation;
 import com.warehouse.warehouse.model.Parcel;
@@ -14,17 +12,17 @@ import com.warehouse.warehouse.repository.UserRepository;
 import com.warehouse.warehouse.security.JwtProvider;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -48,13 +46,30 @@ private final AuthService authService;
     public Parcel save(Parcel parcel){
         Depot depot = new Depot();
         DepotInformation depotInformation= new DepotInformation();
-        depotInformation.setId((long)2);
+        depotInformation.setId((long)3);
         depot.setDepotInformation(depotInformation);
         depot.setParcel(parcel);
         depot.setCreated_at(Instant.now());
+        depot.setUser(usernameToId());
         depotRepository.save(depot);
         return parcelRepository.save(parcel);
     }
+
+    public String auth(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (!(authentication instanceof AnonymousAuthenticationToken)) {
+            return  authentication.getName();
+        }
+        else {
+            return null;
+        }
+    }
+public User usernameToId(){
+    Optional<User> userOptional = userRepository.getUsersIdByUsername(auth());
+    User user = userOptional.orElseThrow(null);
+    return user;
+}
+
 
     @Transactional(readOnly = true)
     public List<Parcel> findAll(){

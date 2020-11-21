@@ -21,7 +21,7 @@ public class DepotController {
         return depotService.findAllDepots();
     }
 
-    @GetMapping("/all/{id}")
+    @GetMapping("/all/parcelId/{id}")
     public List<Depot> findAllDepotByParcelId(@PathVariable UUID id){
         return depotService.findAllDepotByParcelId(id);
     }

@@ -38,7 +38,7 @@ public class Depot {
     private Instant created_at;
 
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private User user;
 
     @OneToOne

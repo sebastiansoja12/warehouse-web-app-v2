@@ -19,5 +19,9 @@ private final UserService userService;
     public List<User> getAll(){
         return userService.findAll();
     }
+    @GetMapping("/{username}")
+    public User findUserIdByUsername(@PathVariable String username){
+        return userService.findUserIdByUsername(username);
+    }
 
 }
