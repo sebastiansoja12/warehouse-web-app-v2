@@ -21,10 +21,8 @@ public class DepotInformationService {
     private final DepotInformationRepository depotInformationRepository;
 
 
-     @Transactional
-    public DepotInformation save(DepotInformation depotInformation){
-
-        return depotInformationRepository.save(depotInformation);
+    public List<DepotInformation> saveAll(List<DepotInformation> depotInformationList){
+         return depotInformationRepository.saveAll(depotInformationList);
     }
 
 

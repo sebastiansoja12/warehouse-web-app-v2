@@ -18,4 +18,6 @@ public interface DepotRepository extends JpaRepository<Depot,Long> {
 
     List<Depot> findByParcel_ParcelCode(final String parcelCode);
 
+    void deleteByParcelId( final UUID parcelId);
+
 }

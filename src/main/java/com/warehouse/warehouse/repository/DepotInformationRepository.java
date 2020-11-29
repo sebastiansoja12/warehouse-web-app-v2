@@ -8,6 +8,4 @@ import java.util.List;
 public interface DepotInformationRepository extends JpaRepository<DepotInformation, Long> {
 
 
-    List<DepotInformation> findDepotInformationById(Long id);
-
 }

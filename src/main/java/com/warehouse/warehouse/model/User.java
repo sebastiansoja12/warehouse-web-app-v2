@@ -30,7 +30,7 @@ public class User {
 
     @Id
     @GeneratedValue()
-    private int userId;
+    private int id;
 
     @JsonProperty("nazwaUzytkownika")
     private String username;

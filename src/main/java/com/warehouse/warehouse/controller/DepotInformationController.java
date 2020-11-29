@@ -6,14 +6,17 @@ import com.warehouse.warehouse.service.DepotInformationService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 public class DepotInformationController {
 
     private final DepotInformationService depotInformationService;
 
+
     @PostMapping("/api/depots/information")
-    public DepotInformation addDepotInformation(@RequestBody DepotInformation depotInformation){
-        return depotInformationService.save(depotInformation);
+    public List<DepotInformation> addDepotInformationList(@RequestBody List<DepotInformation> depotInformationList){
+        return depotInformationService.saveAll(depotInformationList);
     }
 }

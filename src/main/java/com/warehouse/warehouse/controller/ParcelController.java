@@ -33,4 +33,6 @@ public class ParcelController {
     public void updateParcelByParcelCode(@RequestBody Parcel parcel, @PathVariable String parcelCode){
          parcelService.update(parcel, parcelCode);
     }
+
+
 }
