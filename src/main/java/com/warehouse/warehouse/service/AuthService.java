@@ -3,16 +3,19 @@ package com.warehouse.warehouse.service;
 
 import com.warehouse.warehouse.dto.AuthenticationResponse;
 import com.warehouse.warehouse.dto.LoginRequest;
+import com.warehouse.warehouse.dto.RefreshTokenRequest;
 import com.warehouse.warehouse.dto.RegisterRequest;
 import com.warehouse.warehouse.exceptions.WarehouseMailException;
 import com.warehouse.warehouse.model.NotificationEmail;
 import com.warehouse.warehouse.model.User;
 import com.warehouse.warehouse.model.VerificationToken;
+import com.warehouse.warehouse.repository.RefreshTokenRepository;
 import com.warehouse.warehouse.repository.UserRepository;
 import com.warehouse.warehouse.repository.VerificationTokenRepository;
 import com.warehouse.warehouse.security.JwtProvider;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -41,6 +44,8 @@ private final MailService mailService;
 private final AuthenticationManager authenticationManager;
 
 private final JwtProvider jwtProvider;
+
+private final RefreshTokenService refreshTokenService;
 
     public void signup(RegisterRequest registerRequest)
     {
@@ -91,6 +96,27 @@ private final JwtProvider jwtProvider;
                 loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authenticate);
         String token = jwtProvider.generateToken(authenticate);
-        return new AuthenticationResponse(token, loginRequest.getUsername());
+        return AuthenticationResponse.builder()
+                .authenticationToken(token)
+                .refreshToken(refreshTokenService.generateRefreshToken().getToken())
+                .expiresAt(Instant.now().plusMillis(jwtProvider.getJwtExpirationInMillis()))
+                .username(loginRequest.getUsername())
+                .build();
+    }
+
+    public AuthenticationResponse refreshToken(RefreshTokenRequest refreshTokenRequest){
+        refreshTokenService.validateRefreshToken(refreshTokenRequest.getRefreshToken());
+        String token = jwtProvider.generateTokenWithUserName(refreshTokenRequest.getUsername());
+        return AuthenticationResponse.builder()
+                .authenticationToken(token)
+                .refreshToken(refreshTokenRequest.getRefreshToken())
+                .expiresAt(Instant.now().plusMillis(jwtProvider.getJwtExpirationInMillis()))
+                .username(refreshTokenRequest.getUsername())
+                .build();
+    }
+
+    public boolean isLoggedIn() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return !(authentication instanceof AnonymousAuthenticationToken) && authentication.isAuthenticated();
     }
 }

@@ -48,7 +48,7 @@ public class User {
     @Email
     private String email;
 
-    @NotEmpty(message="Rola jest wymagana")
+    //@NotEmpty(message="Rola jest wymagana")
     @JsonProperty("rola")
     private String role;
 

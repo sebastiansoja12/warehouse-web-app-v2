@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent implements OnInit {
 
-  signupRequestPayload: SignupRequestPayload;
+  signupRequestPayload: { password: string; email: string; username: string };
   signupForm: FormGroup;
 
   constructor(private authService: AuthService, private router: Router,
@@ -30,6 +30,9 @@ export class SignupComponent implements OnInit {
       username: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      role: new FormControl('', Validators.required)
     });
   }
 

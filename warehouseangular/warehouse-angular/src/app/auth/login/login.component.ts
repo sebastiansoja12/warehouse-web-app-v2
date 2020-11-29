@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  // tslint:disable-next-line:typedef
   login() {
     this.loginRequestPayload.username = this.loginForm.get('username').value;
     this.loginRequestPayload.password = this.loginForm.get('password').value;

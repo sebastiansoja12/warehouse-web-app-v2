@@ -23,7 +23,7 @@ import static java.util.Date.from;
 @Service
 public class JwtProvider {
     private KeyStore keyStore;
-    @Value("900000")
+    @Value("${jwt.expiration.time}")
     private Long jwtExpirationInMillis;
 
     @PostConstruct
@@ -80,7 +80,14 @@ public class JwtProvider {
 
         return claims.getSubject();
     }
-
+    public String generateTokenWithUserName(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(from(Instant.now()))
+                .signWith(getPrivateKey())
+                .setExpiration(java.sql.Date.from(Instant.now().plusMillis(jwtExpirationInMillis)))
+                .compact();
+    }
     public Long getJwtExpirationInMillis() {
         return jwtExpirationInMillis;
     }
