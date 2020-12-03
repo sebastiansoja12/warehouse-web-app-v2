@@ -29,7 +29,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class User {
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @JsonProperty("nazwaUzytkownika")
@@ -57,6 +57,9 @@ public class User {
 
     @JsonProperty( value= "czyAktywowane", access = JsonProperty.Access.WRITE_ONLY)
     private boolean enabled;
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    private VerificationToken verificationToken;
 
 
     public User(String username){
