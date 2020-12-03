@@ -18,6 +18,7 @@ public class AuthenticationResponse {
     private String username;
     private String refreshToken;
     private Instant expiresAt;
+    private String role;
 
 
 

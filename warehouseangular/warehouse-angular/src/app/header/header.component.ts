@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   isLoggedIn: boolean;
   username: string;
+  role: string;
+  isAdmin: boolean;
+  isNull: boolean;
 
   constructor(private authService: AuthService, private router: Router) {
   }
@@ -17,6 +20,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.authService.loggedIn.subscribe((data: boolean) => this.isLoggedIn = data);
     this.authService.username.subscribe((data: string) => this.username = data);
+    this.authService.role.subscribe((data: string) => this.role = data);
+    this.isAdmin = this.authService.isAdmin();
+    this.isNull = this.authService.isNull();
     this.isLoggedIn = this.authService.isLoggedIn();
     this.username = this.authService.getUserName();
   }
@@ -24,6 +30,8 @@ export class HeaderComponent implements OnInit {
   logout() {
     this.authService.logout();
     this.isLoggedIn = false;
+    this.isNull = true;
+    this.isAdmin = false;
     this.router.navigateByUrl('');
   }
 

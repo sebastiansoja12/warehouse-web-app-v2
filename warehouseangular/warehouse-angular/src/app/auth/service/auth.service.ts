@@ -14,10 +14,13 @@ export class AuthService {
 
   @Output() loggedIn: EventEmitter<boolean> = new EventEmitter();
   @Output() username: EventEmitter<string> = new EventEmitter();
+  @Output() role: EventEmitter<string> = new EventEmitter();
+
 
   refreshTokenPayload = {
     refreshToken: this.getRefreshToken(),
-    username: this.getUserName()
+    username: this.getUserName(),
+    role: this.getRole()
   };
 
   constructor(private httpClient: HttpClient,
@@ -35,7 +38,7 @@ export class AuthService {
       this.localStorage.store('username', data.username);
       this.localStorage.store('refreshToken', data.refreshToken);
       this.localStorage.store('expiresAt', data.expiresAt);
-
+      this.localStorage.store('role', data.role);
       this.loggedIn.emit(true);
       this.username.emit(data.username);
       return true;
@@ -45,6 +48,9 @@ export class AuthService {
   getJwtToken() {
     return this.localStorage.retrieve('authenticationToken');
   }
+  getRole() {
+    return this.localStorage.retrieve('role');
+  }
 
   refreshToken() {
     return this.httpClient.post<LoginResponse>('http://localhost:8080/api/users/refresh/token',
@@ -52,9 +58,9 @@ export class AuthService {
       .pipe(tap(response => {
         this.localStorage.clear('authenticationToken');
         this.localStorage.clear('expiresAt');
-
-        this.localStorage.store('authenticationToken',
-          response.authenticationToken);
+        this.localStorage.clear('role');
+        this.localStorage.store('role', response.role);
+        this.localStorage.store('authenticationToken', response.authenticationToken);
         this.localStorage.store('expiresAt', response.expiresAt);
       }));
   }
@@ -66,11 +72,12 @@ export class AuthService {
         console.log(data);
       }, error => {
         throwError(error);
-      })
+      });
     this.localStorage.clear('authenticationToken');
     this.localStorage.clear('username');
     this.localStorage.clear('refreshToken');
     this.localStorage.clear('expiresAt');
+    this.localStorage.clear('role');
   }
 
   getUserName() {
@@ -82,5 +89,11 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return this.getJwtToken() != null;
+  }
+  isAdmin(): boolean {
+    return this.getRole() != 'admin';
+  }
+  isNull(): boolean {
+    return this.getRole() != null;
   }
 }

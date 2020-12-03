@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -61,9 +62,9 @@ private final RefreshTokenService refreshTokenService;
         userRepository.save(user);
 
        String token = generateVerificationToken(user);
-        mailService.sendMail(new NotificationEmail("Please Activate your Account",
-                user.getEmail(), "Thank you for signing up to PDP, " +
-                "please click on the below url to activate your account : " +
+        mailService.sendMail(new NotificationEmail("Aktywacja konta",
+                user.getEmail(), "Dziękujemy za zarejestrowanie się w 26andfour, " +
+                "wciśnij poniższy link by aktywować konto : " +
                 "http://localhost:8080/api/users/accountVerification/" + token));
     }
 
@@ -98,6 +99,7 @@ private final RefreshTokenService refreshTokenService;
         String token = jwtProvider.generateToken(authenticate);
         return AuthenticationResponse.builder()
                 .authenticationToken(token)
+                .role(userRepository.getRoleByUsername(loginRequest.getUsername()))
                 .refreshToken(refreshTokenService.generateRefreshToken().getToken())
                 .expiresAt(Instant.now().plusMillis(jwtProvider.getJwtExpirationInMillis()))
                 .username(loginRequest.getUsername())

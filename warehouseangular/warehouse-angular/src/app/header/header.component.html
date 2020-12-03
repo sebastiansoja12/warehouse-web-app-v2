@@ -7,6 +7,8 @@
                     26andfour
                 </span>
             </a>
+
+          <button  *ngIf="isLoggedIn && !isAdmin"   class="userdetails" id="dropdownBasic1" routerLink="/depots" ngbDropdownToggle> Przesyłki</button>
         </div>
         <div class="flex-grow-1 float-right">
             <div *ngIf="isLoggedIn" ngbDropdown class="float-right">
