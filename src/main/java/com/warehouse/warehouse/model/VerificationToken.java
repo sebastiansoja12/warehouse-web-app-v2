@@ -20,7 +20,7 @@ public class VerificationToken {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String token;
-    @OneToOne(fetch = LAZY)
+    @OneToOne(cascade = CascadeType.REFRESH)
     private User user;
     private Instant expiryDate;
 }

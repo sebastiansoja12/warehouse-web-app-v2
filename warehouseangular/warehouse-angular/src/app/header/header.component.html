@@ -14,11 +14,15 @@
                     <img class="account-icon" src="https://www.redditstatic.com/avatars/avatar_default_08_D4E815.png">
                     {{username}}
                 </button>
+              <button mdbBtn class="userdetails" id="dropdownBasic1"  gradient="aqua" rounded="true" mdbWavesEffect  (click)="logout()" ngbDropdownItem>Wyloguj</button>
+
             </div>
         </div>
             <div *ngIf="!isLoggedIn">
-                <a routerLink="/sign-up" class="float-right sign-up mr-2">Sign up</a>
-                <a routerLink="/login" class="float-right login mr-2">Login</a>
+                <a routerLink="/sign-up" class="float-right sign-up mr-2">Rejestracja</a>
+                <a routerLink="/login" class="float-right login mr-2">Logowanie</a>
             </div>
+
+
     </nav>
 </header>

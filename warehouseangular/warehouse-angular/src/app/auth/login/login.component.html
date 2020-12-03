@@ -3,38 +3,38 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header" style="text-align: center"><h4>Login</h4></div>
+                <div class="card-header" style="text-align: center"><h4>Zaloguj</h4></div>
                 <div class="card-body">
                     <form [formGroup]="loginForm" (ngSubmit)="login()">
                         <div class="form-group row">
-                            <label for="user_name" class="col-md-4 col-form-label text-md-right">Username</label>
+                            <label for="user_name" class="col-md-4 col-form-label text-md-right">Nazwa użytkownika</label>
                             <div class="col-md-6">
                                 <input type="text" id="user_name" class="form-control" [formControlName]="'username'" name="user_name" required
                                     autofocus>
                                 <span *ngIf="!loginForm.get('username').valid && loginForm.get('username').touched">
-                                   Please provide a valid username
+                                   Proszę wprowadzić poprawną nazwę użytkownika
                                 </span>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">Hasło</label>
                             <div class="col-md-6">
                                 <input type="password" id="password" class="form-control" [formControlName]="'password'" name="password" required>
                                 <span *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">
-                                  Password cannot be empty
+                                  Hasło nie może być puste
                                 </span>
                             </div>
                         </div>
 
-                        <span class="col-md-6 offset-md-4">
+                      <span class="col-md-6 offset-md-4">
                             <button type="submit" class="login">
-                                Login
+                                Zaloguj
                             </button>
-                            <span style="padding-left: 15px">New user? <a routerLink="/sign-up">Sign up</a></span>
+                            <span style="padding-left: 15px">Nowy użytkownik? <a href routerLink="/sign-up">Utwórz konto</a></span>
                         </span>
                         <div class="login-failed" *ngIf='this.isError'>
-                             <p class="login-failed-text">Login Failed. Please check your credentials and try again.</p>
+                             <p class="login-failed-text">Logowanie nie powiodło się, sprawdź swoje dane i spróbuj ponownie.</p>
                         </div>
                         <div class="login-failed" [ngStyle]="{'background-color': 'green'}" *ngIf="this.registerSuccessMessage.length > 0">
                             <p class="register-success-text">{{registerSuccessMessage}}</p>

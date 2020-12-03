@@ -4,47 +4,66 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header" style="text-align: center">
-                    <h4>Register</h4>
+                    <h4>Rejestracja</h4>
                 </div>
                 <div class="card-body">
                     <form [formGroup]="signupForm" (ngSubmit)="signup()">
                         <div class="form-group row">
-                            <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail
-                                Address</label>
+                            <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail</label>
                             <div class="col-md-6">
                                 <input type="text" [formControlName]="'email'" id="email_address" class="form-control" name="email-address" required
                                     autofocus>
                                 <span *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched">
-                                    Please provide a valid email
-                                </span>                                    
+                                    Wprowadź istniejący adres e-mail
+                                </span>
                             </div>
                         </div>
- 
+
                         <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">User Name</label>
+                            <label class="col-md-4 col-form-label text-md-right">Nazwa użytkownika</label>
                             <div class="col-md-6">
-                                <input type="text" [formControlName]="'username'"class="form-control" required autofocus>
+                                <input type="text" [formControlName]="'username'" class="form-control" required autofocus>
                                 <span *ngIf="!signupForm.get('username').valid && signupForm.get('username').touched">
-                                    Please provide a valid username
-                                </span>                                 
+                                    Wprowadź poprawną nazwę użytkownika
+                                </span>
                             </div>
                         </div>
- 
+
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                            <label for="password" class="col-md-4 col-form-label text-md-right">Hasło</label>
                             <div class="col-md-6">
                                 <input type="password" [formControlName]="'password'" id="password" class="form-control" name="password" required>
                                 <span *ngIf="!signupForm.get('password').valid && signupForm.get('password').touched">
-                                    Please provide a valid Password
-                                </span>  
+                                    Proszę wprowadzić poprawne hasło
+                                </span>
                             </div>
                         </div>
- 
+
+                      <div class="form-group row">
+                        <label for="password" class="col-md-4 col-form-label text-md-right">Nazwisko</label>
+                        <div class="col-md-6">
+                          <input type="text" [formControlName]="'lastName'" id="lastName" class="form-control" name="lastName" required>
+                          <span *ngIf="!signupForm.get('lastName').valid && signupForm.get('lastName').touched">
+                                    Proszę podać nazwisko
+                                </span>
+                        </div>
+                      </div>
+
+                        <div class="form-group row">
+                          <label for="password" class="col-md-4 col-form-label text-md-right">Imie</label>
+                          <div class="col-md-6">
+                            <input type="text" [formControlName]="'firstName'" id="firstName" class="form-control" name="firstName" required>
+                            <span *ngIf="!signupForm.get('firstName').valid && signupForm.get('firstName').touched">
+                                    Proszę podać imie
+                                </span>
+                          </div>
+                      </div>
+
                         <span class="col-md-6 offset-md-4">
                             <button type="submit" class="sign-up">
-                                Sign Up
+                                Utwórz konto
                             </button>
-                            <span style="padding-left: 15px">Existing user? <a routerLink="/login">Log In</a></span>
+                            <span style="padding-left: 15px">Już masz konto? <a routerLink="/login">Zaloguj się</a></span>
                         </span>
                     </form>
                 </div>
