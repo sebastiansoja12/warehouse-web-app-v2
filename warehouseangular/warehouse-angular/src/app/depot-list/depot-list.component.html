@@ -3,17 +3,21 @@
     <table class="table table-bordered table-striped">
       <thead class="thead-dark">
       <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Created</th>
-        <th scope="col">User</th>
+        <th scope="col">Kod paczki</th>
+        <th scope="col">Data wejścia</th>
+        <th scope="col">Użytkownik</th>
+        <th scope="col">Miasto</th>
+        <th scope="col">Oddział</th>
 
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let depot of depots">
-        <td>{{ depot.id }}</td>
-        <td></td>
-        <td></td>
+        <td>{{ depot.parcel.kodPaczki }}</td>
+        <td>{{ depot.dataWejscia}}</td>
+        <td>{{ depot.user.imie}}</td>
+        <td>{{ depot.depotInformation.miasto}}</td>
+        <td>{{depot.depotInformation.kodOddzialu}}</td>
 
       </tr>
       </tbody>

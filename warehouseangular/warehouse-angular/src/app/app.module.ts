@@ -13,10 +13,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import {TokenInterceptor} from './token-interceptor';
 import {HomeComponent} from './home/home.component';
-import { DepotComponent } from './depot/depot.component';
 import { DepotListComponent } from './depot-list/depot-list.component';
 import { DepotFormComponent } from './depot-form/depot-form.component';
-import {DepotService} from './depot-service.service';
+import {DepotService} from './auth/service/depot-service.service';
 
 
 
@@ -27,7 +26,6 @@ import {DepotService} from './depot-service.service';
     SignupComponent,
     LoginComponent,
     HomeComponent,
-    DepotComponent,
     DepotListComponent,
     DepotFormComponent,
   ],

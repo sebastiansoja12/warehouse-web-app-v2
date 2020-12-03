@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Depot} from '../depot';
-import {DepotService} from '../depot-service.service';
+import {Depot} from '../auth/model/depot';
+import {DepotService} from '../auth/service/depot-service.service';
+import {Observable} from 'rxjs';
 
 
 
@@ -16,11 +17,11 @@ export class DepotListComponent implements OnInit {
   constructor(private depotService: DepotService) {
   }
 
-  // tslint:disable-next-line:typedef
   ngOnInit() {
-    this.depotService.findAll().subscribe(data => {
+    this.depotService.getAllDepots().subscribe(data => {
       this.depots = data;
     });
   }
+
 
 }

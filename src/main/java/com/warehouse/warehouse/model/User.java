@@ -35,26 +35,27 @@ public class User {
     @JsonProperty("nazwaUzytkownika")
     private String username;
 
-    @JsonProperty("haslo")
+    @JsonProperty( value= "haslo", access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
 
-    @JsonProperty("imie")
+    @JsonProperty( value= "imie")
     private String firstName;
 
-    @JsonProperty("nazwisko")
+    @JsonProperty( value= "nazwisko", access = JsonProperty.Access.WRITE_ONLY)
     private String lastName;
 
     @Email
+    @JsonProperty( value= "email", access = JsonProperty.Access.WRITE_ONLY)
     private String email;
 
     //@NotEmpty(message="Rola jest wymagana")
-    @JsonProperty("rola")
+    @JsonProperty( value= "rola", access = JsonProperty.Access.WRITE_ONLY)
     private String role;
 
 
 
-    @JsonProperty("czyAktywowane")
+    @JsonProperty( value= "czyAktywowane", access = JsonProperty.Access.WRITE_ONLY)
     private boolean enabled;
 
 

@@ -43,7 +43,7 @@ private final AuthService authService;
     public Parcel save(Parcel parcel){
         Depot depot = new Depot();
         DepotInformation depotInformation= new DepotInformation();
-        depotInformation.setId((long)3);
+        depotInformation.setId((long)6);
         depot.setDepotInformation(depotInformation);
         depot.setParcel(parcel);
         depot.setCreated_at(Instant.now());

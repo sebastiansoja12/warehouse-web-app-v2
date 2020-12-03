@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Depot} from '../depot';
+import {Depot} from '../auth/model/depot';
 import {ActivatedRoute, Router} from '@angular/router';
-import {DepotService} from '../depot-service.service';
+import {DepotService} from '../auth/service/depot-service.service';
 
 @Component({
   selector: 'app-depot-form',
