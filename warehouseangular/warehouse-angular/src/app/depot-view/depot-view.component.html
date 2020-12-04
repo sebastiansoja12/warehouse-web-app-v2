@@ -1,0 +1,26 @@
+<div class="depot-section">
+  <h1> Trasa paczki {{parcelCode}}</h1>
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Miasto</th>
+        <th scope="col">Oddział</th>
+        <th scope="col">Data wejścia</th>
+
+      </tr>
+      </thead>
+      <tbody>
+
+      <tr *ngFor="let depot of depots">
+        <td>{{ depot.depotInformation.miasto}}</td>
+        <td>{{ depot.depotInformation.kodOddzialu}}</td>
+        <td>{{ depot.dataWejscia}}</td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>

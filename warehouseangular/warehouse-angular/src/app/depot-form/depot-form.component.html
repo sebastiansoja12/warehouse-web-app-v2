@@ -1,1 +1,36 @@
-<p>depot-form works!</p>
+<div class="depot-section">
+  <div class="row justify-content-center">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header" style="text-align: center">
+          <h4>Znajdź przesyłkę</h4>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="depotFindForm" (ngSubmit)="findDepot()" >
+            <div class="form-group row">
+
+              <label for="parcelCode" class="col-md-4 col-form-label text-md-right">Kod przesyłki</label>
+              <div class="col-md-5">
+                <input type="text" [formControlName]="'parcelCode'" id="parcelCode" class="form-control" name="parcelCode">
+              </div>
+              <div class="col-md"> <button type="submit" class="findDepot">
+                Znajdź
+              </button></div>
+            </div>
+            <div class="login-failed" *ngIf='this.isError'>
+              <p class="login-failed-text">Paczka o kodzie: {{parcelCode}} nie istnieje</p>
+            </div>
+
+
+
+
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>

@@ -8,7 +8,9 @@
                 </span>
             </a>
 
-          <button  *ngIf="isLoggedIn && !isAdmin"   class="userdetails" id="dropdownBasic1" routerLink="/depots" ngbDropdownToggle> Przesyłki</button>
+          <button  *ngIf="isLoggedIn && !isAdmin"   class="userdetails" id="dropdownBasic1" routerLink="/depots/all" ngbDropdownToggle> Przesyłki</button>
+          <button    class="userdetails" id="dropdownBasic1" routerLink="/depot/find" ngbDropdownToggle>Znajdź przesyłkę</button>
+
         </div>
         <div class="flex-grow-1 float-right">
             <div *ngIf="isLoggedIn" ngbDropdown class="float-right">

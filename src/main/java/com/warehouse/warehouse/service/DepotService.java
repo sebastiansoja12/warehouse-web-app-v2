@@ -4,6 +4,7 @@ package com.warehouse.warehouse.service;
 import com.warehouse.warehouse.model.Depot;
 import com.warehouse.warehouse.model.Parcel;
 import com.warehouse.warehouse.repository.DepotRepository;
+import javassist.runtime.Desc;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,7 @@ public class DepotService {
 
     @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public List<Depot> findByParcelCode(String parcelCode) {
-        return depotRepository.findByParcel_ParcelCode(parcelCode);
+        return depotRepository.findAllByParcel_ParcelCodeOrderByCreatedDesc(parcelCode);
     }
    public void deleteDepotByParcelId( UUID id) {
         depotRepository.deleteByParcelId( id);

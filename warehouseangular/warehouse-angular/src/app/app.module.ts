@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { SignupComponent } from './auth/signup/signup.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './auth/login/login.component';
 import { NgxWebstorageModule } from 'ngx-webstorage';
@@ -16,6 +16,8 @@ import {HomeComponent} from './home/home.component';
 import { DepotListComponent } from './depot-list/depot-list.component';
 import { DepotFormComponent } from './depot-form/depot-form.component';
 import {DepotService} from './auth/service/depot-service.service';
+import { DepotViewComponent } from './depot-view/depot-view.component';
+import {environment} from '../environments/environment';
 
 
 
@@ -28,6 +30,8 @@ import {DepotService} from './auth/service/depot-service.service';
     HomeComponent,
     DepotListComponent,
     DepotFormComponent,
+    DepotViewComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -37,6 +41,8 @@ import {DepotService} from './auth/service/depot-service.service';
     NgxWebstorageModule.forRoot(),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    FormsModule,
+
 
   ],
   providers: [
@@ -46,6 +52,9 @@ import {DepotService} from './auth/service/depot-service.service';
       multi: true
     },
     DepotService,
+    DepotFormComponent,
+    DepotViewComponent,
+    DepotListComponent
   ],
   bootstrap: [AppComponent]
 })

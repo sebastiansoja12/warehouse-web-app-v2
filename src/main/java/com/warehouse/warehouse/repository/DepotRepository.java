@@ -15,8 +15,13 @@ public interface DepotRepository extends JpaRepository<Depot,Long> {
 
     List<Depot> findByParcelId(final UUID id);
 
+   /* @Query("select d.created_at, d.parcel.id, p.parcelCode, di.city  " +
+            "from Depot d join Parcel p on d.parcel.id= p.id " +
+            " join DepotInformation di on d.depotInformation.id= di.id " +
+            "where p.parcelCode = ?1 ORDER BY d.created_at DESC")
 
-    List<Depot> findByParcel_ParcelCode(final String parcelCode);
+    */
+    List<Depot> findAllByParcel_ParcelCodeOrderByCreatedDesc(final String parcelCode);
 
     void deleteByParcelId( final UUID parcelId);
 

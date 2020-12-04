@@ -36,7 +36,7 @@ public class Depot {
 
 
     @JsonProperty("dataWejscia")
-    private Instant created_at;
+    private Instant created;
 
 
     @ManyToOne(fetch = FetchType.EAGER)
