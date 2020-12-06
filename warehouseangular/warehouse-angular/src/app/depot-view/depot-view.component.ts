@@ -20,14 +20,16 @@ export class DepotViewComponent implements  OnInit {
   depots: Depot[];
  parcelCode: string;
 
-  constructor(private depotService: DepotService, private depotForm: DepotFormComponent, private localStorage: LocalStorageService) {
+  constructor(private depotService: DepotService, private depotForm: DepotFormComponent,
+              private localStorage: LocalStorageService) {
 
   }
   ngOnInit() {
-   this.parcelCode =  localStorage.getItem('parcelCode');
-   this.depotService.getAllDepotsByParcelCode(this.parcelCode).subscribe(data => {
-      this.depots = data;
-    });
+   this.depotForm.parseParcelCode.subscribe((data: string) => this.parcelCode = data);
+   this.parcelCode = this.depotForm.findParcelCode();
+   this.depotService.getAllDepotsByParcelCode(this.parcelCode).subscribe(dane => {
+    this.depots = dane;
+   });
   }
 
 

@@ -48,12 +48,18 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.loginRequestPayload).subscribe(data => {
       this.isError = false;
-      this.router.navigateByUrl('');
+      if (this.authService.isAdmin() === true){
+        this.router.navigateByUrl('/depots/all');
+      } else {
+        this.router.navigateByUrl('');
+      }
       this.toastr.success('Logowanie powiodło się');
+
     }, error => {
       this.isError = true;
       throwError(error);
     });
+
   }
 
 }

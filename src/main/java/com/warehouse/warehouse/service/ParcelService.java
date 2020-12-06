@@ -11,6 +11,7 @@ import com.warehouse.warehouse.repository.UserRepository;
 import com.warehouse.warehouse.security.JwtProvider;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
@@ -23,27 +24,25 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-@AllArgsConstructor
 @Slf4j
 @Transactional
-
 public class ParcelService {
 
+    @Autowired
+    public ParcelService(ParcelRepository parcelRepository, UserRepository userRepository, DepotRepository depotRepository){
+        this.parcelRepository= parcelRepository;
+        this.userRepository= userRepository;
+        this.depotRepository=depotRepository;
+    }
 private final ParcelRepository parcelRepository;
 private final UserRepository userRepository;
 private final DepotRepository depotRepository;
-private final DepotInformationRepository depotInformationRepository;
-private final AuthService authService;
-    private final AuthenticationManager authenticationManager;
-    private final JwtProvider jwtProvider;
-
-
 
     @Transactional
     public Parcel save(Parcel parcel){
         Depot depot = new Depot();
         DepotInformation depotInformation= new DepotInformation();
-        depotInformation.setId((long)2);
+        depotInformation.setId((long)1);
         depot.setDepotInformation(depotInformation);
         depot.setParcel(parcel);
         depot.setCreated(Instant.now());
@@ -66,8 +65,6 @@ public User usernameToId(){
     User user = userOptional.orElseThrow(null);
     return user;
 }
-
-
     @Transactional(readOnly = true)
     public List<Parcel> findAll(){
         return parcelRepository.findAll();
@@ -77,12 +74,4 @@ public User usernameToId(){
     public Parcel findByParcelCode(String parcelCode) {
         return parcelRepository.findByParcelCode(parcelCode).orElse(null);
     }
-
-
-    @Transactional
-    public void update(Parcel parcel, String kod) {
-    }
-
-
-
 }

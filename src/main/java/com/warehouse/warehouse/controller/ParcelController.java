@@ -29,10 +29,6 @@ public class ParcelController {
     public Parcel getParcelByParcelCode(@PathVariable String parcelCode){
         return parcelService.findByParcelCode(parcelCode);
     }
-    @PutMapping("/{parcelCode}")
-    public void updateParcelByParcelCode(@RequestBody Parcel parcel, @PathVariable String parcelCode){
-         parcelService.update(parcel, parcelCode);
-    }
 
 
 }

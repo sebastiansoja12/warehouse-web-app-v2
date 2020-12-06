@@ -19,40 +19,47 @@ import {LocalStorageService} from 'ngx-webstorage';
 })
 export class DepotFormComponent implements OnInit {
 
-  depot: Depot;
+  depot: Array<Depot>;
   depotFindForm: FormGroup;
- parcelCode: string;
-  @Output() parseParcelCode: EventEmitter<String> = new EventEmitter();
+ dss: string;
+parcelCode: string;
+  @Output() parseParcelCode: EventEmitter<string> = new EventEmitter();
+
   isError: boolean;
 
 
   constructor(private depotService: DepotService, private router: Router,
-              private toastr: ToastrService, private localStorage: LocalStorageService) {
+              private toastr: ToastrService, private localStorage: LocalStorageService,
+              private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.depotFindForm = new FormGroup({
       parcelCode: new FormControl('', Validators.required)
     });
+
   }
 
 // tslint:disable-next-line:typedef
-findParcelCode(){
- return this.parcelCode = this.depotFindForm.get('parcelCode').value;
+findParcelCode(): string {
+ return this.localStorage.retrieve('parcelCode');
 }
 
   findDepot() {
    this.parcelCode = this.depotFindForm.get('parcelCode').value;
+   this.localStorage.store('parcelCode', this.parcelCode);
    this.parseParcelCode.emit(this.parcelCode);
-   localStorage.setItem('parcelCode', this.parcelCode);
-
    this.depotService.getAllDepotsByParcelCode(this.parcelCode).subscribe(data => {
-      this.router.navigate(['/depot'],
-        { queryParams: { parcelCode: this.parcelCode } });
-    }, error => {
-      console.log(error);
-      this.toastr.error('Nie znaleziono paczki o kodzie: ', this.parcelCode);
-    });
+     this.depot = data;
+     this.router.navigate(
+       ['/depot'],
+       {
+         relativeTo: this.activatedRoute,
+         queryParams: { parcelCode: this.parcelCode },
+         queryParamsHandling: 'merge',
+         preserveFragment: true
+       });
+   });
   }
 
 

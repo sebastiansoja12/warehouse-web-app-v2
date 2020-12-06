@@ -11,27 +11,29 @@ export class HeaderComponent implements OnInit {
   isLoggedIn: boolean;
   username: string;
   role: string;
-  isAdmin: boolean;
+  isLoggedInAsAdmin: boolean;
   isNull: boolean;
+  isAdmin: boolean;
 
   constructor(private authService: AuthService, private router: Router) {
   }
+
 
   ngOnInit() {
     this.authService.loggedIn.subscribe((data: boolean) => this.isLoggedIn = data);
     this.authService.username.subscribe((data: string) => this.username = data);
     this.authService.role.subscribe((data: string) => this.role = data);
-    this.isAdmin = this.authService.isAdmin();
+    this.authService.admin.subscribe( (data: boolean) => this.isAdmin = data);
     this.isNull = this.authService.isNull();
     this.isLoggedIn = this.authService.isLoggedIn();
+    this.isAdmin = this.authService.isAdmin();
     this.username = this.authService.getUserName();
   }
 
   logout() {
     this.authService.logout();
     this.isLoggedIn = false;
-    this.isNull = true;
-    this.isAdmin = false;
+    this.isLoggedInAsAdmin = false;
     this.router.navigateByUrl('');
   }
 

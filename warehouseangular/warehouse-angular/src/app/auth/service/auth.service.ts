@@ -15,6 +15,8 @@ export class AuthService {
   @Output() loggedIn: EventEmitter<boolean> = new EventEmitter();
   @Output() username: EventEmitter<string> = new EventEmitter();
   @Output() role: EventEmitter<string> = new EventEmitter();
+  @Output() admin: EventEmitter<boolean> = new EventEmitter();
+
 
 
   refreshTokenPayload = {
@@ -30,7 +32,9 @@ export class AuthService {
   signup(signupRequestPayload: SignupRequestPayload): Observable<any> {
     return this.httpClient.post('http://localhost:8080/api/users/signup', signupRequestPayload, { responseType: 'text' });
   }
-
+  refreshPage() {
+    window.location.reload();
+  }
   login(loginRequestPayload: LoginRequestPayload): Observable<boolean> {
     return this.httpClient.post<LoginResponse>('http://localhost:8080/api/users/login',
       loginRequestPayload).pipe(map(data => {
@@ -39,8 +43,8 @@ export class AuthService {
       this.localStorage.store('refreshToken', data.refreshToken);
       this.localStorage.store('expiresAt', data.expiresAt);
       this.localStorage.store('role', data.role);
-      this.loggedIn.emit(true);
       this.username.emit(data.username);
+      this.role.emit(data.role);
       return true;
     }));
   }
@@ -48,7 +52,8 @@ export class AuthService {
   getJwtToken() {
     return this.localStorage.retrieve('authenticationToken');
   }
-  getRole() {
+  getRole(): string
+  {
     return this.localStorage.retrieve('role');
   }
 
@@ -83,6 +88,7 @@ export class AuthService {
   getUserName() {
     return this.localStorage.retrieve('username');
   }
+
   getRefreshToken() {
     return this.localStorage.retrieve('refreshToken');
   }
@@ -91,7 +97,7 @@ export class AuthService {
     return this.getJwtToken() != null;
   }
   isAdmin(): boolean {
-    return this.getRole() != 'admin';
+   return this.getRole() == 'admin';
   }
   isNull(): boolean {
     return this.getRole() != null;

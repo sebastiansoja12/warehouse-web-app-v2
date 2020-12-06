@@ -1,6 +1,6 @@
 <header>
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-        <div class="flex-grow-1">
+        <div class="flex-grow-1 float-left">
             <a aria-label="Home" class="logo" routerLink="/">
                 <img src="../../assets/img/package.png" viewBox="0 0 20 20" class="reddit-icon-svg">
               <span class="warehouse-text">
@@ -8,13 +8,12 @@
                 </span>
             </a>
 
-          <button  *ngIf="isLoggedIn && !isAdmin"   class="userdetails" id="dropdownBasic1" routerLink="/depots/all" ngbDropdownToggle> Przesyłki</button>
-          <button    class="userdetails" id="dropdownBasic1" routerLink="/depot/find" ngbDropdownToggle>Znajdź przesyłkę</button>
-
+            <button  *ngIf="isLoggedIn"   class="userdetails" id="dropdownBasic1" routerLink="/depots/all"> Przesyłki</button>
+            <button class="userdetails" id="dropdownBasic1" routerLink="/depot/find">Znajdź przesyłkę</button>
         </div>
         <div class="flex-grow-1 float-right">
             <div *ngIf="isLoggedIn" ngbDropdown class="float-right">
-                <button class="userdetails" id="dropdownBasic1" ngbDropdownToggle>
+              <button class="userdetails" id="dropdownBasic1" ngbDropdownToggle>
                     <img class="account-icon" src="https://www.redditstatic.com/avatars/avatar_default_08_D4E815.png">
                     {{username}}
                 </button>
