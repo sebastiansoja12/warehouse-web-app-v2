@@ -1,0 +1,38 @@
+<div class="parcel-add-section">
+  <div class="row justify-content-center">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header" style="text-align: center">
+          <h4>Rejestracja przesyłki</h4>
+        </div>
+        <div class="card-body">
+
+            <div class="form-group row">
+              <label for="email_address" class="col-md-4 col-form-label text-md-right">Kod paczki</label>
+              <div class="col-md-6">
+                <input type="text" [formControlName]="'email'" id="email_address" class="form-control" name="email-address" required
+                       autofocus>
+
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <label class="col-md-4 col-form-label text-md-right">Standardowa</label>
+              <div class="col-md-4 col-form-label ">
+                <input value="" type="checkbox" checked="item.check">
+              </div>
+            </div>
+            <span class="col-md-6 offset-md-4">
+              <button type="submit" class="sign-up">
+                Dodaj paczke
+              </button>
+            </span>
+
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+</div>

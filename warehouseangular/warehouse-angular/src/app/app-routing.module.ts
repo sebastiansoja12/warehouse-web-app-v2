@@ -8,6 +8,7 @@ import {HomeComponent} from './home/home.component';
 import {DepotListComponent} from './depot-list/depot-list.component';
 import {DepotViewComponent} from './depot-view/depot-view.component';
 import {DepotFormComponent} from './depot-form/depot-form.component';
+import {ParcelAddComponent} from './parcel-add/parcel-add.component';
 
 const routes: Routes = [
   { path: 'sign-up', component: SignupComponent },
@@ -15,7 +16,9 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'depots/all', component: DepotListComponent },
   { path: 'depot', component: DepotViewComponent },
-  { path: 'depot/find', component: DepotFormComponent }
+  { path: 'depot/find', component: DepotFormComponent },
+  { path: 'parcel/add', component: ParcelAddComponent }
+
 
 
 

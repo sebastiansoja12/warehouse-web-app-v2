@@ -42,7 +42,7 @@ private final DepotRepository depotRepository;
     public Parcel save(Parcel parcel){
         Depot depot = new Depot();
         DepotInformation depotInformation= new DepotInformation();
-        depotInformation.setId((long)1);
+        depotInformation.setId((long) 7);
         depot.setDepotInformation(depotInformation);
         depot.setParcel(parcel);
         depot.setCreated(Instant.now());
@@ -50,6 +50,8 @@ private final DepotRepository depotRepository;
         depotRepository.save(depot);
         return parcelRepository.save(parcel);
     }
+
+
 
     public String auth(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

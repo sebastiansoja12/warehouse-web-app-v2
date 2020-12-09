@@ -18,6 +18,7 @@ import { DepotFormComponent } from './depot-form/depot-form.component';
 import {DepotService} from './auth/service/depot-service.service';
 import { DepotViewComponent } from './depot-view/depot-view.component';
 import {environment} from '../environments/environment';
+import { ParcelAddComponent } from './parcel-add/parcel-add.component';
 
 
 
@@ -31,6 +32,7 @@ import {environment} from '../environments/environment';
     DepotListComponent,
     DepotFormComponent,
     DepotViewComponent,
+    ParcelAddComponent,
 
   ],
   imports: [
@@ -46,6 +48,7 @@ import {environment} from '../environments/environment';
 
   ],
   providers: [
+
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

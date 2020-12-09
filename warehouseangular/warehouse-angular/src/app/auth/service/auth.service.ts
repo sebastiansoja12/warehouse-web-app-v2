@@ -97,7 +97,7 @@ export class AuthService {
     return this.getJwtToken() != null;
   }
   isAdmin(): boolean {
-   return this.getRole() == 'admin';
+   return this.getRole() === 'admin';
   }
   isNull(): boolean {
     return this.getRole() != null;
