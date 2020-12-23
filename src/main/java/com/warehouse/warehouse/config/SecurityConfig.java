@@ -45,11 +45,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/api/parcels/")
+                .antMatchers("/api/parcels/**")
                 .permitAll()
                 .antMatchers("/api/users/**")
                 .permitAll()
-                .antMatchers("/api/depots/all")
+                .antMatchers("/api/depots/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
