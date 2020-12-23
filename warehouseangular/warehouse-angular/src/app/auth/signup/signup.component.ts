@@ -52,7 +52,7 @@ export class SignupComponent implements OnInit {
     this.signupRequestPayload.firstName = this.signupForm.get('firstName').value;
     this.signupRequestPayload.lastName = this.signupForm.get('lastName').value;
     this.authService.signup(this.signupRequestPayload)
-      .subscribe(data => {
+      .subscribe(() => {
         this.router.navigate(['/login'],
           { queryParams: { registered: 'true' } });
       }, error => {

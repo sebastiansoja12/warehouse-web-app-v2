@@ -1,4 +1,4 @@
 export class Parcel {
-  parcelCode: string;
+  kodPaczki: string;
   isCustom: boolean;
 }

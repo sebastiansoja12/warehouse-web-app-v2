@@ -54,7 +54,6 @@ public class User {
     private String role;
 
 
-
     @JsonProperty( value= "czyAktywowane", access = JsonProperty.Access.WRITE_ONLY)
     private boolean enabled;
 

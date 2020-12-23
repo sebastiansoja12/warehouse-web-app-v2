@@ -7,27 +7,26 @@
           <h4>Rejestracja przesyłki</h4>
         </div>
         <div class="card-body">
+<form  [formGroup]="createParcelForm" (ngSubmit)="createParcel()">
 
             <div class="form-group row">
-              <label for="email_address" class="col-md-4 col-form-label text-md-right">Kod paczki</label>
+              <label for="parcelCode" class="col-md-4 col-form-label text-md-right">Kod paczki</label>
               <div class="col-md-6">
-                <input type="text" [formControlName]="'email'" id="email_address" class="form-control" name="email-address" required
+                <input type="text" [formControlName]="'parcelCode'" id="parcelCode" class="form-control" name="parcelCode" required
                        autofocus>
 
               </div>
             </div>
 
-            <div class="form-group row">
-              <label class="col-md-4 col-form-label text-md-right">Standardowa</label>
-              <div class="col-md-4 col-form-label ">
-                <input value="" type="checkbox" checked="item.check">
-              </div>
-            </div>
+
             <span class="col-md-6 offset-md-4">
-              <button type="submit" class="sign-up">
+              <button type="submit" class="add-parcel">
                 Dodaj paczke
               </button>
             </span>
+
+</form>
+
 
 
         </div>

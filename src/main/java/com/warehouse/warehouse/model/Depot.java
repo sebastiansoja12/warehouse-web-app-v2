@@ -43,11 +43,11 @@ public class Depot {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade=CascadeType.REMOVE, fetch = FetchType.EAGER)
     @JoinColumn(name = "parcel_id", referencedColumnName = "id")
     private Parcel parcel;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(cascade=CascadeType.REMOVE, fetch = FetchType.EAGER)
     @JoinColumn(name = "depot_id", referencedColumnName = "id")
     private DepotInformation depotInformation;
 

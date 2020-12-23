@@ -11,6 +11,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface DepotRepository extends JpaRepository<Depot,Long> {
+
+    @Query(value = "SELECT * from Depot order by created desc", nativeQuery = true)
     List<Depot> findAll();
 
     List<Depot> findByParcelId(final UUID id);

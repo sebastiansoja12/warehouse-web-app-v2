@@ -6,6 +6,8 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { LoginRequestPayload } from '../login/login-request.payload';
 import { LoginResponse } from '../login/login-response.payload';
 import { map, tap } from 'rxjs/operators';
+import {User} from '../model/user';
+import {Depot} from '../model/depot';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +18,7 @@ export class AuthService {
   @Output() username: EventEmitter<string> = new EventEmitter();
   @Output() role: EventEmitter<string> = new EventEmitter();
   @Output() admin: EventEmitter<boolean> = new EventEmitter();
+  @Output() user: EventEmitter<User[]> = new EventEmitter();
 
 
 
@@ -32,9 +35,6 @@ export class AuthService {
   signup(signupRequestPayload: SignupRequestPayload): Observable<any> {
     return this.httpClient.post('http://localhost:8080/api/users/signup', signupRequestPayload, { responseType: 'text' });
   }
-  refreshPage() {
-    window.location.reload();
-  }
   login(loginRequestPayload: LoginRequestPayload): Observable<boolean> {
     return this.httpClient.post<LoginResponse>('http://localhost:8080/api/users/login',
       loginRequestPayload).pipe(map(data => {
@@ -48,8 +48,16 @@ export class AuthService {
       return true;
     }));
   }
+  getCurrentUser(): any {
+    return this.httpClient.get<User>('http://localhost:8080/api/users/currentuser').pipe(map(data => {
+      this.localStorage.store('id', data.id);
+      this.localStorage.store('nazwaUzytkownika', data.username);
+      this.localStorage.store('imie', data.firstName);
+    }));
 
-  getJwtToken() {
+  }
+
+  getJwtToken(): string {
     return this.localStorage.retrieve('authenticationToken');
   }
   getRole(): string
@@ -57,20 +65,17 @@ export class AuthService {
     return this.localStorage.retrieve('role');
   }
 
-  refreshToken() {
+  refreshToken(): any {
     return this.httpClient.post<LoginResponse>('http://localhost:8080/api/users/refresh/token',
       this.refreshTokenPayload)
       .pipe(tap(response => {
-        this.localStorage.clear('authenticationToken');
-        this.localStorage.clear('expiresAt');
-        this.localStorage.clear('role');
         this.localStorage.store('role', response.role);
         this.localStorage.store('authenticationToken', response.authenticationToken);
         this.localStorage.store('expiresAt', response.expiresAt);
       }));
   }
 
-  logout() {
+  logout(): any {
     this.httpClient.post('http://localhost:8080/api/users/logout', this.refreshTokenPayload,
       { responseType: 'text' })
       .subscribe(data => {
@@ -85,11 +90,11 @@ export class AuthService {
     this.localStorage.clear('role');
   }
 
-  getUserName() {
+  getUserName(): string {
     return this.localStorage.retrieve('username');
   }
 
-  getRefreshToken() {
+  getRefreshToken(): string {
     return this.localStorage.retrieve('refreshToken');
   }
 

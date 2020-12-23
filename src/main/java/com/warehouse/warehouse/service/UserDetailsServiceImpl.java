@@ -19,7 +19,7 @@ import java.util.Optional;
 import static java.util.Collections.singletonList;
 
 @AllArgsConstructor
-@Service
+@Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;

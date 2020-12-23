@@ -10,7 +10,7 @@
 
             <button  *ngIf="isLoggedIn && isAdmin"   class="userdetails" id="dropdownBasic1" routerLink="/depots/all"> Przesyłki</button>
             <button class="userdetails" id="dropdownBasic1" routerLink="/depot/find">Znajdź przesyłkę</button>
-          <button  *ngIf="isLoggedIn && isAdmin"   class="userdetails" id="dropdownBasic1" routerLink="/parcel/add">Przyjęcie od kuriera</button>
+          <button  *ngIf="isLoggedIn"   class="userdetails" id="dropdownBasic1" routerLink="/parcel/add">Przyjęcie od kuriera</button>
 
         </div>
         <div class="flex-grow-1 float-right">

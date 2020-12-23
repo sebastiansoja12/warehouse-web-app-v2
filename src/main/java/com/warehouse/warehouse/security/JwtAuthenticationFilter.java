@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -17,11 +18,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class JwtAuthenticationFilter {
+@Service
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-  /*  @Autowired
+    @Autowired
     private JwtProvider jwtProvider;
-    @Qualifier("inMemoryUserDetailsManager")
     @Autowired
     private UserDetailsService userDetailsService;
 
@@ -52,7 +53,5 @@ public class JwtAuthenticationFilter {
         }
         return bearerToken;
     }
-
-   */
 }
 

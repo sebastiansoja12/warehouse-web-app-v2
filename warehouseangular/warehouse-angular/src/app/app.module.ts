@@ -19,6 +19,8 @@ import {DepotService} from './auth/service/depot-service.service';
 import { DepotViewComponent } from './depot-view/depot-view.component';
 import {environment} from '../environments/environment';
 import { ParcelAddComponent } from './parcel-add/parcel-add.component';
+import {ParcelService} from './auth/service/parcel.service';
+import {Parcel} from './auth/model/parcel';
 
 
 
@@ -54,6 +56,8 @@ import { ParcelAddComponent } from './parcel-add/parcel-add.component';
       useClass: TokenInterceptor,
       multi: true
     },
+    Parcel,
+    ParcelService,
     DepotService,
     DepotFormComponent,
     DepotViewComponent,

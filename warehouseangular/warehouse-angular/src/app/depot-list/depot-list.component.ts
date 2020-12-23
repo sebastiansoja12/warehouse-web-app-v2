@@ -3,6 +3,8 @@ import {Depot} from '../auth/model/depot';
 import {DepotService} from '../auth/service/depot-service.service';
 import {Observable} from 'rxjs';
 import {DepotFormComponent} from '../depot-form/depot-form.component';
+import {User} from '../auth/model/user';
+import {AuthService} from '../auth/service/auth.service';
 
 
 
@@ -14,10 +16,9 @@ import {DepotFormComponent} from '../depot-form/depot-form.component';
 export class DepotListComponent implements OnInit {
 
   depots: Depot[];
-  parcelCode: string;
+  username: string;
 
-
-  constructor(private depotService: DepotService) {
+  constructor(private depotService: DepotService, private authService: AuthService) {
   }
 
   // tslint:disable-next-line:typedef

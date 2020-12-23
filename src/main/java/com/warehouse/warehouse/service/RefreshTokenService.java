@@ -21,7 +21,6 @@ public class RefreshTokenService {
         RefreshToken refreshToken = new RefreshToken();
         refreshToken.setToken(UUID.randomUUID().toString());
         refreshToken.setCreatedDate(Instant.now());
-
         return refreshTokenRepository.save(refreshToken);
 
     }

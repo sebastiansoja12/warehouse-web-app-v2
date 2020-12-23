@@ -23,7 +23,7 @@ import static java.util.Date.from;
 @Service
 public class JwtProvider {
     private KeyStore keyStore;
-    @Value("${jwt.expiration.time}")
+    @Value("5000")
     private Long jwtExpirationInMillis;
 
     @PostConstruct
@@ -45,7 +45,7 @@ public class JwtProvider {
                 .setSubject(principal.getUsername())
                 .setIssuedAt(from(Instant.now()))
                 .signWith(getPrivateKey())
-                .setExpiration(Date.from(Instant.now().plusMillis(jwtExpirationInMillis)))
+                .setExpiration(Date.from(Instant.now().plusSeconds(jwtExpirationInMillis)))
                 .compact();
     }
 
@@ -85,7 +85,7 @@ public class JwtProvider {
                 .setSubject(username)
                 .setIssuedAt(from(Instant.now()))
                 .signWith(getPrivateKey())
-                .setExpiration(java.sql.Date.from(Instant.now().plusMillis(jwtExpirationInMillis)))
+                .setExpiration(java.sql.Date.from(Instant.now().plusSeconds(jwtExpirationInMillis)))
                 .compact();
     }
     public Long getJwtExpirationInMillis() {
