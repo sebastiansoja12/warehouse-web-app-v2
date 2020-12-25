@@ -6,9 +6,11 @@ import com.warehouse.warehouse.dto.LoginRequest;
 import com.warehouse.warehouse.dto.RefreshTokenRequest;
 import com.warehouse.warehouse.dto.RegisterRequest;
 import com.warehouse.warehouse.exceptions.WarehouseMailException;
+import com.warehouse.warehouse.model.DepotInformation;
 import com.warehouse.warehouse.model.NotificationEmail;
 import com.warehouse.warehouse.model.User;
 import com.warehouse.warehouse.model.VerificationToken;
+import com.warehouse.warehouse.repository.DepotInformationRepository;
 import com.warehouse.warehouse.repository.RefreshTokenRepository;
 import com.warehouse.warehouse.repository.UserRepository;
 import com.warehouse.warehouse.repository.VerificationTokenRepository;
@@ -49,15 +51,20 @@ private final JwtProvider jwtProvider;
 
 private final RefreshTokenService refreshTokenService;
 
+private final DepotInformationRepository depotInformationRepository;
+
     public void signup(RegisterRequest registerRequest)
     {
         User user = new User();
+        DepotInformation depotInformation= new DepotInformation();
+        depotInformation.setId((long) registerRequest.getDepot_id());
         user.setUsername(registerRequest.getUsername());
         user.setEmail(registerRequest.getEmail());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setFirstName(registerRequest.getFirstName());
         user.setLastName(registerRequest.getLastName());
         user.setRole(registerRequest.getRole());
+        user.setDepotInformation(depotInformation);
         user.setEnabled(false);
 
         userRepository.save(user);

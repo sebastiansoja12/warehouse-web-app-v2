@@ -7,6 +7,7 @@
                     <h4>Rejestracja</h4>
                 </div>
                 <div class="card-body">
+
                     <form [formGroup]="signupForm" (ngSubmit)="signup()">
                         <div class="form-group row">
                             <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail</label>
@@ -59,12 +60,24 @@
                           </div>
                       </div>
 
+                      <div class="form-group row">
+                        <label for="depot_id" class="col-md-4 col-form-label text-md-right">Id oddziału</label>
+                        <div class="col-md-4 col-form-label-sm" id="depot_id">
+                          <select [formControlName]="'depot_id'">
+                            <option *ngFor="let option of depotInformation" [value]="option.id">
+                              {{option.id}}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
                         <span class="col-md-6 offset-md-4">
+
                             <button type="submit" class="sign-up">
                                 Utwórz konto
                             </button>
                             <span style="padding-left: 15px">Już masz konto? <a routerLink="/login">Zaloguj się</a></span>
                         </span>
+
                     </form>
                 </div>
             </div>

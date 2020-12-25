@@ -63,6 +63,7 @@ public class User {
         this.username= username;
     }
 
+    @JsonProperty("idOddzialu")
     @ManyToOne
     DepotInformation depotInformation;
 

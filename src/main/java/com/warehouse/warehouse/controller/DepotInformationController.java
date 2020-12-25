@@ -19,4 +19,8 @@ public class DepotInformationController {
     public List<DepotInformation> addDepotInformationList(@RequestBody List<DepotInformation> depotInformationList){
         return depotInformationService.saveAll(depotInformationList);
     }
+    @GetMapping("/api/depots/information/all")
+    public List<DepotInformation> getDepotInformation(){
+        return depotInformationService.getAll();
+    }
 }

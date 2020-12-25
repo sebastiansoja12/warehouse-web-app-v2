@@ -25,5 +25,9 @@ public class DepotInformationService {
          return depotInformationRepository.saveAll(depotInformationList);
     }
 
+    public List<DepotInformation> getAll(){
+        return depotInformationRepository.findAll();
+    }
+
 
 }

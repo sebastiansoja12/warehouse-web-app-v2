@@ -4,6 +4,8 @@ import { SignupRequestPayload } from './singup-request.payload';
 import { AuthService } from '../service/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import {DepotService} from '../service/depot-service.service';
+import {DepotInformation} from '../model/DepotInformation';
 
 @Component({
   selector: 'app-signup',
@@ -17,30 +19,35 @@ export class SignupComponent implements OnInit {
     email: string;
     role: string;
     firstName: string;
-    lastName: string; };
+    lastName: string;
+    depot_id: any};
   signupForm: FormGroup;
+  depotInformation: DepotInformation[];
 
   constructor(private authService: AuthService, private router: Router,
-              private toastr: ToastrService) {
+              private toastr: ToastrService, private depotService: DepotService) {
     this.signupRequestPayload = {
       username: '',
       email: '',
       password: '',
       role: '',
       firstName: '',
-      lastName: ''
+      lastName: '',
+      depot_id: ''
     };
   }
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
+    this.depotService.findAllDepots().subscribe((data) => this.depotInformation = data);
     this.signupForm = new FormGroup({
       username: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
-      role: new FormControl('', Validators.required)
+      role: new FormControl('', Validators.required),
+      depot_id: new FormControl('', Validators.required)
     });
   }
 
@@ -51,6 +58,7 @@ export class SignupComponent implements OnInit {
     this.signupRequestPayload.password = this.signupForm.get('password').value;
     this.signupRequestPayload.firstName = this.signupForm.get('firstName').value;
     this.signupRequestPayload.lastName = this.signupForm.get('lastName').value;
+    this.signupRequestPayload.depot_id = this.signupForm.get('depot_id').value;
     this.authService.signup(this.signupRequestPayload)
       .subscribe(() => {
         this.router.navigate(['/login'],
