@@ -23,12 +23,16 @@ export class ParcelAddComponent implements OnInit {
   ngOnInit() {
     this.createParcelForm = new FormGroup({
       parcelCode: new FormControl('', Validators.required),
-      isCustom: new FormControl('')
+      isCustom: new FormControl('', Validators.required)
     });
   }
+  makeTrue(): boolean {
+    return this.parcel.czyStandardowa = true;
+  }
 
-  createParcel() {
+  createParcel(): any {
     this.parcel.kodPaczki = this.createParcelForm.get('parcelCode').value;
+    this.parcel.czyStandardowa = this.createParcelForm.get('isCustom').value;
     this.authService.isLoggedIn();
     this.parcelService.save(this.parcel).subscribe(() => {
         this.router.navigate(['/'],

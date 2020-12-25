@@ -36,11 +36,11 @@ private final AuthService authService;
     public Parcel save(Parcel parcel){
         Depot depot = new Depot();
         DepotInformation depotInformation = new DepotInformation();
-        depotInformation.setId((long) 5);
-        depot.setDepotInformation(depotInformation);
         depot.setParcel(parcel);
         depot.setCreated(Instant.now());
         depot.setUser( authService.getUser().orElseThrow());
+        depotInformation.setId(depot.getUser().getDepotInformation().getId());
+        depot.setDepotInformation(depotInformation);
         depotRepository.save(depot);
         return parcelRepository.save(parcel);
     }

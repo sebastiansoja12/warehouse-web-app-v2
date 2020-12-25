@@ -14,9 +14,16 @@
               <div class="col-md-6">
                 <input type="text" [formControlName]="'parcelCode'" id="parcelCode" class="form-control" name="parcelCode" required
                        autofocus>
-
               </div>
+
             </div>
+  <div class="form-group row">
+    <label for="isCustom" class="col-md-4">Standard</label>
+    <div class="col-md-4 col-form-label-sm" >
+      <input type="checkbox" [formControlName]="'isCustom'" [checked]="'true'" id="isCustom" class="form-check" name="isCustom"  required autofocus>
+    </div>
+  </div>
+
 
 
             <span class="col-md-6 offset-md-4">

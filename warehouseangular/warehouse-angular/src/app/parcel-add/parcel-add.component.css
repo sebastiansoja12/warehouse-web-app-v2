@@ -1,3 +1,10 @@
 .parcel-add-section {
   margin: 100px;
 }
+label {
+  /* Other styling... */
+  text-align: right;
+  clear: both;
+  float:left;
+  margin-right:15px;
+}

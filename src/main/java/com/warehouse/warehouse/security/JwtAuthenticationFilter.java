@@ -1,5 +1,6 @@
 package com.warehouse.warehouse.security;
 
+import com.warehouse.warehouse.exceptions.WarehouseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -32,15 +33,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
         String jwt = getJwtFromRequest(request);
 
-        if (StringUtils.hasText(jwt) && jwtProvider.validateToken(jwt)) {
-            String username = jwtProvider.getUsernameFromJwt(jwt);
+        try {
+            if (StringUtils.hasText(jwt) && jwtProvider.validateToken(jwt)) {
+                String username = jwtProvider.getUsernameFromJwt(jwt);
 
-            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails,
-                    null, userDetails.getAuthorities());
-            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails,
+                        null, userDetails.getAuthorities());
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            }
+        }catch(Exception e){
+            throw new WarehouseException("Zaloguj sie ponownie");
         }
         filterChain.doFilter(request, response);
     }
