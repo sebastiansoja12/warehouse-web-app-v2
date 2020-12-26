@@ -7,6 +7,7 @@ import {AuthService} from '../auth/service/auth.service';
 import {ToastrService} from 'ngx-toastr';
 import {RouteRequestPayload} from './route-request.payload';
 import {LocalStorageService} from 'ngx-webstorage';
+import {throwError} from 'rxjs';
 
 
 @Component({
@@ -26,6 +27,7 @@ id: string;
   @Output() parseParcelId: EventEmitter<string> = new EventEmitter();
 
   isError: boolean;
+  message: string;
 
 
   constructor(private routeService: RouteService, private router: Router,
@@ -51,6 +53,8 @@ findParcelCode(): string {
    this.parseParcelId.emit(this.id);
    this.routeService.getAllRoutesByParcelId(this.id).subscribe(data => {
      this.depot = data;
+     this.toastr.success('Paczka znaleziona');
+     this.isError = false;
      this.router.navigate(
        ['/route'],
        {
@@ -59,8 +63,12 @@ findParcelCode(): string {
          queryParamsHandling: 'merge',
          preserveFragment: true
        });
+   }, error => {
+     this.isError = true;
+     throwError(error);
+     this.toastr.error('Paczka nie została znaleziona');
+     this.message = 'Paczka o id: ' +  this.id + ' nie została znaleziona w bazie.\n' +
+                       'Sprawdź numer swojej przesyłki i spróbuj ponownie';
    });
   }
-
-
 }

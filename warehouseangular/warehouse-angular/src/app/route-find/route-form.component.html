@@ -19,14 +19,11 @@
               </button></div>
             </div>
             <div class="login-failed" *ngIf='this.isError'>
-              <p class="login-failed-text">Paczka o kodzie: {{id}} nie istnieje</p>
+              <p class="login-failed-text">{{message}}</p>
             </div>
-
-
-
-
-
-
+            <div class="login-failed" [ngStyle]="{'background-color': 'green'}" *ngIf="!this.isError">
+              <p class="register-success-text">{{message}}</p>
+            </div>
           </form>
         </div>
       </div>
