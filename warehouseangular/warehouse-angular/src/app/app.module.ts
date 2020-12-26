@@ -13,14 +13,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import {TokenInterceptor} from './token-interceptor';
 import {HomeComponent} from './home/home.component';
-import { DepotListComponent } from './depot-list/depot-list.component';
-import { DepotFormComponent } from './depot-form/depot-form.component';
-import {DepotService} from './auth/service/depot-service.service';
-import { DepotViewComponent } from './depot-view/depot-view.component';
+import { RouteListComponent } from './route-list/route-list.component';
+import { RouteFormComponent } from './route-find/route-form.component';
+import { RouteViewComponent } from './route-view/route-view.component';
 import {environment} from '../environments/environment';
 import { ParcelAddComponent } from './parcel-add/parcel-add.component';
 import {ParcelService} from './auth/service/parcel.service';
 import {Parcel} from './auth/model/parcel';
+import {RouteService} from './auth/service/route-service.service';
+import { RouteGetComponent } from './route-get/route-get.component';
+import {Route} from './auth/model/route';
 
 
 
@@ -31,10 +33,11 @@ import {Parcel} from './auth/model/parcel';
     SignupComponent,
     LoginComponent,
     HomeComponent,
-    DepotListComponent,
-    DepotFormComponent,
-    DepotViewComponent,
+    RouteListComponent,
+    RouteFormComponent,
+    RouteViewComponent,
     ParcelAddComponent,
+    RouteGetComponent,
 
   ],
   imports: [
@@ -57,11 +60,13 @@ import {Parcel} from './auth/model/parcel';
       multi: true
     },
     Parcel,
+    Route,
     ParcelService,
-    DepotService,
-    DepotFormComponent,
-    DepotViewComponent,
-    DepotListComponent
+    RouteService,
+    RouteFormComponent,
+    RouteViewComponent,
+    RouteListComponent,
+    RouteGetComponent,
   ],
   bootstrap: [AppComponent]
 })

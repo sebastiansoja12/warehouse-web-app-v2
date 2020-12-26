@@ -1,7 +1,7 @@
-import { Depot } from './depot';
+import { Route } from './route';
 
 describe('Depot', () => {
   it('should create an instance', () => {
-    expect(new Depot()).toBeTruthy();
+    expect(new Route()).toBeTruthy();
   });
 });

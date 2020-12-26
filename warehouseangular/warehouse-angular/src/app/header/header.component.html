@@ -8,13 +8,16 @@
                 </span>
             </a>
 
-            <button  *ngIf="isLoggedIn && isAdmin"   class="userdetails" id="dropdownBasic1" routerLink="/depots/all"> Przesyłki</button>
-            <button *ngIf="!isLoggedIn" class="userdetails" id="dropdownBasic1" routerLink="/depot/find">Znajdź przesyłkę</button>
-          <button  *ngIf="isLoggedIn"   class="userdetails" id="dropdownBasic1" routerLink="/parcel/add">Przyjęcie od kuriera</button>
+            <button  *ngIf="isLoggedIn && isAdmin"   class="userdetails" id="dropdownBasic1" routerLink="/routes/all"> Przesyłki</button>
+            <button *ngIf="!isLoggedIn" class="userdetails" id="dropdownBasic1" routerLink="/route/find">Znajdź przesyłkę</button>
+          <button  *ngIf="!isLoggedIn"   class="userdetails" id="dropdownBasic1" routerLink="/parcel/add">Nadaj przesyłkę</button>
+
 
         </div>
         <div class="flex-grow-1 float-right">
-            <div *ngIf="isLoggedIn" ngbDropdown class="float-right">
+
+          <div *ngIf="isLoggedIn" ngbDropdown class="float-right">
+            <button  *ngIf="isLoggedIn"   class="userdetails" id="dropdownBasic1" routerLink="/route/add">Przyjęcie od kuriera</button>
               <button class="userdetails" id="dropdownBasic1" ngbDropdownToggle>
                     <img class="account-icon" src="https://www.redditstatic.com/avatars/avatar_default_08_D4E815.png">
                     {{username}}

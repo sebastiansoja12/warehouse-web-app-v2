@@ -9,16 +9,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import java.time.Instant;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
-import static javax.persistence.FetchType.LAZY;
-import static javax.persistence.GenerationType.AUTO;
-import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
 @AllArgsConstructor
@@ -32,40 +22,33 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @JsonProperty("nazwaUzytkownika")
+    @JsonProperty()
     private String username;
 
-    @JsonProperty( value= "haslo", access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
 
-    @JsonProperty( value= "imie")
+    @JsonProperty()
     private String firstName;
 
-    @JsonProperty( value= "nazwisko", access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String lastName;
 
     @Email
-    @JsonProperty( value= "email", access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String email;
 
     //@NotEmpty(message="Rola jest wymagana")
-    @JsonProperty( value= "rola", access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String role;
 
 
-    @JsonProperty( value= "czyAktywowane", access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private boolean enabled;
 
-
-
-    public User(String username){
-        this.username= username;
-    }
-
-    @JsonProperty("idOddzialu")
     @ManyToOne
-    DepotInformation depotInformation;
+    Depot depot;
 
 
 }

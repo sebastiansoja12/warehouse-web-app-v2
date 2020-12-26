@@ -4,23 +4,52 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-header" style="text-align: center">
-          <h4>Rejestracja przesyłki</h4>
+          <h4>Nadanie przesyłki</h4>
         </div>
         <div class="card-body">
 <form  [formGroup]="createParcelForm" (ngSubmit)="createParcel()">
 
             <div class="form-group row">
-              <label for="parcelCode" class="col-md-4 col-form-label text-md-right">Kod paczki</label>
+              <label for="firstName" class="col-md-4 col-form-label text-md-right">Imie odbiorcy</label>
               <div class="col-md-6">
-                <input type="text" [formControlName]="'parcelCode'" id="parcelCode" class="form-control" name="parcelCode" required
-                       autofocus>
+                <input type="text" [formControlName]="'firstName'" id="firstName" class="form-control" name="firstName" required autofocus>
               </div>
-
             </div>
   <div class="form-group row">
-    <label for="isCustom" class="col-md-4">Standard</label>
+    <label for="lastName" class="col-md-4 col-form-label text-md-right">Nazwisko odbiorcy</label>
+    <div class="col-md-6">
+      <input type="text" [formControlName]="'lastName'" id="lastName" class="form-control" name="lastName" required autofocus>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="sender_telephone" class="col-md-4 col-form-label text-md-right">Numer telefonu wysyłającego</label>
+    <div class="col-md-6">
+      <input type="text" [formControlName]="'sender_telephone'" id="sender_telephone" class="form-control" name="sender_telephone" required autofocus>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="destination_telephone" class="col-md-4 col-form-label text-md-right">Numer telefonu odbiorcy</label>
+    <div class="col-md-6">
+      <input type="text" [formControlName]="'destination_telephone'" id="destination_telephone" class="form-control" name="destination_telephone" required autofocus>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="destination_address" class="col-md-4 col-form-label text-md-right">Destynacja</label>
+    <div class="col-md-6">
+      <input type="text" [formControlName]="'destination_address'" id="destination_address" class="form-control" name="destination_address" required autofocus>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="email" class="col-md-4 col-form-label text-md-right">E-mail odbiorcy</label>
+    <div class="col-md-6">
+      <input type="text" [formControlName]="'email'" id="email" class="form-control" name="email" required autofocus>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="custom" class="col-md-4">Standard</label>
     <div class="col-md-4 col-form-label-sm" >
-      <input type="checkbox" [formControlName]="'isCustom'" [checked]="'true'" id="isCustom" class="form-check" name="isCustom"  required autofocus>
+      <input type="checkbox" [formControlName]="'custom'" [checked]="'true'" id="custom" class="form-check" name="custom"  required autofocus>
     </div>
 
   </div>
@@ -28,8 +57,8 @@
 
 
             <span class="col-md-6 offset-md-4">
-              <button type="submit" class="add-parcel">
-                Dodaj paczke
+              <button type="submit" class="sign-up">
+                Nadaj paczkę
               </button>
             </span>
 

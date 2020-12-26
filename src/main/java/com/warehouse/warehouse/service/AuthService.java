@@ -6,17 +6,15 @@ import com.warehouse.warehouse.dto.LoginRequest;
 import com.warehouse.warehouse.dto.RefreshTokenRequest;
 import com.warehouse.warehouse.dto.RegisterRequest;
 import com.warehouse.warehouse.exceptions.WarehouseMailException;
-import com.warehouse.warehouse.model.DepotInformation;
+import com.warehouse.warehouse.model.Depot;
 import com.warehouse.warehouse.model.NotificationEmail;
 import com.warehouse.warehouse.model.User;
 import com.warehouse.warehouse.model.VerificationToken;
-import com.warehouse.warehouse.repository.DepotInformationRepository;
-import com.warehouse.warehouse.repository.RefreshTokenRepository;
+import com.warehouse.warehouse.repository.DepotRepository;
 import com.warehouse.warehouse.repository.UserRepository;
 import com.warehouse.warehouse.repository.VerificationTokenRepository;
 import com.warehouse.warehouse.security.JwtProvider;
 import lombok.AllArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -51,20 +49,20 @@ private final JwtProvider jwtProvider;
 
 private final RefreshTokenService refreshTokenService;
 
-private final DepotInformationRepository depotInformationRepository;
+private final DepotRepository depotRepository;
 
     public void signup(RegisterRequest registerRequest)
     {
         User user = new User();
-        DepotInformation depotInformation= new DepotInformation();
-        depotInformation.setId((long) registerRequest.getDepot_id());
+        Depot depot = new Depot();
+        depot.setId((long) registerRequest.getDepot_id());
         user.setUsername(registerRequest.getUsername());
         user.setEmail(registerRequest.getEmail());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setFirstName(registerRequest.getFirstName());
         user.setLastName(registerRequest.getLastName());
         user.setRole(registerRequest.getRole());
-        user.setDepotInformation(depotInformation);
+        user.setDepot(depot);
         user.setEnabled(false);
 
         userRepository.save(user);

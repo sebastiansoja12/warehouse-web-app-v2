@@ -7,16 +7,16 @@ header{
     width: 50px;
 }
 
-.warehouse-text{        
+.warehouse-text{
     font-weight: 700;
     height: 50px;
-    width: 50px;    
+    width: 50px;
 }
 .logo{
     text-decoration: none;
 }
 
-.login, .sign-up{    
+.login, .sign-up{
     background-color: transparent;
     border-color: #0079D3;
     color: #0079D3;
@@ -33,11 +33,11 @@ header{
     line-height: 24px;
     text-transform: uppercase;
     padding: 3px 16px;
-    opacity: 1;  
+    opacity: 1;
 }
 
 .sign-up{
-    background-color: #0079D3;
+    background-color: #001cd3;
     border-color: #0079D3;
     color: aliceblue;
 }
@@ -46,7 +46,7 @@ header{
     opacity: 0.6;
 }
 
-.userdetails{    
+.userdetails{
     background-color: transparent;
     border-color: #0079D3;
     color: #0079D3;

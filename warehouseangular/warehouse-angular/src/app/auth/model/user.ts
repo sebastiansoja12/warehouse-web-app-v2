@@ -1,3 +1,5 @@
+import {Depot} from './depot';
+
 export class User {
   id: number;
   email: string;
@@ -5,4 +7,5 @@ export class User {
   lastName: string;
   username: string;
   city: string;
+  depot: Depot;
 }

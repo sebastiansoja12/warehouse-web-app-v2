@@ -1,6 +1,5 @@
 package com.warehouse.warehouse.repository;
 
-import com.warehouse.warehouse.model.DepotInformation;
 import com.warehouse.warehouse.model.RefreshToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 

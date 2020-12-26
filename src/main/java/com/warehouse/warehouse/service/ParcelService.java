@@ -1,21 +1,20 @@
 package com.warehouse.warehouse.service;
 
 import com.warehouse.warehouse.model.Depot;
-import com.warehouse.warehouse.model.DepotInformation;
+import com.warehouse.warehouse.model.Route;
 import com.warehouse.warehouse.model.Parcel;
 import com.warehouse.warehouse.model.User;
-import com.warehouse.warehouse.repository.DepotRepository;
+import com.warehouse.warehouse.repository.RouteRepository;
 import com.warehouse.warehouse.repository.ParcelRepository;
 import com.warehouse.warehouse.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Slf4j
@@ -23,30 +22,37 @@ import java.util.List;
 public class ParcelService {
 
     @Autowired
-    public ParcelService(ParcelRepository parcelRepository, UserRepository userRepository, DepotRepository depotRepository, AuthService authService){
+    public ParcelService(ParcelRepository parcelRepository, UserRepository userRepository, RouteRepository routeRepository, AuthService authService){
         this.parcelRepository= parcelRepository;
-        this.depotRepository=depotRepository;
+        this.routeRepository = routeRepository;
         this.authService = authService;
     }
 private final ParcelRepository parcelRepository;
-    private final DepotRepository depotRepository;
+    private final RouteRepository routeRepository;
 private final AuthService authService;
 
     @Transactional
     public Parcel save(Parcel parcel){
-        Depot depot = new Depot();
-        DepotInformation depotInformation = new DepotInformation();
-        depot.setParcel(parcel);
-        depot.setCreated(Instant.now());
-        depot.setUser( authService.getUser().orElseThrow());
-        depotInformation.setId(depot.getUser().getDepotInformation().getId());
-        depot.setDepotInformation(depotInformation);
-        depotRepository.save(depot);
+        Route route = new Route();
+        User user = new User();
+        user.setId(1);
+        route.setParcel(parcel);
+        route.setCreated(Instant.now());
+        route.setUser(user);
+        route.setDepot(initiate());
+        routeRepository.save(route);
         return parcelRepository.save(parcel);
     }
 
-
-
+    public Depot initiate(){
+        Depot depot = new Depot();
+        depot.setId((long)9);
+        depot.setCity("-");
+        depot.setCountry("-");
+        depot.setCity("-");
+        depot.setStreet("-");
+        return depot;
+    }
 
     @Transactional(readOnly = true)
     public List<Parcel> findAll(){
@@ -54,7 +60,7 @@ private final AuthService authService;
     }
 
     @Transactional(readOnly = true)
-    public Parcel findByParcelCode(String parcelCode) {
-        return parcelRepository.findByParcelCode(parcelCode).orElse(null);
+    public Parcel findById(UUID id) {
+        return parcelRepository.findById(id).orElse(null);
     }
 }

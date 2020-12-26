@@ -1,6 +1,5 @@
-
-export class Depot {
-  id: string;
-  created: string;
-  parcelCode: string;
+export class Depot{
+  id: number;
+  city: string;
+  depotCode: string;
 }

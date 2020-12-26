@@ -22,24 +22,34 @@ export class ParcelAddComponent implements OnInit {
 
   ngOnInit() {
     this.createParcelForm = new FormGroup({
-      parcelCode: new FormControl('', Validators.required),
-      isCustom: new FormControl('', Validators.required)
+      firstName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      sender_telephone: new FormControl('', Validators.required),
+      destination_telephone: new FormControl('', Validators.required),
+      destination_address: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required),
+      custom: new FormControl('', Validators.required)
     });
   }
   makeTrue(): boolean {
-    return this.parcel.czyStandardowa = true;
+    return this.parcel.custom = true;
   }
 
   createParcel(): any {
-    this.parcel.kodPaczki = this.createParcelForm.get('parcelCode').value;
-    this.parcel.czyStandardowa = this.createParcelForm.get('isCustom').value;
-    this.authService.isLoggedIn();
+    this.parcel.firstName = this.createParcelForm.get('firstName').value;
+    this.parcel.lastName = this.createParcelForm.get('lastName').value;
+    this.parcel.sender_telephone = this.createParcelForm.get('sender_telephone').value;
+    this.parcel.destination_telephone = this.createParcelForm.get('destination_telephone').value;
+    this.parcel.destination_address = this.createParcelForm.get('destination_address').value;
+    this.parcel.email = this.createParcelForm.get('email').value;
+    this.parcel.custom = this.createParcelForm.get('custom').value;
     this.parcelService.save(this.parcel).subscribe(() => {
         this.router.navigate(['/'],
-          { queryParams: { parcelCode: this.parcel.kodPaczki } });
+          { queryParams: { sent: 'true' } });
       }, error => {
         console.log(error);
       });
   }
+
 
 }

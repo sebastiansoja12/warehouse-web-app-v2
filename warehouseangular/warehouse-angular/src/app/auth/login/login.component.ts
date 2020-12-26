@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginRequestPayload).subscribe(data => {
       this.isError = false;
       if (this.authService.isAdmin() === true){
-        this.router.navigateByUrl('/depots/all');
+        this.router.navigateByUrl('/routes/all');
       } else {
         this.router.navigateByUrl('');
       }

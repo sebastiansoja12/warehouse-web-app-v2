@@ -1,5 +1,5 @@
-<div class="depot-section">
-  <h1> Trasa paczki {{parcelCode}}</h1>
+<div class="route-section">
+  <h1> Trasa paczki {{id}}</h1>
 <div class="card my-5">
   <div class="card-body">
     <table class="table table-bordered table-striped">
@@ -13,10 +13,10 @@
       </thead>
       <tbody>
 
-      <tr *ngFor="let depot of depots">
-        <td>{{ depot.depotInformation.miasto}}</td>
-        <td>{{ depot.depotInformation.kodOddzialu}}</td>
-        <td>{{ depot.dataWejscia}}</td>
+      <tr *ngFor="let route of routes">
+        <td>{{ route.user.depot.city}}</td>
+        <td>{{ route.user.depot.depotCode}}</td>
+        <td>{{ route.created}}</td>
 
       </tr>
       </tbody>

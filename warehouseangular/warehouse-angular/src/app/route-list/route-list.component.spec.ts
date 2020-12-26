@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DepotViewComponent } from './depot-view.component';
+import { RouteListComponent } from './route-list.component';
 
-describe('DepotViewComponent', () => {
-  let component: DepotViewComponent;
-  let fixture: ComponentFixture<DepotViewComponent>;
+describe('DepotListComponent', () => {
+  let component: RouteListComponent;
+  let fixture: ComponentFixture<RouteListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DepotViewComponent ]
+      declarations: [ RouteListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DepotViewComponent);
+    fixture = TestBed.createComponent(RouteListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

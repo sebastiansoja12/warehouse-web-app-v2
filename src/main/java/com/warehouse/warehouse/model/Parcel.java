@@ -27,10 +27,18 @@ public class Parcel {
     private UUID id;
 
 
-    @JsonProperty("kodPaczki")
-    private String parcelCode;
+    private String firstName;
 
-    @JsonProperty("czyStandardowa")
+    private String lastName;
+
+    private String sender_telephone;
+
+    private String destination_telephone;
+
+    private String destination_address;
+
+    private String email;
+
     private boolean isCustom;
 
 

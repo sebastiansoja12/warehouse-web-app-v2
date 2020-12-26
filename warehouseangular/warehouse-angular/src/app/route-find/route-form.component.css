@@ -1,15 +1,5 @@
-.parcel-add-section {
+.route-section {
   margin: 100px;
-}
-label {
-  /* Other styling... */
-  text-align: right;
-  clear: both;
-  float:left;
-  margin-right:15px;
-}
-header{
-  border-radius: 1px solid;
 }
 .reddit-icon-svg{
   height: 50px;
@@ -46,15 +36,6 @@ header{
   opacity: 1;
 }
 
-.add-parcel{
-  background-color: #001cd3;
-  border-color: #0079D3;
-  color: aliceblue;
-}
-
-.add-parcel:hover{
-  opacity: 0.6;
-}
 .sign-up{
   background-color: #001cd3;
   border-color: #0079D3;
@@ -114,3 +95,4 @@ header{
   max-height: 24px;
   max-width: 24px;
 }
+

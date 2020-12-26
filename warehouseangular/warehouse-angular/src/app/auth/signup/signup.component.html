@@ -64,7 +64,7 @@
                         <label for="depot_id" class="col-md-4 col-form-label text-md-right">Id oddziału</label>
                         <div class="col-md-4 col-form-label-sm" id="depot_id">
                           <select [formControlName]="'depot_id'">
-                            <option *ngFor="let option of depotInformation" [value]="option.id">
+                            <option *ngFor="let option of depot" [value]="option.id">
                               {{option.id}}
                             </option>
                           </select>

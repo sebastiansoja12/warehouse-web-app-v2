@@ -1,4 +1,4 @@
-<div class="depot-section">
+<div class="route-section">
   <div class="row justify-content-center">
     <div class="col-md-3"></div>
     <div class="col-md-6">
@@ -7,19 +7,19 @@
           <h4>Znajdź przesyłkę</h4>
         </div>
         <div class="card-body">
-          <form [formGroup]="depotFindForm" (ngSubmit)="findDepot()" >
+          <form [formGroup]="parcelFindForm" (ngSubmit)="findParcel()" >
             <div class="form-group row">
 
-              <label for="parcelCode" class="col-md-4 col-form-label text-md-right">Kod przesyłki</label>
+              <label for="id" class="col-md-4 col-form-label text-md-right">Kod przesyłki</label>
               <div class="col-md-5">
-                <input type="text" [formControlName]="'parcelCode'" id="parcelCode" class="form-control" name="parcelCode">
+                <input type="text" [formControlName]="'id'" id="id" class="form-control" name="id">
               </div>
-              <div class="col-md"> <button type="submit" class="findDepot">
+              <div class="col-md"> <button type="submit" class="sign-up">
                 Znajdź
               </button></div>
             </div>
             <div class="login-failed" *ngIf='this.isError'>
-              <p class="login-failed-text">Paczka o kodzie: {{parcelCode}} nie istnieje</p>
+              <p class="login-failed-text">Paczka o kodzie: {{id}} nie istnieje</p>
             </div>
 
 

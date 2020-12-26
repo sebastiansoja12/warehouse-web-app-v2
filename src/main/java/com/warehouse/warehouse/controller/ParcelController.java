@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/parcels")
@@ -25,9 +26,9 @@ public class ParcelController {
     public List<Parcel> getAll(){
         return parcelService.findAll();
     }
-    @GetMapping("/{parcelCode}")
-    public Parcel getParcelByParcelCode(@PathVariable String parcelCode){
-        return parcelService.findByParcelCode(parcelCode);
+    @GetMapping("/{id}")
+    public Parcel getParcelByParcelId(@PathVariable UUID id){
+        return parcelService.findById(id);
     }
 
 

@@ -4,8 +4,9 @@ import { SignupRequestPayload } from './singup-request.payload';
 import { AuthService } from '../service/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import {DepotService} from '../service/depot-service.service';
-import {DepotInformation} from '../model/DepotInformation';
+import {RouteService} from '../service/route-service.service';
+import {Depot} from '../model/depot';
+import {Route} from '../model/route';
 
 @Component({
   selector: 'app-signup',
@@ -22,10 +23,11 @@ export class SignupComponent implements OnInit {
     lastName: string;
     depot_id: any};
   signupForm: FormGroup;
-  depotInformation: DepotInformation[];
+  depot: Depot[];
+  route: Route[];
 
   constructor(private authService: AuthService, private router: Router,
-              private toastr: ToastrService, private depotService: DepotService) {
+              private toastr: ToastrService, private routeService: RouteService) {
     this.signupRequestPayload = {
       username: '',
       email: '',
@@ -39,7 +41,7 @@ export class SignupComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   ngOnInit() {
-    this.depotService.findAllDepots().subscribe((data) => this.depotInformation = data);
+    this.routeService.findAllDepots().subscribe((data) => this.depot = data);
     this.signupForm = new FormGroup({
       username: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
