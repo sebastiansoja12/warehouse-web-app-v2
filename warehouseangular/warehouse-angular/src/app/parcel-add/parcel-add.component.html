@@ -13,18 +13,27 @@
               <label for="firstName" class="col-md-4 col-form-label text-md-right">Imie odbiorcy</label>
               <div class="col-md-6">
                 <input type="text" [formControlName]="'firstName'" id="firstName" class="form-control" name="firstName" required autofocus>
+                <span *ngIf="!createParcelForm.get('firstName').valid && createParcelForm.get('firstName').touched">
+                                    Proszę podać imie
+                                </span>
               </div>
             </div>
   <div class="form-group row">
     <label for="lastName" class="col-md-4 col-form-label text-md-right">Nazwisko odbiorcy</label>
     <div class="col-md-6">
       <input type="text" [formControlName]="'lastName'" id="lastName" class="form-control" name="lastName" required autofocus>
+      <span *ngIf="!createParcelForm.get('lastName').valid && createParcelForm.get('lastName').touched">
+                                    Proszę podać nazwisko
+                                </span>
     </div>
   </div>
   <div class="form-group row">
     <label for="sender_telephone" class="col-md-4 col-form-label text-md-right">Numer telefonu wysyłającego</label>
     <div class="col-md-6">
       <input type="text" [formControlName]="'sender_telephone'" id="sender_telephone" class="form-control" name="sender_telephone" required autofocus>
+      <span *ngIf="!createParcelForm.get('sender_telephone').valid && createParcelForm.get('sender_telephone').touched">
+                                    Proszę podać telefon wysyłającego
+                                </span>
     </div>
   </div>
 
@@ -32,40 +41,45 @@
     <label for="destination_telephone" class="col-md-4 col-form-label text-md-right">Numer telefonu odbiorcy</label>
     <div class="col-md-6">
       <input type="text" [formControlName]="'destination_telephone'" id="destination_telephone" class="form-control" name="destination_telephone" required autofocus>
+      <span *ngIf="!createParcelForm.get('destination_telephone').valid && createParcelForm.get('destination_telephone').touched">
+                                    Proszę podać telefon odbiorcy
+                                </span>
     </div>
   </div>
   <div class="form-group row">
     <label for="destination_address" class="col-md-4 col-form-label text-md-right">Destynacja</label>
     <div class="col-md-6">
       <input type="text" [formControlName]="'destination_address'" id="destination_address" class="form-control" name="destination_address" required autofocus>
+      <span *ngIf="!createParcelForm.get('destination_address').valid && createParcelForm.get('destination_address').touched">
+                                    Proszę podać destynację
+                                </span>
     </div>
   </div>
   <div class="form-group row">
     <label for="email" class="col-md-4 col-form-label text-md-right">E-mail odbiorcy</label>
     <div class="col-md-6">
       <input type="text" [formControlName]="'email'" id="email" class="form-control" name="email" required autofocus>
+      <span *ngIf="!createParcelForm.get('email').valid && createParcelForm.get('email').touched">
+                                    Proszę podać email
+                                </span>
     </div>
   </div>
   <div class="form-group row">
     <label for="custom" class="col-md-4">Standard</label>
     <div class="col-md-4 col-form-label-sm" >
       <input type="checkbox" [formControlName]="'custom'" [checked]="'true'" id="custom" class="form-check" name="custom"  required autofocus>
+      <span *ngIf="!createParcelForm.get('custom').valid && createParcelForm.get('custom').touched">
+                                    Czy paczka posiada niestandardowe kształty?
+                                </span>
     </div>
 
   </div>
-
-
-
             <span class="col-md-6 offset-md-4">
               <button type="submit" class="sign-up">
                 Nadaj paczkę
               </button>
             </span>
-
 </form>
-
-
-
         </div>
       </div>
     </div>

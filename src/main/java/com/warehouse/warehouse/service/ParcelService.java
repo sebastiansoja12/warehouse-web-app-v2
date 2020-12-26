@@ -1,5 +1,6 @@
 package com.warehouse.warehouse.service;
 
+import com.warehouse.warehouse.exceptions.WarehouseException;
 import com.warehouse.warehouse.model.Depot;
 import com.warehouse.warehouse.model.Route;
 import com.warehouse.warehouse.model.Parcel;
@@ -9,6 +10,7 @@ import com.warehouse.warehouse.repository.ParcelRepository;
 import com.warehouse.warehouse.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,15 +35,17 @@ private final AuthService authService;
 
     @Transactional
     public Parcel save(Parcel parcel){
-        Route route = new Route();
-        User user = new User();
-        user.setId(1);
-        route.setParcel(parcel);
-        route.setCreated(Instant.now());
-        route.setUser(user);
-        route.setDepot(initiate());
-        routeRepository.save(route);
-        return parcelRepository.save(parcel);
+
+            Route route = new Route();
+            User user = new User();
+            user.setId(1);
+            route.setParcel(parcel);
+            route.setCreated(Instant.now());
+            route.setUser(user);
+            route.setDepot(initiate());
+            routeRepository.save(route);
+            return parcelRepository.save(parcel);
+
     }
 
     public Depot initiate(){
@@ -61,6 +65,10 @@ private final AuthService authService;
 
     @Transactional(readOnly = true)
     public Parcel findById(UUID id) {
-        return parcelRepository.findById(id).orElse(null);
+        if(parcelRepository.exists(Example.of(parcelRepository.findById(id).orElseThrow()))){
+            return parcelRepository.findById(id).orElseThrow();
+
+        }
+        return null;
     }
 }

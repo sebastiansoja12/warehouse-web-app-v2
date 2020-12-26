@@ -20,7 +20,7 @@ import {throwError} from 'rxjs';
 })
 export class RouteFormComponent implements OnInit {
 
-  depot: Array<Route>;
+  routes: Array<Route>;
   parcelFindForm: FormGroup;
  dss: string;
 id: string;
@@ -35,7 +35,7 @@ id: string;
               private activatedRoute: ActivatedRoute) {
   }
 
-  ngOnInit() {
+  ngOnInit(): any {
     this.parcelFindForm = new FormGroup({
       id: new FormControl('', Validators.required)
     });
@@ -47,22 +47,22 @@ findParcelCode(): string {
  return this.localStorage.retrieve('id');
 }
 
-  findParcel() {
+  findParcel(): any {
    this.id = this.parcelFindForm.get('id').value;
    this.localStorage.store('id', this.id);
    this.parseParcelId.emit(this.id);
    this.routeService.getAllRoutesByParcelId(this.id).subscribe(data => {
-     this.depot = data;
+     this.routes = data;
      this.toastr.success('Paczka znaleziona');
      this.isError = false;
      this.router.navigate(
-       ['/route'],
-       {
-         relativeTo: this.activatedRoute,
-         queryParams: { parcelCode: this.id },
-         queryParamsHandling: 'merge',
-         preserveFragment: true
-       });
+         ['/route'],
+         {
+           relativeTo: this.activatedRoute,
+           queryParams: { parcelCode: this.id },
+           queryParamsHandling: 'merge',
+           preserveFragment: true
+         });
    }, error => {
      this.isError = true;
      throwError(error);

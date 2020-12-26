@@ -17,6 +17,6 @@ public interface RouteRepository extends JpaRepository<Route,Long> {
 
     List<Route> findAllByParcel_IdOrderByCreatedDesc(final UUID id);
 
-    void deleteByParcelId( final UUID parcelId);
+    void deleteByParcelIdAndDepot_Id(final UUID parcelId, final Long depot_id);
 
 }

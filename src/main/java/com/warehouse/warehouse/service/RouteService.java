@@ -5,6 +5,7 @@ import com.warehouse.warehouse.model.Route;
 import com.warehouse.warehouse.repository.DepotRepository;
 import com.warehouse.warehouse.repository.RouteRepository;
 import com.warehouse.warehouse.repository.ParcelRepository;
+import com.warehouse.warehouse.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,7 @@ public class RouteService {
     private final RouteRepository routeRepository;
     private final AuthService authService;
     private final DepotRepository depotRepository;
+    private final UserRepository userRepository;
 
 
 
@@ -45,8 +47,11 @@ public class RouteService {
     public List<Route> findByParcelId(UUID id) {
         return routeRepository.findAllByParcel_IdOrderByCreatedDesc(id);
     }
-   public void deleteRouteByParcelId( UUID id) {
-        routeRepository.deleteByParcelId( id);
+   public void deleteRouteByParcelId(UUID id) {
+        Route route = new Route();
+        route.setUser(authService.getCurrentUser().orElseThrow(null));
+        Long depot_id = depotRepository.depot(route.getUser().getDepot().getDepotCode());
+        routeRepository.deleteByParcelIdAndDepot_Id(id, depot_id);
     }
 
 }

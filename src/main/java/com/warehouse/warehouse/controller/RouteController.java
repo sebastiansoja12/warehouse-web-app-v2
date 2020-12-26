@@ -35,8 +35,8 @@ public class RouteController {
         return routeService.findByParcelId(id);
     }
     @PostMapping("/all/parcelId/delete/{id}")
-    public ResponseEntity<String> deleteRouteByParcelId(  @Valid @PathVariable UUID id){
-            routeService.deleteRouteByParcelId( id);
+    public ResponseEntity<String> deleteRouteByParcelId(@Valid @PathVariable UUID id){
+            routeService.deleteRouteByParcelId(id);
             return ResponseEntity.status(OK).body("Zarejestrowana paczka w systemie usunięta!");
     }
 }

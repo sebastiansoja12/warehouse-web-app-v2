@@ -5,6 +5,8 @@ import {Parcel} from '../auth/model/parcel';
 import {throwError} from 'rxjs';
 import {Router} from '@angular/router';
 import {AuthService} from '../auth/service/auth.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-parcel-add',
@@ -17,7 +19,8 @@ export class ParcelAddComponent implements OnInit {
 
   constructor(
     private parcelService: ParcelService, private parcel: Parcel,
-    private router: Router, private authService: AuthService
+    private router: Router, private authService: AuthService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -43,12 +46,13 @@ export class ParcelAddComponent implements OnInit {
     this.parcel.destination_address = this.createParcelForm.get('destination_address').value;
     this.parcel.email = this.createParcelForm.get('email').value;
     this.parcel.custom = this.createParcelForm.get('custom').value;
-    this.parcelService.save(this.parcel).subscribe(() => {
-        this.router.navigate(['/'],
-          { queryParams: { sent: 'true' } });
-      }, error => {
-        console.log(error);
-      });
+    this.parcelService.save(this.parcel)
+      .subscribe(() => {
+      this.router.navigate(['/'],
+        { queryParams: { sent: 'true' } });
+    }, error => {
+      this.toastr.error('Paczka nie została nadana!');
+    });
   }
 
 
