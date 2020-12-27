@@ -46,4 +46,10 @@ export class RouteService {
   getAllRoutesByParcelId(id: string): Observable<Array<Route>> {
       return this.http.get<Array<Route>>('http://localhost:8080/api/routes/all/parcelId/' + id);
   }
+  deleteRouteByParcelId(id: string): any {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Basic '});
+    return this.http.post<Route>('http://localhost:8080/api/routes/all/parcelId/delete/' + id, {headers});
+  }
 }

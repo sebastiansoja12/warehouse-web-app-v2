@@ -23,6 +23,7 @@ import {Parcel} from './auth/model/parcel';
 import {RouteService} from './auth/service/route-service.service';
 import { RouteGetComponent } from './route-get/route-get.component';
 import {Route} from './auth/model/route';
+import { RouteDeleteComponent } from './route-delete/route-delete.component';
 
 
 
@@ -38,6 +39,7 @@ import {Route} from './auth/model/route';
     RouteViewComponent,
     ParcelAddComponent,
     RouteGetComponent,
+    RouteDeleteComponent,
 
   ],
   imports: [

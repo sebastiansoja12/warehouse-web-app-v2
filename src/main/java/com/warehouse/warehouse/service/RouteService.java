@@ -54,4 +54,11 @@ public class RouteService {
         routeRepository.deleteByParcelIdAndDepot_Id(id, depot_id);
     }
 
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    public List<Route> findAllByUsername(){
+        Route route = new Route();
+        route.setUser(authService.getCurrentUser().orElseThrow(null));
+        return routeRepository.findAllByUser_username(route.getUser().getUsername());
+    }
+
 }

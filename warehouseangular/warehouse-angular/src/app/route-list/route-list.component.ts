@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {RouteFormComponent} from '../route-find/route-form.component';
 import {User} from '../auth/model/user';
 import {AuthService} from '../auth/service/auth.service';
+import {LocalStorageService} from 'ngx-webstorage';
 
 
 
@@ -18,11 +19,13 @@ export class RouteListComponent implements OnInit {
   routes: Route[];
   username: string;
 
-  constructor(private routeService: RouteService, private authService: AuthService) {
+  constructor(private routeService: RouteService, private authService: AuthService,
+              private localStorage: LocalStorageService) {
   }
 
   // tslint:disable-next-line:typedef
-  ngOnInit() {
+
+  ngOnInit(): any {
     this.routeService.findAll().subscribe(data => {
       this.routes = data;
     });

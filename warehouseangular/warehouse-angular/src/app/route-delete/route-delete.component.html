@@ -2,11 +2,11 @@
 
   <div class="row justify-content-center" style="width:800px; margin:20px auto;[B]padding:20px 0;[/B]">
     <div class="card-header" style="text-align: center">
-      <button  class="userdetails" id="dropdownBasic1" routerLink="/route/delete">Usuwanie przesyłek</button>
+      <button  class="userdetails" id="dropdownBasic1" routerLink="/route/add">Rejestracja przesyłek</button>
       <button  class="userdetails" id="dropdownBasic1" routerLink="/route/update">Aktualizacja przesyłek</button>
     </div>
 
-</div>
+  </div>
 
   <div class="row justify-content-center">
 
@@ -14,10 +14,10 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-header" style="text-align: center">
-          <h4>Przyjęcie przesyłki od kuriera</h4>
+          <h4>Usuwanie przesyłek</h4>
         </div>
         <div class="card-body">
-          <form  [formGroup]="getRouteForm" (ngSubmit)="getRoute()">
+          <form  [formGroup]="getRouteForm" (ngSubmit)="deleteRoute()">
 
             <div class="form-group row">
               <label for="id" class="col-md-4 col-form-label text-md-right">Kod paczki</label>
@@ -27,16 +27,10 @@
               </div>
 
             </div>
-            <div class="form-group row">
-              <label for="custom" class="col-md-4">Standard</label>
-              <div class="col-md-4 col-form-label-sm" >
-                <input type="checkbox" [formControlName]="'custom'" [checked]="'true'" id="custom" class="form-check" name="custom"  required autofocus>
-              </div>
 
-            </div>
             <span class="col-md-6 offset-md-4">
               <button type="submit" class="sign-up">
-                Zarejestruj przesyłkę
+                Usuń przesyłkę
               </button>
             </span>
 

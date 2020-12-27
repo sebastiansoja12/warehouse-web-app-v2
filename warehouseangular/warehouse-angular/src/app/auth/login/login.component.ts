@@ -42,16 +42,16 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  login() {
+  login(): any {
     this.loginRequestPayload.username = this.loginForm.get('username').value;
     this.loginRequestPayload.password = this.loginForm.get('password').value;
 
     this.authService.login(this.loginRequestPayload).subscribe(data => {
       this.isError = false;
       if (this.authService.isAdmin() === true){
-        this.router.navigateByUrl('/routes/all');
+        window.location.assign('/routes/all');
       } else {
-        this.router.navigateByUrl('');
+        window.location.assign('/');
       }
       this.toastr.success('Logowanie powiodło się');
 
@@ -59,6 +59,8 @@ export class LoginComponent implements OnInit {
       this.isError = true;
       throwError(error);
     });
+
+
 
   }
 

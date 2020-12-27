@@ -10,6 +10,7 @@ import {RouteViewComponent} from './route-view/route-view.component';
 import {RouteFormComponent} from './route-find/route-form.component';
 import {ParcelAddComponent} from './parcel-add/parcel-add.component';
 import {RouteGetComponent} from './route-get/route-get.component';
+import {RouteDeleteComponent} from './route-delete/route-delete.component';
 
 const routes: Routes = [
   { path: 'sign-up', component: SignupComponent },
@@ -19,7 +20,9 @@ const routes: Routes = [
   { path: 'route', component: RouteViewComponent },
   { path: 'route/find', component: RouteFormComponent },
   { path: 'parcel/add', component: ParcelAddComponent },
-  { path: 'route/add', component: RouteGetComponent }
+  { path: 'route/add', component: RouteGetComponent },
+  { path: 'route/delete', component: RouteDeleteComponent }
+
 
 
 

@@ -24,11 +24,15 @@ public class RouteController {
         return routeService.save(route);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/all/allUsers")
     public List<Route> findAllRoutes(){
         return routeService.findAllRoutes();
     }
 
+    @GetMapping("/all")
+    public List<Route> findAllByUsername(){
+        return routeService.findAllByUsername();
+    }
 
     @GetMapping("/all/parcelId/{id}")
     public List<Route> findByParcelCode(@PathVariable UUID id){

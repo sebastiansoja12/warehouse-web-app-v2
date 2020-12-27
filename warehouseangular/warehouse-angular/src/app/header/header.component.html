@@ -8,7 +8,7 @@
                 </span>
             </a>
 
-            <button  *ngIf="isLoggedIn && isAdmin"   class="userdetails" id="dropdownBasic1" routerLink="/routes/all"> Przesyłki</button>
+            <button  *ngIf="isLoggedIn"   class="userdetails" id="dropdownBasic1" routerLink="/routes/all"> Przesyłki</button>
             <button *ngIf="!isLoggedIn" class="userdetails" id="dropdownBasic1" routerLink="/route/find">Znajdź przesyłkę</button>
           <button  *ngIf="!isLoggedIn"   class="userdetails" id="dropdownBasic1" routerLink="/parcel/add">Nadaj przesyłkę</button>
 
