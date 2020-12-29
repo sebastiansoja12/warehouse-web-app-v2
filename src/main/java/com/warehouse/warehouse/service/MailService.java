@@ -1,5 +1,6 @@
 package com.warehouse.warehouse.service;
 import com.warehouse.warehouse.exceptions.WarehouseMailException;
+import com.warehouse.warehouse.model.ParcelNotification;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -22,7 +23,7 @@ class MailService {
     void sendMail(NotificationEmail notificationEmail) {
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
-            messageHelper.setFrom("pdpmail@pdp.com");
+            messageHelper.setFrom("26andfour@pdp.com");
             messageHelper.setTo(notificationEmail.getRecipient());
             messageHelper.setSubject(notificationEmail.getSubject());
             messageHelper.setText(notificationEmail.getBody());
@@ -35,5 +36,24 @@ class MailService {
             throw new WarehouseMailException("Exception occurred when sending mail to " + notificationEmail.getRecipient(), e);
         }
     }
+
+    @Async
+    void sendNotification(ParcelNotification parcelNotification) {
+        MimeMessagePreparator messagePreparator = mimeMessage -> {
+            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
+            messageHelper.setFrom("26andfour@pdp.com");
+            messageHelper.setTo(parcelNotification.getRecipient());
+            messageHelper.setSubject(parcelNotification.getSubject());
+            messageHelper.setText(parcelNotification.getBody());
+        };
+        try {
+            mailSender.send(messagePreparator);
+            log.info("Powiadomienie wysłane");
+        } catch (MailException e) {
+            log.error("Błąd", e);
+            throw new WarehouseMailException("Blad  " + parcelNotification.getRecipient(), e);
+        }
+    }
+
 
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,7 +32,7 @@ public class RouteService {
 
     public Route save(Route route){
         route.setParcel(parcelRepository.findById(route.getParcel().getId()).orElseThrow());
-        route.setCreated(Instant.now());
+        route.setCreated(Date.from(Instant.now()));
         route.setUser(authService.getCurrentUser().orElseThrow(null));
         route.setDepot(depotRepository.findById(
                 route.getUser().getDepot().getId()).orElseThrow(null));

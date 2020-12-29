@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 import java.time.Instant;
+import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -27,7 +28,7 @@ public class Route {
     private UUID id;
 
 
-    private Instant created;
+    private Date created;
 
 
     @ManyToOne( fetch = FetchType.EAGER)

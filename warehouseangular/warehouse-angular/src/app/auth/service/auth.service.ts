@@ -1,5 +1,5 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { SignupRequestPayload } from '../signup/singup-request.payload';
 import { Observable, throwError } from 'rxjs';
 import { LocalStorageService } from 'ngx-webstorage';
@@ -19,6 +19,7 @@ export class AuthService {
   @Output() role: EventEmitter<string> = new EventEmitter();
   @Output() admin: EventEmitter<boolean> = new EventEmitter();
   @Output() user: EventEmitter<User[]> = new EventEmitter();
+  @Output() depotcode: EventEmitter<string> = new EventEmitter();
 
 
 
@@ -49,12 +50,16 @@ export class AuthService {
     }));
   }
   getCurrentUser(): any {
-    return this.httpClient.get<User>('http://localhost:8080/api/users/currentuser').pipe(map(data => {
-      this.localStorage.store('id', data.id);
-      this.localStorage.store('nazwaUzytkownika', data.username);
-      this.localStorage.store('imie', data.firstName);
-    }));
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Basic '
+    });
 
+    return this.httpClient.get<User>('http://localhost:8080/api/users/currentuser');
+  }
+
+    getDepotCode(): string {
+    return this.localStorage.retrieve('depotCode');
   }
 
   getJwtToken(): string {

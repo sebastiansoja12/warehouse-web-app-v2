@@ -17,7 +17,8 @@ import {LocalStorageService} from 'ngx-webstorage';
 export class RouteListComponent implements OnInit {
 
   routes: Route[];
-  username: string;
+  depotcode: string;
+  users: User[];
 
   constructor(private routeService: RouteService, private authService: AuthService,
               private localStorage: LocalStorageService) {
@@ -29,7 +30,6 @@ export class RouteListComponent implements OnInit {
     this.routeService.findAll().subscribe(data => {
       this.routes = data;
     });
+
   }
-
-
 }
