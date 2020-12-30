@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Route} from '../auth/model/route';
 import { RouteService} from '../auth/service/route-service.service';
-import {Observable} from 'rxjs';
+import {Observable, Subscription} from 'rxjs';
 import {RouteFormComponent} from '../route-find/route-form.component';
 import {User} from '../auth/model/user';
 import {AuthService} from '../auth/service/auth.service';
@@ -30,6 +30,10 @@ export class RouteListComponent implements OnInit {
     this.routeService.findAll().subscribe(data => {
       this.routes = data;
     });
+    this.authService.getCurrentUser().subscribe(data => {
+      this.users = data;
+    });
+
 
   }
 }

@@ -49,13 +49,13 @@ export class AuthService {
       return true;
     }));
   }
-  getCurrentUser(): any {
+  getCurrentUser(): Observable<User[]> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: 'Basic '
     });
 
-    return this.httpClient.get<User>('http://localhost:8080/api/users/currentuser');
+    return this.httpClient.get<User[]>('http://localhost:8080/api/users/currentuser');
   }
 
     getDepotCode(): string {

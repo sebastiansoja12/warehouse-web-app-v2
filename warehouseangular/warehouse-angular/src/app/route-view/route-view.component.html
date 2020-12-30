@@ -1,26 +1,19 @@
 <div class="route-section">
-  <h1> Trasa paczki {{id}}</h1>
-<div class="card my-5">
-  <div class="card-body">
-    <table class="table table-bordered table-striped">
-      <thead class="thead-dark">
-      <tr>
-        <th scope="col">Miasto</th>
-        <th scope="col">Oddział</th>
-        <th scope="col">Data wejścia</th>
+  <div class="row justify-content-center" style="width:800px; margin:20px auto;[B]padding:20px 0;[/B]">
+    <div class="card-header" style="text-align: center">
+      <h1> Trasa paczki {{id}}</h1>
 
-      </tr>
-      </thead>
-      <tbody>
+    </div>
 
-      <tr *ngFor="let route of routes">
-        <td>{{ route.user.depot.city}}</td>
-        <td>{{ route.user.depot.depotCode}}</td>
-        <td>{{ route.created}}</td>
-
-      </tr>
-      </tbody>
-    </table>
   </div>
-</div>
+  <div class="row justify-content-center" style="width:800px; margin:20px auto;[B]padding:20px 0;[/B]">
+    <div class="card-header" style="text-align: center">
+        <h1 *ngFor="let route of routes">
+          <p>{{ route.user.depot.city}}</p>
+          <p>Oddział: {{ route.user.depot.depotCode}}</p>
+          <p>^</p>
+          <p>|</p>
+        </h1>
+    </div>
+  </div>
 </div>
