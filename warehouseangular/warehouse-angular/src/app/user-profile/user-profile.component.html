@@ -1,0 +1,25 @@
+
+<div class="user-section">
+  <div class="container">
+    <h1 *ngFor="let user of users">Witaj {{user.firstName}}</h1>
+    <div id="first" class="row">
+      <div class="col-lg-12">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-6 col-12" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.2s"
+               *ngFor="let user of users">
+            <div class="features-small-item">
+              <div class="icon" >
+                <i><img class = "icon" src="assets/img/user.png" alt=""></i>
+              </div>
+              <h5 class="features-title">{{user.firstName}}</h5>
+              <p>Nazwa użytkownika {{user.username}}</p>
+              <p>Email {{user.email}}</p>
+              <p>Miasto: {{ user.depot.city}}</p>
+              <p>Oddział: {{ user.depot.depotCode}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

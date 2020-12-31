@@ -36,7 +36,6 @@ public class User {
     private String lastName;
 
     @Email
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String email;
 
     //@NotEmpty(message="Rola jest wymagana")
