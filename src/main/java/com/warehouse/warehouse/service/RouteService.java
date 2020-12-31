@@ -32,7 +32,7 @@ public class RouteService {
 
     public Route save(Route route){
         route.setParcel(parcelRepository.findById(route.getParcel().getId()).orElseThrow());
-        route.setCreated(Date.from(Instant.now()));
+        route.setCreated((Instant.now()));
         route.setUser(authService.getCurrentUser().orElseThrow(null));
         route.setDepot(depotRepository.findById(
                 route.getUser().getDepot().getId()).orElseThrow(null));
@@ -46,7 +46,7 @@ public class RouteService {
 
     @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public List<Route> findByParcelId(UUID id) {
-        return routeRepository.findAllByParcel_IdOrderByCreatedDesc(id);
+        return routeRepository.findAllByParcel_IdOrderByCreatedAsc(id);
     }
    public void deleteRouteByParcelId(UUID id) {
         Route route = new Route();

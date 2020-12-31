@@ -1,36 +1,36 @@
-<header>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-        <div class="flex-grow-1 float-left">
-            <a aria-label="Home" class="logo" routerLink="/">
-                <img src="../../assets/img/package.png" viewBox="0 0 20 20" class="reddit-icon-svg">
-              <span class="warehouse-text">
+<header class="header-area header-sticky">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="main-nav">
+          <!-- ***** Logo Start ***** -->
+          <a  routerLink="/home" class="logo">
+            <img src="assets/img/package.png" alt="Softy Pinko" class="reddit-icon-svg"/>
+            <span class="warehouse-text">
                     26andfour
                 </span>
-            </a>
 
-            <button  *ngIf="isLoggedIn"   class="userdetails" id="dropdownBasic1" routerLink="/routes/all"> Przesyłki</button>
-            <button *ngIf="!isLoggedIn" class="userdetails" id="dropdownBasic1" routerLink="/route/find">Znajdź przesyłkę</button>
-          <button  *ngIf="!isLoggedIn"   class="userdetails" id="dropdownBasic1" routerLink="/parcel/add">Nadaj przesyłkę</button>
-
-
-        </div>
-        <div class="flex-grow-1 float-right">
-
-          <div *ngIf="isLoggedIn" ngbDropdown class="float-right">
-            <button  *ngIf="isLoggedIn"   class="userdetails" id="dropdownBasic1" routerLink="/route/add">Przyjęcie od kuriera</button>
-              <button class="userdetails" id="dropdownBasic1" ngbDropdownToggle>
-                    <img class="account-icon" src="https://www.redditstatic.com/avatars/avatar_default_08_D4E815.png">
-                    {{username}}
-                </button>
-              <button mdbBtn class="userdetails" id="dropdownBasic1"  gradient="aqua" rounded="true" mdbWavesEffect  (click)="logout()" ngbDropdownItem>Wyloguj</button>
-
-            </div>
-        </div>
-            <div *ngIf="!isLoggedIn">
-                <a routerLink="/sign-up" class="float-right sign-up mr-2">Rejestracja</a>
-                <a routerLink="/login" class="float-right login mr-2">Logowanie</a>
-            </div>
-
-
-    </nav>
+          </a>
+          <ul *ngIf="isLoggedIn" class="nav">
+            <li></li>
+            <li><a *ngIf="isLoggedIn" routerLink="/route/add">Przyjęcie od kuriera</a></li>
+            <li><a routerLink="/routes/all">Przesyłki</a></li>
+            <li><a routerLink="/user/profile">{{username}}</a></li>
+            <li><a routerLink="/home" (click)="logout()">Wyloguj</a></li>
+          </ul>
+          <ul *ngIf="!isLoggedIn" class="nav">
+            <li><a routerLink="/depots/all">Nasze oddziały</a></li>
+            <li><a routerLink="/parcel/add">Nadaj przesyłkę</a></li>
+            <li><a routerLink="/route/find">Znajdź przesyłkę</a></li>
+            <li><a routerLink="/login">Logowanie</a></li>
+            <li><a routerLink="/sign-up">Rejestracja</a></li>
+          </ul>
+          <a class='menu-trigger'>
+            <span>Menu</span>
+          </a>
+          <!-- ***** Menu End ***** -->
+        </nav>
+      </div>
+    </div>
+  </div>
 </header>

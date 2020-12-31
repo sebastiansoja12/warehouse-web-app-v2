@@ -1,19 +1,31 @@
-<div class="route-section">
-  <div class="row justify-content-center" style="width:800px; margin:20px auto;[B]padding:20px 0;[/B]">
-    <div class="card-header" style="text-align: center">
-      <h1> Trasa paczki {{id}}</h1>
 
-    </div>
+<section class="mini" id="work-process">
+  <div class="route-section">
+  <div class="mini-content">
+    <div class="container">
+      <div class="row">
+        <div class="offset-lg-3 col-lg-6">
+          <div class="info">
+            <h1>Trasa paczki {{id}}</h1>
+            <p>Podróż Twojej przesyłki od nadania.</p>
+          </div>
+        </div>
+      </div>
 
-  </div>
-  <div class="row justify-content-center" style="width:800px; margin:20px auto;[B]padding:20px 0;[/B]">
-    <div class="card-header" style="text-align: center">
-        <h1 *ngFor="let route of routes">
-          <p>{{ route.user.depot.city}}</p>
-          <p>Oddział: {{ route.user.depot.depotCode}}</p>
-          <p>^</p>
-          <p>|</p>
-        </h1>
-    </div>
+      <!-- ***** Mini Box Start ***** -->
+
+      <div class="row">
+        <div class="col-lg-2 col-md-3 col-sm-6 col-6" data-scroll-reveal="enter bottom move 50px over 0.6s after 0.2s"
+             *ngFor="let route of routes">
+          <a href="#" class="mini-box">
+            <i><img src="assets/images/work-process-item-01.png" alt=""></i>
+            <strong>{{route.user.depot.city}}</strong>
+            <span *ngIf="route.user.depot.depotCode != 'NAD'">Oddział: {{route.user.depot.depotCode}}</span>
+            <p>Data i godzina: {{route.created}}</p>
+          </a>
+        </div>
+      </div>
   </div>
 </div>
+  </div>
+</section>

@@ -28,7 +28,7 @@ public class Route {
     private UUID id;
 
 
-    private Date created;
+    private Instant created;
 
 
     @ManyToOne( fetch = FetchType.EAGER)

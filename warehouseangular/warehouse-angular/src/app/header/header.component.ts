@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/service/auth.service';
 import { Router } from '@angular/router';
+import 'node_modules/bootstrap/dist/css/bootstrap.min.css';
+
 
 @Component({
   selector: 'app-header',
@@ -28,6 +30,7 @@ export class HeaderComponent implements OnInit {
     this.isLoggedIn = this.authService.isLoggedIn();
     this.isAdmin = this.authService.isAdmin();
     this.username = this.authService.getUserName();
+
   }
 
   logout() {

@@ -28,6 +28,7 @@ export class AuthService {
     username: this.getUserName(),
     role: this.getRole()
   };
+  firstName: string;
 
   constructor(private httpClient: HttpClient,
               private localStorage: LocalStorageService) {

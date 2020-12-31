@@ -1,8 +1,5 @@
 .route-section {
-  margin: 100px;
-}
-.first{
-  margin:100px;
+  margin: 200px;
 }
 label {
   /* Other styling... */
@@ -11,97 +8,122 @@ label {
   float:left;
   margin-right:15px;
 }
-.reddit-icon-svg{
-  height: 50px;
-  padding: 8px 8px 8px 0;
-  width: 50px;
+.mini {
+  content: '';
+  position: absolute;
+  width: 140%;
+  height: 140%;
+  opacity: .95;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-image: url(node_modules/bootstrap/assets/images/work-process-bg.png);
+  z-index: 2;
+  top: -20%;
+  left: -20%;
+}
+.mini .mini-content {
+  position: relative;
+  z-index: 3;
 }
 
-.warehouse-text{
-  font-weight: 700;
-  height: 50px;
-  width: 50px;
-}
-.logo{
-  text-decoration: none;
-}
-
-.login, .sign-up{
-  background-color: transparent;
-  border-color: #0079D3;
-  color: #0079D3;
-  fill: #0079D3;
-  border: 1px solid;
-  border-radius: 4px;
-  box-sizing: border-box;
+.mini .mini-content .info {
   text-align: center;
-  letter-spacing: 1px;
-  text-decoration: none;
-  font-size: 12px;
+  color: #fff;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.mini .mini-content .info small {
+  display: block;
+  font-weight: 400;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.mini .mini-content .info strong {
   font-weight: 700;
-  letter-spacing: .5px;
-  line-height: 24px;
-  text-transform: uppercase;
-  padding: 3px 16px;
-  opacity: 1;
+  font-size: 17px;
+  margin-bottom: 40px;
+  display: block;
 }
 
-.sign-up{
-  background-color: #001cd3;
-  border-color: #0079D3;
-  color: aliceblue;
-}
-
-.sign-up:hover{
-  opacity: 0.6;
-}
-
-.userdetails{
-  background-color: transparent;
-  border-color: #0079D3;
-  color: #0079D3;
-  fill: #0079D3;
-  border: 1px solid;
-  border-radius: 4px;
-  box-sizing: border-box;
-  text-align: center;
-  letter-spacing: 1px;
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: .5px;
-  line-height: 24px;
-  text-transform: uppercase;
-  padding: 3px 16px;
-  opacity: 1;
-  border: 0px;
-}
-
-.userdetails:hover{
-  border: 1px solid;
-}
-
-.dropdown-item{
-  background-color: #f8f9fa;
-  font-size: 14px;
+.mini .mini-content .info h1 {
+  color: #fff;
   font-weight: 500;
-  line-height: 18px;
-  display: inline-block;
-  vertical-align: middle;
+  font-size: 28px;
+  letter-spacing: 0.25px;
+  margin-bottom: 30px;
 }
 
-.dropdown-item:hover{
-  background-color: #0079D3;
+.mini .mini-content .info p {
+  letter-spacing: 1px;
+  margin-bottom: 40px;
+  color: #fff;
+  letter-spacing: 0.25px;
+  line-height: 26px;
+  font-weight: 400;
+  font-size: 15px;
 }
 
-.dropdown-menu{
-  background-color: #f8f9fa;
+.mini .mini-content .info p span {
+  text-decoration: underline;
 }
 
-.account-icon{
-  border-radius: 4px;
-  float: left;
-  margin-right: 5px;
-  max-height: 24px;
-  max-width: 24px;
+ .mini-content .mini-box {
+  display: block;
+  background: #fff;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 2px 48px 0 rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+  position: relative;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  text-align: center;
+}
+
+.mini .mini-content .mini-box:hover {
+  margin-top: -10px;
+}
+
+.mini  .mini-box:before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  background: #fff;
+  width: 100%;
+  opacity: .15;
+  height: 100%;
+  bottom: -10px;
+  left: 0px;
+  right: -20px;
+  margin: auto;
+  border-radius: 20px;
+}
+
+.mini .mini-content .mini-box i {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.mini .mini-content .mini-box span {
+  display: block;
+  font-weight: 400;
+  font-size: 14px;
+  color: #777;
+  letter-spacing: .75px;
+}
+
+.mini .mini-content .mini-box strong {
+  display: block;
+  font-weight: 400;
+  font-size: 17px;
+  color: #1e1e1e;
+  letter-spacing: 0.25px;
+  margin-bottom: 5px;
+  margin-top: 20px;
 }

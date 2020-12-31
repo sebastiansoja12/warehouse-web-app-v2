@@ -41,7 +41,7 @@ private final MailService mailService;
             User user = new User();
             user.setId(1);
             route.setParcel(parcel);
-            route.setCreated(Date.from(Instant.now()));
+            route.setCreated(Instant.now());
             route.setUser(user);
             route.setDepot(initiate());
 

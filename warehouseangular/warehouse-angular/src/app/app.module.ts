@@ -24,6 +24,9 @@ import {RouteService} from './auth/service/route-service.service';
 import { RouteGetComponent } from './route-get/route-get.component';
 import {Route} from './auth/model/route';
 import { RouteDeleteComponent } from './route-delete/route-delete.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { DepotAllComponent } from './depot-all/depot-all.component';
+import {Depot} from './auth/model/depot';
 
 
 
@@ -40,6 +43,8 @@ import { RouteDeleteComponent } from './route-delete/route-delete.component';
     ParcelAddComponent,
     RouteGetComponent,
     RouteDeleteComponent,
+    UserProfileComponent,
+    DepotAllComponent,
 
   ],
   imports: [
@@ -61,6 +66,7 @@ import { RouteDeleteComponent } from './route-delete/route-delete.component';
       useClass: TokenInterceptor,
       multi: true
     },
+    Depot,
     Parcel,
     Route,
     ParcelService,
