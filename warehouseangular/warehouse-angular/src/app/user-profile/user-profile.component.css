@@ -10,3 +10,26 @@
   width: 50px;
   height: auto;
 }
+.container {
+  text-align: center;
+  position: relative;
+}
+.user-section{
+  text-align: center;
+}
+.user-profile{
+  text-align: center;
+  position: relative;
+}
+.center{
+  margin: auto;
+  width: auto;
+  height: auto;
+
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+}

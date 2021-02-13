@@ -1395,6 +1395,9 @@ preloader
 }
 .first{
   margin:100px;
+  text-align: center;
+  position: relative;
+
 }
 label {
   /* Other styling... */
