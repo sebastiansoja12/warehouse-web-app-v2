@@ -1,60 +1,43 @@
-<section class="login-section" id="testimonials">
-  <div class="container">
-    <!-- ***** Section Title Start ***** -->
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="center-heading">
-          <p  class="section-title">Moduł logowania</p>
-        </div>
-      </div>
-    </div>
-    <!-- ***** Section Title End ***** -->
-    <div class="center-heading">
-      <form [formGroup]="loginForm" (ngSubmit)="login()">
-      <div class="team-content">
-          <div class="team-info">
-            <label for="user_name">Nazwa użytkownika</label>
-            <div class="user-name">
-              <input type="text" id="user_name" class="form-control" [formControlName]="'username'" required
-                                          autofocus>
-              <span  *ngIf="!loginForm.get('username').valid && loginForm.get('username').touched">
-                                   Proszę wprowadzić poprawną nazwę użytkownika
-                                </span>
-            </div>
 
+<footer class="contact-us">
+  <div class="container">
+    <div class="footer-content">
+      <div class="row">
+  <div class="contact-form">
+      <form id="contact" action="" method="post" [formGroup]="loginForm" (ngSubmit)="login()">
+      <div class="center-heading">
+        <p  class="section-title">Moduł logowania</p>
+        <p class="login-failed-text" *ngIf='this.isError' >Logowanie nie powiodło się.</p>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-lg-12">
+          <fieldset>
+            <label for="name">Nazwa użytkownika</label>
+            <div class="user-name">
+              <input type="text" id="name" class="form-control" placeholder="Nazwa użytkownika" required=""
+                     style="background-color: rgba(250,250,250,0.3);" [formControlName]="'username'">
+            </div>
+          </fieldset>
+        </div>
+        <div class="col-md-6 col-lg-12">
+          <fieldset>
             <label for="password">Hasło</label>
             <div class="user-name">
-               <input type="password" id="password" class="form-control" [formControlName]="'password'" name="password" required>
-                                <span  *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">
-                                  Hasło nie może być puste
-                                </span>
-
+              <input type="password" class="form-control" id="password" placeholder="Hasło"
+                     required="" style="background-color: rgba(250,250,250,0.3);"[formControlName]="'password'" name="password">
             </div>
-
-
-
-
-            <span class="col-md-6 offset-md-4">
-              <p class = "user-name">
-              <button type="submit" id="form-submit" class="main-button">
-                                Zaloguj
-              </button>
-            </p>
-                         </span>
-            <div class="user-name" *ngIf='this.isError'>
-              <p class="login-failed-text">Logowanie nie powiodło się, sprawdź swoje dane i spróbuj ponownie.</p>
-            </div>
-            <div class="login-failed" [ngStyle]="{'background-color': 'green'}" *ngIf="this.registerSuccessMessage">
-              <p class="register-success-text">{{registerSuccessMessage}}</p>
-            </div>
-
-
-          </div>
+          </fieldset>
         </div>
-
-
-      </form>
-    </div>
-
+        <div class="col-lg-12">
+          <fieldset>
+            <button type="submit" id="form-submit" class="main-button">Zaloguj</button>
+          </fieldset>
+        </div>
       </div>
-</section>
+    </form>
+  </div>
+
+        </div>
+      </div>
+    </div>
+</footer>

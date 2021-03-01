@@ -19,22 +19,13 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'routes/all', component: RouteListComponent },
-  { path: 'route', component: RouteViewComponent },
+  { path: 'route/parcelCode/:id', component: RouteViewComponent },
   { path: 'route/find', component: RouteFormComponent },
   { path: 'parcel/add', component: ParcelAddComponent },
   { path: 'route/add', component: RouteGetComponent },
   { path: 'route/delete', component: RouteDeleteComponent },
   { path: 'user/profile', component: UserProfileComponent },
   { path: 'depots/all', component: DepotAllComponent }
-
-
-
-
-
-
-
-
-
 ];
 
 @NgModule({

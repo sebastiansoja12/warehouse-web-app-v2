@@ -8,20 +8,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController
 public class CodeController {
 
     @GetMapping(value = "/generateAndDownloadQRCode/{text}")
     public void download(
-            @PathVariable("text") String text)
+            @PathVariable("text") UUID text)
             throws Exception {
         CodeService.generateQRCodeImage(text);
     }
 
     @GetMapping(value = "/generateQRCode/{text}")
-    public ResponseEntity<byte[]> generateQRCode(
+    public void generateQRCode(
             @PathVariable("text") String text)
             throws Exception {
-        return ResponseEntity.status(HttpStatus.OK).body(CodeService.getQRCodeImage(text));
+        CodeService.getQRCodeImage(text);
     }
 }

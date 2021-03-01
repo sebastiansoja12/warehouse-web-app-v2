@@ -1,13 +1,10 @@
 package com.warehouse.warehouse.service;
 
 
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Path;
 import java.util.UUID;
 
 import com.google.zxing.BarcodeFormat;
@@ -15,6 +12,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import com.lowagie.text.Image;
 import net.glxn.qrgen.javase.QRCode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.converter.BufferedImageHttpMessageConverter;
@@ -27,7 +25,7 @@ import javax.imageio.ImageIO;
 public class CodeService {
 
 
-    public static void generateQRCodeImage(String text)
+   /* public static void generateQRCodeImage(String text)
             throws WriterException, IOException {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, 400, 400);
@@ -36,25 +34,28 @@ public class CodeService {
         MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
 
     }
+*/
 
-
-    public static byte[] getQRCodeImage(String text) throws WriterException, IOException {
+    public static Image getQRCodeImage(String text) throws WriterException, IOException {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, 400, 400);
         ByteArrayOutputStream pngOutputStream = new ByteArrayOutputStream();
         MatrixToImageWriter.writeToStream(bitMatrix, "PNG", pngOutputStream);
-        return pngOutputStream.toByteArray();
-    }
-   /* public static Image generateQRCodeImage(String barcodeText) throws Exception {
-        ByteArrayOutputStream stream = QRCode
-                .from(barcodeText)
-                .withSize(250, 250)
-                .stream();
-        ByteArrayInputStream bis = new ByteArrayInputStream(stream.toByteArray());
-        return (Image) ImageIO.read(bis);
+        return Image.getInstance(String.valueOf(bitMatrix));
     }
 
-    */
+    public static Image generateQRCodeImage(UUID barcodeText) throws Exception {
+        BufferedImage image = new BufferedImage(250,
+                250,
+                BufferedImage.TYPE_BYTE_GRAY);
+        ByteArrayOutputStream stream = QRCode
+                .from(String.valueOf(barcodeText))
+                .withSize(250, 250)
+                .stream();
+        ImageIO.write(image, "png", stream);
+
+        return Image.getInstance(stream.toByteArray());
+    }
 
     @Bean
     public HttpMessageConverter<BufferedImage> createImageHttpMessageConverter() {

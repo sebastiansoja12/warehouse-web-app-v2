@@ -1,105 +1,96 @@
-<section class="section colored" id="contact-us">
+<footer class="contact-us" id="contact-us">
+  <form  [formGroup]="createParcelForm" (ngSubmit)="createParcel()">
   <div class="container">
-    <!-- ***** Section Title Start ***** -->
     <div class="row">
-      <div class="col-lg-12">
-        <div class="center-heading">
-          <h2 class="section-title">Nadanie przesyłki</h2>
-        </div>
-      </div>
-    </div>
-    <!-- ***** Section Title End ***** -->
-
-    <div class="row">
-      <label for="firstName" class="col-md-4 col-form-label text-md-left">Imie odbiorcy</label>
-      <label for="lastName" class="col-md-4 col-form-label text-md-left">Nazwisko odbiorcy</label>
-
-      <!-- ***** Contact Text Start ***** -->
-
-      <!-- ***** Contact Text End ***** -->
-
-      <!-- ***** Contact Form Start ***** -->
       <div class="col-lg-8 col-md-6 col-sm-12">
         <div class="contact-form center">
-          <form  [formGroup]="createParcelForm" (ngSubmit)="createParcel()">
+          <h2 class="section-title">Dane nadawcy </h2>
             <div class="row">
               <div class="col-lg-6 col-md-12 col-sm-12">
                 <fieldset>
-                  <input type="text" [formControlName]="'firstName'" id="firstName" class="form-control" name="firstName" required autofocus>
-                  <span *ngIf="!createParcelForm.get('firstName').valid && createParcelForm.get('firstName').touched">
-                                    Proszę podać imie
-                                </span>
-
+                  <input type="text" [formControlName]="'firstName'" id="firstName" class="form-control" name="firstName"
+                         placeholder="Imię" required=""
+                         style="background-color: rgba(250,250,250,0.3);" >
                 </fieldset>
               </div>
               <div class="col-lg-6 col-md-12 col-sm-12">
                 <fieldset>
-                  <input type="text" [formControlName]="'lastName'" id="lastName" class="form-control" name="lastName" required autofocus>
-                  <span *ngIf="!createParcelForm.get('lastName').valid && createParcelForm.get('lastName').touched">
-                                    Proszę podać nazwisko
-                                </span>
-                </fieldset>
-              </div>
-              <div class="col-lg-6">
-                <fieldset>
-                  <label for="destination_telephone" >Telefon odbiorcy</label>
-                  <input type="text" [formControlName]="'destination_telephone'" id="destination_telephone" class="form-control" name="destination_telephone" required autofocus>
-                  <span *ngIf="!createParcelForm.get('destination_telephone').valid && createParcelForm.get('destination_telephone').touched">
-                                    Proszę podać telefon odbiorcy
-                                </span>
-
+                  <input type="text" [formControlName]="'lastName'" id="lastName" class="form-control" name="lastName"placeholder="Nazwisko" required=""
+                         style="background-color: rgba(250,250,250,0.3);" >
                 </fieldset>
               </div>
               <div class="col-lg-6 col-md-12 col-sm-12">
                 <fieldset>
-                  <label for="email" >E-mail odbiorcy</label>
-                  <input type="text" [formControlName]="'email'" id="email" class="form-control" name="email" required autofocus>
-                  <span *ngIf="!createParcelForm.get('email').valid && createParcelForm.get('email').touched">
-                                    Proszę podać email
-                                </span>
+                  <input type="text" [formControlName]="'email'"
+                         placeholder="Email" required=""
+                         style="background-color: rgba(250,250,250,0.3);" id="email" class="form-control" name="email">
+
                 </fieldset>
               </div>
 
               <div class="col-lg">
-                  <label for="custom">Standard</label>
-                  <input type="checkbox" [formControlName]="'custom'" [checked]="'true'" id="custom" class="form-check" name="custom"  required autofocus>
-                  <span *ngIf="!createParcelForm.get('custom').valid && createParcelForm.get('custom').touched">
-                                    Czy paczka posiada niestandardowe kształty?
-                                </span>
-
+                  <input type="checkbox" [formControlName]="'custom'" [checked]="'true'"
+                         placeholder="Standardowa" required=""
+                         style="background-color: rgba(250,250,250,0.3);"id="custom" class="form-check">
               </div>
 
               <div class="col-lg-6 col-md-12 col-sm-12">
               <fieldset>
-                  <label for="sender_telephone">Numer telefonu nadawcy</label>
-                  <input type="text" [formControlName]="'sender_telephone'" id="sender_telephone" class="form-control" name="sender_telephone" required autofocus>
-                  <span *ngIf="!createParcelForm.get('sender_telephone').valid && createParcelForm.get('sender_telephone').touched">
-                                    Proszę podać telefon wysyłającego
-                                </span>
+                  <input type="text" [formControlName]="'sender_telephone'"
+                         placeholder="Telefon nadawcy" required=""
+                         style="background-color: rgba(250,250,250,0.3); "id="sender_telephone" class="form-control" name="sender_telephone">
                 </fieldset>
               </div>
 
               <div class="col-lg-12">
                 <fieldset>
-                  <label for="destination_address">Destynacja</label>
-                  <input type="text" [formControlName]="'destination_address'" id="destination_address" class="form-control" name="destination_address" required autofocus>
-                  <span *ngIf="!createParcelForm.get('destination_address').valid && createParcelForm.get('destination_address').touched">
-                                    Proszę podać destynację
-                                </span>
-
-                </fieldset>
-              </div>
-
-              <div class="col-lg-12">
-                <fieldset>
-                  <button type="submit" id="form-submit" class="main-button">Wysyłam</button>
+                  <input type="text" [formControlName]="'destination_address'"  placeholder="Miejscowość" required=""
+                         style="background-color: rgba(250,250,250,0.3);" id="destination_address" class="form-control" name="destination_address">
                 </fieldset>
               </div>
             </div>
-          </form>
         </div>
       </div>
-      <!-- ***** Contact Form End ***** -->
+    </div>
+    <div>
+    <p></p>
+    <div class="footer-content">
+      <div class="row">
+        <div class="col-lg-8 col-md-6 col-sm-12">
+          <div class="contact-form">
+            <h2 class="section-title">Dane odbiorcy </h2>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                  <fieldset>
+                    <input name="name" type="text" id="name" placeholder="Imię" required=""
+                           style="background-color: rgba(250,250,250,0.3);">
+                  </fieldset>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <fieldset>
+                    <input name="name" type="text" placeholder="Nazwisko" required=""
+                           style="background-color: rgba(250,250,250,0.3);">
+                  </fieldset>
+                </div>
+                <div class="col-lg-6">
+                  <fieldset>
+                    <input type="text" [formControlName]="'destination_telephone'"
+                           placeholder="Telefon odbiorcy" required=""
+                           style="background-color: rgba(250,250,250,0.3);" id="destination_telephone" class="form-control" name="destination_telephone" >
+                  </fieldset>
+                </div>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <button type="submit" id="form-submit" class="main-button">Wysyłam</button>
+                  </fieldset>
+                </div>
+              </div>
+          </div>
+        </div>
+  </div>
     </div>
   </div>
-</section>
+  </form>
+</footer>

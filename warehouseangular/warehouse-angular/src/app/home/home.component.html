@@ -1,66 +1,34 @@
-<section class="section" id="testimonials">
-  <div class="container">
-    <!-- ***** Section Title Start ***** -->
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="center-heading">
-          <h2 class="section-title">Co mówią o nas inni?</h2>
-        </div>
-      </div>
-      <div class="offset-lg-3 col-lg-6">
-        <div class="center-text">
-          <p>Znani celebryci na całym świecie korzystają z naszych usług.</p>
-        </div>
-      </div>
-    </div>
-    <!-- ***** Section Title End ***** -->
+<div class="welcome-area" id="welcome">
 
-    <div class="row">
-      <!-- ***** Testimonials Item Start ***** -->
-      <div class="col-lg-4 col-md-6 col-sm-12">
-        <div class="team-item">
-          <div class="team-content">
-            <p>Najlepsza firma kurierska na świecie! Wszystko szybko i sprawnie.</p>
-
-              <img src="assets/img/testimonial-icon.png" alt="">
-            <div class="team-info">
-              <h3 class="user-name">Barack Obama</h3>
-              <span>Były prezydent USA</span>
-            </div>
-          </div>
-        </div>
+  <!-- ***** Header Text Start ***** -->
+  <div class="header-text">
+    <div class="container">
+      <div class="row">
+        <div class="left-text col-lg-6 col-md-12 col-sm-12 col-xs-12"
+             data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
+          <h1>Znajdź swoją <em>przesyłkę</em></h1>
+          <div class="contact-form">
+            <form [formGroup]="parcelFindForm" (ngSubmit)="findParcel()" >
+              <div class="row">
+                <div class="col-md-12 col-sm-12">
+                  <fieldset>
+                    <input type="text" [formControlName]="'id'"  id="id" name="name" placeholder="Wpisz kod przesyłki" required=""
+                           style="background-color: rgba(250,250,250,0.3);">
+                  </fieldset>
+                </div>
+                <div class="col-lg-12">
+                  <fieldset>
+                    <button type="submit" id="form-submit" class="main-button">Znajdź</button>
+                  </fieldset>
+                </div>
+                <div class="error" *ngIf='this.isError'>
+                  <p class="error-text">{{message}}</p>
+                </div>
+              </div>
+            </form>
       </div>
-      <!-- ***** Testimonials Item End ***** -->
-
-      <!-- ***** Testimonials Item Start ***** -->
-      <div class="col-lg-4 col-md-6 col-sm-12">
-        <div class="team-item">
-          <div class="team-content">
-            <p>Wysyłam wiele paczek i firma 26andfour spełnia moje oczekiwania. Polecam każdemu.</p>
-              <img src="assets/img/testimonial-icon.png" alt="">
-            <div class="team-info">
-              <h3 class="user-name">Angela Merkel</h3>
-              <span>Kanclerz Niemiec</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- ***** Testimonials Item End ***** -->
-
-      <!-- ***** Testimonials Item Start ***** -->
-      <div class="col-lg-4 col-md-6 col-sm-12">
-        <div class="team-item">
-          <div class="team-content">
-            <p>Quisque diam odio, maximus ac consectetur eu, auctor non lorem. Cras quis est non ante ultrices molestie. Ut vehicula et diam at aliquam.</p>
-              <img src="assets/img/testimonial-icon.png" alt="">
-            <div class="team-info">
-              <h3 class="user-name">Tim Cook</h3>
-              <span>Prezes Apple</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- ***** Testimonials Item End ***** -->
     </div>
   </div>
-</section>
+</div>
+  </div>
+</div>

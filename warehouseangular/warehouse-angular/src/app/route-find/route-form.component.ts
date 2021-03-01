@@ -42,32 +42,16 @@ id: string;
 
   }
 
-// tslint:disable-next-line:typedef
-findParcelCode(): string {
- return this.localStorage.retrieve('id');
-}
-
   findParcel(): any {
    this.id = this.parcelFindForm.get('id').value;
-   this.localStorage.store('id', this.id);
-   this.parseParcelId.emit(this.id);
+   this.router.navigateByUrl('/route/parcelCode/' + this.id);
    this.routeService.getAllRoutesByParcelId(this.id).subscribe(data => {
      this.routes = data;
-     this.toastr.success('Paczka znaleziona');
      this.isError = false;
-     this.router.navigate(
-         ['/route'],
-         {
-           relativeTo: this.activatedRoute,
-           queryParams: { parcelCode: this.id },
-           queryParamsHandling: 'merge',
-           preserveFragment: true
-         });
    }, error => {
      this.isError = true;
      throwError(error);
-     this.toastr.error('Paczka nie została znaleziona');
-     this.message = 'Paczka o id: ' +  this.id + ' nie została znaleziona w bazie.\n' +
+     this.message = 'Paczka o id: ' +  this.id + ' nie została znaleziona.\n' +
                        'Sprawdź numer swojej przesyłki i spróbuj ponownie';
    });
   }

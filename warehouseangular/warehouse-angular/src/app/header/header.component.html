@@ -4,33 +4,42 @@
       <div class="col-12">
         <nav class="main-nav">
           <!-- ***** Logo Start ***** -->
-          <a  routerLink="/" class="logo">
-            <img src="assets/img/package.png" alt="Softy Pinko" class="reddit-icon-svg"/>
-            <span class="warehouse-text">
-                    26andfour
-                </span>
-
+          <a  routerLink="/home" class="logo">
+            26andfour
           </a>
-          <ul *ngIf="isLoggedIn" class="nav">
-            <li></li>
-            <li><a *ngIf="isLoggedIn" routerLink="/route/add">Przyjęcie od kuriera</a></li>
-            <li><a routerLink="/routes/all">Przesyłki</a></li>
-            <li><a routerLink="/user/profile">{{username}}</a></li>
-            <li><a routerLink="/home" (click)="logout()">Wyloguj</a></li>
-          </ul>
-          <ul *ngIf="!isLoggedIn" class="nav">
-            <li><a routerLink="/depots/all">Nasze oddziały</a></li>
-            <li><a routerLink="/parcel/add">Nadaj przesyłkę</a></li>
-            <li><a routerLink="/route/find">Znajdź przesyłkę</a></li>
-            <li><a routerLink="/login">Logowanie</a></li>
-            <li><a routerLink="/sign-up">Rejestracja</a></li>
+          <!-- ***** Logo End ***** -->
+          <!-- ***** Menu Start ***** -->
+          <ul class="nav">
+            <li class="scroll-to-section" *ngIf="!isLoggedIn"><a routerLink="/parcel/add" class="menu-item">Nadaję</a></li>
+            <li class="scroll-to-section" *ngIf="!isLoggedIn"><a routerLink="/route/find"  class="menu-item">Znajdź przesyłkę</a></li>
+            <li class="scroll-to-section" *ngIf="!isLoggedIn"><a routerLink="/depots/all" class="menu-item">Nasze oddziały</a>
+            <li class="scroll-to-section" *ngIf="isLoggedIn"><a routerLink="/user/profile">{{username}}</a></li>
+
+
+            <li class="submenu" *ngIf="!isLoggedIn">
+              <a href="javascript:;">Twoje konto</a>
+              <ul>
+                <li *ngIf="!isLoggedIn"><a routerLink="/sign-up" class="menu-item">Rejestracja</a></li>
+                <li *ngIf="!isLoggedIn"><a routerLink="/login" class="menu-item">Logowanie</a></li>
+              </ul>
+
+            </li>
+            <li class="submenu" *ngIf="isLoggedIn">
+              <a href="javascript:;">Magazyn</a>
+              <ul>
+                <li><a routerLink="/route/add" class="menu-item">Przyjęcie od kuriera</a></li>
+              </ul>
+
+            </li>
+            <li class="scroll-to-section" *ngIf="isLoggedIn"><a routerLink="/home" (click)="logout()">Wyloguj</a></li>
           </ul>
           <a class='menu-trigger'>
             <span>Menu</span>
           </a>
-          <!-- ***** Menu End ***** -->
         </nav>
       </div>
     </div>
   </div>
+
+
 </header>

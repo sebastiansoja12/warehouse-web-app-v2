@@ -1,10 +1,12 @@
 import {Component, Injectable, OnInit, Output, ViewChild, AfterViewInit, Input} from '@angular/core';
-import {Route} from '../auth/model/route';
+import { Router } from '@angular/router';
 import { RouteService} from '../auth/service/route-service.service';
 import {ActivatedRoute} from '@angular/router';
 import {RouteFormComponent} from '../route-find/route-form.component';
 import {FormGroup} from '@angular/forms';
 import {LocalStorageService} from 'ngx-webstorage';
+import {Subscription} from 'rxjs';
+import {Route} from '../auth/model/route';
 
 
 @Component({
@@ -19,14 +21,16 @@ export class RouteViewComponent implements  OnInit {
 
   routes: Route[];
  id: string;
+  routeSub: Subscription;
 
   constructor(private routeService: RouteService, private routeForm: RouteFormComponent,
-              private localStorage: LocalStorageService) {
+              private localStorage: LocalStorageService, private router: Router, private activatedRoute: ActivatedRoute) {
 
   }
   ngOnInit(): any {
-   this.routeForm.parseParcelId.subscribe((data: string) => this.id = data);
-   this.id = this.routeForm.findParcelCode();
+   this.routeSub = this.activatedRoute.params.subscribe(params => {
+      this.id = params.id;
+    });
    this.routeService.getAllRoutesByParcelId(this.id).subscribe(dane => {
     this.routes = dane;
    });
