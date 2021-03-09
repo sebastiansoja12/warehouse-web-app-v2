@@ -21,7 +21,7 @@ export class SignupComponent implements OnInit {
     role: string;
     firstName: string;
     lastName: string;
-    depot_id: any};
+    depotCode: any};
   signupForm: FormGroup;
   depot: Depot[];
   route: Route[];
@@ -35,7 +35,7 @@ export class SignupComponent implements OnInit {
       role: '',
       firstName: '',
       lastName: '',
-      depot_id: ''
+      depotCode: ''
     };
   }
 
@@ -49,7 +49,7 @@ export class SignupComponent implements OnInit {
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
       role: new FormControl('', Validators.required),
-      depot_id: new FormControl('', Validators.required)
+      depotCode: new FormControl('', Validators.required)
     });
   }
 
@@ -60,7 +60,7 @@ export class SignupComponent implements OnInit {
     this.signupRequestPayload.password = this.signupForm.get('password').value;
     this.signupRequestPayload.firstName = this.signupForm.get('firstName').value;
     this.signupRequestPayload.lastName = this.signupForm.get('lastName').value;
-    this.signupRequestPayload.depot_id = this.signupForm.get('depot_id').value;
+    this.signupRequestPayload.depotCode = this.signupForm.get('depotCode').value;
     this.authService.signup(this.signupRequestPayload)
       .subscribe(() => {
         this.router.navigate(['/login'],

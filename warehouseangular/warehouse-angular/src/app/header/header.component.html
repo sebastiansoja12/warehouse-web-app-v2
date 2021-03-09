@@ -14,18 +14,16 @@
             <li class="scroll-to-section" *ngIf="!isLoggedIn"><a routerLink="/route/find"  class="menu-item">Znajdź przesyłkę</a></li>
             <li class="scroll-to-section" *ngIf="!isLoggedIn"><a routerLink="/depots/all" class="menu-item">Nasze oddziały</a>
             <li class="scroll-to-section" *ngIf="isLoggedIn"><a routerLink="/user/profile">{{username}}</a></li>
-
-
             <li class="submenu" *ngIf="!isLoggedIn">
-              <a href="javascript:;">Twoje konto</a>
-              <ul>
-                <li *ngIf="!isLoggedIn"><a routerLink="/sign-up" class="menu-item">Rejestracja</a></li>
-                <li *ngIf="!isLoggedIn"><a routerLink="/login" class="menu-item">Logowanie</a></li>
+              <a href="javascript:">Konto</a>
+              <ul class = "active">
+                <li *ngIf="!isLoggedIn" class="menu-item" ><a routerLink="/sign-up" class="menu-item">Rejestracja</a></li>
+                <li *ngIf="!isLoggedIn" class="menu-item"><a routerLink="/login" class="menu-item">Logowanie</a></li>
               </ul>
 
             </li>
             <li class="submenu" *ngIf="isLoggedIn">
-              <a href="javascript:;">Magazyn</a>
+              <a href="javascript:">Magazyn</a>
               <ul>
                 <li><a routerLink="/route/add" class="menu-item">Przyjęcie od kuriera</a></li>
               </ul>

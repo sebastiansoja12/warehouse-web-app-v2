@@ -8,3 +8,106 @@ label {
   float:left;
   margin-right:15px;
 }
+.right-image-decor {
+  background-image: url(node_modules/bootstrap/assets/images/right-bg-decor.png);
+  background-repeat: no-repeat;
+  background-position: right center;
+  position: absolute;
+  width: 100%;
+  display: inline-block;
+  height: 110%;
+  margin-top: -200px;
+}
+
+#testimonials {
+  padding-top: 100px;
+  position: relative;
+  z-index: 9;
+}
+
+#testimonials .item {
+  position: relative;
+}
+
+#testimonials .item .testimonial-content {
+  background: rgb(244,129,63);
+  background: linear-gradient(145deg, rgba(244,129,63,1) 0%, rgba(241,85,106,1) 100%);
+  margin-left: 60px;
+  padding: 40px 30px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+#testimonials .item .testimonial-content ul li {
+  display: inline-block;
+  margin: 0px 1px;
+}
+
+#testimonials .item .testimonial-content ul li i {
+  color: #fff;
+  font-size: 13px;
+}
+
+#testimonials .item .testimonial-content h4 {
+  font-size: 22px;
+  margin-top: 20px;
+  color: #fff;
+}
+
+#testimonials .item .testimonial-content p {
+  color: #fff;
+  font-style: italic;
+  font-weight: 200;
+  margin: 20px 0px 15px 0px;
+}
+
+#testimonials .item .testimonial-content span {
+  color: #fff;
+  font-weight: 200;
+  font-size: 13px;
+}
+
+#testimonials .author img {
+  max-width: 120px;
+  margin-bottom: -60px;
+}
+
+.owl-carousel .owl-nav button.owl-next span {
+  z-index: 10;
+  top: 45%;
+  border-radius: 10px;
+  font-size: 46px;
+  color: #fff;
+  right: -210px;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+  display: inline-block;
+  background: rgb(244,129,63);
+  background: linear-gradient(145deg, rgba(244,129,63,1) 0%, rgba(241,85,106,1) 100%);
+  position: absolute;
+}
+
+.owl-carousel .owl-nav button.owl-prev span {
+  z-index: 9;
+  top: 30%;
+  border-radius: 10px;
+  font-size: 46px;
+  color: #fff;
+  right: -150px;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  text-align: center;
+  display: inline-block;
+  background: rgb(244,129,63);
+  background: linear-gradient(145deg, rgba(244,129,63,1) 0%, rgba(241,85,106,1) 100%);
+  position: absolute;
+}
+
+@media screen and (max-width: 1060px) {
+  .owl-carousel .owl-nav {
+    display: none!important;
+  }
+}

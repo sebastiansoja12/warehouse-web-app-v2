@@ -1,87 +1,69 @@
-<div class="register-section">
-    <div class="row justify-content-center">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header" style="text-align: center">
-                    <h4>Rejestracja</h4>
-                </div>
-                <div class="card-body">
-
-                    <form [formGroup]="signupForm" (ngSubmit)="signup()">
-                        <div class="form-group row">
-                            <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail</label>
-                            <div class="col-md-6">
-                                <input type="text" [formControlName]="'email'" id="email_address" class="form-control" name="email-address" required
-                                    autofocus>
-                                <span *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched">
-                                    Wprowadź istniejący adres e-mail
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-md-4 col-form-label text-md-right">Nazwa użytkownika</label>
-                            <div class="col-md-6">
-                                <input type="text" [formControlName]="'username'" class="form-control" required autofocus>
-                                <span *ngIf="!signupForm.get('username').valid && signupForm.get('username').touched">
-                                    Wprowadź poprawną nazwę użytkownika
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">Hasło</label>
-                            <div class="col-md-6">
-                                <input type="password" [formControlName]="'password'" id="password" class="form-control" name="password" required>
-                                <span *ngIf="!signupForm.get('password').valid && signupForm.get('password').touched">
-                                    Proszę wprowadzić poprawne hasło
-                                </span>
-                            </div>
-                        </div>
-
-                      <div class="form-group row">
-                        <label for="password" class="col-md-4 col-form-label text-md-right">Nazwisko</label>
-                        <div class="col-md-6">
-                          <input type="text" [formControlName]="'lastName'" id="lastName" class="form-control" name="lastName" required>
-                          <span *ngIf="!signupForm.get('lastName').valid && signupForm.get('lastName').touched">
-                                    Proszę podać nazwisko
-                                </span>
-                        </div>
-                      </div>
-
-                        <div class="form-group row">
-                          <label for="password" class="col-md-4 col-form-label text-md-right">Imie</label>
-                          <div class="col-md-6">
-                            <input type="text" [formControlName]="'firstName'" id="firstName" class="form-control" name="firstName" required>
-                            <span *ngIf="!signupForm.get('firstName').valid && signupForm.get('firstName').touched">
-                                    Proszę podać imie
-                                </span>
-                          </div>
-                      </div>
-
-                      <div class="form-group row">
-                        <label for="depot_id" class="col-md-4 col-form-label text-md-right">Id oddziału</label>
-                        <div class="col-md-4 col-form-label-sm" id="depot_id">
-                          <select [formControlName]="'depot_id'">
-                            <option *ngFor="let option of depot" [value]="option.id">
-                              {{option.id}}
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-                        <span class="col-md-6 offset-md-4">
-
-                            <button type="submit" class="sign-up">
-                                Utwórz konto
-                            </button>
-                            <span style="padding-left: 15px">Już masz konto? <a routerLink="/login">Zaloguj się</a></span>
-                        </span>
-
-                    </form>
-                </div>
+<footer class="contact-us">
+  <div class="container">
+    <div class="footer-content">
+      <div class="row">
+        <div class="contact-form">
+          <form id="contact" action="" method="post" [formGroup]="signupForm" (ngSubmit)="signup()">
+            <div class="center-heading">
+              <p  class="section-title">Moduł rejestracji pracownika</p>
             </div>
+            <div class="row">
+              <div class="col-md-6 col-lg-6">
+                <fieldset>
+                  <div class="user-name">
+                    <input type="text" [formControlName]="'email'" id="email_address" placeholder="E-mail" required="" class="form-control" name="email-address">
+                  </div>
+                </fieldset>
+              </div>
+              <div class="col-md-12 col-lg-6">
+                <fieldset>
+                  <div class="user-name">
+                    <input type="text" [formControlName]="'username'" class="form-control" placeholder="Nazwa użytkownika" id="username" required="">
+                  </div>
+                </fieldset>
+              </div>
+              <div class="col-md-6 col-lg-6">
+                <fieldset>
+                  <div class="user-name">
+                    <input type="password" [formControlName]="'password'" id="password" class="form-control" name="password" placeholder="Hasło" required="">
+                  </div>
+                </fieldset>
+              </div>
+              <div class="col-md-12 col-lg-6">
+                <fieldset>
+                  <div class="user-name">
+                    <input type="text" [formControlName]="'firstName'" id="firstName" class="form-control" name="firstName" placeholder="Imie" required="">
+                  </div>
+                </fieldset>
+              </div>
+              <div class="col-md-6 col-lg-12">
+                <fieldset>
+                  <div class="user-name">
+                    <input type="text" [formControlName]="'lastName'" id="lastName" class="form-control" name="lastName" placeholder="Nazwisko" required="">
+                  </div>
+                </fieldset>
+              </div>
+              <div class="col-md-6 col-lg-12">
+                <label for="depot_id" class="col-md-auto">Oddział</label>
+                <div class="col-md-auto" id="depot_id">
+                  <select [formControlName]="'depotCode'">
+                    <option *ngFor="let option of depot" [value]="option.depotCode">
+                      {{option.depotCode}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-12"><h1></h1></div>
+              <div class="col-md-6 col-lg-12">
+                <fieldset>
+                  <button type="submit" id="form-submit" class="main-button">Załóż konto</button>
+                </fieldset>
+              </div>
+            </div>
+          </form>
         </div>
-        <div class="col-md-3"></div>
+
+      </div>
     </div>
-</div>
+  </div>
+</footer>

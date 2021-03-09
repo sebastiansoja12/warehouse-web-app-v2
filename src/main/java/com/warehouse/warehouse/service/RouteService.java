@@ -1,6 +1,8 @@
 package com.warehouse.warehouse.service;
 
 
+import com.warehouse.warehouse.exceptions.ParcelNotFound;
+import com.warehouse.warehouse.model.Parcel;
 import com.warehouse.warehouse.model.Route;
 import com.warehouse.warehouse.repository.DepotRepository;
 import com.warehouse.warehouse.repository.RouteRepository;
@@ -12,8 +14,8 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.Instant;
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -45,8 +47,11 @@ public class RouteService {
     }
 
     @org.springframework.transaction.annotation.Transactional(readOnly = true)
-    public List<Route> findByParcelId(UUID id) {
-        return routeRepository.findAllByParcel_IdOrderByCreatedAsc(id);
+    public List<Route> findByParcelId(UUID id) throws Exception {
+        parcelRepository.findById(id).orElseThrow(
+                () -> new ParcelNotFound("Paczka nie zostala znaleziona lub jest jeszcze nie nadana"));
+        return routeRepository.findAllByParcel_IdOrderByCreatedDesc(id).orElseThrow(
+                () -> new ParcelNotFound("Paczka nie zostala znaleziona lub jest jeszcze nie nadana"));
     }
    public void deleteRouteByParcelId(UUID id) {
         Route route = new Route();

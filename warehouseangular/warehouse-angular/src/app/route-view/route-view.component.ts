@@ -5,7 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import {RouteFormComponent} from '../route-find/route-form.component';
 import {FormGroup} from '@angular/forms';
 import {LocalStorageService} from 'ngx-webstorage';
-import {Subscription} from 'rxjs';
+import {Subscription, throwError} from 'rxjs';
 import {Route} from '../auth/model/route';
 
 
@@ -22,6 +22,8 @@ export class RouteViewComponent implements  OnInit {
   routes: Route[];
  id: string;
   routeSub: Subscription;
+  private isError: boolean;
+  private message: string;
 
   constructor(private routeService: RouteService, private routeForm: RouteFormComponent,
               private localStorage: LocalStorageService, private router: Router, private activatedRoute: ActivatedRoute) {
@@ -31,9 +33,15 @@ export class RouteViewComponent implements  OnInit {
    this.routeSub = this.activatedRoute.params.subscribe(params => {
       this.id = params.id;
     });
-   this.routeService.getAllRoutesByParcelId(this.id).subscribe(dane => {
-    this.routes = dane;
-   });
+   this.routeService.getAllRoutesByParcelId(this.id).subscribe(data => {
+      this.routes = data;
+      this.isError = false;
+    }, error => {
+      this.isError = true;
+      throwError(error);
+      this.message = 'Paczka o id: ' +  this.id + ' nie została znaleziona.\n' +
+        'Sprawdź numer swojej przesyłki i spróbuj ponownie';
+    });
   }
 
 

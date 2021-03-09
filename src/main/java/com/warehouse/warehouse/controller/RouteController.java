@@ -35,7 +35,7 @@ public class RouteController {
     }
 
     @GetMapping("/all/parcelId/{id}")
-    public List<Route> findByParcelCode(@PathVariable UUID id){
+    public List<Route> findByParcelCode(@PathVariable UUID id) throws Exception {
         return routeService.findByParcelId(id);
     }
     @PostMapping("/all/parcelId/delete/{id}")
