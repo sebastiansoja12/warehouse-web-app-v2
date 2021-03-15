@@ -16,5 +16,5 @@ public class RegisterRequest {
     private String firstName;
     private String lastName;
     private String role;
-    private int depot_id;
+    private String depotCode;
 }

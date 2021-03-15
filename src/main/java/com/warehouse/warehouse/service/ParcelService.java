@@ -58,8 +58,8 @@ private final ParcelExportService parcelExportService;
             routeRepository.save(route);
             parcelRepository.save(parcel);
 
-        mailService.sendNotification(new ParcelNotification( "Została do państwa nadana przesyłka",
-                parcel.getEmail(), "Docelowa destynacja paczki to: " + parcel.getDestination_address() + "\n" +
+        mailService.sendNotification(new ParcelNotification( "Została do państwa nadana przesyłka z emaila ",
+                parcel.getSenderEmail(), "Docelowa destynacja paczki to: " + parcel.getRecipientCity() + "\n" +
                 "Kod Państwa paczki to: " + parcel.getId().toString() + "\nWciśnij poniższy link by pobrać atykietę: " +
                  "\n" + "http://localhost:8080/api/parcels/toPDF/" + parcel.getId().toString()));
 

@@ -1,11 +1,12 @@
 .routes-section{
   margin: 150px;
-  position: page;
+  position: center;
 
 }
-.container {
+.hello {
   margin-left: auto;
-  position: absolute;
+  margin-bottom: 6%;
+  position: center;
   height: 0px;
 text-align: center;
 }

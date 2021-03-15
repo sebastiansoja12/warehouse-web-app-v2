@@ -55,7 +55,7 @@ private final DepotRepository depotRepository;
     {
         User user = new User();
         Depot depot = new Depot();
-        depot.setId((long) registerRequest.getDepot_id());
+        depot.setDepotCode(registerRequest.getDepotCode());
         user.setUsername(registerRequest.getUsername());
         user.setEmail(registerRequest.getEmail());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
@@ -63,15 +63,20 @@ private final DepotRepository depotRepository;
         user.setLastName(registerRequest.getLastName());
         user.setRole(registerRequest.getRole());
         user.setDepot(depot);
-        user.setEnabled(false);
+
+        user.setEnabled(true);
 
         userRepository.save(user);
+        userRepository.flush();
 
-       String token = generateVerificationToken(user);
+
+       /*String token = generateVerificationToken(user);
         mailService.sendMail(new NotificationEmail("Aktywacja konta",
                 user.getEmail(), "Dziękujemy za zarejestrowanie się w 26andfour, " +
                 "wciśnij poniższy link by aktywować konto : " +
                 "http://localhost:8080/api/users/accountVerification/" + token));
+
+        */
     }
 
     private String generateVerificationToken(User user) {

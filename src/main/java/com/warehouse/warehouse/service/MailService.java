@@ -23,7 +23,7 @@ class MailService {
     void sendMail(NotificationEmail notificationEmail) {
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
-            messageHelper.setFrom("26andfour@pdp.com");
+            messageHelper.setFrom("26andfour@four.com");
             messageHelper.setTo(notificationEmail.getRecipient());
             messageHelper.setSubject(notificationEmail.getSubject());
             messageHelper.setText(notificationEmail.getBody());
@@ -41,7 +41,7 @@ class MailService {
     void sendNotification(ParcelNotification parcelNotification) {
         MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
-            messageHelper.setFrom("26andfour@pdp.com");
+            messageHelper.setFrom("26andfour@four.com");
             messageHelper.setTo(parcelNotification.getRecipient());
             messageHelper.setSubject(parcelNotification.getSubject());
             messageHelper.setText(parcelNotification.getBody());

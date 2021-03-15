@@ -38,16 +38,14 @@ public class User {
     @Email
     private String email;
 
-    //@NotEmpty(message="Rola jest wymagana")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String role;
-
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private boolean enabled;
 
-    @ManyToOne
-    Depot depot;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Depot depot;
 
 
 }

@@ -46,7 +46,7 @@
               <div class="col-md-6 col-lg-12">
                 <label for="depot_id" class="col-md-auto">Oddział</label>
                 <div class="col-md-auto" id="depot_id">
-                  <select [formControlName]="'depotCode'">
+                  <select [formControlName]="'depotCode'"> //poprawic w bazie
                     <option *ngFor="let option of depot" [value]="option.depotCode">
                       {{option.depotCode}}
                     </option>

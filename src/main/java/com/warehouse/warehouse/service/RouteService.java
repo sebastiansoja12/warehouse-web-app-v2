@@ -56,8 +56,8 @@ public class RouteService {
    public void deleteRouteByParcelId(UUID id) {
         Route route = new Route();
         route.setUser(authService.getCurrentUser().orElseThrow(null));
-        Long depot_id = depotRepository.depot(route.getUser().getDepot().getDepotCode());
-        routeRepository.deleteByParcelIdAndDepot_Id(id, depot_id);
+        String depotCode = route.getUser().getDepot().getDepotCode();
+        routeRepository.deleteByParcelIdAndDepot_DepotCode(id, depotCode);
     }
 
     @org.springframework.transaction.annotation.Transactional(readOnly = true)

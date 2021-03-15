@@ -104,9 +104,8 @@
 
 footer {
   margin-top:auto;
-  padding-top: 200px;
+  padding-bottom: 200px;
   background-image: url(node_modules/bootstrap/assets/images/footer-bg.png);
-  background-position: center center;
   background-size: cover;
   width: 100%;
 }
@@ -119,7 +118,7 @@ footer .footer-content {
   position: relative;
   margin-left:18%;
   margin-bottom: auto;
-  margin-top: -130px;
+  margin-top: 80px;
   z-index: 10;
   padding: 45px;
   border-radius: 5px;

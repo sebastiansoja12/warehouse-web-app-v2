@@ -41,24 +41,38 @@ public class Parcel {
 
     @Valid
     @NotBlank
-    private String sender_telephone;
+    private String senderTelephone;
 
     @Valid
     @NotBlank
-    private String destination_telephone;
+    private String senderEmail;
 
     @Valid
     @NotBlank
-    private String destination_address;
+    private String recipientEmail;
 
     @Valid
     @NotBlank
-    private String email;
+    private String recipientTelephone;
+
+    @Valid
+    @NotBlank
+    private String recipientFirstName;
+
+    @Valid
+    @NotBlank
+    private String recipientLastName;
+
+    @Valid
+    @NotBlank
+    private String recipientCity;
+
+    @Valid
+    @NotBlank
+    private String recipientStreet;
+
 
     private boolean isCustom;
-
-
-
 
 
 }
