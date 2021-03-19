@@ -64,7 +64,7 @@ public class RouteService {
     public List<Route> findAllByUsername(){
         Route route = new Route();
         route.setUser(authService.getCurrentUser().orElseThrow(null));
-        return routeRepository.findAllByUser_username(route.getUser().getUsername());
+        return routeRepository.findFirst10ByUser_username(route.getUser().getUsername());
     }
 
 }

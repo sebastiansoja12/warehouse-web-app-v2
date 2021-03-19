@@ -23,14 +23,19 @@ export class ParcelAddComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
+  // tslint:disable-next-line:typedef
   ngOnInit() {
     this.createParcelForm = new FormGroup({
       firstName: new FormControl('', Validators.required),
       lastName: new FormControl('', Validators.required),
-      sender_telephone: new FormControl('', Validators.required),
-      destination_telephone: new FormControl('', Validators.required),
-      destination_address: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required),
+      senderTelephone: new FormControl('', Validators.required),
+      senderEmail: new FormControl('', Validators.required),
+      recipientFirstName: new FormControl('', Validators.required),
+      recipientLastName: new FormControl('', Validators.required),
+      recipientTelephone: new FormControl('', Validators.required),
+      recipientCity: new FormControl('', Validators.required),
+      recipientStreet: new FormControl('', Validators.required),
+      recipientEmail: new FormControl('', Validators.required),
       custom: new FormControl('', Validators.required)
     });
   }
@@ -41,10 +46,14 @@ export class ParcelAddComponent implements OnInit {
   createParcel(): any {
     this.parcel.firstName = this.createParcelForm.get('firstName').value;
     this.parcel.lastName = this.createParcelForm.get('lastName').value;
-    this.parcel.sender_telephone = this.createParcelForm.get('sender_telephone').value;
-    this.parcel.destination_telephone = this.createParcelForm.get('destination_telephone').value;
-    this.parcel.destination_address = this.createParcelForm.get('destination_address').value;
-    this.parcel.email = this.createParcelForm.get('email').value;
+    this.parcel.senderTelephone = this.createParcelForm.get('senderTelephone').value;
+    this.parcel.senderEmail = this.createParcelForm.get('senderEmail').value;
+    this.parcel.recipientFirstName = this.createParcelForm.get('recipientFirstName').value;
+    this.parcel.recipientLastName = this.createParcelForm.get('recipientLastName').value;
+    this.parcel.recipientTelephone = this.createParcelForm.get('recipientTelephone').value;
+    this.parcel.recipientCity = this.createParcelForm.get('recipientCity').value;
+    this.parcel.recipientStreet = this.createParcelForm.get('recipientStreet').value;
+    this.parcel.recipientEmail = this.createParcelForm.get('recipientEmail').value;
     this.parcel.custom = this.createParcelForm.get('custom').value;
     this.parcelService.save(this.parcel)
       .subscribe(() => {

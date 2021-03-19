@@ -4,12 +4,17 @@ export class Parcel {
 firstName: string;
 lastName: string;
   // tslint:disable-next-line:variable-name
-   sender_telephone: string;
+   senderTelephone: string;
   // tslint:disable-next-line:variable-name
-  destination_telephone: string;
+    senderEmail: string;
+
+  recipientTelephone: string;
   // tslint:disable-next-line:variable-name
- destination_address: string;
-  email: string;
+ recipientCity: string;
+    recipientEmail: string;
+    recipientFirstName: string;
+    recipientLastName: string;
+    recipientStreet: string;
   custom: boolean;
 
 }

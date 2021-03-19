@@ -63,7 +63,7 @@ export class SignupComponent implements OnInit {
     this.signupRequestPayload.depotCode = this.signupForm.get('depotCode').value;
     this.authService.signup(this.signupRequestPayload)
       .subscribe(() => {
-        this.router.navigate(['/login'],
+        this.router.navigate(['/'],
           { queryParams: { registered: 'true' } });
       }, error => {
         console.log(error);

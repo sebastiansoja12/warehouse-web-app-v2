@@ -60,7 +60,7 @@ private final ParcelExportService parcelExportService;
 
         mailService.sendNotification(new ParcelNotification( "Została do państwa nadana przesyłka z emaila ",
                 parcel.getSenderEmail(), "Docelowa destynacja paczki to: " + parcel.getRecipientCity() + "\n" +
-                "Kod Państwa paczki to: " + parcel.getId().toString() + "\nWciśnij poniższy link by pobrać atykietę: " +
+                "Kod Państwa paczki to: " + parcel.getId().toString() + "\nProsimy wejść w poniższy link by pobrać atykietę: " +
                  "\n" + "http://localhost:8080/api/parcels/toPDF/" + parcel.getId().toString()));
 
 

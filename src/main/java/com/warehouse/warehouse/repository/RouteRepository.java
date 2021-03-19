@@ -15,7 +15,7 @@ public interface RouteRepository extends JpaRepository<Route,Long> {
     @Query(value = "SELECT * from Route order by created desc", nativeQuery = true)
     List<Route> findAll();
 
-    List<Route> findAllByUser_username(String username);
+    List<Route> findFirst10ByUser_username(String username);
 
     List<Route> findByParcelId(final UUID id);
 

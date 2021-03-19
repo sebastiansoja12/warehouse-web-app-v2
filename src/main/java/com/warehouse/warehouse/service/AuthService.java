@@ -32,6 +32,7 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
+
 public class AuthService {
 
 
@@ -53,21 +54,19 @@ private final DepotRepository depotRepository;
 
     public void signup(RegisterRequest registerRequest)
     {
+
         User user = new User();
-        Depot depot = new Depot();
-        depot.setDepotCode(registerRequest.getDepotCode());
         user.setUsername(registerRequest.getUsername());
         user.setEmail(registerRequest.getEmail());
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setFirstName(registerRequest.getFirstName());
         user.setLastName(registerRequest.getLastName());
-        user.setRole(registerRequest.getRole());
-        user.setDepot(depot);
-
+        user.setRole("WORKER");
+        Optional<Depot> depot = depotRepository.findByDepotCode(registerRequest.getDepotCode());
+        user.setDepot(depot.orElseThrow());
         user.setEnabled(true);
 
         userRepository.save(user);
-        userRepository.flush();
 
 
        /*String token = generateVerificationToken(user);
