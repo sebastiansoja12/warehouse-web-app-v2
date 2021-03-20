@@ -27,7 +27,7 @@
       <td>{{ route.user.depot.city}}</td>
       <td>{{ route.user.depot.depotCode}}</td>
       <td>{{route.parcel.custom}}</td>
-      <td>X</td>
+      <td><button (click)="deleteRouteByParcelId(route.parcel.id)" >X</button></td>
 
 
     </tr>

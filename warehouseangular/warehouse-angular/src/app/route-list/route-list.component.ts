@@ -33,7 +33,11 @@ export class RouteListComponent implements OnInit {
     this.authService.getCurrentUser().subscribe(data => {
       this.users = data;
     });
-
-
+  }
+  deleteRouteByParcelId(id: string): any{
+    this.routeService.deleteRouteByParcelId(id).subscribe(data => {
+      this.routes = data;
+    });
+    window.location.reload();
   }
 }
