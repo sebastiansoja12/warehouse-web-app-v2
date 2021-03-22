@@ -18,6 +18,7 @@ public interface DepotRepository extends JpaRepository<Depot, Long> {
     @Query("SELECT id from Depot where depotCode=:depotCode and id<9")
     Long depot(String depotCode);
 
+    @Query("SELECT id from Depot where depotCode=:depotCode")
     Long getIdByDepotCode(String depotCode);
 
     Optional<Depot> findByDepotCode(String depotCode);

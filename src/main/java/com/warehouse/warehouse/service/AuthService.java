@@ -61,11 +61,10 @@ private final DepotRepository depotRepository;
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setFirstName(registerRequest.getFirstName());
         user.setLastName(registerRequest.getLastName());
-        user.setRole("WORKER");
+        user.setRole("worker");
         Optional<Depot> depot = depotRepository.findByDepotCode(registerRequest.getDepotCode());
         user.setDepot(depot.orElseThrow());
         user.setEnabled(true);
-
         userRepository.save(user);
 
 

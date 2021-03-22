@@ -27,6 +27,7 @@ import { RouteDeleteComponent } from './route-delete/route-delete.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DepotAllComponent } from './depot-all/depot-all.component';
 import {Depot} from './auth/model/depot';
+import { SideBarComponent } from './shared/side-bar/side-bar.component';
 
 
 
@@ -45,6 +46,7 @@ import {Depot} from './auth/model/depot';
     RouteDeleteComponent,
     UserProfileComponent,
     DepotAllComponent,
+    SideBarComponent,
 
   ],
   imports: [

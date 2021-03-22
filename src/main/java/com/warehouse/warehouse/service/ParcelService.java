@@ -46,16 +46,9 @@ private final ParcelExportService parcelExportService;
     public void save(Parcel parcel) throws Exception {
 
             Route route = new Route();
-            User user = new User();
-            user.setId(1);
             route.setParcel(parcel);
             route.setCreated(Instant.now());
-            route.setUser(user);
-            route.setDepot(initiate());
-
-
-
-            routeRepository.save(route);
+            route.setUser(initiate());
             parcelRepository.save(parcel);
 
         mailService.sendNotification(new ParcelNotification( "Została do państwa nadana przesyłka z emaila ",
@@ -66,13 +59,15 @@ private final ParcelExportService parcelExportService;
 
     }
 
-    public Depot initiate(){
+    public User initiate(){
         Depot depot = new Depot();
-        depot.setId((long)9);
+        User user = new User();
+        user.setId(0);
         depot.setCity("Paczka wkrótce zostanie odebrana przez kuriera");
         depot.setCountry("Nadanie");
         depot.setStreet("-");
-        return depot;
+        user.setDepot(depot);
+        return user;
     }
 
     @Transactional(readOnly = true)

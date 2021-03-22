@@ -27,5 +27,4 @@ public class Depot {
 
     private String depotCode;
 
-
 }

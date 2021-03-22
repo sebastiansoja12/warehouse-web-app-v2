@@ -66,7 +66,7 @@ public class ParcelExportService {
         table.addCell(parcel.getFirstName() + " " + parcel.getLastName());
         table.addCell(String.valueOf(parcel.getSenderTelephone()));
         table.addCell(String.valueOf(parcel.getRecipientTelephone()));
-        table.addCell(String.valueOf(parcel.getRecipientCity()));
+        table.addCell((parcel.getRecipientCity()) + " " + parcel.getRecipientStreet());
         table.addCell(String.valueOf(parcel.getRecipientEmail()));
         table.addCell(CodeService.generateQRCodeImage(parcel.getId()));
 
@@ -98,15 +98,19 @@ public class ParcelExportService {
 
         CsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.EXCEL_PREFERENCE);
 
-        String[] csvHeader = {"Kod paczki", "Imie nadawcy", "Nazwisko nadawcy", "Numer tel nadawcy", "Numer tel odbiorcy", "Destynacja", "Email"};
+        String[] csvHeader = {"Kod paczki", "Imie nadawcy", "Nazwisko nadawcy", "Numer tel nadawcy",
+                "Imie odbiorcy", "Nazwisko odbiorcy", "Numer tel odbiorcy", "Miasto", "Ulica", "Email"};
         String[] nameMapping = {
                 "id",
                 "firstName",
                 "lastName",
-                "sender_telephone",
-                "destination_telephone",
-                "destination_address",
-                "email"
+                "senderTelephone",
+                "recipientFirstName",
+                "recipientLastName",
+                "recipientTelephone",
+                "recipientCity",
+                "recipientStreet",
+                "recipientEmail"
         };
 
         csvWriter.writeHeader(csvHeader);

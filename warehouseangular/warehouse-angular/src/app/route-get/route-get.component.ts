@@ -41,4 +41,15 @@ export class RouteGetComponent implements OnInit {
       console.log(error);
     });
   }
+
+  printLabel(): any {
+    this.parcel.id  = this.getRouteForm.get('id').value;
+    window.location.href = 'http://localhost:8080/api/parcels/toPDF/' + this.parcel.id;
+
+  }
+
+  toCSV(): any {
+    this.parcel.id  = this.getRouteForm.get('id').value;
+    window.location.href = 'http://localhost:8080/api/parcels/csv/' + this.parcel.id;
+  }
 }
