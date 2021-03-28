@@ -14,6 +14,7 @@ import {Route} from '../auth/model/route';
 })
 export class RouteDeleteComponent implements OnInit {
   getRouteForm: FormGroup;
+  id: string;
 
   constructor(private routeService: RouteService, private parcelService: ParcelService,
               private localStorage: LocalStorageService,
@@ -28,9 +29,9 @@ export class RouteDeleteComponent implements OnInit {
   }
 
   deleteRoute(): any {
-    this.parcel.id  = this.getRouteForm.get('id').value;
+    this.id  = this.getRouteForm.get('id').value;
     this.route.parcel = this.parcel;
-    this.routeService.deleteRouteByParcelId(this.parcel.id).subscribe(() => {
+    this.routeService.deleteRouteByParcelId(this.id).subscribe(() => {
       this.router.navigate(['/'],
         { queryParams: { deleted: this.parcel.id } });
     }, error => {

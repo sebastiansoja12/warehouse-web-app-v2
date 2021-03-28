@@ -7,6 +7,7 @@ import com.warehouse.warehouse.model.*;
 import com.warehouse.warehouse.repository.RouteRepository;
 import com.warehouse.warehouse.repository.ParcelRepository;
 import com.warehouse.warehouse.repository.UserRepository;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -25,31 +27,17 @@ import java.util.UUID;
 @Service
 @Slf4j
 @Transactional
+@AllArgsConstructor
 public class ParcelService {
 
-    @Autowired
-    public ParcelService(ParcelRepository parcelRepository, UserRepository userRepository, RouteRepository routeRepository, AuthService authService, MailService mailService, ParcelExportService parcelExportService){
-        this.parcelRepository= parcelRepository;
-        this.routeRepository = routeRepository;
-        this.authService = authService;
-        this.mailService = mailService;
-        this.parcelExportService = parcelExportService;
-    }
 private final ParcelRepository parcelRepository;
-    private final RouteRepository routeRepository;
-private final AuthService authService;
-private final MailService mailService;
-
+    private final MailService mailService;
 private final ParcelExportService parcelExportService;
 
     @Transactional
     public void save(Parcel parcel) throws Exception {
 
-            Route route = new Route();
-            route.setParcel(parcel);
-            route.setCreated(Instant.now());
-            route.setUser(initiate());
-            parcelRepository.save(parcel);
+        parcelRepository.save(parcel);
 
         mailService.sendNotification(new ParcelNotification( "Została do państwa nadana przesyłka z emaila ",
                 parcel.getSenderEmail(), "Docelowa destynacja paczki to: " + parcel.getRecipientCity() + "\n" +
@@ -59,16 +47,7 @@ private final ParcelExportService parcelExportService;
 
     }
 
-    public User initiate(){
-        Depot depot = new Depot();
-        User user = new User();
-        user.setId(0);
-        depot.setCity("Paczka wkrótce zostanie odebrana przez kuriera");
-        depot.setCountry("Nadanie");
-        depot.setStreet("-");
-        user.setDepot(depot);
-        return user;
-    }
+
 
     @Transactional(readOnly = true)
     public List<Parcel> findAll(){

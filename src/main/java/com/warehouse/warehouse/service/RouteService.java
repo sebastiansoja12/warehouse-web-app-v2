@@ -13,7 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.Instant;
+import java.sql.Date;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -34,7 +36,7 @@ public class RouteService {
 
     public Route save(Route route){
         route.setParcel(parcelRepository.findById(route.getParcel().getId()).orElseThrow());
-        route.setCreated((Instant.now()));
+        route.setCreated(LocalDateTime.now(ZoneId.of(String.valueOf(ZoneId.systemDefault()))));
         route.setUser(authService.getCurrentUser().orElseThrow(null));
         route.setDepot(depotRepository.findById(
                 route.getUser().getDepot().getId()).orElseThrow(null));

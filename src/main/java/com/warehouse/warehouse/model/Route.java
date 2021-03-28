@@ -1,15 +1,22 @@
 package com.warehouse.warehouse.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.time.Instant;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @Data
@@ -27,8 +34,9 @@ public class Route {
     @org.hibernate.annotations.Type(type="uuid-char")
     private UUID id;
 
-
-    private Instant created;
+    @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+    @JsonFormat(pattern="dd/MM/yyyy HH:mm")
+    private LocalDateTime created;
 
 
     @ManyToOne( fetch = FetchType.EAGER)

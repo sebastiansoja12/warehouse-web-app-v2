@@ -28,6 +28,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DepotAllComponent } from './depot-all/depot-all.component';
 import {Depot} from './auth/model/depot';
 import { SideBarComponent } from './shared/side-bar/side-bar.component';
+import {DatePipe} from '@angular/common';
 
 
 
@@ -62,7 +63,7 @@ import { SideBarComponent } from './shared/side-bar/side-bar.component';
 
   ],
   providers: [
-
+DatePipe,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
