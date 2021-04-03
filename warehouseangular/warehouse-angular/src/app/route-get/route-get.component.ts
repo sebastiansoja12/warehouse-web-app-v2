@@ -6,7 +6,9 @@ import {LocalStorageService} from 'ngx-webstorage';
 import {Depot} from '../auth/model/depot';
 import {Parcel} from '../auth/model/parcel';
 import {Route} from '../auth/model/route';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {throwError} from 'rxjs';
 
 @Component({
   selector: 'app-route-get',
@@ -17,16 +19,23 @@ export class RouteGetComponent implements OnInit {
 
   getRouteForm: FormGroup;
   depot: Depot;
+  isError: boolean;
+  routes: Route[];
   constructor(private routeService: RouteService, private parcelService: ParcelService,
               private localStorage: LocalStorageService,
               private router: Router,
               private parcel: Parcel,
-              private route: Route) { }
+              private route: Route,
+              private toastr: ToastrService,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getRouteForm = new FormGroup({
       id: new FormControl('', Validators.required),
       custom: new FormControl('', Validators.required)
+    });
+    this.routeService.findAll().subscribe(data => {
+      this.routes = data;
     });
   }
 
@@ -34,11 +43,16 @@ export class RouteGetComponent implements OnInit {
     this.parcel.id  = this.getRouteForm.get('id').value;
     this.parcel.custom  =  this.getRouteForm.get('custom').value;
     this.route.parcel = this.parcel;
-    this.routeService.save(this.route).subscribe(() => {
-      this.router.navigate(['/'],
-        { queryParams: { parcelId: this.parcel.id } });
+    this.routeService.save(this.route).subscribe(data => {
+      this.isError = false;
+      window.location.reload();
+
     }, error => {
-      console.log(error);
+      this.isError = true;
+      window.location.assign('/');
+      this.toastr.success('Błędny kod lub paczka została już zarejestrowana');
+      throwError(error);
+
     });
   }
 

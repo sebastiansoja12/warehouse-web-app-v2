@@ -335,3 +335,9 @@ button.main-button {
 button.main-button:hover {
   background-color: #f1556a;
 }
+.container{
+  text-align: center;
+}
+.row{
+  text-align: center;
+}

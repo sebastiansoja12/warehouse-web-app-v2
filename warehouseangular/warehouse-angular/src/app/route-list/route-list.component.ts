@@ -19,20 +19,21 @@ export class RouteListComponent implements OnInit {
   routes: Route[];
   depotcode: string;
   users: User[];
+  username: string;
 
   constructor(private routeService: RouteService, private authService: AuthService,
               private localStorage: LocalStorageService) {
   }
 
   // tslint:disable-next-line:typedef
+  firstName: string;
 
   ngOnInit(): any {
     this.routeService.findAll().subscribe(data => {
       this.routes = data;
     });
-    this.authService.getCurrentUser().subscribe(data => {
-      this.users = data;
-    });
+    this.username = this.authService.getUserName();
+    this.firstName = this.authService.getFirstName();
   }
   deleteRouteByParcelId(id: string): any{
     this.routeService.deleteRouteByParcelId(id).subscribe(data => {

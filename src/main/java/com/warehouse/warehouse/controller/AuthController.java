@@ -54,9 +54,22 @@ public class AuthController {
         refreshTokenService.deleteRefreshToken(refreshTokenRequest.getRefreshToken());
         return ResponseEntity.status(OK).body("Refresh Token Deleted Successfully!!");
     }
+
+
     @GetMapping("/currentuser")
     public List<User> getCurrentUser(){
         return authService.getCurrentUsers();
     }
+
+
+/*
+    @GetMapping("/currentuser")
+    public Optional<User> getCurrentUser(){
+        return authService.getCurrentUser();
+    }
+
+
+ */
+
 
 }

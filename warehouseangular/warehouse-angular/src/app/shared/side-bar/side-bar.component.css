@@ -1,9 +1,8 @@
-.sidebar-view-subforum {
+.sidebar-view-warehouse {
   width: 312px;
   height: 242px;
   --post-line-color: #ccc;
   border: 1px solid #ccc;
-  margin-bottom: 10px;
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0.8);
   color: #878A8C;
@@ -12,11 +11,11 @@
   padding: 5px;
 }
 
-.sidebar-view-subforum {
+.sidebar-view-warehouse {
   height: 280px;
 }
 a.main-button-slider:hover {
-  background-color: #f1556a;
+  background-color: #f4813f;
 }
 
 a.main-button {
@@ -35,21 +34,20 @@ a.main-button {
 }
 
 a.main-button:hover {
-  background-color: #f1556a;
+  background-color: #f4813f;
 }
 
 button.main-button {
   outline: none;
   border: none;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 16px;
   border-radius: 25px;
   padding: 15px 25px;
-  background-color: #f4813f;
-  text-transform: uppercase;
-  color: #fff;
-  font-weight: 600;
-  letter-spacing: 1px;
+  background-color: #858794;
+  text-transform: initial;
+  color: #ffffff;
+  font-weight: 350;
   -webkit-transition: all 0.3s ease 0s;
   -moz-transition: all 0.3s ease 0s;
   -o-transition: all 0.3s ease 0s;
@@ -57,5 +55,5 @@ button.main-button {
 }
 
 button.main-button:hover {
-  background-color: #f1556a;
+  background-color: #f4813f;
 }

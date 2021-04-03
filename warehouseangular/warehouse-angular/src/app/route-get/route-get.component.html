@@ -1,9 +1,7 @@
 <div class="route-get-section">
 
   <div class="row justify-content-center" style="width:800px; margin:20px auto;[B]padding:20px 0;[/B]">
-    <div class="card-header" style="text-align: center">
-      <button  class="userdetails" id="dropdownBasic1" routerLink="/route/delete">Usuwanie przesyłek</button>
-    </div>
+
 
 </div>
 
@@ -14,30 +12,36 @@
       <div class="card">
         <div class="card-header" style="text-align: center">
           <h4>Moduł przesyłek kurierskich</h4>
+
         </div>
         <div class="card-body">
           <form  [formGroup]="getRouteForm" (ngSubmit)="getRoute()">
+            <h1 class="login-failed-text" *ngIf='this.isError' >Paczka już została zarejestrowana.</h1>
+
 
             <div class="form-group row">
-              <label for="id" class="col-md-4 col-form-label text-md-right">Kod paczki</label>
-              <div class="col-md-6">
-                <input type="text" [formControlName]="'id'" id="id" class="form-control" name="id" required
-                       autofocus>
+              <div class="col-md-12">
+                <input type="text" [formControlName]="'id'" id="id"  name="id" placeholder="Kod paczki" required=""
+                       style="background-color: rgba(250,250,250,0.3); " class="form-control">
+
               </div>
 
             </div>
             <div class="form-group row">
-              <label for="custom" class="col-md-4">Standard</label>
-              <div class="col-md-4 col-form-label-sm" >
+              <label for="custom" class="col-sm-auto col-md-0" >Niestandardowa</label>
+              <div class="col-md-0 col-form-label-sm" >
                 <input type="checkbox" [formControlName]="'custom'" [checked]="'true'" id="custom" class="form-check" name="custom"  required autofocus>
               </div>
 
             </div>
-            <span class="col-md-6 offset-md-4">
-              <button type="submit" id="form-submit" class="main-button" >
+            <div class="form-group-row">
+               <span >
+              <button type="submit" id="form-submit" class="register-button" >
                 Zarejestruj przesyłkę
               </button>
             </span>
+            </div>
+
 
           </form>
 
@@ -48,8 +52,32 @@
 
     </div>
 
-    <div class="col-md-3">
+    <div class="col-md-auto">
       <app-side-bar></app-side-bar>
+
     </div>
+    <div class="col-md-6">
+      <table class="table table-striped table-hover table-bordered table-sm ">
+        <thead>
+        <tr>
+          <th scope="col">Kod</th>
+          <th scope="col">Wejście</th>
+          <th scope="col">Oddział</th>
+          <th scope="col">Niestandard</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let route of routes">
+          <td>{{ route.parcel.id }}</td>
+          <td>{{ route.created  }}</td>
+          <td>{{ route.user.depot.depotCode}}</td>
+          <td>{{route.parcel.custom}}</td>
+        </tr>
+        </tbody>
+
+      </table>
+    </div>
+
+
   </div>
 </div>

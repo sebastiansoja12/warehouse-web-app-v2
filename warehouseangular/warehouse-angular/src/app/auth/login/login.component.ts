@@ -36,8 +36,6 @@ export class LoginComponent implements OnInit {
       .subscribe(params => {
         if (params.registered !== undefined && params.registered === 'true') {
           this.toastr.success('Użytkownik zarejestrowany');
-          this.registerSuccessMessage = 'Sprawdz swoja skrzynke mailowa i uzyj linku aktywacyjnego '
-            + 'zanim się zalogujesz!';
         }
       });
   }

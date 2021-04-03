@@ -37,11 +37,13 @@ export class RouteService {
   public getCity(): string{
     return this.localStorage.retrieve('city');
   }
-  public save(parcelRoute: Route): Observable<any>  {
+  public save(parcelRoute: Route): Observable<boolean>  {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: 'Basic '});
-    return this.http.post<Route>(this.registerParcel, parcelRoute, {headers});
+    return this.http.post<Route>(this.registerParcel, parcelRoute, {headers}).pipe(map(data => {
+      return true;
+    }));
   }
   getAllRoutesByParcelId(id: string): Observable<Array<Route>> {
       return this.http.get<Array<Route>>('http://localhost:8080/api/routes/all/parcelId/' + id);

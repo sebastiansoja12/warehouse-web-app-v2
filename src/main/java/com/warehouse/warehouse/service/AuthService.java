@@ -7,7 +7,6 @@ import com.warehouse.warehouse.dto.RefreshTokenRequest;
 import com.warehouse.warehouse.dto.RegisterRequest;
 import com.warehouse.warehouse.exceptions.WarehouseMailException;
 import com.warehouse.warehouse.model.Depot;
-import com.warehouse.warehouse.model.NotificationEmail;
 import com.warehouse.warehouse.model.User;
 import com.warehouse.warehouse.model.VerificationToken;
 import com.warehouse.warehouse.repository.DepotRepository;
@@ -135,7 +134,7 @@ private final DepotRepository depotRepository;
     @ResponseBody
     public Optional<User> getCurrentUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-       return  userRepository.getUsersIdByUsername(authentication.getName());
+        return  userRepository.getUsersIdByUsername(authentication.getName());
 
     }
     @ResponseBody
@@ -150,4 +149,5 @@ private final DepotRepository depotRepository;
         return userRepository.findByUsername(authentication.getName());
 
     }
+
 }

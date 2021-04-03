@@ -32,7 +32,7 @@ public class User {
     @JsonProperty()
     private String firstName;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty()
     private String lastName;
 
     @Email

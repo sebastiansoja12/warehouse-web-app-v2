@@ -2,6 +2,7 @@ package com.warehouse.warehouse.service;
 
 
 import com.warehouse.warehouse.exceptions.ParcelNotFound;
+import com.warehouse.warehouse.exceptions.WarehouseException;
 import com.warehouse.warehouse.model.Parcel;
 import com.warehouse.warehouse.model.Route;
 import com.warehouse.warehouse.repository.DepotRepository;
@@ -35,11 +36,26 @@ public class RouteService {
 
 
     public Route save(Route route){
-        route.setParcel(parcelRepository.findById(route.getParcel().getId()).orElseThrow());
+        Parcel parcel = parcelRepository.findById(route.getParcel().getId()).orElseThrow();
+
+
+
+        if(routeRepository.findByParcel_IdAndUser(route.getParcel().getId(),
+                authService.getCurrentUser().orElseThrow()) != null){
+
+            throw new WarehouseException("Paczka została już zarejestrowana w tym oddziale");
+        }
+
+
+
+        route.setUser(authService.getCurrentUser().orElseThrow(()
+                -> new WarehouseException("Nie znaleziono uzytkownika")));
+        parcel.setCustom(route.getParcel().isCustom());
+        route.setParcel(parcel);
         route.setCreated(LocalDateTime.now(ZoneId.of(String.valueOf(ZoneId.systemDefault()))));
-        route.setUser(authService.getCurrentUser().orElseThrow(null));
         route.setDepot(depotRepository.findById(
                 route.getUser().getDepot().getId()).orElseThrow(null));
+        parcelRepository.saveAndFlush(parcel);
         return routeRepository.save(route);
     }
 
@@ -66,7 +82,7 @@ public class RouteService {
     public List<Route> findAllByUsername(){
         Route route = new Route();
         route.setUser(authService.getCurrentUser().orElseThrow(null));
-        return routeRepository.findFirst10ByUser_username(route.getUser().getUsername());
+        return routeRepository.findFirst10ByUser_usernameOrderByCreatedDesc(route.getUser().getUsername());
     }
 
 }

@@ -1,13 +1,16 @@
 .route-get-section {
   margin: 100px;
   margin-left: auto;
+  position: center;
 }
+
 label {
   /* Other styling... */
   text-align: right;
   clear: both;
   float:left;
   margin-right:15px;
+
 }
 .reddit-icon-svg{
   height: 50px;
@@ -103,7 +106,7 @@ label {
   max-height: 24px;
   max-width: 24px;
 }
-a.main-button-slider {
+a.main-button-slider, a.register-button {
   font-size: 14px;
   border-radius: 25px;
   padding: 15px 25px;
@@ -118,7 +121,7 @@ a.main-button-slider {
   transition: all 0.3s ease 0s;
 }
 
-a.main-button-slider:hover {
+a.main-button-slider:hover, a.register-button:hover {
   background-color: #f1556a;
 }
 
@@ -137,7 +140,7 @@ a.main-button {
   transition: all 0.3s ease 0s;
 }
 
-a.main-button:hover {
+a.main-button:hover, a.register-button:hover {
   background-color: #f1556a;
 }
 
@@ -158,8 +161,35 @@ button.main-button {
   -o-transition: all 0.3s ease 0s;
   transition: all 0.3s ease 0s;
 }
-
-button.main-button:hover {
-  background-color: #f1556a;
+button.register-button {
+  outline: none;
+  cursor: pointer;
+  background-color: #f4813f;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 1px;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+  border: 1px solid;
+  border-radius: 4px;
+  box-sizing: border-box;
+  text-align: center;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 24px;
+  padding: 3px 16px;
+  opacity: 1;
 }
 
+button.main-button:hover, button.register-button:hover {
+  background-color: #f1556a;
+}
+.login-failed-text{
+  color: red;
+}
+.form-group-row{
+  text-align: center;
+}

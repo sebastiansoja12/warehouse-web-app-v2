@@ -50,17 +50,45 @@ export class AuthService {
       return true;
     }));
   }
-  getCurrentUser(): Observable<User[]> {
+  getCurrentUser(): Observable<void> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Basic '
+    });
+
+    return this.httpClient.get<User>('http://localhost:8080/api/users/currentuser').pipe(map(data => {
+      this.localStorage.store('username', data.username);
+      this.localStorage.store('firstName', data.firstName);
+      this.localStorage.store('lastName', data.lastName);
+      this.localStorage.store('email', data.email);
+      this.localStorage.store('depotCode', data.depot.depotCode);
+      this.localStorage.store('city', data.depot.city);
+    }));
+  }
+  getCurrentLoggedInUser(): Observable<User[]> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: 'Basic '
     });
 
     return this.httpClient.get<User[]>('http://localhost:8080/api/users/currentuser');
+
   }
 
     getDepotCode(): string {
     return this.localStorage.retrieve('depotCode');
+  }
+  getFirstName(): string {
+    return this.localStorage.retrieve('firstName');
+  }
+  getLastName(): string {
+    return this.localStorage.retrieve('lastName');
+  }
+  getEmail(): string {
+    return this.localStorage.retrieve('email');
+  }
+  getCity(): string {
+    return this.localStorage.retrieve('city');
   }
 
   getJwtToken(): string {
