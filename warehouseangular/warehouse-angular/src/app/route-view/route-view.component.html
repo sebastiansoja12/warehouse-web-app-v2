@@ -4,33 +4,28 @@
       <div class="col-lg-8 offset-lg-2">
         <div class="center-heading">
         </div>
+
       </div>
-      <div class="col-lg-11 col-md-10 col-sm-12 mobile-bottom-fix-big"
-           data-scroll-reveal="enter left move 30px over 0.6s after 0.4s" *ngFor="let route of routes"
-      >
-        <div class="owl-carousel owl-theme" *ngIf="route.user.depot.depotCode!='NAD'">
-          <div class="item service-item">
-            <div class="testimonial-content">
-              <table class="table table-borderless ">
-                <thead>
-                <tr>
-                  <th scope="col">Miasto</th>
-                  <th scope="col">Oddział</th>
-                  <th scope="col">Data i godzina</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td *ngIf="route.user.depot.depotCode!='NAD'">{{route.user.depot.city}}</td>
-                  <td *ngIf="route.user.depot.depotCode!='NAD'">{{route.user.depot.depotCode}}</td>
-                  <td *ngIf="route.user.depot.depotCode!='NAD'">{{route.created}}</td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+      <div class="mb-5"><h3 class="header--h4">Przesyłka nr: <b>{{id}}</b></h3></div>
+
     </div>
   </div>
+  <div class="left-image-decor"></div>
+  <div class="container">
+    <div class="row">
+      <div class="right-text offset-lg-3 col-lg-6 col-md-6 col-sm-6 mobile-bottom-fix" *ngFor="let route of routes">
+        <ul>
+          <li style="list-style-type: none;">
+            <img src="assets/images/features-icon-2.png" alt="">
+            <div class="text" style="float: right;">
+             <h3>Paczka przyjęta w oddziale {{route.user.depot.depotCode}}</h3>
+              <p style="float: right;"><b>{{route.user.depot.city}}</b>, {{route.created}}</p>
+
+            </div>
+          </li>
+
+        </ul>
+      </div>
     </div>
   </div>
 </section>

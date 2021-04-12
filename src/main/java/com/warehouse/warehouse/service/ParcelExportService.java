@@ -28,51 +28,60 @@ public class ParcelExportService {
     }
 
 
-    private void writeTableHeader(PdfPTable table) {
+    private void writeTableHeader(PdfPTable senderTable, PdfPTable recipientTable) {
         PdfPCell cell = new PdfPCell();
+
         cell.setBackgroundColor(Color.gray);
         cell.setPadding(2);
-
+        
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
         font.setColor(Color.WHITE);
 
         cell.setPhrase(new Phrase("Kod", font));
-        table.addCell(cell);
+        senderTable.addCell(cell);
 
         cell.setPhrase(new Phrase("Dane nadawcy", font));
-        table.addCell(cell);
+        senderTable.addCell(cell);
 
         cell.setPhrase(new Phrase("Numer telefonu nadawcy", font));
-        table.addCell(cell);
+        senderTable.addCell(cell);
 
-        cell.setPhrase(new Phrase("Numer telefonu odbiorcy", font));
-        table.addCell(cell);
+
+        cell.setPhrase(new Phrase("Dane odbiorcy", font));
+        recipientTable.addCell(cell);
+
+        cell.setPhrase(new Phrase("Numer telefonu", font));
+        recipientTable.addCell(cell);
 
         cell.setPhrase(new Phrase("Destynacja", font));
-        table.addCell(cell);
+        recipientTable.addCell(cell);
 
-        cell.setPhrase(new Phrase("Email", font));
-        table.addCell(cell);
+        cell.setPhrase(new Phrase("Email odbiorcy", font));
+        recipientTable.addCell(cell);
 
         cell.setPhrase(new Phrase("Kod QR", font));
-        table.addCell(cell);
+        recipientTable.addCell(cell);
 
     }
 
 
-    private void writeTableData(PdfPTable table, Parcel parcel) throws Exception {
+    private void writeTableData(PdfPTable senderTable,PdfPTable recipientTable, Parcel parcel) throws Exception {
 
-        table.addCell(String.valueOf(parcel.getId()));
-        table.addCell(parcel.getFirstName() + " " + parcel.getLastName());
-        table.addCell(String.valueOf(parcel.getSenderTelephone()));
-        table.addCell(String.valueOf(parcel.getRecipientTelephone()));
-        table.addCell((parcel.getRecipientCity()) + " " + parcel.getRecipientStreet());
-        table.addCell(String.valueOf(parcel.getRecipientEmail()));
-        table.addCell(CodeService.generateQRCodeImage(parcel.getId()));
+        //sender
+        senderTable.addCell(String.valueOf(parcel.getId()));
+        senderTable.addCell(parcel.getFirstName() + " " + parcel.getLastName());
+        senderTable.addCell(String.valueOf(parcel.getSenderTelephone()));
+
+        //recipient
+        recipientTable.addCell(parcel.getRecipientFirstName() + " " + parcel.getRecipientLastName());
+        recipientTable.addCell(String.valueOf(parcel.getRecipientTelephone()));
+        recipientTable.addCell((parcel.getRecipientCity()) + " " + parcel.getRecipientStreet());
+        recipientTable.addCell(String.valueOf(parcel.getRecipientEmail()));
+        recipientTable.addCell(CodeService.generateQRCodeImage(parcel.getId()));
+
 
     }
-    private void getQRCode(PdfPTable table, Parcel parcel) throws Exception {
-    }
+
 
     public void exportToPdf(HttpServletResponse response, Parcel parcel) throws Exception {
         Document document = new Document(PageSize.LETTER);
@@ -83,13 +92,22 @@ public class ParcelExportService {
         font.setSize(18);
         font.setColor(Color.BLUE);
 
-        PdfPTable table = new PdfPTable(7);
-        table.setWidthPercentage(100f);
-        table.setSpacingBefore(10);
+        PdfPTable senderTable = new PdfPTable(3);
+        PdfPTable recipientTable = new PdfPTable(5);
 
-        writeTableHeader(table);
-        writeTableData(table, parcel);
-        document.add(table);
+
+        senderTable.setWidthPercentage(100f);
+        senderTable.setSpacingBefore(10);
+
+        recipientTable.setWidthPercentage(100f);
+        recipientTable.setSpacingBefore(10);
+
+
+        writeTableHeader(senderTable, recipientTable);
+        writeTableData(senderTable, recipientTable,parcel);
+        document.add(senderTable);
+        document.add(recipientTable);
+
         document.close();
 
     }

@@ -111,3 +111,52 @@ label {
     display: none!important;
   }
 }
+.left-image-decor {
+  background-image: url(node_modules/bootstrap/assets/images/left-bg-decor.png);
+  background-repeat: no-repeat;
+  position: absolute;
+  width: 100%;
+  display: inline-block;
+  height: 110%;
+  min-height: 793px;
+  background-position: left bottom;
+
+}
+
+#promotion {
+  padding: 100px 0px;
+  list-style-type: none;
+}
+
+#promotion .left-image {
+  align-self: center;
+}
+
+#promotion .right-text ul {
+  padding: 0;
+  margin: 0;
+}
+
+#promotion .right-text ul li {
+  display: inline-block;
+  margin-bottom: 60px;
+  list-style-type: none;
+}
+
+#promotion .right-text ul li:last-child {
+  margin-bottom: 0px;
+  list-style-type: none;
+}
+
+#promotion .right-text img {
+  display: inline-block;
+  float: left;
+  margin-right: 30px;
+}
+
+#promotion .right-text h4 {
+  font-size: 22px;
+  color: #1e1e1e;
+  margin-bottom: 15px;
+  margin-top: 3px;
+}
