@@ -170,25 +170,21 @@ header{
 }
 
 footer {
-  margin-top: 200px;
-  padding-top: 120px;
   background-image: url(node_modules/bootstrap/assets/images/footer-bg.png);
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
   background-repeat: no-repeat;
-  background-position: center center;
   background-size: cover;
-  width: 100%;
+  margin-top: 150px;
 }
 
-footer .footer-content {
-  padding: 120px 0px;
-}
 
 .contact-form {
   position: center;
   margin-right: -300px;
   margin-bottom: auto;
   margin-left: 50px;
-  margin-top: -170px;
   z-index: 10;
   padding: 20px;
   border-radius: 5px;
@@ -404,4 +400,11 @@ button.main-button {
 
 button.main-button:hover {
   background-color: #f1556a;
+}
+input[type='text'] { font-size: 60px; }
+
+#firstName, #lastName, #email, #destination_address, #destination_telephone,
+#sender_telephone, #recipientFirstName, #recipientLastName, #recipientCity, #recipientEmail, #street, #recipientTelephone {
+  font-size: 1em;
+
 }

@@ -33,7 +33,7 @@ public class ParcelExportService {
 
         cell.setBackgroundColor(Color.gray);
         cell.setPadding(2);
-        
+
         Font font = FontFactory.getFont(FontFactory.HELVETICA);
         font.setColor(Color.WHITE);
 

@@ -103,12 +103,14 @@
 }
 
 footer {
-  margin-top:auto;
-  padding-bottom: 200px;
-  background-image: url(node_modules/bootstrap/assets/images/footer-bg.png);
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
   background-size: cover;
-  width: 100%;
-}
+   background-image: url(node_modules/bootstrap/assets/images/footer-bg.png);
+ }
 
 footer .footer-content {
   padding: 120px 0px;
@@ -340,4 +342,7 @@ button.main-button:hover {
 }
 .row{
   text-align: center;
+}
+#username, #password{
+  font-size: 1em;
 }

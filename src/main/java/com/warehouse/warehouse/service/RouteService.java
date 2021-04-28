@@ -84,5 +84,9 @@ public class RouteService {
         route.setUser(authService.getCurrentUser().orElseThrow(null));
         return routeRepository.findFirst10ByUser_usernameOrderByCreatedDesc(route.getUser().getUsername());
     }
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    public List<Route> findRoutesByUsername(String username) {
+        return routeRepository.findRoutesByUser_Username(username);
+    }
 
 }

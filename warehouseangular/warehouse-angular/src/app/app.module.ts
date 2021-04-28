@@ -29,6 +29,7 @@ import { DepotAllComponent } from './depot-all/depot-all.component';
 import {Depot} from './auth/model/depot';
 import { SideBarComponent } from './shared/side-bar/side-bar.component';
 import {DatePipe} from '@angular/common';
+import { AdministratorComponent } from './administrator/administrator.component';
 
 
 
@@ -49,6 +50,7 @@ import {DatePipe} from '@angular/common';
     UserProfileComponent,
     DepotAllComponent,
     SideBarComponent,
+    AdministratorComponent,
 
   ],
   imports: [

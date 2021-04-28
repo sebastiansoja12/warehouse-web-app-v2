@@ -30,10 +30,12 @@ public class ParcelController {
     public void addPaczka(@RequestBody Parcel parcel) throws Exception {
          parcelService.save(parcel);
     }
+
     @GetMapping("/all")
     public List<Parcel> getAll(){
         return parcelService.findAll();
     }
+
     @GetMapping("/{id}")
     public Parcel getParcelByParcelId(@PathVariable UUID id){
         return parcelService.findById(id);

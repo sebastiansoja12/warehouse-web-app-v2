@@ -1,6 +1,4 @@
-.route-section {
-  margin: 150px;
-}
+
 .warehouse-text{
   font-weight: 700;
   height: 50px;
@@ -126,4 +124,16 @@ button.main-button:hover {
 em {
   font-style: normal;
   color: #f4813f;
+}
+#id{
+  font-size: 1em;
+}
+.findParcel {
+  background-image: url(node_modules/bootstrap/assets/images/footer-bg.png);
+  height: 100%;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: 150px;
 }

@@ -13,6 +13,7 @@ import {RouteGetComponent} from './route-get/route-get.component';
 import {RouteDeleteComponent} from './route-delete/route-delete.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import {DepotAllComponent} from './depot-all/depot-all.component';
+import {AdministratorComponent} from './administrator/administrator.component';
 
 const routes: Routes = [
   { path: 'sign-up', component: SignupComponent },
@@ -25,7 +26,9 @@ const routes: Routes = [
   { path: 'route/add', component: RouteGetComponent },
   { path: 'route/delete', component: RouteDeleteComponent },
   { path: 'user/profile', component: UserProfileComponent },
-  { path: 'depots/all', component: DepotAllComponent }
+  { path: 'depots/all', component: DepotAllComponent },
+  { path: 'admin/routes/all/:id', component: AdministratorComponent }
+
 ];
 
 @NgModule({

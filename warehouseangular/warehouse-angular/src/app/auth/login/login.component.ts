@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginRequestPayload).subscribe(data => {
       this.isError = false;
       if (this.authService.isAdmin() === true){
-        window.location.assign('/routes/all');
+        window.location.assign('/admin/routes/all/inparcel-admin');
       } else {
         window.location.assign('/');
       }

@@ -22,9 +22,12 @@ public interface RouteRepository extends JpaRepository<Route,Long> {
 
     Route findByParcel_IdAndUser(UUID parcel_id, User user);
 
+    List<Route> findRoutesByUser_Username(String username);
+
 
     Optional<List<Route>> findAllByParcel_IdOrderByCreatedDesc(final UUID id);
 
     void deleteByParcelIdAndDepot_DepotCode(final UUID parcelId, final String depotCode);
+
 
 }

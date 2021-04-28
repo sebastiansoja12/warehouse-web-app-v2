@@ -31,25 +31,19 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
-
 public class AuthService {
 
 
 private final PasswordEncoder passwordEncoder;
-
-private final UserRepository userRepository;
-
 private final VerificationTokenRepository verificationTokenRepository;
-
 private final MailService mailService;
-
 private final AuthenticationManager authenticationManager;
-
 private final JwtProvider jwtProvider;
-
 private final RefreshTokenService refreshTokenService;
-
 private final DepotRepository depotRepository;
+
+    private final UserRepository userRepository;
+
 
     public void signup(RegisterRequest registerRequest)
     {
@@ -65,15 +59,6 @@ private final DepotRepository depotRepository;
         user.setDepot(depot.orElseThrow());
         user.setEnabled(true);
         userRepository.save(user);
-
-
-       /*String token = generateVerificationToken(user);
-        mailService.sendMail(new NotificationEmail("Aktywacja konta",
-                user.getEmail(), "Dziękujemy za zarejestrowanie się w 26andfour, " +
-                "wciśnij poniższy link by aktywować konto : " +
-                "http://localhost:8080/api/users/accountVerification/" + token));
-
-        */
     }
 
     private String generateVerificationToken(User user) {

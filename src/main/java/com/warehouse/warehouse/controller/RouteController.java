@@ -38,9 +38,13 @@ public class RouteController {
     public List<Route> findByParcelCode(@PathVariable UUID id) throws Exception {
         return routeService.findByParcelId(id);
     }
-    @PostMapping("/all/parcelId/delete/{id}")
+    @PostMapping("/all/parcelId/{id}")
     public ResponseEntity<String> deleteRouteByParcelId(@Valid @PathVariable UUID id){
             routeService.deleteRouteByParcelId(id);
             return ResponseEntity.status(OK).body("Zarejestrowana paczka w systemie usunięta!");
+    }
+    @GetMapping("/all/user/{username}")
+    public List<Route> findRoutesByUsername(@PathVariable String username){
+        return routeService.findRoutesByUsername(username);
     }
 }

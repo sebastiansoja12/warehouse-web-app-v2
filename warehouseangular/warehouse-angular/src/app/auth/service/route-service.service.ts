@@ -17,15 +17,19 @@ export class RouteService {
   depotUrl: string;
   depotinfUrl: string;
   registerParcel: string;
-
+  userUrl: string;
 
   constructor(private http: HttpClient, private localStorage: LocalStorageService) {
     this.depotUrl = 'http://localhost:8080/api/routes/all';
     this.depotinfUrl = 'http://localhost:8080/api/depots/all';
     this.registerParcel = 'http://localhost:8080/api/routes';
+    this.userUrl = 'http://localhost:8080/api/routes/all/user/';
 
   }
 
+   findByUsername(username: string): Observable<Route[]> {
+    return this.http.get<Route[]>('http://localhost:8080/api/routes/all/user/' + username);
+  }
 
   public findAll(): Observable<Route[]> {
     return this.http.get<Route[]>(this.depotUrl);
@@ -52,6 +56,6 @@ export class RouteService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: 'Basic '});
-    return this.http.post<Route>('http://localhost:8080/api/routes/all/parcelId/delete/' + id, {headers});
+    return this.http.post<Route>('http://localhost:8080/api/routes/all/parcelId/' + id, {headers});
   }
 }
