@@ -11,6 +11,9 @@ import com.warehouse.warehouse.repository.ParcelRepository;
 import com.warehouse.warehouse.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -31,22 +34,16 @@ public class RouteService {
     private final RouteRepository routeRepository;
     private final AuthService authService;
     private final DepotRepository depotRepository;
-    private final UserRepository userRepository;
 
 
 
     public Route save(Route route){
         Parcel parcel = parcelRepository.findById(route.getParcel().getId()).orElseThrow();
 
-
-
         if(routeRepository.findByParcel_IdAndUser(route.getParcel().getId(),
                 authService.getCurrentUser().orElseThrow()) != null){
-
             throw new WarehouseException("Paczka została już zarejestrowana w tym oddziale");
         }
-
-
 
         route.setUser(authService.getCurrentUser().orElseThrow(()
                 -> new WarehouseException("Nie znaleziono uzytkownika")));
@@ -66,8 +63,9 @@ public class RouteService {
 
     @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public List<Route> findByParcelId(UUID id) throws Exception {
-        parcelRepository.findById(id).orElseThrow(
-                () -> new ParcelNotFound("Paczka nie zostala znaleziona lub jest jeszcze nie nadana"));
+        if(parcelRepository.findById(id).isEmpty()){
+            throw new ParcelNotFound("Paczka nie znaleziona");
+        }
         return routeRepository.findAllByParcel_IdOrderByCreatedDesc(id).orElseThrow(
                 () -> new ParcelNotFound("Paczka nie zostala znaleziona lub jest jeszcze nie nadana"));
     }
@@ -82,7 +80,7 @@ public class RouteService {
     public List<Route> findAllByUsername(){
         Route route = new Route();
         route.setUser(authService.getCurrentUser().orElseThrow(null));
-        return routeRepository.findFirst10ByUser_usernameOrderByCreatedDesc(route.getUser().getUsername());
+        return routeRepository.findByUser_username(route.getUser().getUsername());
     }
     @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public List<Route> findRoutesByUsername(String username) {

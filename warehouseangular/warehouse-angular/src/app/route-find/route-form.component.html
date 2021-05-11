@@ -15,9 +15,7 @@
           <button type="submit" id="form-submit" class="main-button">Znajdź</button>
         </fieldset>
       </div>
-      <div class="error" *ngIf='this.isError'>
-        <p class="error-text">{{message}}</p>
-      </div>
+      <p class="login-failed-text" *ngIf='this.isError' >Paczka nie znaleziona.</p>
     </div>
   </form>
 </div>

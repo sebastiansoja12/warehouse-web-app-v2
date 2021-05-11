@@ -22,7 +22,7 @@ export class RouteViewComponent implements  OnInit {
   routes: Route[];
  id: string;
   routeSub: Subscription;
-  private isError: boolean;
+   isError: boolean;
   private message: string;
 
   constructor(private routeService: RouteService, private routeForm: RouteFormComponent,
@@ -34,8 +34,8 @@ export class RouteViewComponent implements  OnInit {
       this.id = params.id;
     });
    this.routeService.getAllRoutesByParcelId(this.id).subscribe(data => {
-      this.routes = data;
-      this.isError = false;
+     this.isError = false;
+     this.routes = data;
     }, error => {
       this.isError = true;
       throwError(error);

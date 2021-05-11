@@ -1,19 +1,23 @@
 <section class="section" id="testimonials">
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 offset-lg-2">
+      <div class="col-lg-10 offset-lg-2">
         <div class="center-heading">
+          <div class="mb-5"><h3 class="header--h4" *ngIf='!this.isError'>Numer paczki: <b>{{id}}</b></h3></div>
+          <div class="mb-5"><h3 class="header--h4" *ngIf='this.isError'><b>{{message}}</b></h3></div>
         </div>
-
       </div>
-      <div class="mb-5"><h3 class="header--h4">Przesyłka nr: <b>{{id}}</b></h3></div>
 
     </div>
+
   </div>
+
   <div class="left-image-decor"></div>
+
   <div class="container">
+
     <div class="row">
-      <div class="right-text offset-lg-3 col-lg-6 col-md-6 col-sm-6 mobile-bottom-fix" *ngFor="let route of routes">
+      <div class=" offset-lg-3 col-lg-6 col-md-6 col-sm-6 mobile-bottom-fix" *ngFor="let route of routes">
         <ul>
           <li style="list-style-type: none;">
             <img src="assets/images/features-icon-2.png" alt="">

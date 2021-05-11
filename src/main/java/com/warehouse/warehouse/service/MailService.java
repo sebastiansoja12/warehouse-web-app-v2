@@ -1,8 +1,10 @@
 package com.warehouse.warehouse.service;
 import com.warehouse.warehouse.exceptions.WarehouseMailException;
 import com.warehouse.warehouse.model.ParcelNotification;
+import org.springframework.context.annotation.Bean;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import com.warehouse.warehouse.model.NotificationEmail;
@@ -11,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.util.Properties;
+
 @Service
 @AllArgsConstructor
 @Slf4j
@@ -18,6 +22,7 @@ class MailService {
 
     private final JavaMailSender mailSender;
     private final MailContentBuilder mailContentBuilder;
+    private final JavaMailSenderImpl javaMailSender;
 
     @Async
     void sendMail(NotificationEmail notificationEmail) {
@@ -30,7 +35,7 @@ class MailService {
         };
         try {
             mailSender.send(messagePreparator);
-            log.info("Activation email sent!!");
+            log.info("email sent!!");
         } catch (MailException e) {
             log.error("Exception occurred when sending mail", e);
             throw new WarehouseMailException("Exception occurred when sending mail to " + notificationEmail.getRecipient(), e);
@@ -54,6 +59,8 @@ class MailService {
             throw new WarehouseMailException("Blad  " + parcelNotification.getRecipient(), e);
         }
     }
+
+
 
 
 }

@@ -45,14 +45,5 @@ id: string;
   findParcel(): any {
    this.id = this.parcelFindForm.get('id').value;
    this.router.navigateByUrl('/route/parcelCode/' + this.id);
-   this.routeService.getAllRoutesByParcelId(this.id).subscribe(data => {
-     this.routes = data;
-     this.isError = false;
-   }, error => {
-     this.isError = true;
-     throwError(error);
-     this.message = 'Paczka o id: ' +  this.id + ' nie została znaleziona.\n' +
-                       'Sprawdź numer swojej przesyłki i spróbuj ponownie';
-   });
   }
 }

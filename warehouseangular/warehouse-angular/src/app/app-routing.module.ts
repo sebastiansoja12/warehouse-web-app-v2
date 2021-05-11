@@ -28,7 +28,6 @@ const routes: Routes = [
   { path: 'user/profile', component: UserProfileComponent },
   { path: 'depots/all', component: DepotAllComponent },
   { path: 'admin/routes/all/:id', component: AdministratorComponent }
-
 ];
 
 @NgModule({

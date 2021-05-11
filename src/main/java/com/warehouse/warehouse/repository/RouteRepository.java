@@ -13,10 +13,9 @@ import java.util.UUID;
 @Repository
 public interface RouteRepository extends JpaRepository<Route,Long> {
 
-    @Query(value = "SELECT * from Route order by created desc", nativeQuery = true)
     List<Route> findAll();
 
-    List<Route> findFirst10ByUser_usernameOrderByCreatedDesc(String username);
+    List<Route> findByUser_username(String username);
 
     List<Route> findByParcelId(final UUID id);
 

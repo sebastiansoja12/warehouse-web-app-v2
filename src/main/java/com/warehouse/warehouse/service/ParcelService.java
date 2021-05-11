@@ -31,7 +31,7 @@ import java.util.UUID;
 public class ParcelService {
 
 private final ParcelRepository parcelRepository;
-    private final MailService mailService;
+private final MailService mailService;
 private final ParcelExportService parcelExportService;
 
     @Transactional
@@ -39,12 +39,14 @@ private final ParcelExportService parcelExportService;
 
         parcelRepository.save(parcel);
 
-        mailService.sendNotification(new ParcelNotification( "Została do państwa nadana przesyłka z emaila ",
-                parcel.getSenderEmail(), "Docelowa destynacja paczki to: " + parcel.getRecipientCity() + "\n" +
-                "Kod Państwa paczki to: " + parcel.getId().toString() + "\nProsimy wejść w poniższy link by pobrać atykietę: " +
+        mailService.sendNotification(new ParcelNotification
+                ( "Została przez Państwa nadana przesyłka ",
+                parcel.getSenderEmail(), "Docelowa destynacja paczki to: " +
+                parcel.getRecipientCity() + ", "
+                + parcel.getRecipientStreet() + "\n" +
+                "Kod Państwa paczki to: " + parcel.getId().toString()
+                 + "\nProsimy wejść w poniższy link by pobrać etykietę: " +
                  "\n" + "http://localhost:8080/api/parcels/toPDF/" + parcel.getId().toString()));
-
-
     }
 
 
