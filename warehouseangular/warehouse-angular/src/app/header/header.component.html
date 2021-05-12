@@ -12,7 +12,7 @@
           <ul class="nav">
             <li class="scroll-to-section" *ngIf="!isLoggedIn"><a routerLink="/parcel/add" class="menu-item">Nadaję</a></li>
             <li class="scroll-to-section" *ngIf="!isLoggedIn"><a routerLink="/route/find"  class="menu-item">Znajdź przesyłkę</a></li>
-            <li class="scroll-to-section" *ngIf="!isLoggedIn"><a routerLink="/depots/all" class="menu-item">Oddziały</a>
+            <li class="scroll-to-section" *ngIf="!isLoggedIn"><a routerLink="/depots" class="menu-item">Oddziały</a>
             <li class="scroll-to-section" *ngIf="isLoggedIn"><a routerLink="/user/profile">{{username}}</a></li>
             <li class="scroll-to-section" *ngIf="!isLoggedIn"><a routerLink="/login">Logowanie</a></li>
 
@@ -22,7 +22,7 @@
                 <li class="scroll-to-section"><a routerLink="/route/add" class="menu-item">Przyjęcie</a></li>
                 <li class="scroll-to-section"><a routerLink="/routes/all" class="menu-item">Przesyłki</a></li>
                 <li class="scroll-to-section" *ngIf="isAdmin"><a routerLink="/sign-up">Rejestracja pracownika</a></li>
-
+                <li class="scroll-to-section" *ngIf="isAdmin"><a routerLink="/admin/routes/all/{{username}}">Kontrola pracowników</a></li>
               </ul>
             </li>
             <li class="scroll-to-section" *ngIf="isLoggedIn"><a routerLink="/home" (click)="logout()">Wyloguj</a></li>

@@ -1,5 +1,5 @@
 import { Injectable, AfterViewInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Route} from '../model/route';
 import {Observable} from 'rxjs';
 import { map, tap } from 'rxjs/operators';
@@ -14,25 +14,25 @@ import {Parcel} from '../model/parcel';
 @Injectable()
 export class RouteService {
 
-  depotUrl: string;
+  routeUrl: string;
   depotinfUrl: string;
   registerParcel: string;
   userUrl: string;
 
   constructor(private http: HttpClient, private localStorage: LocalStorageService) {
-    this.depotUrl = 'http://localhost:8080/api/routes/all';
-    this.depotinfUrl = 'http://localhost:8080/api/depots/all';
+    this.routeUrl = 'http://localhost:8080/api/routes';
+    this.depotinfUrl = 'http://localhost:8080/api/depots';
     this.registerParcel = 'http://localhost:8080/api/routes';
-    this.userUrl = 'http://localhost:8080/api/routes/all/user/';
+    this.userUrl = 'http://localhost:8080/api/routes/user/';
 
   }
 
    findByUsername(username: string): Observable<Route[]> {
-    return this.http.get<Route[]>('http://localhost:8080/api/routes/all/user/' + username);
+    return this.http.get<Route[]>('http://localhost:8080/api/routes/user/' + username);
   }
 
   public findAll(): Observable<Route[]> {
-    return this.http.get<Route[]>(this.depotUrl);
+    return this.http.get<Route[]>(this.routeUrl);
   }
   public findAllDepots(): Observable<Depot[]> {
 
@@ -50,12 +50,12 @@ export class RouteService {
     }));
   }
   getAllRoutesByParcelId(id: string): Observable<Array<Route>> {
-      return this.http.get<Array<Route>>('http://localhost:8080/api/routes/all/parcelId/' + id);
+      return this.http.get<Array<Route>>('http://localhost:8080/api/routes/parcelId/' + id);
   }
   deleteRouteByParcelId(id: string): any {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: 'Basic '});
-    return this.http.post<Route>('http://localhost:8080/api/routes/all/parcelId/' + id, {headers});
+    return this.http.post<Route>('http://localhost:8080/api/routes/parcelId/' + id, {headers});
   }
 }

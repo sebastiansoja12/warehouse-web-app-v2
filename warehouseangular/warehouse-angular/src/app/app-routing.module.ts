@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'route/add', component: RouteGetComponent },
   { path: 'route/delete', component: RouteDeleteComponent },
   { path: 'user/profile', component: UserProfileComponent },
-  { path: 'depots/all', component: DepotAllComponent },
+  { path: 'depots', component: DepotAllComponent },
   { path: 'admin/routes/all/:id', component: AdministratorComponent }
 ];
 

@@ -17,7 +17,7 @@ export class DepotService {
     private depot: Depot, private http: HttpClient, private localStorage: LocalStorageService,
     private authService: AuthService
   ) {
-    this.depotUrl = 'http://localhost:8080/api/depots/all';
+    this.depotUrl = 'http://localhost:8080/api/depots';
   }
 
 

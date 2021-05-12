@@ -1,15 +1,10 @@
 package com.warehouse.warehouse.controller;
 
 
-import com.google.zxing.WriterException;
 import com.lowagie.text.DocumentException;
-import com.warehouse.warehouse.dto.LoginRequest;
 import com.warehouse.warehouse.model.Parcel;
-import com.warehouse.warehouse.model.User;
 import com.warehouse.warehouse.service.ParcelService;
-import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -21,17 +16,21 @@ import static org.springframework.http.ResponseEntity.status;
 
 @RestController
 @RequestMapping("/api/parcels")
-@AllArgsConstructor
 public class ParcelController {
 
     private final ParcelService parcelService;
 
+    @Autowired
+    public ParcelController(ParcelService parcelService) {
+        this.parcelService = parcelService;
+    }
+
     @PostMapping
-    public void addPaczka(@RequestBody Parcel parcel) throws Exception {
+    public void addParcel(@RequestBody Parcel parcel) throws Exception {
          parcelService.save(parcel);
     }
 
-    @GetMapping("/all")
+    @GetMapping()
     public List<Parcel> getAll(){
         return parcelService.findAll();
     }

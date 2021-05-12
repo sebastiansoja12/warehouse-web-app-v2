@@ -63,9 +63,7 @@ public class RouteService {
 
     @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public List<Route> findByParcelId(UUID id) throws Exception {
-        if(parcelRepository.findById(id).isEmpty()){
-            throw new ParcelNotFound("Paczka nie znaleziona");
-        }
+        parcelRepository.findById(id).orElseThrow(() ->  new ParcelNotFound("Paczka nie znaleziona"));
         return routeRepository.findAllByParcel_IdOrderByCreatedDesc(id).orElseThrow(
                 () -> new ParcelNotFound("Paczka nie zostala znaleziona lub jest jeszcze nie nadana"));
     }

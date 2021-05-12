@@ -10,7 +10,7 @@ import {Route} from '../auth/model/route';
 
 
 @Component({
-  selector: 'app-depot-view',
+  selector: 'app-route-view',
   templateUrl: './route-view.component.html',
   styleUrls: ['./route-view.component.css']
 })
@@ -42,6 +42,7 @@ export class RouteViewComponent implements  OnInit {
       this.message = 'Paczka o id: ' +  this.id + ' nie została znaleziona.\n' +
         'Sprawdź numer swojej przesyłki i spróbuj ponownie';
     });
+
   }
 
 
