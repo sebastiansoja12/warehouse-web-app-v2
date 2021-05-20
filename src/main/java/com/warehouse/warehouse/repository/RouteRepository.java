@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface RouteRepository extends JpaRepository<Route,Long> {
+public interface RouteRepository extends JpaRepository<Route,UUID> {
 
     List<Route> findAll();
 

@@ -30,7 +30,7 @@ public class ParcelController {
          parcelService.save(parcel);
     }
 
-    @GetMapping()
+    @GetMapping
     public List<Parcel> getAll(){
         return parcelService.findAll();
     }
@@ -40,12 +40,12 @@ public class ParcelController {
         return parcelService.findById(id);
     }
 
-    @GetMapping("/toPDF/{id}")
+    @GetMapping("/{id}/label")
     public void exportParcelByIdToPdf(HttpServletResponse reponse, @PathVariable UUID id) throws Exception {
         parcelService.exportParcelToPdfById(reponse, id);
     }
 
-    @GetMapping("/csv/{id}")
+    @GetMapping("/{id}/csv")
     public void exportPostByIdToCSV(HttpServletResponse reponse, @PathVariable UUID id) throws DocumentException,IOException {
         parcelService.exportParcelToCSVById(reponse, id);
     }

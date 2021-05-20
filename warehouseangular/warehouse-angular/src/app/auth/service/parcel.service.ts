@@ -22,6 +22,6 @@ export class ParcelService {
   public save(parcel: Parcel): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', this.localStorage.retrieve('authenticationToken'));
 
-    return this.http.post('http://localhost:8080/api/parcels/', parcel, { responseType: 'text' });
+    return this.http.post('http://localhost:8080/api/parcels', parcel, { responseType: 'text' });
   }
 }

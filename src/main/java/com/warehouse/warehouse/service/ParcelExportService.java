@@ -24,8 +24,7 @@ import java.io.IOException;
 public class ParcelExportService {
 
 
-    public ParcelExportService(CodeService codeService) {
-    }
+
 
 
     private void writeTableHeader(PdfPTable senderTable, PdfPTable recipientTable) {

@@ -28,7 +28,7 @@ export class RouteService {
   }
 
    findByUsername(username: string): Observable<Route[]> {
-    return this.http.get<Route[]>('http://localhost:8080/api/routes/user/' + username);
+    return this.http.get<Route[]>('http://localhost:8080/api/routes/' + username + '/user');
   }
 
   public findAll(): Observable<Route[]> {
@@ -50,12 +50,12 @@ export class RouteService {
     }));
   }
   getAllRoutesByParcelId(id: string): Observable<Array<Route>> {
-      return this.http.get<Array<Route>>('http://localhost:8080/api/routes/parcelId/' + id);
+      return this.http.get<Array<Route>>('http://localhost:8080/api/routes/' + id + '/parcelId');
   }
   deleteRouteByParcelId(id: string): any {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: 'Basic '});
-    return this.http.post<Route>('http://localhost:8080/api/routes/parcelId/' + id, {headers});
+    return this.http.post<Route>('http://localhost:8080/api/routes/' + id + '/parcelId', {headers});
   }
 }

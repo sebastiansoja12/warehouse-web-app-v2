@@ -27,7 +27,6 @@ import java.util.UUID;
 @Service
 @AllArgsConstructor
 @Slf4j
-@Transactional
 public class RouteService {
 
     private final ParcelRepository parcelRepository;
@@ -52,16 +51,14 @@ public class RouteService {
         route.setCreated(LocalDateTime.now(ZoneId.of(String.valueOf(ZoneId.systemDefault()))));
         route.setDepot(depotRepository.findById(
                 route.getUser().getDepot().getId()).orElseThrow(null));
-        parcelRepository.saveAndFlush(parcel);
+       // parcelRepository.saveAndFlush(parcel);
         return routeRepository.save(route);
     }
 
-    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public List<Route> findAllRoutes() {
         return  routeRepository.findAll();
     }
 
-    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public List<Route> findByParcelId(UUID id) throws Exception {
         parcelRepository.findById(id).orElseThrow(() ->  new ParcelNotFound("Paczka nie znaleziona"));
         return routeRepository.findAllByParcel_IdOrderByCreatedDesc(id).orElseThrow(
@@ -74,13 +71,11 @@ public class RouteService {
         routeRepository.deleteByParcelIdAndDepot_DepotCode(id, depotCode);
     }
 
-    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public List<Route> findAllByUsername(){
         Route route = new Route();
         route.setUser(authService.getCurrentUser().orElseThrow(null));
         return routeRepository.findByUser_username(route.getUser().getUsername());
     }
-    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     public List<Route> findRoutesByUsername(String username) {
         return routeRepository.findRoutesByUser_Username(username);
     }

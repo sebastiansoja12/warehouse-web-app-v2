@@ -49,17 +49,17 @@ public class RouteController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/parcelId/{id}")
+    @GetMapping("/{id}/parcelId")
     public ResponseEntity<List<Route>> findByParcelId(@PathVariable UUID id) throws Exception {
         List<Route> route =  routeService.findByParcelId(id);
         return new ResponseEntity<>(route, HttpStatus.OK);
     }
-    @PostMapping("/parcelId/{id}")
+    @PostMapping("/{id}/parcelId")
     public ResponseEntity<String> deleteRouteByParcelId(@Valid @PathVariable UUID id){
             routeService.deleteRouteByParcelId(id);
             return ResponseEntity.status(OK).body("Zarejestrowana paczka usunięta");
     }
-    @GetMapping("/user/{username}")
+    @GetMapping("/{username}/user")
     public List<Route> findRoutesByUsername(@PathVariable String username){
         List<Route> byUsername = routeService.findAllRoutes();
         return  byUsername.stream()

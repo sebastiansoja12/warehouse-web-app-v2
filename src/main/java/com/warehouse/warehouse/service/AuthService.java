@@ -61,17 +61,7 @@ private final DepotRepository depotRepository;
         userRepository.save(user);
     }
 
-    private String generateVerificationToken(User user) {
-        String token = UUID.randomUUID().toString();
 
-        VerificationToken verificationToken = new VerificationToken();
-        verificationToken.setToken(token);
-        verificationToken.setUser(user);
-        verificationTokenRepository.save(verificationToken);
-        return token;
-    }
-
-    @Transactional
     void fetchUserAndEnable(VerificationToken verificationToken) {
         String username = verificationToken.getUser().getUsername();
         User user = userRepository.findByUsername(username).orElseThrow(() -> new WarehouseMailException("Uzytkownik nie znaleziony o nazwie - " + username));
@@ -116,19 +106,16 @@ private final DepotRepository depotRepository;
         return !(authentication instanceof AnonymousAuthenticationToken) && authentication.isAuthenticated();
     }
 
-    @ResponseBody
     public Optional<User> getCurrentUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return  userRepository.getUsersIdByUsername(authentication.getName());
 
     }
-    @ResponseBody
     public List<User> getCurrentUsers(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return  userRepository.getUserByUsername(authentication.getName());
 
     }
-    @Transactional(readOnly = true)
     public Optional<User> getUser(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findByUsername(authentication.getName());

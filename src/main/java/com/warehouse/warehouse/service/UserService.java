@@ -22,12 +22,10 @@ public class UserService {
     @Autowired
     private final UserRepository userRepository;
 
-    @Transactional(readOnly = true)
     public List<User> findAll(){
         return userRepository.findAll();
     }
 
-    @Transactional(readOnly = true)
     public User findUserIdByUsername(String username){
         return userRepository.getUsersIdByUsername(username).orElseThrow(null);
     }
