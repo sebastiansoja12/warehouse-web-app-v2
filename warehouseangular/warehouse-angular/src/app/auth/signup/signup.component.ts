@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import {RouteService} from '../service/route-service.service';
 import {Depot} from '../model/depot';
 import {Route} from '../model/route';
+import {throwError} from 'rxjs';
 
 @Component({
   selector: 'app-signup',
@@ -25,6 +26,7 @@ export class SignupComponent implements OnInit {
   signupForm: FormGroup;
   depot: Depot[];
   route: Route[];
+  isError: boolean;
 
   constructor(private authService: AuthService, private router: Router,
               private toastr: ToastrService, private routeService: RouteService) {
@@ -63,10 +65,10 @@ export class SignupComponent implements OnInit {
     this.signupRequestPayload.depotCode = this.signupForm.get('depotCode').value;
     this.authService.signup(this.signupRequestPayload)
       .subscribe(() => {
-        this.router.navigate(['/'],
-          { queryParams: { registered: 'true' } });
       }, error => {
         console.log(error);
+        this.isError = true;
+        throwError(error);
         this.toastr.error('Registration Failed! Please try again');
       });
   }

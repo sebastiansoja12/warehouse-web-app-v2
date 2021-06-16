@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -15,7 +16,6 @@ import javax.validation.constraints.Email;
 @NoArgsConstructor
 @Entity
 @Builder
-
 public class User {
 
     @Id

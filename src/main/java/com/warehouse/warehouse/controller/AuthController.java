@@ -1,6 +1,9 @@
 package com.warehouse.warehouse.controller;
 
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.warehouse.warehouse.dto.AuthenticationResponse;
 import com.warehouse.warehouse.dto.LoginRequest;
 import com.warehouse.warehouse.dto.RefreshTokenRequest;
@@ -11,6 +14,7 @@ import com.warehouse.warehouse.service.RefreshTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.annotation.RequestScope;
 
 import javax.validation.Valid;
 
@@ -23,6 +27,7 @@ import static org.springframework.http.HttpStatus.OK;
 public class AuthController {
 
 
+
     private final AuthService authService;
     private final RefreshTokenService refreshTokenService;
 
@@ -31,7 +36,6 @@ public class AuthController {
         this.authService = authService;
         this.refreshTokenService = refreshTokenService;
     }
-
 
     @PostMapping("/signup")
     public void signup(@RequestBody RegisterRequest registerRequest){
@@ -45,7 +49,7 @@ public class AuthController {
 }
 
 @PostMapping("/login")
-    public AuthenticationResponse login(@RequestBody LoginRequest loginRequest){
+public AuthenticationResponse login( @RequestBody LoginRequest loginRequest){
         return authService.login(loginRequest);
 }
 

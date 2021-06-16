@@ -5,6 +5,7 @@ import com.warehouse.warehouse.dto.AuthenticationResponse;
 import com.warehouse.warehouse.dto.LoginRequest;
 import com.warehouse.warehouse.dto.RefreshTokenRequest;
 import com.warehouse.warehouse.dto.RegisterRequest;
+import com.warehouse.warehouse.exceptions.WarehouseException;
 import com.warehouse.warehouse.exceptions.WarehouseMailException;
 import com.warehouse.warehouse.model.Depot;
 import com.warehouse.warehouse.model.User;
@@ -14,6 +15,7 @@ import com.warehouse.warehouse.repository.UserRepository;
 import com.warehouse.warehouse.repository.VerificationTokenRepository;
 import com.warehouse.warehouse.security.JwtProvider;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,24 +32,40 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
 public class AuthService {
 
 
 private final PasswordEncoder passwordEncoder;
 private final VerificationTokenRepository verificationTokenRepository;
-private final MailService mailService;
 private final AuthenticationManager authenticationManager;
 private final JwtProvider jwtProvider;
 private final RefreshTokenService refreshTokenService;
 private final DepotRepository depotRepository;
+private final UserRepository userRepository;
 
-    private final UserRepository userRepository;
-
+@Autowired
+    public AuthService(PasswordEncoder passwordEncoder, VerificationTokenRepository verificationTokenRepository,
+                       AuthenticationManager authenticationManager,
+                       JwtProvider jwtProvider, RefreshTokenService refreshTokenService,
+                       DepotRepository depotRepository, UserRepository userRepository) {
+        this.passwordEncoder = passwordEncoder;
+        this.verificationTokenRepository = verificationTokenRepository;
+        this.authenticationManager = authenticationManager;
+        this.jwtProvider = jwtProvider;
+        this.refreshTokenService = refreshTokenService;
+        this.depotRepository = depotRepository;
+        this.userRepository = userRepository;
+    }
 
     public void signup(RegisterRequest registerRequest)
     {
 
+        Optional<User> ifUsernameIsTaken = userRepository.findByUsername(registerRequest.getUsername());
+        Optional<User> ifEmailIsTaken = userRepository.findByEmail(registerRequest.getEmail());
+
+        if (ifUsernameIsTaken.isPresent() || ifEmailIsTaken.isPresent()){
+            throw new WarehouseException("User already exists");
+        }
         User user = new User();
         user.setUsername(registerRequest.getUsername());
         user.setEmail(registerRequest.getEmail());

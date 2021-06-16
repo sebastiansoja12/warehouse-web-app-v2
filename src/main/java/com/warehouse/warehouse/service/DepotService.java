@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 @Slf4j
-@Transactional
 public class DepotService {
 
     private final DepotRepository depotRepository;
@@ -27,4 +27,7 @@ public class DepotService {
     }
 
 
+    public Optional<Depot> findById(Long id) {
+        return depotRepository.findById(id);
+    }
 }

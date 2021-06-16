@@ -36,6 +36,7 @@ public class RouteService {
 
 
 
+    @Transactional
     public Route save(Route route){
         Parcel parcel = parcelRepository.findById(route.getParcel().getId()).orElseThrow();
 

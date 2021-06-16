@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface DepotRepository extends JpaRepository<Depot, Long> {
 
-    @Query(value = "select * from Depot where  not city='Nadanie' order by country", nativeQuery = true)
+    @Query(value = "select * from Depot order by id", nativeQuery = true)
     List<Depot> findAll();
     Optional<Depot> findById(Long id);
 

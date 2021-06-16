@@ -34,9 +34,11 @@ export class AuthService {
               private localStorage: LocalStorageService) {
   }
 
-  signup(signupRequestPayload: SignupRequestPayload): Observable<any> {
+  signup(signupRequestPayload: SignupRequestPayload): Observable<boolean> {
     return this.httpClient.post('http://localhost:8080/api/users/signup',
-      signupRequestPayload, { responseType: 'text' });
+      signupRequestPayload, { responseType: 'text' }).pipe(map(data => {
+      return true;
+    }));
   }
   login(loginRequestPayload: LoginRequestPayload): Observable<boolean> {
     return this.httpClient.post<LoginResponse>('http://localhost:8080/api/users/login',

@@ -27,8 +27,6 @@ import java.util.UUID;
 @Table(name="route")
 public class Route {
 
-
-
     @Id
     @GeneratedValue()
     @org.hibernate.annotations.Type(type="uuid-char")
