@@ -109,7 +109,7 @@ footer {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-   background-image: url(node_modules/bootstrap/assets/images/footer-bg.png);
+   background-image: url(src/assets/images/footer-bg.png);
  }
 
 footer .footer-content {

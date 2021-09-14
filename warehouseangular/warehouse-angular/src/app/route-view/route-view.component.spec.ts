@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { RouteViewComponent } from './route-view.component';
 
@@ -6,7 +6,7 @@ describe('DepotViewComponent', () => {
   let component: RouteViewComponent;
   let fixture: ComponentFixture<RouteViewComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ RouteViewComponent ]
     })

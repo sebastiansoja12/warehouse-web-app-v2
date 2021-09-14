@@ -199,7 +199,7 @@ promotion
 */
 
 .left-image-decor {
-  background-image: url(node_modules/bootstrap/assets/images/left-bg-decor.png);
+  background-image: url(src/assets/images/left-bg-decor.png);
   background-repeat: no-repeat;
   position: absolute;
   width: 100%;
@@ -250,7 +250,7 @@ testimonials
 --------------------------------------------
 */
 .right-image-decor {
-  background-image: url(node_modules/bootstrap/assets/images/right-bg-decor.png);
+  background-image: url(src/assets/images/right-bg-decor.png);
   background-repeat: no-repeat;
   background-position: right center;
   position: absolute;

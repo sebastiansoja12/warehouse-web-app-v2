@@ -170,7 +170,7 @@ header{
 }
 
 footer {
-  background-image: url(node_modules/bootstrap/assets/images/footer-bg.png);
+  background-image: url(src/assets/images/footer-bg.png);
   height: 100%;
   /* Center and scale the image nicely */
   background-position: center;
