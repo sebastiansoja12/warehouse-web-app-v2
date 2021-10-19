@@ -21,7 +21,7 @@ export class HeaderComponent implements OnInit {
   }
 
 
-  ngOnInit() {
+  ngOnInit(): any {
     this.authService.loggedIn.subscribe((data: boolean) => this.isLoggedIn = data);
     this.authService.username.subscribe((data: string) => this.username = data);
     this.authService.role.subscribe((data: string) => this.role = data);
@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit {
     this.isLoggedIn = this.authService.isLoggedIn();
     this.isAdmin = this.authService.isAdmin();
     this.username = this.authService.getUserName();
+
 
   }
 

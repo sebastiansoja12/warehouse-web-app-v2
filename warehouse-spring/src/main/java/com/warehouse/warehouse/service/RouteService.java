@@ -62,7 +62,7 @@ public class RouteService {
 
     public List<Route> findByParcelId(UUID id) throws Exception {
         parcelRepository.findById(id).orElseThrow(() ->  new ParcelNotFound("Paczka nie znaleziona"));
-        return routeRepository.findAllByParcel_IdOrderByCreatedDesc(id).orElseThrow(
+        return routeRepository.findAllByParcel_IdOrderByCreated(id).orElseThrow(
                 () -> new ParcelNotFound("Paczka nie zostala znaleziona lub jest jeszcze nie nadana"));
     }
    public void deleteRouteByParcelId(UUID id) {

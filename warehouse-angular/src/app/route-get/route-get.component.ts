@@ -21,6 +21,7 @@ export class RouteGetComponent implements OnInit {
   depot: Depot;
   isError: boolean;
   routes: Route[];
+  routesList: Route[];
   constructor(private routeService: RouteService, private parcelService: ParcelService,
               private localStorage: LocalStorageService,
               private router: Router,
@@ -37,6 +38,10 @@ export class RouteGetComponent implements OnInit {
     this.routeService.findAll().subscribe(data => {
       this.routes = data;
     });
+
+    this.routeService.findAll().subscribe(data => {
+      this.routesList = data;
+    });
   }
 
   getRoute(): any {
@@ -45,8 +50,6 @@ export class RouteGetComponent implements OnInit {
     this.route.parcel = this.parcel;
     this.routeService.save(this.route).subscribe(data => {
       this.isError = false;
-      window.location.reload();
-
     }, error => {
       this.isError = true;
       window.location.assign('/');
@@ -54,6 +57,7 @@ export class RouteGetComponent implements OnInit {
       throwError(error);
 
     });
+    window.location.reload();
   }
 
   printLabel(): any {
