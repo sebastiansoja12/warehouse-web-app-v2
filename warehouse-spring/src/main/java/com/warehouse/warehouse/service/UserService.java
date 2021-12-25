@@ -22,11 +22,11 @@ public class UserService {
     @Autowired
     private final UserRepository userRepository;
 
-    public List<User> findAll(){
+    public List<User> findAll() {
         return userRepository.findAll();
     }
 
-    public User findUserIdByUsername(String username){
+    public User findUserIdByUsername(String username) {
         return userRepository.getUsersIdByUsername(username).orElseThrow(null);
     }
 }

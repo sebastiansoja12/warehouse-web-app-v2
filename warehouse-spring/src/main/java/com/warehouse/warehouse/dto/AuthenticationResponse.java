@@ -1,6 +1,5 @@
 package com.warehouse.warehouse.dto;
 
-import com.warehouse.warehouse.service.AuthService;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,12 +18,5 @@ public class AuthenticationResponse {
     private String refreshToken;
     private Instant expiresAt;
     private String role;
-
-
-
-    public AuthenticationResponse(String username){
-        this.username=username;
-    }
-
 
 }

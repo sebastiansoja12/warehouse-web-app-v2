@@ -35,15 +35,15 @@ import java.util.UUID;
 public class AuthService {
 
 
-private final PasswordEncoder passwordEncoder;
-private final VerificationTokenRepository verificationTokenRepository;
-private final AuthenticationManager authenticationManager;
-private final JwtProvider jwtProvider;
-private final RefreshTokenService refreshTokenService;
-private final DepotRepository depotRepository;
-private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final VerificationTokenRepository verificationTokenRepository;
+    private final AuthenticationManager authenticationManager;
+    private final JwtProvider jwtProvider;
+    private final RefreshTokenService refreshTokenService;
+    private final DepotRepository depotRepository;
+    private final UserRepository userRepository;
 
-@Autowired
+    @Autowired
     public AuthService(PasswordEncoder passwordEncoder, VerificationTokenRepository verificationTokenRepository,
                        AuthenticationManager authenticationManager,
                        JwtProvider jwtProvider, RefreshTokenService refreshTokenService,
@@ -57,13 +57,12 @@ private final UserRepository userRepository;
         this.userRepository = userRepository;
     }
 
-    public void signup(RegisterRequest registerRequest)
-    {
+    public void signup(RegisterRequest registerRequest) {
 
         Optional<User> ifUsernameIsTaken = userRepository.findByUsername(registerRequest.getUsername());
         Optional<User> ifEmailIsTaken = userRepository.findByEmail(registerRequest.getEmail());
 
-        if (ifUsernameIsTaken.isPresent() || ifEmailIsTaken.isPresent()){
+        if (ifUsernameIsTaken.isPresent() || ifEmailIsTaken.isPresent()) {
             throw new WarehouseException("User already exists");
         }
         User user = new User();
@@ -82,13 +81,14 @@ private final UserRepository userRepository;
 
     void fetchUserAndEnable(VerificationToken verificationToken) {
         String username = verificationToken.getUser().getUsername();
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new WarehouseMailException("Uzytkownik nie znaleziony o nazwie - " + username));
+        User user = userRepository.findByUsername(username).orElseThrow(() ->
+                new WarehouseMailException("Uzytkownik nie znaleziony o nazwie - " + username));
         user.setEnabled(true);
         userRepository.save(user);
     }
 
 
-    public void verifyAccount(String token){
+    public void verifyAccount(String token) {
         Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(token);
         fetchUserAndEnable(verificationToken.orElseThrow(() -> new WarehouseMailException("Nieprawidlowy Token")));
     }
@@ -108,7 +108,7 @@ private final UserRepository userRepository;
                 .build();
     }
 
-    public AuthenticationResponse refreshToken(RefreshTokenRequest refreshTokenRequest){
+    public AuthenticationResponse refreshToken(RefreshTokenRequest refreshTokenRequest) {
         refreshTokenService.validateRefreshToken(refreshTokenRequest.getRefreshToken());
         String token = jwtProvider.generateTokenWithUserName(refreshTokenRequest.getUsername());
         return AuthenticationResponse.builder()
@@ -124,17 +124,19 @@ private final UserRepository userRepository;
         return !(authentication instanceof AnonymousAuthenticationToken) && authentication.isAuthenticated();
     }
 
-    public Optional<User> getCurrentUser(){
+    public Optional<User> getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return  userRepository.getUsersIdByUsername(authentication.getName());
+        return userRepository.getUsersIdByUsername(authentication.getName());
 
     }
-    public List<User> getCurrentUsers(){
+
+    public List<User> getCurrentUsers() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return  userRepository.getUserByUsername(authentication.getName());
+        return userRepository.getUserByUsername(authentication.getName());
 
     }
-    public Optional<User> getUser(){
+
+    public Optional<User> getUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findByUsername(authentication.getName());
 
