@@ -14,8 +14,17 @@ import {RouteDeleteComponent} from './route-delete/route-delete.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
 import {DepotAllComponent} from './depot-all/depot-all.component';
 import {AdministratorComponent} from './administrator/administrator.component';
+import {IndexComponent} from './pages/index/index.component';
+import {ProfilepageComponent} from './pages/examples/profilepage/profilepage.component';
+import {RegisterpageComponent} from './pages/examples/registerpage/registerpage.component';
+import {LandingpageComponent} from './pages/examples/landingpage/landingpage.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: IndexComponent },
+  { path: 'profile', component: ProfilepageComponent },
+  { path: 'register', component: RegisterpageComponent },
+  { path: 'landing', component: LandingpageComponent },
   { path: 'sign-up', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   { path: '', component: HomeComponent },

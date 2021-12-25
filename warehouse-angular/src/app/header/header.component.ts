@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth/service/auth.service';
 import { Router } from '@angular/router';
-import 'node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 
 @Component({

@@ -1,9 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -16,7 +15,6 @@ import {HomeComponent} from './home/home.component';
 import { RouteListComponent } from './route-list/route-list.component';
 import { RouteFormComponent } from './route-find/route-form.component';
 import { RouteViewComponent } from './route-view/route-view.component';
-import {environment} from '../environments/environment';
 import { ParcelAddComponent } from './parcel-add/parcel-add.component';
 import {ParcelService} from './auth/service/parcel.service';
 import {Parcel} from './auth/model/parcel';
@@ -28,16 +26,24 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { DepotAllComponent } from './depot-all/depot-all.component';
 import {Depot} from './auth/model/depot';
 import { SideBarComponent } from './shared/side-bar/side-bar.component';
-import {DatePipe} from '@angular/common';
+import {APP_BASE_HREF, DatePipe} from '@angular/common';
 import { AdministratorComponent } from './administrator/administrator.component';
+import {RouterModule} from '@angular/router';
 
-
-
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { AlertModule } from 'ngx-bootstrap/alert';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     SignupComponent,
     LoginComponent,
     HomeComponent,
@@ -50,22 +56,31 @@ import { AdministratorComponent } from './administrator/administrator.component'
     UserProfileComponent,
     DepotAllComponent,
     SideBarComponent,
-    AdministratorComponent,
-
+    AdministratorComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
     HttpClientModule,
     NgxWebstorageModule.forRoot(),
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     FormsModule,
-
+    RouterModule,
+    ReactiveFormsModule,
+    BsDropdownModule.forRoot(),
+    ProgressbarModule.forRoot(),
+    TooltipModule.forRoot(),
+    CollapseModule.forRoot(),
+    TabsModule.forRoot(),
+    PaginationModule.forRoot(),
+    AlertModule.forRoot(),
+    BsDatepickerModule.forRoot(),
+    CarouselModule.forRoot(),
+    ModalModule.forRoot()
 
   ],
-  providers: [
+  providers: [{provide: APP_BASE_HREF, useValue : '/' },
 DatePipe,
     {
       provide: HTTP_INTERCEPTORS,
@@ -81,7 +96,10 @@ DatePipe,
     RouteViewComponent,
     RouteListComponent,
     RouteGetComponent,
+    AdministratorComponent
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+
 })
 export class AppModule { }
