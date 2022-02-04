@@ -14,8 +14,6 @@ import com.warehouse.warehouse.repository.DepotRepository;
 import com.warehouse.warehouse.repository.UserRepository;
 import com.warehouse.warehouse.repository.VerificationTokenRepository;
 import com.warehouse.warehouse.security.JwtProvider;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,17 +21,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class AuthService {
-
 
     private final PasswordEncoder passwordEncoder;
     private final VerificationTokenRepository verificationTokenRepository;
@@ -43,7 +37,6 @@ public class AuthService {
     private final DepotRepository depotRepository;
     private final UserRepository userRepository;
 
-    @Autowired
     public AuthService(PasswordEncoder passwordEncoder, VerificationTokenRepository verificationTokenRepository,
                        AuthenticationManager authenticationManager,
                        JwtProvider jwtProvider, RefreshTokenService refreshTokenService,

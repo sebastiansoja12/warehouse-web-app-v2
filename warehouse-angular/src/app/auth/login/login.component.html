@@ -1,42 +1,158 @@
+<div class="wrapper">
+  <div class="page-header">
+    <div class="page-header-image"></div>
+    <div class="content">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5 col-md-6 offset-lg-0 offset-md-3">
+            <div class="square square-7" id="square7"></div>
+            <div class="square square-8" id="square8"></div>
+            <div class="card card-register">
+              <div class="card-header">
+                <img
+                  alt="Card image"
+                  class="card-img"
+                  src="assets/img/square1-red.png"
+                />
+                <h4 class="card-title">Logowanie</h4>
+              </div>
+              <div class="card-body">
+                <form id="contact" action="" method="post" [formGroup]="loginForm" (ngSubmit)="login()">
+                  <div
+                    class="input-group"
+                    [ngClass]="{ 'input-group-focus': focus === true }"
+                  >
+                  </div>
+                  <div
+                    class="input-group"
+                  >
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="tim-icons icon-single-02"> </i>
+                      </div>
+                    </div>
+                    <input
+                      class="form-control"
+                      placeholder="Nazwa użytkownika"
+                      type="text"
+                      [formControlName]="'username'"
+                      (focus)="focus1 = true"
+                      (blur)="focus1 = false"
+                    />
+                  </div>
+                  <div
+                    class="input-group"
+                  >
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="tim-icons icon-lock-circle"> </i>
+                      </div>
+                    </div>
+                    <input
+                      class="form-control"
+                      placeholder="Hasło"
+                      type="password"
+                      [formControlName]="'password'"
+                      (focus)="focus2 = true"
+                      (blur)="focus2 = false"
+                    />
+                  </div>
+                  <div class="card-footer">
+                    <a
+                      type="submit" id="form-submit"
+                      class="btn btn-danger btn-round btn-lg"
+                    >
+                      Zaloguj się
+                    </a>
 
-<footer class="contact-us">
-  <div class="container">
-    <div class="footer-content">
-      <div class="row">
-  <div class="contact-form">
-      <form id="contact" action="" method="post" [formGroup]="loginForm" (ngSubmit)="login()">
-      <div class="center-heading">
-        <p  class="section-title">Moduł logowania</p>
-        <p class="login-failed-text" *ngIf='this.isError' >Logowanie nie powiodło się.</p>
-      </div>
-      <div class="row">
-        <div class="col-md-6 col-lg-12">
-          <fieldset>
-            <div class="user-name">
-              <input type="text" id="username" class="form-control" placeholder="Nazwa użytkownika" required=""
-                     style="background-color: rgba(250,250,250,0.3);" [formControlName]="'username'">
+                  </div>
+                  <p class="login-failed-text" *ngIf='this.isError' >Logowanie nie powiodło się.</p>
+                </form>
+              </div>
             </div>
-          </fieldset>
+          </div>
         </div>
-        <div class="col-md-6 col-lg-12">
-          <fieldset>
-            <div class="user-name">
-              <input type="password" class="form-control" id="password" placeholder="Hasło"
-                     required="" style="background-color: rgba(250,250,250,0.3);"[formControlName]="'password'" name="password">
-            </div>
-          </fieldset>
-        </div>
-        <div class="col-lg-12">
-          <fieldset>
-            <button type="submit" id="form-submit" class="main-button">Zaloguj</button>
-          </fieldset>
-        </div>
+        <div class="register-bg"></div>
+        <div class="square square-1" id="square1"></div>
+        <div class="square square-2" id="square2"></div>
+        <div class="square square-3" id="square3"></div>
+        <div class="square square-4" id="square4"></div>
+        <div class="square square-5" id="square5"></div>
+        <div class="square square-6" id="square6"></div>
       </div>
-    </form>
+    </div>
   </div>
-
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3"><h1 class="title">BLK•</h1></div>
+        <div class="col-md-3">
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/home']"> Home </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/landing']"> Landing </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/register']"> Register </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/profile']"> Profile </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" href="https://creative-tim.com/contact-us?ref=blkdsa-footer">
+                Contact Us
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://creative-tim.com/about-us?ref=blkdsa-footer">
+                About Us
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://creative-tim.com/blog?ref=blkdsa-footer">
+                Blog
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://opensource.org/licenses/MIT">
+                License
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h3 class="title">Follow us:</h3>
+          <div class="btn-wrapper profile">
+            <a
+              class="btn btn-icon btn-neutral btn-round btn-simple mr-1"
+              href="https://twitter.com/creativetim"
+              target="_blank"
+            >
+              <i class="fab fa-twitter"> </i>
+            </a>
+            <a
+              class="btn btn-icon btn-neutral btn-round btn-simple mr-1"
+              href="https://www.facebook.com/creativetim"
+              target="_blank"
+            >
+              <i class="fab fa-facebook-square"> </i>
+            </a>
+            <a
+              class="btn btn-icon btn-neutral btn-round btn-simple"
+              href="https://dribbble.com/creativetim"
+              target="_blank"
+            >
+              <i class="fab fa-dribbble"> </i>
+            </a>
+          </div>
         </div>
       </div>
     </div>
-
-</footer>
+  </footer>
+</div>

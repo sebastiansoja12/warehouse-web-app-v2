@@ -40,6 +40,8 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import {PagesModule} from './pages/pages.module';
+import {HeaderComponent} from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     UserProfileComponent,
     DepotAllComponent,
     SideBarComponent,
-    AdministratorComponent
+    AdministratorComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +70,6 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     ToastrModule.forRoot(),
     FormsModule,
     RouterModule,
-    ReactiveFormsModule,
     BsDropdownModule.forRoot(),
     ProgressbarModule.forRoot(),
     TooltipModule.forRoot(),
@@ -77,7 +79,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     AlertModule.forRoot(),
     BsDatepickerModule.forRoot(),
     CarouselModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    ReactiveFormsModule,
+    PagesModule
 
   ],
   providers: [{provide: APP_BASE_HREF, useValue : '/' },

@@ -115,7 +115,7 @@ button.main-button:hover {
   text-align: center;
   font-size: 42px;
   font-weight: 700;
-  color: #1e1e1e;
+  color: #d50b0b;
   margin-bottom: 25px;
 }
 
@@ -162,7 +162,6 @@ button.main-button:hover {
 .features-item h4 {
   margin-top: 0px;
   font-size: 22px;
-  color: #1e1e1e;
   margin-bottom: 25px;
 }
 

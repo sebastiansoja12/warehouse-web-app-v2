@@ -1,6 +1,6 @@
 
 .login-failed-text{
-    color: red;
+  color: red;
 }
 .center-heading {
   text-align: center;
@@ -109,8 +109,8 @@ footer {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-   background-image: url(src/assets/images/footer-bg.png);
- }
+  background-image: url(src/assets/images/footer-bg.png);
+}
 
 footer .footer-content {
   padding: 120px 0px;
