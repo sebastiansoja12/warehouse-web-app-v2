@@ -1,12 +1,8 @@
 package com.warehouse.warehouse.service;
 
 
-import com.google.zxing.WriterException;
-import com.lowagie.text.*;
 import com.lowagie.text.Font;
-import com.lowagie.text.Image;
-import com.lowagie.text.alignment.HorizontalAlignment;
-import com.lowagie.text.pdf.PdfDocument;
+import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
@@ -17,14 +13,10 @@ import org.supercsv.prefs.CsvPreference;
 
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 @Service
 public class ParcelExportService {
-
-
-
 
 
     private void writeTableHeader(PdfPTable senderTable, PdfPTable recipientTable) {
@@ -64,7 +56,7 @@ public class ParcelExportService {
     }
 
 
-    private void writeTableData(PdfPTable senderTable,PdfPTable recipientTable, Parcel parcel) throws Exception {
+    private void writeTableData(PdfPTable senderTable, PdfPTable recipientTable, Parcel parcel) throws Exception {
 
         //sender
         senderTable.addCell(String.valueOf(parcel.getId()));
@@ -103,7 +95,7 @@ public class ParcelExportService {
 
 
         writeTableHeader(senderTable, recipientTable);
-        writeTableData(senderTable, recipientTable,parcel);
+        writeTableData(senderTable, recipientTable, parcel);
         document.add(senderTable);
         document.add(recipientTable);
 

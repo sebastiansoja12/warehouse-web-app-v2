@@ -1,10 +1,11 @@
 package com.warehouse.warehouse.model;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import javax.persistence.*;
 
+import javax.persistence.*;
 
 
 @Data
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name="depot")
+@Table(name = "depot")
 public class Depot {
 
     @Id

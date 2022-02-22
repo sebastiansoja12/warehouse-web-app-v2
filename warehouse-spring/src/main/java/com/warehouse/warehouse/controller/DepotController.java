@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/depots")
@@ -21,15 +20,17 @@ public class DepotController {
     }
 
     @PostMapping()
-    public List<Depot> addDepotList(@RequestBody List<Depot> depotList){
+    public List<Depot> addDepotList(@RequestBody List<Depot> depotList) {
         return depotService.saveAll(depotList);
     }
+
     @GetMapping()
-    public List<Depot> getDepot(){
+    public List<Depot> getDepot() {
         return depotService.getAll();
     }
+
     @GetMapping("/{id}")
-    public Optional<Depot> getSingleDepot(@PathVariable Long id){
+    public Optional<Depot> getSingleDepot(@PathVariable Long id) {
         return depotService.findById(id);
     }
 }

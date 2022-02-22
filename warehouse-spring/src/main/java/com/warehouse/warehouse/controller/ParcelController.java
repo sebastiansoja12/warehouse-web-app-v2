@@ -12,8 +12,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
-import static org.springframework.http.ResponseEntity.status;
-
 @RestController
 @RequestMapping("/api/parcels")
 public class ParcelController {
@@ -27,16 +25,16 @@ public class ParcelController {
 
     @PostMapping
     public void addParcel(@RequestBody Parcel parcel) throws Exception {
-         parcelService.save(parcel);
+        parcelService.save(parcel);
     }
 
     @GetMapping
-    public List<Parcel> getAll(){
+    public List<Parcel> getAll() {
         return parcelService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Parcel getParcelByParcelId(@PathVariable UUID id){
+    public Parcel getParcelByParcelId(@PathVariable UUID id) {
         return parcelService.findById(id);
     }
 
@@ -46,7 +44,7 @@ public class ParcelController {
     }
 
     @GetMapping("/{id}/csv")
-    public void exportPostByIdToCSV(HttpServletResponse reponse, @PathVariable UUID id) throws DocumentException,IOException {
+    public void exportPostByIdToCSV(HttpServletResponse reponse, @PathVariable UUID id) throws DocumentException, IOException {
         parcelService.exportParcelToCSVById(reponse, id);
     }
 

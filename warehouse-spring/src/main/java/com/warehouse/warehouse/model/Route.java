@@ -8,15 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-
-import java.sql.Date;
-import java.sql.Time;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @Data
@@ -24,45 +18,32 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name="route")
+@Table(name = "route")
 public class Route {
 
     @Id
     @GeneratedValue()
-    @org.hibernate.annotations.Type(type="uuid-char")
+    @org.hibernate.annotations.Type(type = "uuid-char")
     private UUID id;
 
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @JsonFormat(pattern="dd/MM/yyyy HH:mm")
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime created;
 
 
-    @ManyToOne( fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @ManyToOne( fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "parcel_id", referencedColumnName = "id")
     private Parcel parcel;
 
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @ManyToOne( fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "depot_id", referencedColumnName = "id")
     private Depot depot;
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

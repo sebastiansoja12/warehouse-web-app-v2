@@ -13,5 +13,4 @@ public class NotificationEmail {
     private String body;
 
 
-
 }

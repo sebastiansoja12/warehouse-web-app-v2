@@ -27,12 +27,12 @@ public class RouteController {
     }
 
     @PostMapping
-    public Route saveRoute(@RequestBody Route route){
+    public Route saveRoute(@RequestBody Route route) {
         return routeService.save(route);
     }
 
     @GetMapping("/all/users")
-    public List<Route> findAllRoutes(){
+    public List<Route> findAllRoutes() {
         List<Route> allRoutes = routeService.findAllRoutes();
         return allRoutes.stream()
                 .sorted(Comparator.comparing(Route::getCreated).reversed())
@@ -41,9 +41,9 @@ public class RouteController {
     }
 
     @GetMapping
-    public List<Route> findAllByUsername(){
+    public List<Route> findAllByUsername() {
         List<Route> routesByUsername = routeService.findAllByUsername();
-      return  routesByUsername.stream()
+        return routesByUsername.stream()
                 .sorted(Comparator.comparing(Route::getCreated).reversed())
                 .limit(10)
                 .collect(Collectors.toList());
@@ -51,18 +51,20 @@ public class RouteController {
 
     @GetMapping("/{id}/parcelId")
     public ResponseEntity<List<Route>> findByParcelId(@PathVariable UUID id) throws Exception {
-        List<Route> route =  routeService.findByParcelId(id);
+        List<Route> route = routeService.findByParcelId(id);
         return new ResponseEntity<>(route, HttpStatus.OK);
     }
+
     @PostMapping("/{id}/parcelId")
-    public ResponseEntity<String> deleteRouteByParcelId(@Valid @PathVariable UUID id){
-            routeService.deleteRouteByParcelId(id);
-            return ResponseEntity.status(OK).body("Zarejestrowana paczka usunięta");
+    public ResponseEntity<String> deleteRouteByParcelId(@Valid @PathVariable UUID id) {
+        routeService.deleteRouteByParcelId(id);
+        return ResponseEntity.status(OK).body("Zarejestrowana paczka usunięta");
     }
+
     @GetMapping("/{username}/user")
-    public List<Route> findRoutesByUsername(@PathVariable String username){
+    public List<Route> findRoutesByUsername(@PathVariable String username) {
         List<Route> byUsername = routeService.findAllRoutes();
-        return  byUsername.stream()
+        return byUsername.stream()
                 .filter(p -> p.getUser().getUsername().equals(username))
                 .collect(Collectors.toList());
     }

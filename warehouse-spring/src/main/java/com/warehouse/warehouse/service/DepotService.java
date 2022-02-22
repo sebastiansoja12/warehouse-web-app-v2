@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,11 +17,11 @@ public class DepotService {
     private final DepotRepository depotRepository;
 
 
-    public List<Depot> saveAll(List<Depot> depotList){
-         return depotRepository.saveAll(depotList);
+    public List<Depot> saveAll(List<Depot> depotList) {
+        return depotRepository.saveAll(depotList);
     }
 
-    public List<Depot> getAll(){
+    public List<Depot> getAll() {
         return depotRepository.findAll();
     }
 

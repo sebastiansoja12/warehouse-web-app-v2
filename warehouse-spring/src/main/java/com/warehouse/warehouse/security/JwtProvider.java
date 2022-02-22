@@ -80,6 +80,7 @@ public class JwtProvider {
 
         return claims.getSubject();
     }
+
     public String generateTokenWithUserName(String username) {
         return Jwts.builder()
                 .setSubject(username)
@@ -88,6 +89,7 @@ public class JwtProvider {
                 .setExpiration(java.sql.Date.from(Instant.now().plusSeconds(jwtExpirationInMillis)))
                 .compact();
     }
+
     public Long getJwtExpirationInMillis() {
         return jwtExpirationInMillis;
     }

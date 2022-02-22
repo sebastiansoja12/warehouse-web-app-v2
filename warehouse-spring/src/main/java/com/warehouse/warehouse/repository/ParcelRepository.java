@@ -10,9 +10,10 @@ import java.util.UUID;
 
 
 @Repository
-public interface ParcelRepository extends JpaRepository<Parcel,UUID> {
+public interface ParcelRepository extends JpaRepository<Parcel, UUID> {
 
     List<Parcel> findAll();
+
     Optional<Parcel> findById(UUID id);
 
 

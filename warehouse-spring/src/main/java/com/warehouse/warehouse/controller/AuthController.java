@@ -1,9 +1,6 @@
 package com.warehouse.warehouse.controller;
 
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.warehouse.warehouse.dto.AuthenticationResponse;
 import com.warehouse.warehouse.dto.LoginRequest;
 import com.warehouse.warehouse.dto.RefreshTokenRequest;
@@ -14,10 +11,8 @@ import com.warehouse.warehouse.service.RefreshTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.annotation.RequestScope;
 
 import javax.validation.Valid;
-
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.OK;
@@ -25,7 +20,6 @@ import static org.springframework.http.HttpStatus.OK;
 @RestController
 @RequestMapping("/api/users")
 public class AuthController {
-
 
 
     private final AuthService authService;
@@ -38,25 +32,26 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public void signup(@RequestBody RegisterRequest registerRequest){
-     authService.signup(registerRequest);
+    public void signup(@RequestBody RegisterRequest registerRequest) {
+        authService.signup(registerRequest);
     }
 
-@GetMapping("accountVerification/{token}")
-    public ResponseEntity<String> verifyAccount(@PathVariable String token){
+    @GetMapping("accountVerification/{token}")
+    public ResponseEntity<String> verifyAccount(@PathVariable String token) {
         authService.verifyAccount(token);
         return new ResponseEntity<>("Account activated", OK);
-}
+    }
 
-@PostMapping("/login")
-public AuthenticationResponse login( @RequestBody LoginRequest loginRequest){
+    @PostMapping("/login")
+    public AuthenticationResponse login(@RequestBody LoginRequest loginRequest) {
         return authService.login(loginRequest);
-}
+    }
 
-@PostMapping("refresh/token")
-    public AuthenticationResponse refreshToken(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest){
-  return authService.refreshToken(refreshTokenRequest);
-}
+    @PostMapping("refresh/token")
+    public AuthenticationResponse refreshToken(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
+        return authService.refreshToken(refreshTokenRequest);
+    }
+
     @PostMapping("/logout")
     public ResponseEntity<String> logout(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
         refreshTokenService.deleteRefreshToken(refreshTokenRequest.getRefreshToken());
@@ -65,7 +60,7 @@ public AuthenticationResponse login( @RequestBody LoginRequest loginRequest){
 
 
     @GetMapping("/currentuser")
-    public List<User> getCurrentUser(){
+    public List<User> getCurrentUser() {
         return authService.getCurrentUsers();
     }
 

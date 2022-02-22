@@ -1,22 +1,16 @@
 package com.warehouse.warehouse.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import java.time.Instant;
-import java.util.List;
-import java.util.Set;
 import java.util.UUID;
-
-import static javax.persistence.FetchType.LAZY;
 
 @Data
 @AllArgsConstructor
@@ -27,7 +21,7 @@ public class Parcel {
 
     @Id
     @GeneratedValue()
-    @org.hibernate.annotations.Type(type="uuid-char")
+    @org.hibernate.annotations.Type(type = "uuid-char")
     private UUID id;
 
 
