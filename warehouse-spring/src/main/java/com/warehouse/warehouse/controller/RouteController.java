@@ -5,6 +5,7 @@ import com.warehouse.warehouse.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -56,6 +57,7 @@ public class RouteController {
     }
 
     @PostMapping("/{id}/parcelId")
+    @Transactional
     public ResponseEntity<String> deleteRouteByParcelId(@Valid @PathVariable UUID id) {
         routeService.deleteRouteByParcelId(id);
         return ResponseEntity.status(OK).body("Zarejestrowana paczka usunięta");
