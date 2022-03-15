@@ -2,7 +2,6 @@ package com.warehouse.warehouse.controller;
 
 import com.warehouse.warehouse.model.Route;
 import com.warehouse.warehouse.service.RouteService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,14 +21,23 @@ public class RouteController {
 
     private final RouteService routeService;
 
-    @Autowired
     public RouteController(RouteService routeService) {
         this.routeService = routeService;
     }
 
+    @GetMapping("/tmp")
+    public List<Route> getTemporaryRoutes(){
+        return routeService.findAllTemporaryRoutesByUsername();
+    }
+
+    @PostMapping("/tmp")
+    public List<Route> saveTemporaryRoutes(@RequestBody Route route) {
+        return routeService.temporarySave(route);
+    }
+
     @PostMapping
-    public Route saveRoute(@RequestBody Route route) {
-        return routeService.save(route);
+    public void saveRoute() {
+        routeService.save();
     }
 
     @GetMapping("/all/users")
