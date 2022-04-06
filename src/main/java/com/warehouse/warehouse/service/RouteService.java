@@ -3,13 +3,11 @@ package com.warehouse.warehouse.service;
 
 import com.warehouse.warehouse.exceptions.ParcelNotFound;
 import com.warehouse.warehouse.exceptions.WarehouseException;
-import com.warehouse.warehouse.model.Depot;
-import com.warehouse.warehouse.model.Parcel;
-import com.warehouse.warehouse.model.Route;
-import com.warehouse.warehouse.model.User;
+import com.warehouse.warehouse.model.*;
 import com.warehouse.warehouse.repository.DepotRepository;
 import com.warehouse.warehouse.repository.ParcelRepository;
 import com.warehouse.warehouse.repository.RouteRepository;
+import com.warehouse.warehouse.repository.SupplierRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -31,11 +29,13 @@ public class RouteService {
     private final RouteRepository routeRepository;
     private final AuthService authService;
     private final DepotRepository depotRepository;
+    private final SupplierRepository supplierRepository;
     private List<Route> temporaryRouteList;
 
     @Transactional
     public List<Route> temporarySave(Route route){
         Parcel parcel = parcelRepository.findById(route.getParcel().getId()).orElseThrow();
+        Supplier supplier = supplierRepository.findBySupplierCode(route.getSupplier().getSupplierCode());
 
         if (routeRepository.findByParcel_IdAndUser(route.getParcel().getId(),
                 authService.getCurrentUser().orElseThrow()) != null) {
@@ -44,6 +44,7 @@ public class RouteService {
 
         route.setUser(getCurrentUser());
         parcel.setCustom(route.getParcel().isCustom());
+        route.setSupplier(supplier);
         route.setParcel(parcel);
         route.setCreated(LocalDateTime.now(ZoneId.of(String.valueOf(ZoneId.systemDefault()))));
         route.setDepot(findUsersDepot());

@@ -45,5 +45,13 @@ public class Route {
     @JoinColumn(name = "depot_id", referencedColumnName = "id")
     private Depot depot;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    private Customer customer;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "supplier_id", referencedColumnName = "id")
+    private Supplier supplier;
+
 
 }

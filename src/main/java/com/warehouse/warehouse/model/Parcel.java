@@ -1,13 +1,14 @@
 package com.warehouse.warehouse.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.warehouse.warehouse.enumeration.ParcelType;
+import com.warehouse.warehouse.enumeration.PaymentPass;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.UUID;
@@ -24,49 +25,16 @@ public class Parcel {
     @org.hibernate.annotations.Type(type = "uuid-char")
     private UUID id;
 
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Customer customer;
 
-    @Valid
-    @NotBlank
-    private String firstName;
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Recipient recipient;
 
-    @Valid
-    @NotBlank
-    private String lastName;
-
-    @Valid
-    @NotBlank
-    private String senderTelephone;
-
-    @Valid
-    @NotBlank
-    private String senderEmail;
-
-    @Valid
-    @NotBlank
-    private String recipientEmail;
-
-    @Valid
-    @NotBlank
-    private String recipientTelephone;
-
-    @Valid
-    @NotBlank
-    private String recipientFirstName;
-
-    @Valid
-    @NotBlank
-    private String recipientLastName;
-
-    @Valid
-    @NotBlank
-    private String recipientCity;
-
-    @Valid
-    @NotBlank
-    private String recipientStreet;
-
+    private double price;
 
     private boolean isCustom;
 
+    private ParcelType parcelType;
 
 }

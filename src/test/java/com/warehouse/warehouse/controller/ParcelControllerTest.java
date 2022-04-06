@@ -1,9 +1,10 @@
 package com.warehouse.warehouse.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.warehouse.warehouse.model.Depot;
-import com.warehouse.warehouse.model.Parcel;
+import com.warehouse.warehouse.enumeration.ParcelType;
+import com.warehouse.warehouse.model.*;
 import com.warehouse.warehouse.repository.ParcelRepository;
+import com.warehouse.warehouse.repository.PaymentRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -40,42 +41,38 @@ class ParcelControllerTest {
     @Autowired
     private ParcelController parcelController;
 
+    @Autowired
+    private PaymentRepository paymentRepository;
 
 
     @Test
     @Transactional
     void shouldSaveParcel(){
         Parcel parcel = new Parcel();
-        parcel.setFirstName("Sebastian");
-        parcel.setLastName("Soja");
-        parcel.setSenderTelephone("123456789");
-        parcel.setSenderEmail("sebastian5152@wp.pl");
-        parcel.setRecipientFirstName("Adam");
-        parcel.setRecipientLastName("Soja");
-        parcel.setRecipientTelephone("987654321");
-        parcel.setRecipientCity("Rybnik");
-        parcel.setRecipientStreet("Fajna 55");
-        parcel.setRecipientEmail("adam12345@o2.pl");
-        parcel.setCustom(false);
+        Payment payment = new Payment();
+        parcel.setCustomer(buildCustomer());
+        parcel.setRecipient(buildRecipient());
+        parcel.setParcelType(ParcelType.TINY);
+        payment.setParcel(parcel);
+
+        paymentRepository.save(payment);
         parcelRepository.save(parcel);
+    }
+
+    private Customer buildCustomer() {
+        return Customer.builder().build();
+    }
+
+    private Recipient buildRecipient() {
+        return Recipient.builder().build();
     }
 
     @Test
     @Transactional
     void shouldGetSingleParcel() throws Exception {
+        // will be implemented again in the next stories
         //given
         Parcel parcel = new Parcel();
-        parcel.setFirstName("Sebastian");
-        parcel.setLastName("Soja");
-        parcel.setSenderTelephone("123456789");
-        parcel.setSenderEmail("sebastian5152@wp.pl");
-        parcel.setRecipientFirstName("Adam");
-        parcel.setRecipientLastName("Soja");
-        parcel.setRecipientTelephone("987654321");
-        parcel.setRecipientCity("Rybnik");
-        parcel.setRecipientStreet("Fajna 55");
-        parcel.setRecipientEmail("adam12345@o2.pl");
-        parcel.setCustom(false);
         parcelRepository.save(parcel);
         //when
         MvcResult mvcResult = (MvcResult) mockMvc.perform(MockMvcRequestBuilders.get("/api/parcels/" + parcel.getId()))
@@ -86,9 +83,7 @@ class ParcelControllerTest {
         Parcel parcelToTest = objectMapper.readValue(mvcResult.getResponse().getContentAsString(), Parcel.class);
 
         assertThat(parcelToTest).isNotNull();
-        assertThat(parcelToTest.getFirstName()).isEqualTo(parcel.getFirstName());
         assertThat(parcelToTest.getId()).isEqualTo(parcel.getId());
-        assertThat(parcelToTest.getRecipientCity()).isEqualTo(parcel.getRecipientCity());
     }
 
     @Test

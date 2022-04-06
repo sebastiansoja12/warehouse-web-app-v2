@@ -4,7 +4,9 @@ import com.lowagie.text.DocumentException;
 import com.warehouse.warehouse.exceptions.ParcelNotFound;
 import com.warehouse.warehouse.model.Parcel;
 import com.warehouse.warehouse.model.ParcelNotification;
+import com.warehouse.warehouse.model.Payment;
 import com.warehouse.warehouse.repository.ParcelRepository;
+import com.warehouse.warehouse.repository.PaymentRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Example;
@@ -28,17 +30,21 @@ public class ParcelService {
     private final ParcelRepository parcelRepository;
     private final MailService mailService;
     private final ParcelExportService parcelExportService;
+    private final PaymentRepository paymentRepository;
 
     @Transactional
     public void save(Parcel parcel) throws Exception {
-
+        Payment payment = new Payment();
+        payment.setParcel(parcel);
+        payment.setAmount(parcel.getPrice());
+        paymentRepository.save(payment);
         parcelRepository.save(parcel);
 
         mailService.sendNotification(new ParcelNotification
                 ("Została przez Państwa nadana przesyłka ",
-                        parcel.getSenderEmail(), "Docelowa destynacja paczki to: " +
-                        parcel.getRecipientCity() + ", "
-                        + parcel.getRecipientStreet() + "\n" +
+                        parcel.getCustomer().getEmailAddress(), "Docelowa destynacja paczki to: " +
+                        parcel.getRecipient().getCity() + ", "
+                        + parcel.getRecipient().getStreet() + "\n" +
                         "Kod Państwa paczki to: " + parcel.getId().toString()
                         + "\nProsimy wejść w poniższy link by pobrać etykietę: " +
                         "\n" + "http://localhost:8080/api/parcels/toPDF/" + parcel.getId().toString()));
