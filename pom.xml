@@ -16,6 +16,7 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<sonar.organization>sebastiansoja</sonar.organization>
 	</properties>
 	<repositories>
 		<repository>
