@@ -17,4 +17,15 @@ public class Order {
     private String intent;
     private String description;
 
+    public Order(double price, String method, String intent, String description) {
+        this.price = price;
+        this.currency = getCurrency();
+        this.method = method;
+        this.intent = intent;
+        this.description = description;
+    }
+
+    public String getCurrency() {
+        return "PLN";
+    }
 }

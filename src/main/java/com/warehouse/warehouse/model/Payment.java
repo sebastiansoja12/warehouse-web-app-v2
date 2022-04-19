@@ -23,6 +23,8 @@ public class Payment {
 
     private double amount;
 
+    private String paypalId;
+
     private PaymentPass paymentPass;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
