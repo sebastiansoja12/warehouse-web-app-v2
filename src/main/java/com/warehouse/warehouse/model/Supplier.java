@@ -6,10 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
@@ -30,4 +27,7 @@ public class Supplier {
     private String lastName;
 
     private String telephone;
+
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Depot depot;
 }

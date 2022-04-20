@@ -30,15 +30,15 @@ public class RouteService {
     private final AuthService authService;
     private final DepotRepository depotRepository;
     private final SupplierRepository supplierRepository;
-    private List<Route> temporaryRouteList;
+    private final List<Route> temporaryRouteList;
 
     @Transactional
     public List<Route> temporarySave(Route route){
-        Parcel parcel = parcelRepository.findById(route.getParcel().getId()).orElseThrow();
+        Parcel parcel = parcelRepository.getById(route.getParcel().getId());
         Supplier supplier = supplierRepository.findBySupplierCode(route.getSupplier().getSupplierCode());
 
         if (routeRepository.findByParcel_IdAndUser(route.getParcel().getId(),
-                authService.getCurrentUser().orElseThrow()) != null) {
+                authService.getCurrentUser()) != null) {
             throw new WarehouseException("Paczka została już zarejestrowana w tym oddziale");
         }
 
@@ -54,8 +54,8 @@ public class RouteService {
         return temporaryRouteList;
     }
 
-    public User getCurrentUser(){
-        return authService.getCurrentUser().orElseThrow(() -> new WarehouseException("Nie znaleziono uzytkownika"));
+    public User getCurrentUser() {
+        return authService.getCurrentUser();
     }
 
     public Depot findUsersDepot(){

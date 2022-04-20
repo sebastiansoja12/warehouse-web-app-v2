@@ -14,6 +14,7 @@ import com.warehouse.warehouse.repository.DepotRepository;
 import com.warehouse.warehouse.repository.UserRepository;
 import com.warehouse.warehouse.repository.VerificationTokenRepository;
 import com.warehouse.warehouse.security.JwtProvider;
+import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,6 +28,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class AuthService {
 
     private final PasswordEncoder passwordEncoder;
@@ -37,18 +39,6 @@ public class AuthService {
     private final DepotRepository depotRepository;
     private final UserRepository userRepository;
 
-    public AuthService(PasswordEncoder passwordEncoder, VerificationTokenRepository verificationTokenRepository,
-                       AuthenticationManager authenticationManager,
-                       JwtProvider jwtProvider, RefreshTokenService refreshTokenService,
-                       DepotRepository depotRepository, UserRepository userRepository) {
-        this.passwordEncoder = passwordEncoder;
-        this.verificationTokenRepository = verificationTokenRepository;
-        this.authenticationManager = authenticationManager;
-        this.jwtProvider = jwtProvider;
-        this.refreshTokenService = refreshTokenService;
-        this.depotRepository = depotRepository;
-        this.userRepository = userRepository;
-    }
 
     public void signup(RegisterRequest registerRequest) {
 
@@ -65,13 +55,13 @@ public class AuthService {
         user.setFirstName(registerRequest.getFirstName());
         user.setLastName(registerRequest.getLastName());
         user.setRole("worker");
-        Optional<Depot> depot = depotRepository.findByDepotCode(registerRequest.getDepotCode());
-        user.setDepot(depot.orElseThrow());
-        user.setEnabled(true);
+        Depot depot = depotRepository.getByDepotCode(registerRequest.getDepotCode());
+        user.setDepot(depot);
         userRepository.save(user);
     }
 
-
+    // COUR-0001 will be changed in the next stories
+/*
     void fetchUserAndEnable(VerificationToken verificationToken) {
         String username = verificationToken.getUser().getUsername();
         User user = userRepository.findByUsername(username).orElseThrow(() ->
@@ -85,6 +75,8 @@ public class AuthService {
         Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(token);
         fetchUserAndEnable(verificationToken.orElseThrow(() -> new WarehouseMailException("Nieprawidlowy Token")));
     }
+
+ */
 
     public AuthenticationResponse login(LoginRequest loginRequest) {
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -117,7 +109,7 @@ public class AuthService {
         return !(authentication instanceof AnonymousAuthenticationToken) && authentication.isAuthenticated();
     }
 
-    public Optional<User> getCurrentUser() {
+    public User getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.getUsersIdByUsername(authentication.getName());
 

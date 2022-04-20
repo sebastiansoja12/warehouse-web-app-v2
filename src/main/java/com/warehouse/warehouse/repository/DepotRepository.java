@@ -24,4 +24,5 @@ public interface DepotRepository extends JpaRepository<Depot, Long> {
 
     Optional<Depot> findByDepotCode(String depotCode);
 
+    Depot getByDepotCode(String depotCode);
 }

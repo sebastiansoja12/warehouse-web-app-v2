@@ -25,10 +25,10 @@ public class Parcel {
     @org.hibernate.annotations.Type(type = "uuid-char")
     private UUID id;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Customer customer;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Recipient recipient;
 
     private double price;

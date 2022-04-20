@@ -9,13 +9,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SupplierDto {
 
-    private Long id;
+    private Long supplierId;
 
     private String supplierCode;
 
-    private String firstName;
+    private String supplierFirstName;
 
-    private String lastName;
+    private String supplierLastName;
 
-    private String telephone;
+    private String supplierTelephoneNumber;
+
+    private String supplierDepotCode;
+
 }

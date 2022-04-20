@@ -3,13 +3,10 @@ package com.warehouse.warehouse.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.warehouse.warehouse.model.Depot;
 import com.warehouse.warehouse.repository.DepotRepository;
-import org.hamcrest.Matchers;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -18,10 +15,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -95,7 +90,7 @@ class DepotControllerTest {
     void getDepots() {
         depotController = mock(DepotController.class);
         when(depotController.getDepot()).thenReturn(prepareMockData());
-        Assert.assertThat(depotController.getDepot(), Matchers.hasSize(2));
+        assertThat(depotController.getDepot()).isNotNull();
     }
 
     private List<Depot> prepareMockData() {

@@ -16,5 +16,6 @@ public interface ParcelRepository extends JpaRepository<Parcel, UUID> {
 
     Optional<Parcel> findById(UUID id);
 
+    Parcel getById(UUID id);
 
 }

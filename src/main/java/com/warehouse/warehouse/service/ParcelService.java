@@ -5,6 +5,7 @@ import com.warehouse.warehouse.exceptions.ParcelNotFound;
 import com.warehouse.warehouse.model.Parcel;
 import com.warehouse.warehouse.model.ParcelNotification;
 import com.warehouse.warehouse.model.Payment;
+import com.warehouse.warehouse.repository.CustomerRepository;
 import com.warehouse.warehouse.repository.ParcelRepository;
 import com.warehouse.warehouse.repository.PaymentRepository;
 import lombok.AllArgsConstructor;
@@ -28,16 +29,14 @@ import java.util.UUID;
 public class ParcelService {
 
     private final ParcelRepository parcelRepository;
+    private final CustomerRepository customerRepository;
     private final MailService mailService;
     private final ParcelExportService parcelExportService;
-    private final PaymentRepository paymentRepository;
 
     @Transactional
     public void save(Parcel parcel) throws Exception {
-        Payment payment = new Payment();
-        payment.setParcel(parcel);
-        payment.setAmount(parcel.getPrice());
-        paymentRepository.save(payment);
+
+        customerRepository.save(parcel.getCustomer());
         parcelRepository.save(parcel);
 
         mailService.sendNotification(new ParcelNotification
@@ -73,7 +72,7 @@ public class ParcelService {
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         String currentDateTime = dateFormatter.format(new java.util.Date());
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=parcel_id" + parcel.getId() + currentDateTime + ".pdf";
+        String headerValue = "attachment; filename=" + parcel.getId() + currentDateTime + ".pdf";
         response.setHeader(headerKey, headerValue);
         parcelExportService.exportToPdf(response, parcel);
 

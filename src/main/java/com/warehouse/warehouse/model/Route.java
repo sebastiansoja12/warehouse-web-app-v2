@@ -39,7 +39,6 @@ public class Route {
     @JoinColumn(name = "parcel_id", referencedColumnName = "id")
     private Parcel parcel;
 
-
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "depot_id", referencedColumnName = "id")

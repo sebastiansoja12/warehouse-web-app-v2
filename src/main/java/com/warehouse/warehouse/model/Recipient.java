@@ -14,36 +14,24 @@ import javax.validation.constraints.NotBlank;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Builder
+@Entity
 public class Recipient {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue()
     private Long id;
 
-    @Valid
-    @NotBlank
     private String email;
 
-    @Valid
-    @NotBlank
     private String telephone;
 
-    @Valid
-    @NotBlank
     private String firstName;
 
-    @Valid
-    @NotBlank
     private String lastName;
 
-    @Valid
-    @NotBlank
     private String city;
 
-    @Valid
-    @NotBlank
     private String street;
 
 }
