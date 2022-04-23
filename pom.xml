@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.warehouse</groupId>
 	<artifactId>warehouse</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${GIT.BRANCH_NAME}-SNAPSHOT</version>
 	<name>warehouse</name>
 	<description>Prototype warehouse app</description>
 
@@ -138,8 +138,8 @@
 			<scope>test</scope>
 			<exclusions>
 				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
+					<groupId>org.junit.jupiter</groupId>
+					<artifactId>junit-jupiter-engine</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
@@ -153,7 +153,6 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>

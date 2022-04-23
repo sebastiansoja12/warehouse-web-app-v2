@@ -73,7 +73,6 @@ public class ParcelExportService {
 
     }
 
-
     public void exportToPdf(HttpServletResponse response, Parcel parcel) throws Exception {
         Document document = new Document(PageSize.LETTER);
         PdfWriter.getInstance(document, response.getOutputStream());
