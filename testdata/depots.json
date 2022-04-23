@@ -1,0 +1,62 @@
+[
+  {
+    "city": "Katowice",
+    "street": "Medziana 11",
+    "country": "Polska",
+    "depotCode": "KT3"
+  },
+  {
+    "city": "Gliwice",
+    "street": "Bojowska 21",
+    "country": "Polska",
+    "depotCode": "KT1"
+  },
+  {
+    "city": "Wrocław",
+    "street": "Wroclawska 1",
+    "country": "Polska",
+    "depotCode": "WRO"
+  },
+  {
+    "city": "Gdańsk",
+    "street": "Pomorska 33",
+    "country": "Polska",
+    "depotCode": "GD1"
+  },
+  {
+    "city": "Warszawa",
+    "street": "Koktajlowa 21",
+    "country": "Polska",
+    "depotCode": "WA1"
+  },
+  {
+    "city": "Warszawa",
+    "street": "Wolności 112",
+    "country": "Polska",
+    "depotCode": "WA2"
+  },
+  {
+    "city": "Poznań",
+    "street": "Kaponiera 94",
+    "country": "Polska",
+    "depotCode": "POZ"
+  },
+  {
+    "city": "Rzeszów",
+    "street": "Kolorowa 64",
+    "country": "Polska",
+    "depotCode": "RZE"
+  },
+  {
+    "city": "Berlin",
+    "street": "Hochstrasse 3",
+    "country": "Niemcy",
+    "depotCode": "BR1"
+  },
+  {
+    "city": "Lwów",
+    "street": "Baczewskich 44",
+    "country": "Ukraina",
+    "depotCode": "LW1"
+  }
+]
