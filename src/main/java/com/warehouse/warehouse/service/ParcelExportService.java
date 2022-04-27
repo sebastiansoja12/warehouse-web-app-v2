@@ -60,14 +60,14 @@ public class ParcelExportService {
 
         //sender
         senderTable.addCell(String.valueOf(parcel.getId()));
-        senderTable.addCell(parcel.getCustomer().getFirstName() + " " + parcel.getCustomer().getLastName());
-        senderTable.addCell(String.valueOf(parcel.getCustomer().getTelephoneNumber()));
+        senderTable.addCell(parcel.getFirstName() + " " + parcel.getLastName());
+        senderTable.addCell(String.valueOf(parcel.getSenderTelephone()));
 
         //recipient
-        recipientTable.addCell(parcel.getRecipient().getFirstName() + " " + parcel.getRecipient().getLastName());
-        recipientTable.addCell(String.valueOf(parcel.getRecipient().getTelephone()));
-        recipientTable.addCell((parcel.getRecipient().getCity()) + " " + parcel.getRecipient().getStreet());
-        recipientTable.addCell(String.valueOf(parcel.getRecipient().getEmail()));
+        recipientTable.addCell(parcel.getRecipientFirstName() + " " + parcel.getRecipientLastName());
+        recipientTable.addCell(String.valueOf(parcel.getRecipientTelephone()));
+        recipientTable.addCell((parcel.getRecipientCity()) + " " + parcel.getRecipientStreet());
+        recipientTable.addCell(String.valueOf(parcel.getRecipientEmail()));
         recipientTable.addCell(CodeService.generateQRCodeImage(parcel.getId()));
 
 

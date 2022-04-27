@@ -2,33 +2,26 @@ package com.warehouse.warehouse.controller;
 
 
 import com.lowagie.text.DocumentException;
-import com.warehouse.warehouse.model.Customer;
 import com.warehouse.warehouse.model.Parcel;
 import com.warehouse.warehouse.service.ParcelService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/parcels")
+@AllArgsConstructor
 public class ParcelController {
 
     private final ParcelService parcelService;
 
-    @Autowired
-    public ParcelController(ParcelService parcelService) {
-        this.parcelService = parcelService;
-    }
-
     @PostMapping
-    public void addParcel(@RequestBody Parcel parcel) throws Exception {
-        parcelService.save(parcel);
+    public UUID addParcel(@RequestBody Parcel parcel) throws Exception {
+       return parcelService.save(parcel);
     }
 
     @GetMapping
@@ -47,7 +40,8 @@ public class ParcelController {
     }
 
     @GetMapping("/{id}/csv")
-    public void exportPostByIdToCSV(HttpServletResponse reponse, @PathVariable UUID id) throws DocumentException, IOException {
+    public void exportPostByIdToCSV(HttpServletResponse reponse, @PathVariable UUID id) throws DocumentException,
+            IOException {
         parcelService.exportParcelToCSVById(reponse, id);
     }
 

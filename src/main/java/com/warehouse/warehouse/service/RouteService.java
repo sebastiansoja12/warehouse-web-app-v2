@@ -1,6 +1,7 @@
 package com.warehouse.warehouse.service;
 
 
+import com.warehouse.warehouse.enumeration.ParcelStatus;
 import com.warehouse.warehouse.exceptions.ParcelNotFound;
 import com.warehouse.warehouse.exceptions.WarehouseException;
 import com.warehouse.warehouse.model.*;
@@ -15,8 +16,8 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -43,7 +44,6 @@ public class RouteService {
         }
 
         route.setUser(getCurrentUser());
-        parcel.setCustom(route.getParcel().isCustom());
         route.setSupplier(supplier);
         route.setParcel(parcel);
         route.setCreated(LocalDateTime.now(ZoneId.of(String.valueOf(ZoneId.systemDefault()))));
@@ -101,5 +101,4 @@ public class RouteService {
         route.setUser(getCurrentUser());
         return routeRepository.findByUser_username(route.getUser().getUsername());
     }
-
 }
