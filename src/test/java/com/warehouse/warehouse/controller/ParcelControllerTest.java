@@ -2,7 +2,8 @@ package com.warehouse.warehouse.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.warehouse.warehouse.enumeration.ParcelType;
-import com.warehouse.warehouse.model.*;
+import com.warehouse.warehouse.model.Customer;
+import com.warehouse.warehouse.model.Parcel;
 import com.warehouse.warehouse.repository.ParcelRepository;
 import com.warehouse.warehouse.repository.PaymentRepository;
 import org.junit.jupiter.api.Test;
@@ -14,14 +15,9 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-
 import javax.transaction.Transactional;
 
-import java.io.UnsupportedEncodingException;
-import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 
@@ -49,22 +45,13 @@ class ParcelControllerTest {
     @Transactional
     void shouldSaveParcel(){
         Parcel parcel = new Parcel();
-        Payment payment = new Payment();
-        parcel.setCustomer(buildCustomer());
-        parcel.setRecipient(buildRecipient());
         parcel.setParcelType(ParcelType.TINY);
-        payment.setParcel(parcel);
-
-        paymentRepository.save(payment);
+        parcel.setPrice();
         parcelRepository.save(parcel);
     }
 
     private Customer buildCustomer() {
         return Customer.builder().build();
-    }
-
-    private Recipient buildRecipient() {
-        return Recipient.builder().build();
     }
 
     @Test

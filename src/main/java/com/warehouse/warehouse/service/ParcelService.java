@@ -1,6 +1,8 @@
 package com.warehouse.warehouse.service;
 
 import com.lowagie.text.DocumentException;
+import com.warehouse.warehouse.enumeration.ParcelType;
+import com.warehouse.warehouse.enumeration.PaymentStatus;
 import com.warehouse.warehouse.exceptions.ParcelNotFound;
 import com.warehouse.warehouse.model.Parcel;
 import com.warehouse.warehouse.model.ParcelNotification;
@@ -36,14 +38,16 @@ public class ParcelService {
     @Transactional
     public void save(Parcel parcel) throws Exception {
 
-        customerRepository.save(parcel.getCustomer());
+        parcel.setPaymentStatus(PaymentStatus.NOT_PAID);
+        parcel.setParcelType(ParcelType.AVERAGE);
+        parcel.setPrice(parcel.getParcelType().getPrice());
         parcelRepository.save(parcel);
 
         mailService.sendNotification(new ParcelNotification
                 ("Została przez Państwa nadana przesyłka ",
-                        parcel.getCustomer().getEmailAddress(), "Docelowa destynacja paczki to: " +
-                        parcel.getRecipient().getCity() + ", "
-                        + parcel.getRecipient().getStreet() + "\n" +
+                        parcel.getRecipientEmail(), "Docelowa destynacja paczki to: " +
+                        parcel.getRecipientCity() + ", "
+                        + parcel.getRecipientStreet() + "\n" +
                         "Kod Państwa paczki to: " + parcel.getId().toString()
                         + "\nProsimy wejść w poniższy link by pobrać etykietę: " +
                         "\n" + "http://localhost:8080/api/parcels/toPDF/" + parcel.getId().toString()));

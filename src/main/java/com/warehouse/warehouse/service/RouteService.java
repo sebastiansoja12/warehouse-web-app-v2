@@ -43,7 +43,6 @@ public class RouteService {
         }
 
         route.setUser(getCurrentUser());
-        parcel.setCustom(route.getParcel().isCustom());
         route.setSupplier(supplier);
         route.setParcel(parcel);
         route.setCreated(LocalDateTime.now(ZoneId.of(String.valueOf(ZoneId.systemDefault()))));
