@@ -30,7 +30,6 @@ public class AuthController {
         this.authService = authService;
         this.refreshTokenService = refreshTokenService;
     }
-
     @PostMapping("/signup")
     public void signup(@RequestBody RegisterRequest registerRequest) {
         authService.signup(registerRequest);

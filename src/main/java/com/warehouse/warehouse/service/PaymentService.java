@@ -32,9 +32,6 @@ public class PaymentService {
 
     private final PaymentMapper mapper;
 
-    private PaymentInformation paymentInformation;
-
-
     public Payment createPayment(
             String description,
             String cancelUrl,
@@ -62,9 +59,6 @@ public class PaymentService {
         redirectUrls.setCancelUrl(cancelUrl);
         redirectUrls.setReturnUrl(successUrl);
         payment.setRedirectUrls(redirectUrls);
-        paymentInformation.setParcel(parcel);
-        paymentInformation.setParcelStatus(ParcelStatus.NOT_PAID);
-        paymentRepository.save(paymentInformation);
 
         return payment.create(apiContext);
     }
@@ -78,19 +72,22 @@ public class PaymentService {
     }
 
     public String payment(Parcel parcel) throws PayPalRESTException {
+        PaymentInformation paymentInformation = new PaymentInformation();
         Payment payment = createPayment("Payment for parcel: "
                         + parcel.getId(),
                 "http://localhost:8080/api/payments" + CANCEL_URL,
                 "http://localhost:8080/api/payments" + SUCCESS_URL,
                          parcel);
+        paymentInformation.setParcel(parcel);
+        paymentInformation.setParcelStatus(ParcelStatus.NOT_PAID);
         paymentInformation.setPaypalId(payment.getId());
         for (Links link : payment.getLinks()) {
             if (link.getRel().equals("approval_url")) {
                 paymentInformation.setPaymentUrl(link.getHref());
+                paymentRepository.save(paymentInformation);
                 return link.getHref();
             }
         }
-
         return "";
     }
 
@@ -110,7 +107,6 @@ public class PaymentService {
     }
 
     public String cancelPayment() {
-        paymentInformation.setParcelStatus(ParcelStatus.RETURNED);
         return "Płatność została anulowana";
     }
 
