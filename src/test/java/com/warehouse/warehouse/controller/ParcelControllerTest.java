@@ -46,7 +46,7 @@ class ParcelControllerTest {
     void shouldSaveParcel(){
         Parcel parcel = new Parcel();
         parcel.setParcelType(ParcelType.TINY);
-        parcel.setPrice();
+        parcel.setPrice(parcel.getParcelType().getPrice());
         parcelRepository.save(parcel);
     }
 
