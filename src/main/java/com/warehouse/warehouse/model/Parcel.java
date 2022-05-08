@@ -1,7 +1,7 @@
 package com.warehouse.warehouse.model;
 
 import com.warehouse.warehouse.enumeration.ParcelType;
-import com.warehouse.warehouse.enumeration.PaymentStatus;
+import com.warehouse.warehouse.enumeration.ParcelStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -71,8 +72,6 @@ public class Parcel {
     @NotBlank
     @Pattern(regexp="\\d{2}-\\d{3}")
     private String recipientPostalCode;
-
-    private PaymentStatus paymentStatus;
 
     private ParcelType parcelType;
 

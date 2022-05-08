@@ -7,10 +7,11 @@ public enum ParcelType {
     MEDIUM("30cmx30cmx30cm", 20),
     AVERAGE("50cmx50cmx50cm", 30),
     BIG("80cmx80cmx80cm", 50),
-    CUSTOM("XcmXcmXcm", 70);
+    CUSTOM("XcmXcmXcm", 70),
+    TEST("test", 99);
 
     private final String parcelSize;
-    private final double price;
+    public final double price;
 
     ParcelType(String size, double price) {
         this.parcelSize = size;

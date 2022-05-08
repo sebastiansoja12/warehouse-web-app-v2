@@ -1,15 +1,11 @@
 package com.warehouse.warehouse.service;
 
 import com.lowagie.text.DocumentException;
-import com.warehouse.warehouse.enumeration.ParcelType;
-import com.warehouse.warehouse.enumeration.PaymentStatus;
+import com.paypal.base.rest.PayPalRESTException;
 import com.warehouse.warehouse.exceptions.ParcelNotFound;
 import com.warehouse.warehouse.model.Parcel;
 import com.warehouse.warehouse.model.ParcelNotification;
-import com.warehouse.warehouse.model.Payment;
-import com.warehouse.warehouse.repository.CustomerRepository;
 import com.warehouse.warehouse.repository.ParcelRepository;
-import com.warehouse.warehouse.repository.PaymentRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Example;
@@ -31,18 +27,16 @@ import java.util.UUID;
 public class ParcelService {
 
     private final ParcelRepository parcelRepository;
-    private final CustomerRepository customerRepository;
     private final MailService mailService;
     private final ParcelExportService parcelExportService;
 
-    @Transactional
-    public void save(Parcel parcel) throws Exception {
+    private final PaymentService paymentService;
 
-        parcel.setPaymentStatus(PaymentStatus.NOT_PAID);
-        parcel.setParcelType(ParcelType.AVERAGE);
+    @Transactional
+    public UUID save(Parcel parcel) throws PayPalRESTException {
         parcel.setPrice(parcel.getParcelType().getPrice());
         parcelRepository.save(parcel);
-
+        paymentService.payment(parcel);
         mailService.sendNotification(new ParcelNotification
                 ("Została przez Państwa nadana przesyłka ",
                         parcel.getRecipientEmail(), "Docelowa destynacja paczki to: " +
@@ -50,7 +44,11 @@ public class ParcelService {
                         + parcel.getRecipientStreet() + "\n" +
                         "Kod Państwa paczki to: " + parcel.getId().toString()
                         + "\nProsimy wejść w poniższy link by pobrać etykietę: " +
-                        "\n" + "http://localhost:8080/api/parcels/toPDF/" + parcel.getId().toString()));
+                        "\n" + "http://localhost:8080/api/parcels/" + parcel.getId().toString() + "/label" +
+                          "\nAby opłacić przesyłkę prosimy wcisnąć w link: " + paymentService.payment(parcel)));
+
+        return parcel.getId();
+
     }
 
 
