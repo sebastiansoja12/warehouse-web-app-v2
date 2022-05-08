@@ -36,7 +36,7 @@ public class PaymentInformation {
     private String paymentUrl;
 
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(orphanRemoval = true)
     private Parcel parcel;
 
 

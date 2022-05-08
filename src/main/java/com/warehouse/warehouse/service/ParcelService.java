@@ -2,6 +2,7 @@ package com.warehouse.warehouse.service;
 
 import com.lowagie.text.DocumentException;
 import com.paypal.base.rest.PayPalRESTException;
+import com.warehouse.warehouse.enumeration.ParcelType;
 import com.warehouse.warehouse.exceptions.ParcelNotFound;
 import com.warehouse.warehouse.model.Parcel;
 import com.warehouse.warehouse.model.ParcelNotification;
@@ -29,14 +30,13 @@ public class ParcelService {
     private final ParcelRepository parcelRepository;
     private final MailService mailService;
     private final ParcelExportService parcelExportService;
-
     private final PaymentService paymentService;
 
     @Transactional
-    public UUID save(Parcel parcel) throws PayPalRESTException {
-        parcel.setPrice(parcel.getParcelType().getPrice());
+    public String save(Parcel parcel) throws PayPalRESTException {
+        parcel.setParcelType(ParcelType.AVERAGE);
         parcelRepository.save(parcel);
-        paymentService.payment(parcel);
+        final String payment = paymentService.payment(parcel);
         mailService.sendNotification(new ParcelNotification
                 ("Została przez Państwa nadana przesyłka ",
                         parcel.getRecipientEmail(), "Docelowa destynacja paczki to: " +
@@ -45,9 +45,9 @@ public class ParcelService {
                         "Kod Państwa paczki to: " + parcel.getId().toString()
                         + "\nProsimy wejść w poniższy link by pobrać etykietę: " +
                         "\n" + "http://localhost:8080/api/parcels/" + parcel.getId().toString() + "/label" +
-                          "\nAby opłacić przesyłkę prosimy wcisnąć w link: " + paymentService.payment(parcel)));
+                          "\nAby opłacić przesyłkę prosimy wcisnąć w link: " + payment));
 
-        return parcel.getId();
+        return payment;
 
     }
 

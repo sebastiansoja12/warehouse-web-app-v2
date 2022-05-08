@@ -20,8 +20,8 @@ public class ParcelController {
     private final ParcelService parcelService;
 
     @PostMapping
-    public UUID addParcel(@RequestBody Parcel parcel) throws Exception {
-       return parcelService.save(parcel);
+    public String addParcel(@RequestBody Parcel parcel) throws Exception {
+        return parcelService.save(parcel);
     }
 
     @GetMapping
