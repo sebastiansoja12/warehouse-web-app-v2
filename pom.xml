@@ -15,7 +15,6 @@
 	<description>Prototype warehouse app</description>
 
 	<properties>
-		<java.version>11</java.version>
 		<sonar.organization>sebastiansoja</sonar.organization>
 	</properties>
 	<repositories>
@@ -199,10 +198,10 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.5.1</version>
+				<version>3.8.0</version>
 				<configuration>
-					<source>10</source>
-					<target>10</target>
+					<source>11</source>
+					<target>11</target>
 					<annotationProcessorPaths>
 						<path>
 							<groupId>org.projectlombok</groupId>
