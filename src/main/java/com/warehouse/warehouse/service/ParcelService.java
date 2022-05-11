@@ -33,6 +33,8 @@ public class ParcelService {
     private final ParcelExportService parcelExportService;
     private final PaymentService paymentService;
 
+    private final String url = "https://inparcel.herokuapp.com";
+
     @Transactional
     public String save(Parcel parcel) throws HttpMessageNotReadableException, PayPalRESTException {
         parcel.setPrice(parcel.getParcelType().getPrice());
@@ -45,7 +47,7 @@ public class ParcelService {
                         + parcel.getRecipientStreet() + "\n" +
                         "Kod Państwa paczki to: " + parcel.getId().toString()
                         + "\nProsimy wejść w poniższy link by pobrać etykietę: " +
-                        "\n" + "http://localhost:8080/api/parcels/" + parcel.getId().toString() + "/label" +
+                        "\n" + url + "/api/parcels/" + parcel.getId().toString() + "/label" +
                           "\nAby opłacić przesyłkę prosimy wcisnąć w link: " + payment));
 
         return payment;
