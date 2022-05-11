@@ -1,6 +1,10 @@
 package com.warehouse.warehouse.model;
 
 
+import com.paypal.api.payments.Payment;
+import com.paypal.base.rest.APIContext;
+import com.paypal.base.rest.PayPalRESTException;
+import com.warehouse.warehouse.enumeration.ParcelStatus;
 import com.warehouse.warehouse.enumeration.PaymentPass;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +19,7 @@ import javax.persistence.*;
 @Entity
 @Builder
 @Table(name = "payment")
-public class Payment {
+public class PaymentInformation {
 
     @Id
     @GeneratedValue()
@@ -27,11 +31,13 @@ public class Payment {
 
     private PaymentPass paymentPass;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    private Parcel parcel;
+    private ParcelStatus parcelStatus;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    private Customer customer;
+    private String paymentUrl;
+
+
+    @OneToOne(orphanRemoval = true)
+    private Parcel parcel;
 
 
 

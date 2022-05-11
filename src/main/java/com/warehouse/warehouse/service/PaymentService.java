@@ -3,8 +3,13 @@ package com.warehouse.warehouse.service;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
+import com.warehouse.warehouse.enumeration.ParcelStatus;
 import com.warehouse.warehouse.enumeration.PaymentPass;
+import com.warehouse.warehouse.mapper.PaymentMapper;
 import com.warehouse.warehouse.model.Customer;
+import com.warehouse.warehouse.model.Order;
+import com.warehouse.warehouse.model.Parcel;
+import com.warehouse.warehouse.model.PaymentInformation;
 import com.warehouse.warehouse.repository.CustomerRepository;
 import com.warehouse.warehouse.repository.PaymentRepository;
 import lombok.AllArgsConstructor;
@@ -14,6 +19,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -21,20 +27,19 @@ public class PaymentService {
 
     private final APIContext apiContext;
     private final PaymentRepository paymentRepository;
-    private final CustomerRepository customerRepository;
     private final String SUCCESS_URL = "/pay/success";
     private final String CANCEL_URL = "/pay/cancel";
 
+    private final PaymentMapper mapper;
+
     public Payment createPayment(
-            Double total,
-            PaymentPass pass,
             String description,
             String cancelUrl,
-            String successUrl) throws PayPalRESTException {
+            String successUrl,
+            Parcel parcel) throws PayPalRESTException {
         Amount amount = new Amount();
         amount.setCurrency("PLN");
-        total = BigDecimal.valueOf(total).setScale(2, RoundingMode.HALF_UP).doubleValue();
-        amount.setTotal(String.format("%.2f", total));
+        amount.setTotal(String.format("%.3f", parcel.getPrice()));
 
         Transaction transaction = new Transaction();
         transaction.setDescription(description);
@@ -47,7 +52,7 @@ public class PaymentService {
         payer.setPaymentMethod("paypal");
 
         Payment payment = new Payment();
-        payment.setIntent(pass.name());
+        payment.setIntent("ORDER");
         payment.setPayer(payer);
         payment.setTransactions(transactions);
         RedirectUrls redirectUrls = new RedirectUrls();
@@ -59,47 +64,53 @@ public class PaymentService {
     }
 
     public Payment executePayment(String paymentId, String payerId) throws PayPalRESTException {
-        // COUR-011 for now test customer, finding customers will be implemented later
-        Customer customer = customerRepository.getById(44L);
         Payment payment = new Payment();
         payment.setId(paymentId);
         PaymentExecution paymentExecute = new PaymentExecution();
         paymentExecute.setPayerId(payerId);
-        com.warehouse.warehouse.model.Payment payment1 = com.warehouse.warehouse.model.Payment.builder()
-                .paymentPass(PaymentPass.ORDER)
-                .paypalId(paymentId)
-                .customer(customer)
-                .build();
-        paymentRepository.save(payment1);
         return payment.execute(apiContext, paymentExecute);
     }
 
-    public String payment(com.warehouse.warehouse.model.Order order) throws PayPalRESTException {
-        Payment payment = createPayment(order.getPrice(), PaymentPass.ORDER, order.getDescription(),
+    public String payment(Parcel parcel) throws PayPalRESTException {
+        PaymentInformation paymentInformation = new PaymentInformation();
+        Payment payment = createPayment("Payment for parcel: "
+                        + parcel.getId(),
                 "http://localhost:8080/api/payments" + CANCEL_URL,
-                "http://localhost:8080/api/payments" + SUCCESS_URL);
+                "http://localhost:8080/api/payments" + SUCCESS_URL,
+                         parcel);
+        paymentInformation.setParcel(parcel);
+        paymentInformation.setParcelStatus(ParcelStatus.NOT_PAID);
+        paymentInformation.setPaypalId(payment.getId());
         for (Links link : payment.getLinks()) {
             if (link.getRel().equals("approval_url")) {
-                return "redirect:" + link.getHref();
+                paymentInformation.setPaymentUrl(link.getHref());
+                paymentRepository.save(paymentInformation);
+                return link.getHref();
             }
         }
-
-        return "redirect:/";
+        return "";
     }
 
     public String successPay(String paymentId, String payerId) throws PayPalRESTException {
         Payment payment = executePayment(paymentId, payerId);
+        PaymentInformation paymentInformationToUpdate = paymentRepository.findByPaypalId(payment.getId());
         if (payment.getState().equals("approved")) {
+            paymentInformationToUpdate.setParcelStatus(ParcelStatus.PAID);
+            paymentRepository.save(paymentInformationToUpdate);
             return "Płatność powiodła się";
         }
         return "Płatność nie powiodła się";
     }
 
-    public List<com.warehouse.warehouse.model.Payment> getAll() {
+    public List<PaymentInformation> getAll() {
         return paymentRepository.findAll();
     }
 
     public String cancelPayment() {
         return "Płatność została anulowana";
+    }
+
+    public PaymentInformation findByParcelId(UUID id) {
+        return paymentRepository.findByParcel_id(id);
     }
 }
