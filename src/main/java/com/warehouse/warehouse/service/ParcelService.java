@@ -10,6 +10,7 @@ import com.warehouse.warehouse.repository.ParcelRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Example;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,8 +34,8 @@ public class ParcelService {
     private final PaymentService paymentService;
 
     @Transactional
-    public String save(Parcel parcel) throws PayPalRESTException {
-        parcel.setParcelType(ParcelType.AVERAGE);
+    public String save(Parcel parcel) throws HttpMessageNotReadableException, PayPalRESTException {
+        parcel.setPrice(parcel.getParcelType().getPrice());
         parcelRepository.save(parcel);
         final String payment = paymentService.payment(parcel);
         mailService.sendNotification(new ParcelNotification
