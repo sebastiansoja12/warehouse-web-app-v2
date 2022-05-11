@@ -2,6 +2,7 @@ package com.warehouse.warehouse.service;
 
 import com.lowagie.text.DocumentException;
 import com.paypal.base.rest.PayPalRESTException;
+import com.warehouse.warehouse.enumeration.ParcelType;
 import com.warehouse.warehouse.exceptions.ParcelNotFound;
 import com.warehouse.warehouse.model.Parcel;
 import com.warehouse.warehouse.model.ParcelNotification;
@@ -9,6 +10,7 @@ import com.warehouse.warehouse.repository.ParcelRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Example;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,14 +31,13 @@ public class ParcelService {
     private final ParcelRepository parcelRepository;
     private final MailService mailService;
     private final ParcelExportService parcelExportService;
-
     private final PaymentService paymentService;
 
     @Transactional
-    public UUID save(Parcel parcel) throws PayPalRESTException {
+    public String save(Parcel parcel) throws HttpMessageNotReadableException, PayPalRESTException {
         parcel.setPrice(parcel.getParcelType().getPrice());
         parcelRepository.save(parcel);
-        paymentService.payment(parcel);
+        final String payment = paymentService.payment(parcel);
         mailService.sendNotification(new ParcelNotification
                 ("Została przez Państwa nadana przesyłka ",
                         parcel.getRecipientEmail(), "Docelowa destynacja paczki to: " +
@@ -45,9 +46,9 @@ public class ParcelService {
                         "Kod Państwa paczki to: " + parcel.getId().toString()
                         + "\nProsimy wejść w poniższy link by pobrać etykietę: " +
                         "\n" + "http://localhost:8080/api/parcels/" + parcel.getId().toString() + "/label" +
-                          "\nAby opłacić przesyłkę prosimy wcisnąć w link: " + paymentService.payment(parcel)));
+                          "\nAby opłacić przesyłkę prosimy wcisnąć w link: " + payment));
 
-        return parcel.getId();
+        return payment;
 
     }
 
