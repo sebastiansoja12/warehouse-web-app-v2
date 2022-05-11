@@ -32,6 +32,8 @@ public class PaymentService {
 
     private final PaymentMapper mapper;
 
+    private final String url = "https://inparcel.herokuapp.com";
+
     public Payment createPayment(
             String description,
             String cancelUrl,
@@ -75,8 +77,8 @@ public class PaymentService {
         PaymentInformation paymentInformation = new PaymentInformation();
         Payment payment = createPayment("Payment for parcel: "
                         + parcel.getId(),
-                "http://localhost:8080/api/payments" + CANCEL_URL,
-                "http://localhost:8080/api/payments" + SUCCESS_URL,
+                url + "/api/payments" + CANCEL_URL,
+                url + "/api/payments" + SUCCESS_URL,
                          parcel);
         paymentInformation.setParcel(parcel);
         paymentInformation.setParcelStatus(ParcelStatus.NOT_PAID);
