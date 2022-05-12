@@ -27,8 +27,7 @@ class ParcelMapperTest {
 
 
         // then
-        assertEquals(dto.getCustomerId(), entity.getCustomer().getId());
         assertEquals(dto.getParcelType().name(), entity.getParcelType().name());
-        assertEquals(dto.getRecipientId(), entity.getRecipient().getId());
+
     }
 }
