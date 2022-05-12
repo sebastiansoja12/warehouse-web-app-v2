@@ -50,10 +50,6 @@ class ParcelControllerTest {
         parcelRepository.save(parcel);
     }
 
-    private Customer buildCustomer() {
-        return Customer.builder().build();
-    }
-
     @Test
     @Transactional
     void shouldGetSingleParcel() throws Exception {

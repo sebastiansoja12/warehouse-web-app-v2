@@ -1,7 +1,6 @@
 package com.warehouse.warehouse.mapper;
 
 
-import com.warehouse.warehouse.dto.CustomerDto;
 import com.warehouse.warehouse.model.Customer;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

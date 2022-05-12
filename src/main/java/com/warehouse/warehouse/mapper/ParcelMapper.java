@@ -9,7 +9,5 @@ import org.mapstruct.Mapping;
 @Mapper
 public interface ParcelMapper {
 
-    @Mapping(target = "customer.id", source = "customerId")
-    @Mapping(target = "recipient.id", source = "recipientId")
     Parcel map(ParcelDto parcel);
 }
