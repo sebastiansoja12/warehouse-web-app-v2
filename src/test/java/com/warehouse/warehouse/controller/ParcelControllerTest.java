@@ -2,7 +2,6 @@ package com.warehouse.warehouse.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.warehouse.warehouse.enumeration.ParcelType;
-import com.warehouse.warehouse.model.Customer;
 import com.warehouse.warehouse.model.Parcel;
 import com.warehouse.warehouse.repository.ParcelRepository;
 import com.warehouse.warehouse.repository.PaymentRepository;
@@ -48,10 +47,6 @@ class ParcelControllerTest {
         parcel.setParcelType(ParcelType.TINY);
         parcel.setPrice(parcel.getParcelType().getPrice());
         parcelRepository.save(parcel);
-    }
-
-    private Customer buildCustomer() {
-        return Customer.builder().build();
     }
 
     @Test
