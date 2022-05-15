@@ -11,7 +11,5 @@ public class ParcelDto {
 
     private double price;
 
-    private boolean isCustom;
-
     private ParcelTypeDto parcelType;
 }
