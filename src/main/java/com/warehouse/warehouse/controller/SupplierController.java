@@ -30,6 +30,10 @@ public class SupplierController {
         return supplierService.save(supplier);
     }
 
+    @PostMapping("/multiple")
+    public List<Supplier> saveMultipleySuppliers(@RequestBody List<SupplierDto> supplier){
+        return supplierService.saveMultipleSuppliers(supplier);
+    }
     @DeleteMapping("/{supplierCode}")
     public void deleteSupplier(@PathVariable String supplierCode){
         supplierService.delete(supplierCode);

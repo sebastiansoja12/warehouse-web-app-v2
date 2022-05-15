@@ -1,13 +1,10 @@
 package com.warehouse.warehouse.config;
 
 
-import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.OAuthTokenCredential;
 import com.paypal.base.rest.PayPalRESTException;
-import com.warehouse.warehouse.mapper.PaymentMapper;
 import com.warehouse.warehouse.model.PaymentInformation;
-import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -48,10 +45,6 @@ public class PaymentConfig {
         return context;
     }
 
-    @Bean
-    public PaymentMapper mapper() {
-        return Mappers.getMapper(PaymentMapper.class);
-    }
 
     @Bean
     public PaymentInformation paymentInformation() {
