@@ -2,14 +2,12 @@ package com.warehouse.warehouse.service;
 
 import com.lowagie.text.DocumentException;
 import com.paypal.base.rest.PayPalRESTException;
-import com.warehouse.warehouse.enumeration.ParcelType;
 import com.warehouse.warehouse.exceptions.ParcelNotFound;
 import com.warehouse.warehouse.model.Parcel;
 import com.warehouse.warehouse.model.ParcelNotification;
 import com.warehouse.warehouse.repository.ParcelRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Example;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

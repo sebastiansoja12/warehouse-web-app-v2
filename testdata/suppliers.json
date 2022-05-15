@@ -1,22 +1,22 @@
 [
   {
     "supplierCode": "ANG_POZ",
-    "supplierFirstName": "Angelika",
-    "supplierLastName": "Lipinska",
-    "supplierTelephoneNumber": "123456789",
-    "supplierDepotCode": "POZ"
+    "firstName": "Angelika",
+    "lastName": "Lipinska",
+    "telephone": "123456789",
+    "depotCode": "POZ"
   },
   {
     "supplierCode": "SEB_KT1",
-    "supplierFirstName": "Sebastian",
-    "supplierLastName": "Soja",
-    "supplierTelephoneNumber": "987654321",
-    "supplierDepotCode": "KT1"
+    "firstName": "Sebastian",
+    "lastName": "Soja",
+    "telephone": "987654321",
+    "depotCode": "KT1"
   },
   { "supplierCode": "ADA_WA1",
-    "supplierFirstName": "Adam",
-    "supplierLastName": "Kowalski",
-    "supplierTelephoneNumber": "981273645",
-    "supplierDepotCode": "WA1"
+    "firstName": "Adam",
+    "lastName": "Kowalski",
+    "telephone": "981273645",
+    "depotCode": "WA1"
   }
 ]

@@ -32,9 +32,9 @@ public class SupplierService {
     public Supplier save(SupplierDto supplier){
         return supplierRepository.save(Supplier.builder()
                 .supplierCode(supplier.getSupplierCode())
-                .firstName(supplier.getSupplierFirstName())
-                .lastName(supplier.getSupplierLastName())
-                .telephone(supplier.getSupplierTelephoneNumber())
+                .firstName(supplier.getFirstName())
+                .lastName(supplier.getLastName())
+                .telephone(supplier.getTelephone())
                 .depot(getDepotByCode(supplier))
                 .build());
     }
@@ -43,13 +43,17 @@ public class SupplierService {
         return supplierRepository.saveAll(supplierMapper.mapToList(supplier));
     }
 
+    public List<Supplier> saveMultipleSuppliersDisabled(List<Supplier> suppliers) {
+        return supplierRepository.saveAll(suppliers);
+    }
+
     public void delete(String supplierCode){
         Supplier supplierToDelete = supplierRepository.findBySupplierCode(supplierCode);
         supplierRepository.delete(supplierToDelete);
     }
 
     public Depot getDepotByCode(SupplierDto supplier){
-        return depotRepository.findByDepotCode(supplier.getSupplierDepotCode()).orElseThrow(() ->
+        return depotRepository.findByDepotCode(supplier.getDepotCode()).orElseThrow(() ->
                 new DepotNotFound("Given depot doesnt exist!"));
     }
 }

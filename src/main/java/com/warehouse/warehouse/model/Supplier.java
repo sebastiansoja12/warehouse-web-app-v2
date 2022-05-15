@@ -28,6 +28,6 @@ public class Supplier {
 
     private String telephone;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToOne()
     private Depot depot;
 }

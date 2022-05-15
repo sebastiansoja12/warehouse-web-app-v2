@@ -6,16 +6,16 @@ import com.warehouse.warehouse.model.Supplier;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import javax.persistence.ManyToOne;
 import java.util.List;
 
 @Mapper
 public interface SupplierMapper {
-    @Mapping(target = "supplierId", source = "id")
-    @Mapping(target = "supplierFirstName", source = "firstName")
-    @Mapping(target = "supplierLastName", source = "lastName")
-    @Mapping(target = "supplierTelephoneNumber", source = "telephone")
-    @Mapping(target = "supplierDepotCode", source = "depot.depotCode")
+
     SupplierDto map(Supplier supplier);
+
+    @Mapping(target = "depot.depotCode", source = "depotCode")
+    Supplier mapToDto(SupplierDto supplier);
 
     List<Supplier> mapToList(List<SupplierDto> supplierDtoList);
 }

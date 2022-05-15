@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 @Data
 @AllArgsConstructor
@@ -24,13 +23,11 @@ public class User {
     private int id;
 
     @JsonProperty()
-    @NotBlank
-    @NotNull
+    @Column(unique = true, nullable = false)
     private String username;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @NotBlank
-    @NotNull
+    @Column(nullable = false)
     private String password;
 
 
@@ -42,15 +39,13 @@ public class User {
 
     @Email
     @NotBlank
-    @NotNull
+    @Column(unique = true, nullable = false)
     private String email;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String role;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @NotBlank
-    @NotNull
+    @ManyToOne()
     private Depot depot;
 
 

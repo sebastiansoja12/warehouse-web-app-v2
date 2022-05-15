@@ -3,7 +3,6 @@ package com.warehouse.warehouse.mapper;
 import com.warehouse.warehouse.dto.ParcelDto;
 import com.warehouse.warehouse.dto.ParcelTypeDto;
 import com.warehouse.warehouse.model.Parcel;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
