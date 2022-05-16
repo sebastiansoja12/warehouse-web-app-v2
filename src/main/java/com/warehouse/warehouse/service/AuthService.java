@@ -32,7 +32,6 @@ import java.util.Optional;
 public class AuthService {
 
     private final PasswordEncoder passwordEncoder;
-    private final VerificationTokenRepository verificationTokenRepository;
     private final AuthenticationManager authenticationManager;
     private final JwtProvider jwtProvider;
     private final RefreshTokenService refreshTokenService;

@@ -2,6 +2,7 @@ package com.warehouse.warehouse.service;
 
 import com.warehouse.warehouse.dto.SupplierDto;
 import com.warehouse.warehouse.exceptions.DepotNotFound;
+import com.warehouse.warehouse.mapper.SupplierMapper;
 import com.warehouse.warehouse.model.Depot;
 import com.warehouse.warehouse.model.Supplier;
 import com.warehouse.warehouse.repository.DepotRepository;
@@ -18,6 +19,8 @@ public class SupplierService {
     private final SupplierRepository supplierRepository;
     private final DepotRepository depotRepository;
 
+    private final SupplierMapper supplierMapper;
+
     public Supplier findBySupplierCode(String supplierCode) {
         return supplierRepository.findBySupplierCode(supplierCode);
     }
@@ -27,13 +30,17 @@ public class SupplierService {
     }
 
     public Supplier save(SupplierDto supplier){
-        return Supplier.builder()
+        return supplierRepository.save(Supplier.builder()
                 .supplierCode(supplier.getSupplierCode())
                 .firstName(supplier.getSupplierFirstName())
                 .lastName(supplier.getSupplierLastName())
                 .telephone(supplier.getSupplierTelephoneNumber())
                 .depot(getDepotByCode(supplier))
-                .build();
+                .build());
+    }
+
+    public List<Supplier> saveMultipleSuppliers(List<SupplierDto> supplier) {
+        return supplierRepository.saveAll(supplierMapper.mapToList(supplier));
     }
 
     public void delete(String supplierCode){

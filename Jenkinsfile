@@ -8,7 +8,7 @@ def regularAnalysis = '-Dsonar.branch.name=${GIT_BRANCH_NAME}'
 
 @Field
 def pullRequestAnalysis = '-Dsonar.pullrequest.branch=${GIT_BRANCH_NAME} \
-                           -Dsonar.pullrequest.base=VERSION_2022.3'
+                           -Dsonar.pullrequest.base=master'
 
 
 pipeline {

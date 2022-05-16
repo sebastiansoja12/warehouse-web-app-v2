@@ -1,4 +1,4 @@
-package com.warehouse.warehouse.controller;
+package com.warehouse.warehouse.exceptionhandler;
 
 import com.warehouse.warehouse.exceptions.WarehouseException;
 import org.springframework.http.HttpStatus;

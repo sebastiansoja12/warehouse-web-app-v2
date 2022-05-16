@@ -60,19 +60,14 @@ public class ParcelService {
         return parcelRepository.findAll();
     }
 
-    @Transactional(readOnly = true)
     public Parcel findById(UUID id) {
-        if (parcelRepository.exists(Example.of(parcelRepository.findById(id).orElseThrow()))) {
-            return parcelRepository.findById(id).orElseThrow();
-
-        }
-        return null;
+        return parcelRepository.findById(id).orElseThrow( () -> new ParcelNotFound("Paczka nie zostala znaleziona"));
     }
 
-    public void exportParcelToPdfById(HttpServletResponse response, UUID id) throws Exception {
+    public void exportParcelToPdfById(HttpServletResponse response, UUID id) throws Exception, ParcelNotFound {
 
         Parcel parcel = parcelRepository.findById(id)
-                .orElseThrow(() -> new ParcelNotFound("Paczka o id " + id.toString() + " nie zostala znaleziona"));
+                .orElseThrow(() -> new ParcelNotFound("Paczka nie zostala znaleziona"));
         response.setContentType("application/pdf");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         String currentDateTime = dateFormatter.format(new java.util.Date());
@@ -85,7 +80,7 @@ public class ParcelService {
 
     public void exportParcelToCSVById(HttpServletResponse response, UUID id) throws DocumentException, IOException {
         Parcel parcel = parcelRepository.findById(id)
-                .orElseThrow(() -> new ParcelNotFound("Paczka o id " + id.toString() + " nie zostala znaleziona"));
+                .orElseThrow(() -> new ParcelNotFound("Paczka o id " + id + " nie zostala znaleziona"));
         response.setContentType("text/csv");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
         String currentDateTime = dateFormatter.format(new Date());
