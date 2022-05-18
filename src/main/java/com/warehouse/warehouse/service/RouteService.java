@@ -1,7 +1,6 @@
 package com.warehouse.warehouse.service;
 
 
-import com.warehouse.warehouse.enumeration.ParcelStatus;
 import com.warehouse.warehouse.exceptions.ParcelNotFound;
 import com.warehouse.warehouse.exceptions.WarehouseException;
 import com.warehouse.warehouse.model.*;
@@ -17,7 +16,6 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -31,10 +29,9 @@ public class RouteService {
     private final AuthService authService;
     private final DepotRepository depotRepository;
     private final SupplierRepository supplierRepository;
-    private final List<Route> temporaryRouteList;
 
     @Transactional
-    public List<Route> temporarySave(Route route){
+    public void save(Route route){
         Parcel parcel = parcelRepository.getById(route.getParcel().getId());
         Supplier supplier = supplierRepository.findBySupplierCode(route.getSupplier().getSupplierCode());
 
@@ -48,10 +45,9 @@ public class RouteService {
         route.setParcel(parcel);
         route.setCreated(LocalDateTime.now(ZoneId.of(String.valueOf(ZoneId.systemDefault()))));
         route.setDepot(findUsersDepot());
-        route.setId(UUID.randomUUID());
 
-        temporaryRouteList.add(route);
-        return temporaryRouteList;
+        routeRepository.save(route);
+
     }
 
     public User getCurrentUser() {
@@ -60,23 +56,6 @@ public class RouteService {
 
     public Depot findUsersDepot(){
         return depotRepository.findById(getCurrentUser().getDepot().getId()).orElseThrow(null);
-    }
-
-    public void save() {
-        List<Route> temporaryRoutesByUser = temporaryRouteList
-                .stream()
-                .filter(u -> u.getUser().getUsername().equals(getCurrentUser().getUsername()))
-                .collect(Collectors.toList());
-        routeRepository.saveAll(temporaryRoutesByUser);
-        temporaryRoutesByUser.removeIf(u -> u.getUser().getUsername().equals(getCurrentUser().getUsername()));
-        temporaryRouteList.removeIf(u -> u.getUser().getUsername().equals(getCurrentUser().getUsername()));
-    }
-
-    public List<Route> findAllTemporaryRoutesByUsername() {
-        return temporaryRouteList
-                .stream()
-                .filter(p -> p.getUser().equals(getCurrentUser()))
-                .collect(Collectors.toList());
     }
 
     public List<Route> findAllRoutes() {
