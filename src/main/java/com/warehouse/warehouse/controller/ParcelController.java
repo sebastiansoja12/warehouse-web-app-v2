@@ -30,19 +30,19 @@ public class ParcelController {
     }
 
     @GetMapping("/{id}")
-    public Parcel getParcelByParcelId(@PathVariable UUID id) {
+    public Parcel findById(@PathVariable UUID id) {
         return parcelService.findById(id);
     }
 
     @GetMapping("/{id}/label")
-    public void exportParcelByIdToPdf(HttpServletResponse reponse, @PathVariable UUID id) throws Exception {
-        parcelService.exportParcelToPdfById(reponse, id);
+    public void exportParcelByIdToPdf(HttpServletResponse response, @PathVariable UUID id) throws Exception {
+        parcelService.exportParcelToPdfById(response, id);
     }
 
     @GetMapping("/{id}/csv")
-    public void exportPostByIdToCSV(HttpServletResponse reponse, @PathVariable UUID id) throws DocumentException,
+    public void exportPostByIdToCSV(HttpServletResponse response, @PathVariable UUID id) throws DocumentException,
             IOException {
-        parcelService.exportParcelToCSVById(reponse, id);
+        parcelService.exportParcelToCSVById(response, id);
     }
 
 }

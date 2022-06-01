@@ -60,7 +60,7 @@ public class ParcelService {
         return parcelRepository.findById(id).orElseThrow( () -> new ParcelNotFound("Paczka nie zostala znaleziona"));
     }
 
-    public void exportParcelToPdfById(HttpServletResponse response, UUID id) throws Exception, ParcelNotFound {
+    public void exportParcelToPdfById(HttpServletResponse response, UUID id) throws Exception {
 
         Parcel parcel = parcelRepository.findById(id)
                 .orElseThrow(() -> new ParcelNotFound("Paczka nie zostala znaleziona"));
