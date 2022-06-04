@@ -7,5 +7,6 @@ import org.mapstruct.Mapper;
 
 @Mapper
 public interface ParcelMapper {
-    ParcelDto map(Parcel parcel);
+
+    Parcel map(ParcelDto parcel);
 }

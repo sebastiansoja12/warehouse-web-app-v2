@@ -8,7 +8,7 @@ import com.warehouse.warehouse.dto.RegisterRequest;
 import com.warehouse.warehouse.model.User;
 import com.warehouse.warehouse.service.AuthService;
 import com.warehouse.warehouse.service.RefreshTokenService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,17 +19,13 @@ import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/api/users")
+@AllArgsConstructor
 public class AuthController {
 
 
     private final AuthService authService;
     private final RefreshTokenService refreshTokenService;
 
-    @Autowired
-    public AuthController(AuthService authService, RefreshTokenService refreshTokenService) {
-        this.authService = authService;
-        this.refreshTokenService = refreshTokenService;
-    }
     @PostMapping("/signup")
     public void signup(@RequestBody RegisterRequest registerRequest) {
         authService.signup(registerRequest);

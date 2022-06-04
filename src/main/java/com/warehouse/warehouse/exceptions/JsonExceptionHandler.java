@@ -1,6 +1,5 @@
-package com.warehouse.warehouse.controller;
+package com.warehouse.warehouse.exceptions;
 
-import com.warehouse.warehouse.exceptions.WarehouseException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

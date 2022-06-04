@@ -32,7 +32,6 @@ import java.util.Optional;
 public class AuthService {
 
     private final PasswordEncoder passwordEncoder;
-    private final VerificationTokenRepository verificationTokenRepository;
     private final AuthenticationManager authenticationManager;
     private final JwtProvider jwtProvider;
     private final RefreshTokenService refreshTokenService;
@@ -41,13 +40,6 @@ public class AuthService {
 
 
     public void signup(RegisterRequest registerRequest) {
-
-        Optional<User> ifUsernameIsTaken = userRepository.findByUsername(registerRequest.getUsername());
-        Optional<User> ifEmailIsTaken = userRepository.findByEmail(registerRequest.getEmail());
-
-        if (ifUsernameIsTaken.isPresent() || ifEmailIsTaken.isPresent()) {
-            throw new WarehouseException("User already exists");
-        }
         User user = new User();
         user.setUsername(registerRequest.getUsername());
         user.setEmail(registerRequest.getEmail());

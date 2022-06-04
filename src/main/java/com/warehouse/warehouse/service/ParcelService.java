@@ -2,14 +2,12 @@ package com.warehouse.warehouse.service;
 
 import com.lowagie.text.DocumentException;
 import com.paypal.base.rest.PayPalRESTException;
-import com.warehouse.warehouse.enumeration.ParcelType;
 import com.warehouse.warehouse.exceptions.ParcelNotFound;
 import com.warehouse.warehouse.model.Parcel;
 import com.warehouse.warehouse.model.ParcelNotification;
 import com.warehouse.warehouse.repository.ParcelRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Example;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +31,11 @@ public class ParcelService {
     private final ParcelExportService parcelExportService;
     private final PaymentService paymentService;
 
+    private final String url = "http://localhost:8080";
+
+    private final String managementUrl = "http://localhost:4200";
+
+
     @Transactional
     public String save(Parcel parcel) throws HttpMessageNotReadableException, PayPalRESTException {
         parcel.setPrice(parcel.getParcelType().getPrice());
@@ -45,8 +48,10 @@ public class ParcelService {
                         + parcel.getRecipientStreet() + "\n" +
                         "Kod Państwa paczki to: " + parcel.getId().toString()
                         + "\nProsimy wejść w poniższy link by pobrać etykietę: " +
-                        "\n" + "http://localhost:8080/api/parcels/" + parcel.getId().toString() + "/label" +
-                          "\nAby opłacić przesyłkę prosimy wcisnąć w link: " + payment));
+                        "\n" + url + "/api/parcels/" + parcel.getId().toString() + "/label" +
+                          "\nAby opłacić przesyłkę prosimy wcisnąć w link: " + payment
+                            + "\nAby zarządzać przesyłką prosimy wejść w link: " + managementUrl +
+                        "/parcel/client/management/" + parcel.getId().toString()));
 
         return payment;
 
@@ -58,19 +63,14 @@ public class ParcelService {
         return parcelRepository.findAll();
     }
 
-    @Transactional(readOnly = true)
     public Parcel findById(UUID id) {
-        if (parcelRepository.exists(Example.of(parcelRepository.findById(id).orElseThrow()))) {
-            return parcelRepository.findById(id).orElseThrow();
-
-        }
-        return null;
+        return parcelRepository.findById(id).orElseThrow( () -> new ParcelNotFound("Paczka nie zostala znaleziona"));
     }
 
     public void exportParcelToPdfById(HttpServletResponse response, UUID id) throws Exception {
 
         Parcel parcel = parcelRepository.findById(id)
-                .orElseThrow(() -> new ParcelNotFound("Paczka o id " + id.toString() + " nie zostala znaleziona"));
+                .orElseThrow(() -> new ParcelNotFound("Paczka nie zostala znaleziona"));
         response.setContentType("application/pdf");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         String currentDateTime = dateFormatter.format(new java.util.Date());
@@ -83,7 +83,7 @@ public class ParcelService {
 
     public void exportParcelToCSVById(HttpServletResponse response, UUID id) throws DocumentException, IOException {
         Parcel parcel = parcelRepository.findById(id)
-                .orElseThrow(() -> new ParcelNotFound("Paczka o id " + id.toString() + " nie zostala znaleziona"));
+                .orElseThrow(() -> new ParcelNotFound("Paczka o id " + id + " nie zostala znaleziona"));
         response.setContentType("text/csv");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
         String currentDateTime = dateFormatter.format(new Date());

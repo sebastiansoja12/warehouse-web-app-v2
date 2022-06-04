@@ -1,12 +1,15 @@
 package com.warehouse.warehouse.dto;
 
-import com.warehouse.warehouse.enumeration.ParcelType;
+import lombok.Data;
 
+@Data
 public class ParcelDto {
 
-    private double price;
+    private Long customerId;
 
-    private boolean isCustom;
+    private Long recipientId;
+
+    private double price;
 
     private ParcelTypeDto parcelType;
 }

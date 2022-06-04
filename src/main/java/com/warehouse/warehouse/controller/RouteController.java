@@ -25,25 +25,14 @@ public class RouteController {
         this.routeService = routeService;
     }
 
-    @GetMapping("/tmp")
-    public List<Route> getTemporaryRoutes(){
-        return routeService.findAllTemporaryRoutesByUsername();
-    }
-
-    @PostMapping("/tmp")
-    public List<Route> saveTemporaryRoutes(@RequestBody Route route) {
-        return routeService.temporarySave(route);
-    }
-
     @PostMapping
-    public void saveRoute() {
-        routeService.save();
+    public void saveRoute(@RequestBody Route route) {
+        routeService.save(route);
     }
 
     @GetMapping("/all/users")
     public List<Route> findAllRoutes() {
-        List<Route> allRoutes = routeService.findAllRoutes();
-        return allRoutes.stream()
+        return routeService.findAllRoutes().stream()
                 .sorted(Comparator.comparing(Route::getCreated).reversed())
                 .limit(20)
                 .collect(Collectors.toList());
@@ -51,8 +40,7 @@ public class RouteController {
 
     @GetMapping
     public List<Route> findAllByUsername() {
-        List<Route> routesByUsername = routeService.findAllByUsername();
-        return routesByUsername.stream()
+        return routeService.findAllByUsername().stream()
                 .sorted(Comparator.comparing(Route::getCreated).reversed())
                 .limit(10)
                 .collect(Collectors.toList());
