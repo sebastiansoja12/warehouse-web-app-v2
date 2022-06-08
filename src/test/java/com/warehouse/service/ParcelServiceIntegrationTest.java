@@ -3,10 +3,9 @@ package com.warehouse.service;
 
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.warehouse.inmemorydatabase.InMemoryParcelDatabase;
+import com.warehouse.configuration.ParcelServiceIntegrationTestConfiguration;
 import com.warehouse.model.Parcel;
 import com.warehouse.repository.ParcelRepository;
-import com.warehouse.configuration.ParcelServiceIntegrationTestConfiguration;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +18,17 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 
 import java.util.*;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = ParcelServiceIntegrationTestConfiguration.class)
 @TestExecutionListeners({
         DependencyInjectionTestExecutionListener.class,
         TransactionDbUnitTestExecutionListener.class
 })
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.ANY)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class ParcelServiceIntegrationTest {
-
-    @Autowired
-    private InMemoryParcelDatabase inMemoryParcelDatabase;
 
     @Autowired
     private ParcelRepository parcelRepository;
@@ -40,7 +39,7 @@ public class ParcelServiceIntegrationTest {
 
     @DatabaseSetup("/src/test/resources/data001/parcel_repository.xml")
     @Test
-    public void shouldSaveParcelInDatabase() {
+    public void shouldFindInDatabase() {
         // GIVEN: Parcel with random UUID
         final Parcel parcel = Parcel.builder()
                 .id(UUID.fromString("b9c70ce3-025c-477d-8d27-19260433b84f"))
@@ -60,7 +59,10 @@ public class ParcelServiceIntegrationTest {
         final List<Parcel> parcels = List.of(parcel);
 
         // WHEN: Parcel is saved
-        parcelRepository.save(parcel);
+        final Optional<Parcel> parcelToFind = parcelRepository
+                .findById(UUID.fromString("b9c70ce3-025c-477d-8d27-19260433b84f"));
         // THEN
+        assertTrue(parcelToFind.isPresent());
+        assertThat(parcelToFind.get().getId().equals(UUID.fromString("b9c70ce3-025c-477d-8d27-19260433b84f")));
     }
 }

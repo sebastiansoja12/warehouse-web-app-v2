@@ -8,8 +8,9 @@ public class InMemoryDepotRepository {
 
     private final List<Depot> depotList = new ArrayList<>();
 
-    public void addDepot(Depot depot) {
+    public List<Depot> addDepot(Depot depot) {
         depotList.add(depot);
+        return depotList;
     }
 
     public List<Depot> findDepots(List<Depot> depots, String depotCode) {

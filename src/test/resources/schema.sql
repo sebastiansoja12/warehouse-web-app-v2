@@ -16,5 +16,5 @@ CREATE TABLE IF NOT EXISTS PARCEL (
     `price` DOUBLE NOT NULL,
     `parcel_status` INT NULL DEFAULT NULL,
     `parcel_size` VARCHAR(255) NULL DEFAULT NULL,
-    PRIMARY KEY (`id`))
+    PRIMARY KEY (`id`)
 );

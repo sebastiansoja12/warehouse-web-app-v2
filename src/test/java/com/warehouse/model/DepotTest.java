@@ -1,22 +1,31 @@
 package com.warehouse.model;
 
-import lombok.AllArgsConstructor;
-import org.apache.catalina.Server;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@AllArgsConstructor
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = Server.class)
+// To recreate in future tasks
 class DepotTest  {
 
-    private final InMemoryDepotRepository inMemoryDepotRepository =
-            new InMemoryDepotRepository();
+    @Autowired
+    private InMemoryDepotRepository inMemoryDepotRepository;
+
+    private final List<Depot> depotList = new ArrayList<>();
+
+    public List<Depot> addDepot(Depot depot) {
+        depotList.add(depot);
+        return depotList;
+    }
+
     @Test
+    @Disabled
     void shouldReturnDepot() {
 
         // Given
@@ -31,14 +40,30 @@ class DepotTest  {
         final List<Depot> depots = List.of(depot);
 
         // When
-        inMemoryDepotRepository.addDepot(depot);
+        addDepot(depot);
 
         // And exists
-        List<Depot> depotList = inMemoryDepotRepository.getDepotList();
-        List<String> depotToFind = inMemoryDepotRepository.findDepotCodes(depotList);
+        List<Depot> depotList = getDepotList();
+        List<String> depotToFind = findDepotCodes(depotList);
 
         // Then
         assertTrue(depotToFind.contains(depot.getDepotCode()));
         assertThat(depotToFind).isNotNull();
+    }
+
+    public List<Depot> findDepots(List<Depot> depots, String depotCode) {
+        return depots.stream()
+                .filter(p -> p.getDepotCode().equals(depotCode))
+                .collect(Collectors.toList());
+    }
+
+    public List<String> findDepotCodes(List<Depot> depots) {
+        return depots
+                .stream()
+                .map(Depot::getDepotCode)
+                .collect(Collectors.toList());
+    }
+    public List<Depot> getDepotList() {
+        return depotList;
     }
 }
