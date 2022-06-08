@@ -6,6 +6,7 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.warehouse.configuration.ParcelServiceIntegrationTestConfiguration;
 import com.warehouse.entity.Parcel;
 import com.warehouse.repository.ParcelRepository;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
         TransactionDbUnitTestExecutionListener.class
 })
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Disabled
 public class ParcelServiceIntegrationTest {
 
     @Autowired

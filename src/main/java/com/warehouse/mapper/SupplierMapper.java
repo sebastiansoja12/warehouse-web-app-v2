@@ -17,4 +17,5 @@ public interface SupplierMapper {
     Supplier mapToDto(SupplierDto supplier);
 
     List<Supplier> mapToList(List<SupplierDto> supplierDtoList);
+
 }
