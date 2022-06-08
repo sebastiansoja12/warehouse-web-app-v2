@@ -1,8 +1,6 @@
-package com.warehouse.model;
+package com.warehouse.entity;
 
 import org.junit.jupiter.api.BeforeEach;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class RouteTest {
 

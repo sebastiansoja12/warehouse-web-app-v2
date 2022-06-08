@@ -2,7 +2,7 @@ package com.warehouse.service;
 
 
 import com.warehouse.exceptions.WarehouseException;
-import com.warehouse.model.*;
+import com.warehouse.entity.*;
 import com.warehouse.exceptions.ParcelNotFound;
 import com.warehouse.repository.DepotRepository;
 import com.warehouse.repository.ParcelRepository;

@@ -1,4 +1,4 @@
-package com.warehouse.model;
+package com.warehouse.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;

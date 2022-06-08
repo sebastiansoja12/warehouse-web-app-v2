@@ -1,7 +1,7 @@
 package com.warehouse.service;
 
 import com.warehouse.exceptions.WarehouseException;
-import com.warehouse.model.RefreshToken;
+import com.warehouse.entity.RefreshToken;
 import com.warehouse.repository.RefreshTokenRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

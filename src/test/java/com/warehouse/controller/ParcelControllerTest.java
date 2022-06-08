@@ -2,7 +2,7 @@ package com.warehouse.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.warehouse.enumeration.ParcelType;
-import com.warehouse.model.Parcel;
+import com.warehouse.entity.Parcel;
 import com.warehouse.repository.ParcelRepository;
 import com.warehouse.repository.PaymentRepository;
 import org.junit.jupiter.api.Test;

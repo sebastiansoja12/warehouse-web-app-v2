@@ -2,7 +2,7 @@ package com.warehouse.mapper;
 
 
 import com.warehouse.dto.SupplierDto;
-import com.warehouse.model.Supplier;
+import com.warehouse.entity.Supplier;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

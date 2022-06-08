@@ -2,7 +2,7 @@ package com.warehouse.controller;
 
 import com.warehouse.service.SupplierService;
 import com.warehouse.dto.SupplierDto;
-import com.warehouse.model.Supplier;
+import com.warehouse.entity.Supplier;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

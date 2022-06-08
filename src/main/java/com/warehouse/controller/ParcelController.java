@@ -2,7 +2,7 @@ package com.warehouse.controller;
 
 
 import com.lowagie.text.DocumentException;
-import com.warehouse.model.Parcel;
+import com.warehouse.entity.Parcel;
 import com.warehouse.service.ParcelService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;

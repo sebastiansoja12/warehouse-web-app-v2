@@ -3,11 +3,11 @@ package com.warehouse.service;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
-import com.warehouse.model.Parcel;
+import com.warehouse.entity.Parcel;
 import com.warehouse.repository.PaymentRepository;
 import com.warehouse.enumeration.ParcelStatus;
 import com.warehouse.mapper.PaymentMapper;
-import com.warehouse.model.PaymentInformation;
+import com.warehouse.entity.PaymentInformation;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

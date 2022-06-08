@@ -4,7 +4,7 @@ package com.warehouse.mapper;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.api.payments.RedirectUrls;
-import com.warehouse.model.PaymentInformation;
+import com.warehouse.entity.PaymentInformation;
 import org.mapstruct.Mapper;
 
 @Mapper

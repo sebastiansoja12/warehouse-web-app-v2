@@ -1,6 +1,6 @@
 package com.warehouse.repository;
 
-import com.warehouse.model.Depot;
+import com.warehouse.entity.Depot;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

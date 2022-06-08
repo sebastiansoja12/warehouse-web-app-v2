@@ -1,8 +1,8 @@
 package com.warehouse.controller;
 
 import com.paypal.base.rest.PayPalRESTException;
-import com.warehouse.model.Parcel;
-import com.warehouse.model.PaymentInformation;
+import com.warehouse.entity.Parcel;
+import com.warehouse.entity.PaymentInformation;
 import com.warehouse.service.PaymentService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;

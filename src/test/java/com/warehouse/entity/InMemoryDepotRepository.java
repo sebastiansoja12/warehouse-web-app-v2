@@ -1,4 +1,4 @@
-package com.warehouse.model;
+package com.warehouse.entity;
 
 import java.util.ArrayList;
 import java.util.List;

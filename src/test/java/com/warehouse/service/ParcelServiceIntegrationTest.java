@@ -4,7 +4,7 @@ package com.warehouse.service;
 import com.github.springtestdbunit.TransactionDbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.warehouse.configuration.ParcelServiceIntegrationTestConfiguration;
-import com.warehouse.model.Parcel;
+import com.warehouse.entity.Parcel;
 import com.warehouse.repository.ParcelRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,7 +1,7 @@
 package com.warehouse.repository;
 
-import com.warehouse.model.Route;
-import com.warehouse.model.User;
+import com.warehouse.entity.Route;
+import com.warehouse.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

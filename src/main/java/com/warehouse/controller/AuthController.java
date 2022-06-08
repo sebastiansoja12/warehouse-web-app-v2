@@ -7,7 +7,7 @@ import com.warehouse.service.AuthService;
 import com.warehouse.service.RefreshTokenService;
 import com.warehouse.dto.AuthenticationResponse;
 import com.warehouse.dto.RegisterRequest;
-import com.warehouse.model.User;
+import com.warehouse.entity.User;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,7 @@
 package com.warehouse.service;
 
 import com.warehouse.exceptions.WarehouseMailException;
-import com.warehouse.model.ParcelNotification;
+import com.warehouse.entity.ParcelNotification;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;

@@ -1,4 +1,4 @@
-package com.warehouse.model;
+package com.warehouse.entity;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

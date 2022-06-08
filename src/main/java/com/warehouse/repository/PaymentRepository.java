@@ -1,6 +1,6 @@
 package com.warehouse.repository;
 
-import com.warehouse.model.PaymentInformation;
+import com.warehouse.entity.PaymentInformation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

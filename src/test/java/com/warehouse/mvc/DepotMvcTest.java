@@ -1,7 +1,7 @@
 package com.warehouse.mvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.warehouse.model.Depot;
+import com.warehouse.entity.Depot;
 import com.warehouse.repository.DepotRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

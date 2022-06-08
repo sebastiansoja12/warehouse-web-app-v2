@@ -1,6 +1,6 @@
 package com.warehouse.service;
 
-import com.warehouse.model.User;
+import com.warehouse.entity.User;
 import com.warehouse.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,6 +1,6 @@
 package com.warehouse.service;
 
-import com.warehouse.model.Depot;
+import com.warehouse.entity.Depot;
 import com.warehouse.repository.DepotRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

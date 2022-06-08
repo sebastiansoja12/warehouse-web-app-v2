@@ -1,6 +1,6 @@
 package com.warehouse.controller;
 
-import com.warehouse.model.Depot;
+import com.warehouse.entity.Depot;
 import com.warehouse.service.DepotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,6 +1,6 @@
 package com.warehouse.controller;
 
-import com.warehouse.model.Route;
+import com.warehouse.entity.Route;
 import com.warehouse.service.RouteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
 package com.warehouse.inmemorydatabase;
 
-import com.warehouse.model.Parcel;
+import com.warehouse.entity.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;

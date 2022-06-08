@@ -2,7 +2,7 @@ package com.warehouse.mapper;
 
 
 import com.warehouse.dto.ParcelDto;
-import com.warehouse.model.Parcel;
+import com.warehouse.entity.Parcel;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;

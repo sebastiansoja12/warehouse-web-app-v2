@@ -1,7 +1,7 @@
 package com.warehouse.controller;
 
 import com.warehouse.service.UserService;
-import com.warehouse.model.User;
+import com.warehouse.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

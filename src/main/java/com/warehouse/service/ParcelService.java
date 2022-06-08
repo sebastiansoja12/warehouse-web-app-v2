@@ -2,9 +2,9 @@ package com.warehouse.service;
 
 import com.lowagie.text.DocumentException;
 import com.paypal.base.rest.PayPalRESTException;
-import com.warehouse.model.Parcel;
+import com.warehouse.entity.Parcel;
 import com.warehouse.exceptions.ParcelNotFound;
-import com.warehouse.model.ParcelNotification;
+import com.warehouse.entity.ParcelNotification;
 import com.warehouse.repository.ParcelRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
