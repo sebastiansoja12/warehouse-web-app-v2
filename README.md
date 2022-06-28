@@ -65,5 +65,5 @@ Returns all routes from all users.
 Returns specific user with given username.
 
 Basically this project is used for GUI application as a backend server that communicates with database. 
-If you want to find out more, check 'warehouse-web-app-fr' project.
+If you want to find out more, check [GUI project](https://gitlab.com/sebastiansoja/warehouse-web-app-fr).
 
