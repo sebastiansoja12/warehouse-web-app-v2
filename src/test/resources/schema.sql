@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS PARCEL (
+    `id` VARCHAR(255) NOT NULL,
+    `first_name` VARCHAR(255) NULL DEFAULT NULL,
+    `last_name` VARCHAR(255) NULL DEFAULT NULL,
+    `parcel_type` INT NULL DEFAULT NULL,
+    `payment_status` INT NULL DEFAULT NULL,
+    `recipient_city` VARCHAR(255) NULL DEFAULT NULL,
+    `recipient_email` VARCHAR(255) NULL DEFAULT NULL,
+    `recipient_first_name` VARCHAR(255) NULL DEFAULT NULL,
+    `recipient_last_name` VARCHAR(255) NULL DEFAULT NULL,
+    `recipient_postal_code` VARCHAR(255) NULL DEFAULT NULL,
+    `recipient_street` VARCHAR(255) NULL DEFAULT NULL,
+    `recipient_telephone` VARCHAR(255) NULL DEFAULT NULL,
+    `sender_email` VARCHAR(255) NULL DEFAULT NULL,
+    `sender_telephone` VARCHAR(255) NULL DEFAULT NULL,
+    `price` DOUBLE NOT NULL,
+    `parcel_status` INT NULL DEFAULT NULL,
+    `parcel_size` VARCHAR(255) NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
+);
