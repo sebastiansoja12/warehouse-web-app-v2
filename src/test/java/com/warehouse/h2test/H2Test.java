@@ -5,11 +5,6 @@ import org.junit.jupiter.api.Test;
 import java.sql.*;
 
 public class H2Test {
-
-    @Test
-    public void testDatabaseNoMem() throws SQLException {
-        testDatabase("jdbc:h2:test");
-    }
     @Test
     public void testDatabaseMem() throws SQLException {
         testDatabase("jdbc:h2:mem:test");

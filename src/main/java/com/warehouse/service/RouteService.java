@@ -44,7 +44,6 @@ public class RouteService {
         route.setParcel(parcel);
         route.setCreated(LocalDateTime.now(ZoneId.of(String.valueOf(ZoneId.systemDefault()))));
         route.setDepot(findUsersDepot());
-
         routeRepository.save(route);
 
     }
