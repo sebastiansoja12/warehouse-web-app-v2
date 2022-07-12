@@ -23,7 +23,7 @@ class MailService {
     }
 
     void sendNotification(ParcelNotification parcelNotification) {
-        MimeMessagePreparator messagePreparator = mimeMessage -> {
+        final MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setFrom("inparcel@inp.com");
             messageHelper.setTo(parcelNotification.getRecipient());

@@ -69,26 +69,26 @@ public class ParcelService {
 
     public void exportParcelToPdfById(HttpServletResponse response, UUID id) throws Exception {
 
-        Parcel parcel = parcelRepository.findById(id)
+        final Parcel parcel = parcelRepository.findById(id)
                 .orElseThrow(() -> new ParcelNotFound("Paczka nie zostala znaleziona"));
         response.setContentType("application/pdf");
-        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-        String currentDateTime = dateFormatter.format(new java.util.Date());
-        String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=" + parcel.getId() + currentDateTime + ".pdf";
+        final DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        final String currentDateTime = dateFormatter.format(new java.util.Date());
+        final String headerKey = "Content-Disposition";
+        final String headerValue = "attachment; filename=" + parcel.getId() + currentDateTime + ".pdf";
         response.setHeader(headerKey, headerValue);
         parcelExportService.exportToPdf(response, parcel);
 
     }
 
     public void exportParcelToCSVById(HttpServletResponse response, UUID id) throws DocumentException, IOException {
-        Parcel parcel = parcelRepository.findById(id)
+        final Parcel parcel = parcelRepository.findById(id)
                 .orElseThrow(() -> new ParcelNotFound("Paczka o id " + id + " nie zostala znaleziona"));
         response.setContentType("text/csv");
-        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
-        String currentDateTime = dateFormatter.format(new Date());
-        String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=parcel_id" + parcel.getId() + currentDateTime + ".csv";
+        final DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+        final String currentDateTime = dateFormatter.format(new Date());
+        final String headerKey = "Content-Disposition";
+        final String headerValue = "attachment; filename=parcel_id" + parcel.getId() + currentDateTime + ".csv";
         response.setHeader(headerKey, headerValue);
         parcelExportService.exportToCSV(response, parcel);
     }

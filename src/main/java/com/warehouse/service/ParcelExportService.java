@@ -20,12 +20,12 @@ public class ParcelExportService {
 
 
     private void writeTableHeader(PdfPTable senderTable, PdfPTable recipientTable) {
-        PdfPCell cell = new PdfPCell();
+        final PdfPCell cell = new PdfPCell();
 
         cell.setBackgroundColor(Color.gray);
         cell.setPadding(2);
 
-        Font font = FontFactory.getFont(FontFactory.HELVETICA);
+        final Font font = FontFactory.getFont(FontFactory.HELVETICA);
         font.setColor(Color.WHITE);
 
         cell.setPhrase(new Phrase("Kod", font));
@@ -74,16 +74,16 @@ public class ParcelExportService {
     }
 
     public void exportToPdf(HttpServletResponse response, Parcel parcel) throws Exception {
-        Document document = new Document(PageSize.LETTER);
+        final Document document = new Document(PageSize.LETTER);
         PdfWriter.getInstance(document, response.getOutputStream());
 
         document.open();
-        Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
+        final Font font = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
         font.setSize(18);
         font.setColor(Color.BLUE);
 
-        PdfPTable senderTable = new PdfPTable(3);
-        PdfPTable recipientTable = new PdfPTable(5);
+        final PdfPTable senderTable = new PdfPTable(3);
+        final PdfPTable recipientTable = new PdfPTable(5);
 
 
         senderTable.setWidthPercentage(100f);
@@ -104,11 +104,12 @@ public class ParcelExportService {
 
     public void exportToCSV(HttpServletResponse response, Parcel parcel) throws DocumentException, IOException {
 
-        CsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.EXCEL_NORTH_EUROPE_PREFERENCE);
+        final CsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(),
+                CsvPreference.EXCEL_NORTH_EUROPE_PREFERENCE);
 
-        String[] csvHeader = {"Kod paczki", "Imie nadawcy", "Nazwisko nadawcy", "Numer tel nadawcy",
+        final String[] csvHeader = {"Kod paczki", "Imie nadawcy", "Nazwisko nadawcy", "Numer tel nadawcy",
                 "Imie odbiorcy", "Nazwisko odbiorcy", "Numer tel odbiorcy", "Miasto", "Ulica", "Email"};
-        String[] nameMapping = {
+        final String[] nameMapping = {
                 "id",
                 "firstName",
                 "lastName",

@@ -31,8 +31,8 @@ public class RouteService {
 
     @Transactional
     public void save(Route route){
-        Parcel parcel = parcelRepository.getById(route.getParcel().getId());
-        Supplier supplier = supplierRepository.findBySupplierCode(route.getSupplier().getSupplierCode());
+        final Parcel parcel = parcelRepository.getById(route.getParcel().getId());
+        final Supplier supplier = supplierRepository.findBySupplierCode(route.getSupplier().getSupplierCode());
 
         if (routeRepository.findByParcel_IdAndUser(route.getParcel().getId(),
                 authService.getCurrentUser()) != null) {
@@ -67,14 +67,14 @@ public class RouteService {
     }
 
     public void deleteRouteByParcelId(UUID id) {
-        Route route = new Route();
+        final Route route = new Route();
         route.setUser(getCurrentUser());
-        String depotCode = getCurrentUser().getDepot().getDepotCode();
+        final String depotCode = getCurrentUser().getDepot().getDepotCode();
         routeRepository.deleteByParcelIdAndDepot_DepotCode(id, depotCode);
     }
 
     public List<Route> findAllByUsername() {
-        Route route = new Route();
+        final Route route = new Route();
         route.setUser(getCurrentUser());
         return routeRepository.findByUser_username(route.getUser().getUsername());
     }

@@ -17,8 +17,6 @@ import java.util.List;
 @Transactional
 public class UserService {
 
-
-    @Autowired
     private final UserRepository userRepository;
 
     public List<User> findAll() {
