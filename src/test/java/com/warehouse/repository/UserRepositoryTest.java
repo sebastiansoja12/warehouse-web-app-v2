@@ -49,10 +49,10 @@ public class UserRepositoryTest {
 
         // when
         userRepository.save(user);
-
+        final int userId = user.getId();
         // then
         assertThat(user).isNotNull();
-        assertThat(user.getId()).isEqualTo(1);
+        assertThat(user.getId()).isEqualTo(userId);
 
     }
 }

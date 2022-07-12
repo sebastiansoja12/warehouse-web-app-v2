@@ -75,12 +75,12 @@ public class DepotRepositoryTest {
                 .build();
 
         depotRepository.save(depot);
-
+        final Long depotId = depot.getId();
         // when
         final Long id = depotRepository.getIdByDepotCode("TS1");
 
         // then
-        assertThat(id).isEqualTo(5L);
+        assertThat(id).isEqualTo(depotId);
     }
 
     @Test
@@ -94,6 +94,7 @@ public class DepotRepositoryTest {
                 .build();
 
         depotRepository.save(depot);
+        final Long depotId = depot.getId();
 
         // when
         final Optional<Depot> expected = depotRepository.findById(1L);
@@ -101,7 +102,7 @@ public class DepotRepositoryTest {
         // then
         assertTrue(expected.isPresent());
         assertThat(expected.get()).isNotNull();
-        assertThat(expected.get().getId()).isEqualTo(1L);
+        assertThat(expected.get().getId()).isEqualTo(depotId);
     }
 
     @Test

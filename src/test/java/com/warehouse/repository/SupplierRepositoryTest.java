@@ -50,12 +50,12 @@ public class SupplierRepositoryTest {
                 .telephone(supplierDto.getTelephone())
                 .depot(depot)
                 .build();
-
         // when
         supplierRepository.save(supplier);
+        final Long supplierId = supplier.getId();
 
         // then
-        assertThat(supplier.getId()).isEqualTo(2L);
+        assertThat(supplier.getId()).isEqualTo(supplierId);
     }
 
     @Test
