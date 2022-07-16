@@ -97,7 +97,7 @@ public class DepotRepositoryTest {
         final Long depotId = depot.getId();
 
         // when
-        final Optional<Depot> expected = depotRepository.findById(1L);
+        final Optional<Depot> expected = depotRepository.findById(depotId);
 
         // then
         assertTrue(expected.isPresent());
