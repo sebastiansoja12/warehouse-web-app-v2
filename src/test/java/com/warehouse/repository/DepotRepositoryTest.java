@@ -65,25 +65,6 @@ public class DepotRepositoryTest {
     }
 
     @Test
-    public void shouldGiveIdByDepotCode() {
-        // when
-        final Depot depot = Depot.builder()
-                .city("Test")
-                .street("Test street")
-                .depotCode("TS1")
-                .country("Test")
-                .build();
-
-        depotRepository.save(depot);
-        final Long depotId = depot.getId();
-        // when
-        final Long id = depotRepository.getIdByDepotCode("TS1");
-
-        // then
-        assertThat(id).isEqualTo(depotId);
-    }
-
-    @Test
     public void shouldFindDepotById() {
         // when
         final Depot depot = Depot.builder()
