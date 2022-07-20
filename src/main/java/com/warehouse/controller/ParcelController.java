@@ -25,8 +25,8 @@ public class ParcelController {
     }
 
     @PutMapping
-    public void updateParcel(@RequestBody Parcel parcel) {
-        parcelService.updateParcelInformation(parcel);
+    public void updateParcel(@RequestBody Parcel parcel, @PathVariable UUID id) {
+        parcelService.updateParcelInformation(parcel, id);
     }
 
     @GetMapping

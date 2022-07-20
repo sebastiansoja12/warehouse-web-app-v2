@@ -67,9 +67,9 @@ public class ParcelService {
         return parcelRepository.findById(id).orElseThrow( () -> new ParcelNotFound("Paczka nie zostala znaleziona"));
     }
 
-    public void updateParcelInformation(Parcel parcel) {
+    public void updateParcelInformation(Parcel parcel, UUID id) {
         final Parcel parcelToUpdate = parcelRepository
-                .findById(parcel.getId()).orElseThrow(() -> new ParcelNotFound("Paczka nie zostala znaleziona"));
+                .findById(id).orElseThrow(() -> new ParcelNotFound("Paczka nie zostala znaleziona"));
         parcelToUpdate.setFirstName(parcel.getFirstName());
         parcelToUpdate.setLastName(parcel.getLastName());
         parcelToUpdate.setSenderTelephone(parcel.getSenderTelephone());
