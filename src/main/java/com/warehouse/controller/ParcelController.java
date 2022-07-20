@@ -24,6 +24,11 @@ public class ParcelController {
         return parcelService.save(parcel);
     }
 
+    @PutMapping
+    public void updateParcel(@RequestBody Parcel parcel) {
+        parcelService.updateParcelInformation(parcel);
+    }
+
     @GetMapping
     public List<Parcel> getAll() {
         return parcelService.findAll();

@@ -67,6 +67,23 @@ public class ParcelService {
         return parcelRepository.findById(id).orElseThrow( () -> new ParcelNotFound("Paczka nie zostala znaleziona"));
     }
 
+    public void updateParcelInformation(Parcel parcel) {
+        final Parcel parcelToUpdate = parcelRepository
+                .findById(parcel.getId()).orElseThrow(() -> new ParcelNotFound("Paczka nie zostala znaleziona"));
+        parcelToUpdate.setFirstName(parcel.getFirstName());
+        parcelToUpdate.setLastName(parcel.getLastName());
+        parcelToUpdate.setSenderTelephone(parcel.getSenderTelephone());
+        parcelToUpdate.setSenderEmail(parcel.getSenderEmail());
+        parcelToUpdate.setRecipientFirstName(parcel.getRecipientFirstName());
+        parcelToUpdate.setRecipientLastName(parcel.getRecipientLastName());
+        parcelToUpdate.setRecipientEmail(parcel.getRecipientEmail());
+        parcelToUpdate.setRecipientCity(parcel.getRecipientCity());
+        parcelToUpdate.setRecipientPostalCode(parcel.getRecipientPostalCode());
+        parcelToUpdate.setRecipientStreet(parcel.getRecipientStreet());
+
+        parcelRepository.save(parcelToUpdate);
+    }
+
     public void exportParcelToPdfById(HttpServletResponse response, UUID id) throws Exception {
 
         final Parcel parcel = parcelRepository.findById(id)
