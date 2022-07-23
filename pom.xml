@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.warehouse</groupId>
 	<artifactId>warehouse</artifactId>
-	<version>VERSION_2022.8-SNAPSHOT</version>
+	<version>VERSION_2022.9-SNAPSHOT</version>
 	<name>warehouse</name>
 	<description>Prototype warehouse app</description>
 
