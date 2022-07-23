@@ -48,7 +48,7 @@ public class SupplierService {
     }
 
     public void delete(String supplierCode){
-        Supplier supplierToDelete = supplierRepository.findBySupplierCode(supplierCode);
+        final Supplier supplierToDelete = supplierRepository.findBySupplierCode(supplierCode);
         supplierRepository.delete(supplierToDelete);
     }
 

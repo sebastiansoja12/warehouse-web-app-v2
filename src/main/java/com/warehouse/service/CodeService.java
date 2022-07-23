@@ -35,18 +35,18 @@ public class CodeService {
 */
 
     public static Image getQRCodeImage(String text) throws WriterException, IOException {
-        QRCodeWriter qrCodeWriter = new QRCodeWriter();
-        BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, 400, 400);
-        ByteArrayOutputStream pngOutputStream = new ByteArrayOutputStream();
+        final QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        final BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, 400, 400);
+        final ByteArrayOutputStream pngOutputStream = new ByteArrayOutputStream();
         MatrixToImageWriter.writeToStream(bitMatrix, "PNG", pngOutputStream);
         return Image.getInstance(String.valueOf(bitMatrix));
     }
 
     public static Image generateQRCodeImage(UUID barcodeText) throws Exception {
-        BufferedImage image = new BufferedImage(250,
+        final BufferedImage image = new BufferedImage(250,
                 250,
                 BufferedImage.TYPE_BYTE_GRAY);
-        ByteArrayOutputStream stream = QRCode
+        final ByteArrayOutputStream stream = QRCode
                 .from(String.valueOf(barcodeText))
                 .withSize(250, 250)
                 .stream();

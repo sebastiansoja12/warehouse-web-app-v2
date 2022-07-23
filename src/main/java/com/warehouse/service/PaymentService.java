@@ -86,8 +86,8 @@ public class PaymentService {
     }
 
     public String successPay(String paymentId, String payerId) throws PayPalRESTException {
-        Payment payment = executePayment(paymentId, payerId);
-        PaymentInformation paymentInformationToUpdate = paymentRepository.findByPaypalId(payment.getId());
+        final Payment payment = executePayment(paymentId, payerId);
+        final PaymentInformation paymentInformationToUpdate = paymentRepository.findByPaypalId(payment.getId());
         if (payment.getState().equals("approved")) {
             paymentInformationToUpdate.setParcelStatus(ParcelStatus.PAID);
             paymentRepository.save(paymentInformationToUpdate);
