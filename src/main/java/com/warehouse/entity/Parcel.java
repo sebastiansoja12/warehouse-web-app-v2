@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class Parcel {
 
     @Id
     @GeneratedValue()
-    @org.hibernate.annotations.Type(type = "uuid-char")
+    @Type(type = "uuid-char")
     private UUID id;
 
     @Valid

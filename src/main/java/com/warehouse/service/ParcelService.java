@@ -3,9 +3,11 @@ package com.warehouse.service;
 import com.lowagie.text.DocumentException;
 import com.paypal.base.rest.PayPalRESTException;
 import com.warehouse.entity.Parcel;
+import com.warehouse.entity.RerouteToken;
 import com.warehouse.exceptions.ParcelNotFound;
 import com.warehouse.entity.ParcelNotification;
 import com.warehouse.repository.ParcelRepository;
+import com.warehouse.repository.RerouteTokenRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -30,6 +32,10 @@ public class ParcelService {
     private final MailService mailService;
     private final ParcelExportService parcelExportService;
     private final PaymentService paymentService;
+
+    private final RerouteTokenRepository rerouteTokenRepository;
+
+    private final RerouteService rerouteService;
 
     private final String url = "http://localhost:8080";
 
@@ -66,28 +72,10 @@ public class ParcelService {
     public Parcel findById(UUID id) {
         return parcelRepository.findById(id).orElseThrow( () -> new ParcelNotFound("Paczka nie zostala znaleziona"));
     }
-
-    public void updateParcelInformation(Parcel parcel, UUID id) {
-        final Parcel parcelToUpdate = parcelRepository
-                .findById(id).orElseThrow(() -> new ParcelNotFound("Paczka nie zostala znaleziona"));
-        parcelToUpdate.setFirstName(parcel.getFirstName());
-        parcelToUpdate.setLastName(parcel.getLastName());
-        parcelToUpdate.setSenderTelephone(parcel.getSenderTelephone());
-        parcelToUpdate.setSenderEmail(parcel.getSenderEmail());
-        parcelToUpdate.setRecipientFirstName(parcel.getRecipientFirstName());
-        parcelToUpdate.setRecipientLastName(parcel.getRecipientLastName());
-        parcelToUpdate.setRecipientEmail(parcel.getRecipientEmail());
-        parcelToUpdate.setRecipientCity(parcel.getRecipientCity());
-        parcelToUpdate.setRecipientPostalCode(parcel.getRecipientPostalCode());
-        parcelToUpdate.setRecipientStreet(parcel.getRecipientStreet());
-
-        parcelRepository.save(parcelToUpdate);
-    }
-
     public void exportParcelToPdfById(HttpServletResponse response, UUID id) throws Exception {
 
         final Parcel parcel = parcelRepository.findById(id)
-                .orElseThrow(() -> new ParcelNotFound("Paczka nie zostala znaleziona"));
+                .orElseThrow(() -> new ParcelNotFound("Paczka o id " + id + " nie zostala znaleziona"));
         response.setContentType("application/pdf");
         final DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         final String currentDateTime = dateFormatter.format(new java.util.Date());
