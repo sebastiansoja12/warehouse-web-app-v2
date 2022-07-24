@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.OK;
 
@@ -51,6 +52,11 @@ public class AuthController {
     @GetMapping("/currentuser")
     public List<User> getCurrentUser() {
         return authService.getCurrentUsers();
+    }
+
+    @GetMapping("/logged-in")
+    public Optional<User> getCurrentLoggedInUser() {
+        return authService.findCurrentLoggedInUser();
     }
 
 }
