@@ -53,15 +53,4 @@ public class AuthController {
         return authService.getCurrentUsers();
     }
 
-
-/*
-    @GetMapping("/currentuser")
-    public Optional<User> getCurrentUser(){
-        return authService.getCurrentUser();
-    }
-
-
- */
-
-
 }

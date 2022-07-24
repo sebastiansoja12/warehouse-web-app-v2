@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
+public
 class MailService {
 
     private final JavaMailSender mailSender;
@@ -22,7 +23,7 @@ class MailService {
     }
 
     void sendNotification(ParcelNotification parcelNotification) {
-        MimeMessagePreparator messagePreparator = mimeMessage -> {
+        final MimeMessagePreparator messagePreparator = mimeMessage -> {
             MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setFrom("inparcel@inp.com");
             messageHelper.setTo(parcelNotification.getRecipient());

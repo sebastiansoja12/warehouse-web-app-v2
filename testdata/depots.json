@@ -58,5 +58,23 @@
     "street": "Baczewskich 44",
     "country": "Ukraina",
     "depotCode": "LW1"
+  },
+  {
+    "city": "Łódź",
+    "street": "Wodna 38A",
+    "country": "Polska",
+    "depotCode": "NCS"
+  },
+  {
+    "city": "Białystok",
+    "street": "Ognista 31A",
+    "country": "Polska",
+    "depotCode": "BIA"
+  },
+  {
+    "city": "Ruda Śląska",
+    "street": "Śląska 2",
+    "country": "Polska",
+    "depotCode": "SRS"
   }
 ]
