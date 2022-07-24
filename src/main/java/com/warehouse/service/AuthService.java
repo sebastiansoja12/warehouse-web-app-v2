@@ -114,11 +114,4 @@ public class AuthService {
         return userRepository.getUserByUsername(authentication.getName());
 
     }
-
-    public Optional<User> getUser() {
-        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return userRepository.findByUsername(authentication.getName());
-
-    }
-
 }
