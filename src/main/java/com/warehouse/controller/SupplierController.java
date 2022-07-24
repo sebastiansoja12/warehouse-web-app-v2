@@ -17,7 +17,12 @@ public class SupplierController {
 
     @GetMapping()
     public List<Supplier> getAll() {
-        return supplierService.findAll();
+        return supplierService.findAllSupplierByCommonDepotCodes();
+    }
+
+    @GetMapping("/by-depot-code")
+    public List<Supplier> findSuppliersByUsersDepot() {
+        return supplierService.findAllSupplierByCommonDepotCodes();
     }
 
     @GetMapping("/{supplierCode}")
@@ -31,7 +36,7 @@ public class SupplierController {
     }
 
     @PostMapping("/multiple")
-    public List<Supplier> saveMultipleySuppliers(@RequestBody List<SupplierDto> supplier){
+    public List<Supplier> saveMultipleSuppliers(@RequestBody List<SupplierDto> supplier){
         return supplierService.saveMultipleSuppliers(supplier);
     }
     @DeleteMapping("/{supplierCode}")
