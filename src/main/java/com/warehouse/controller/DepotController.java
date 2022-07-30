@@ -1,7 +1,7 @@
 package com.warehouse.controller;
 
 import com.warehouse.entity.Depot;
-import com.warehouse.service.DepotService;
+import com.warehouse.impl.DepotServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,25 +12,25 @@ import java.util.Optional;
 @RequestMapping("/api/depots")
 public class DepotController {
 
-    private final DepotService depotService;
+    private final DepotServiceImpl depotServiceImpl;
 
     @Autowired
-    public DepotController(DepotService depotService) {
-        this.depotService = depotService;
+    public DepotController(DepotServiceImpl depotServiceImpl) {
+        this.depotServiceImpl = depotServiceImpl;
     }
 
     @PostMapping()
     public List<Depot> addDepotList(@RequestBody List<Depot> depotList) {
-        return depotService.saveAll(depotList);
+        return depotServiceImpl.saveAll(depotList);
     }
 
     @GetMapping()
     public List<Depot> getDepot() {
-        return depotService.getAll();
+        return depotServiceImpl.findAll();
     }
 
     @GetMapping("/{id}")
     public Optional<Depot> getSingleDepot(@PathVariable Long id) {
-        return depotService.findById(id);
+        return depotServiceImpl.findById(id);
     }
 }

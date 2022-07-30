@@ -1,6 +1,7 @@
 package com.warehouse.service;
 
 import com.warehouse.entity.Depot;
+import com.warehouse.impl.DepotServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,23 +13,23 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 @SpringBootTest
-class DepotServiceTest {
+class DepotServiceImplTest {
 
     @Autowired
-    private DepotService depotService;
+    private DepotServiceImpl depotServiceImpl;
 
 
     @Test
     void shouldGetSingleDepot(){
 
-       Optional<Depot> depot =  depotService.findById(1L);
+       Optional<Depot> depot =  depotServiceImpl.findById(1L);
        assertThat(depot).isNotNull();
        assertThat(depot.get().getId()).isEqualTo(1L);
     }
 
     @Test
     void shouldReturnAllDepots(){
-        List<Depot> depotList = depotService.getAll();
+        List<Depot> depotList = depotServiceImpl.findAll();
         assertThat(depotList).isNotNull();
 
     }
