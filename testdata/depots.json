@@ -76,5 +76,143 @@
     "street": "Śląska 2",
     "country": "Polska",
     "depotCode": "SRS"
+  },
+  {
+    "city": "Kraków",
+    "street": "Stanisława Dąbka 22A",
+    "country": "Polska",
+    "depotCode": "KR1"
+  },
+  {
+    "city": "Gorzów Wielkopolski",
+    "street": "Lubuska 101",
+    "country": "Polska",
+    "depotCode": "GW1"
+  },
+  {
+    "city": "Zielona Góra",
+    "street": "Ostrowska 9",
+    "country": "Polska",
+    "depotCode": "ZGR"
+  },
+  {
+    "city": "Szczecin",
+    "street": "Zachodniopomorska 12B",
+    "country": "Polska",
+    "depotCode": "SZ1"
+  },
+  {
+    "city": "Opole",
+    "street": "Oławska 11",
+    "country": "Polska",
+    "depotCode": "OPO"
+  },
+  {
+    "city": "Kielce",
+    "street": "Świętokrzyska 2",
+    "country": "Polska",
+    "depotCode": "KIE"
+  },
+  {
+    "city": "Bydgoszcz",
+    "street": "Bydoska 87",
+    "country": "Polska",
+    "depotCode": "BYD"
+  },
+  {
+    "city": "Toruń",
+    "street": "Opatowska 64",
+    "country": "Polska",
+    "depotCode": "TOR"
+  },
+  {
+    "city": "Częstochowa",
+    "street": "Jasna 97",
+    "country": "Polska",
+    "depotCode": "CZW"
+  },
+  {
+    "city": "Koszalin",
+    "street": "Morska 32",
+    "country": "Polska",
+    "depotCode": "KSZ"
+  },
+  {
+    "city": "Zamość",
+    "street": "Lubelska 28",
+    "country": "Polska",
+    "depotCode": "ZAM"
+  },
+  {
+    "city": "Słupsk",
+    "street": "Gdańska 36",
+    "country": "Polska",
+    "depotCode": "SLP"
+  },
+  {
+    "city": "Kalisz",
+    "street": "Wielkopolska 103",
+    "country": "Polska",
+    "depotCode": "KAL"
+  },
+  {
+    "city": "Koszalin",
+    "street": "Morska 32",
+    "country": "Polska",
+    "depotCode": "KSZ"
+  },
+  {
+    "city": "Bielsko-Biała",
+    "street": "Bielska 87",
+    "country": "Polska",
+    "depotCode": "BBA"
+  },
+  {
+    "city": "Kłodzko",
+    "street": "Wrocławska 71",
+    "country": "Polska",
+    "depotCode": "KLD"
+  },
+  {
+    "city": "Mława",
+    "street": "Morawska 79",
+    "country": "Polska",
+    "depotCode": "MLW"
+  },
+  {
+    "city": "Gdynia",
+    "street": "Stoczniowa 80",
+    "country": "Polska",
+    "depotCode": "GD2"
+  },
+  {
+    "city": "Sosnowiec",
+    "street": "Zagłębska 65",
+    "country": "Polska",
+    "depotCode": "KT2"
+  },
+  {
+    "city": "Mińsk Mazowiecki",
+    "street": "Warszawska 15",
+    "country": "Polska",
+    "depotCode": "WA3"
+  },
+  {
+    "city": "Wilno",
+    "street": "Liepkalno 180",
+    "country": "Litwa",
+    "depotCode": "WL1"
+  },
+  {
+    "city": "Praga",
+    "street": "Chodovská 228/3",
+    "country": "Czechy",
+    "depotCode": "PRG"
+  },
+  {
+    "city": "Zagrzeb",
+    "street": "Franje Lučića 23",
+    "country": "Chorwacja",
+    "depotCode": "ZAG"
   }
 ]
