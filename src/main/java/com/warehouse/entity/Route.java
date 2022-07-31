@@ -36,7 +36,6 @@ public class Route {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "parcel_id", referencedColumnName = "id")
     @NonNull
-    @NotBlank
     private Parcel parcel;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -47,7 +46,6 @@ public class Route {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "supplier_id", referencedColumnName = "id")
     @NonNull
-    @NotBlank
     private Supplier supplier;
 
 
