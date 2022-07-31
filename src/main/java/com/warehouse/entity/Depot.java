@@ -17,15 +17,17 @@ import javax.persistence.*;
 public class Depot {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String city;
 
+    @Column(unique=true)
     private String street;
 
     private String country;
 
+    @Column(unique=true)
     private String depotCode;
 
 }

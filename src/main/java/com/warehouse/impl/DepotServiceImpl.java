@@ -16,16 +16,28 @@ public class DepotServiceImpl implements DepotService {
 
     private final DepotRepository depotRepository;
 
+    @Override
     public List<Depot> saveAll(List<Depot> depotList) {
         return depotRepository.saveAll(depotList);
     }
 
+    @Override
     public List<Depot> findAll() {
         return depotRepository.findAll();
     }
 
-
+    @Override
     public Optional<Depot> findById(Long id) {
         return depotRepository.findById(id);
+    }
+
+    @Override
+    public boolean addSingleDepot(Depot depot) {
+        Optional<Depot> ifGivenDepotExists = depotRepository.findByDepotCode(depot.getDepotCode());
+        if (ifGivenDepotExists.isPresent()) {
+            return false;
+        }
+        depotRepository.save(depot);
+        return true;
     }
 }

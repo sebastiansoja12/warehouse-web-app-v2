@@ -19,6 +19,10 @@ public class DepotController {
         this.depotServiceImpl = depotServiceImpl;
     }
 
+    @PostMapping("/single")
+    public boolean addSingleDepot(Depot depot) {
+        return depotServiceImpl.addSingleDepot(depot);
+    }
     @PostMapping()
     public List<Depot> addDepotList(@RequestBody List<Depot> depotList) {
         return depotServiceImpl.saveAll(depotList);
