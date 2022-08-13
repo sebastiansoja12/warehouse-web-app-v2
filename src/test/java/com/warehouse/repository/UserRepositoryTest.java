@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -21,9 +22,11 @@ public class UserRepositoryTest {
     @AfterEach
     void tearDown() {
         userRepository.deleteAll();
+        depotRepository.deleteAll();
     }
 
     @Test
+    @Transactional
     void shouldSaveUser() {
         // given
         final Depot depot = Depot.builder()

@@ -16,6 +16,7 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @Entity
 @Builder
+@Table(name = "users")
 public class User {
 
     @Id
