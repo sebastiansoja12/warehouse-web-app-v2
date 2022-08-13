@@ -1,8 +1,8 @@
  **INPARCEL SPRING BOOT APPLICATION 1.3** 
 
 Technologies: 
-- JAVA 11
-- SPRING BOOT 2.3.4
+- JAVA 17
+- SPRING BOOT 2.7.1
 - MySQL
 - Hibernate
 - Paypal API
