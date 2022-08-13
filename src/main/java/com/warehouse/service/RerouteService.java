@@ -1,6 +1,7 @@
 package com.warehouse.service;
 
 import com.warehouse.dto.ParcelDto;
+import com.warehouse.dto.RerouteRequest;
 import com.warehouse.entity.Parcel;
 import com.warehouse.entity.ParcelNotification;
 import com.warehouse.entity.RerouteToken;
@@ -9,9 +10,11 @@ import com.warehouse.exceptions.WarehouseException;
 import com.warehouse.repository.ParcelRepository;
 import com.warehouse.repository.RerouteTokenRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.Date;
 import java.util.UUID;
 
 @Service
@@ -24,25 +27,27 @@ public class RerouteService {
 
     private final MailService mailService;
 
+    private final static Long SECONDS_TO_EXPIRE = 600L;
 
-    public String sendReroutingInformationAndGenerateToken(UUID parcelId, String email) {
+    public void sendReroutingInformation(RerouteRequest rerouteRequest) {
         final Parcel parcel = parcelRepository
-                .findByIdAndSenderEmail(parcelId, email)
+                .findByIdAndSenderEmail(rerouteRequest.getParcelId(), rerouteRequest.getEmail())
                 .orElseThrow(() -> new ParcelNotFound("Paczka nie zostala znaleziona"));
 
-        mailService.sendNotification(new ParcelNotification
-                ("Została przez Państwa nadana przesyłka ",
-                        email, "Docelowa destynacja paczki to: " +
-                        parcel.getId() + ", "
-                        + parcel.getRecipientTelephone()));
+        final RerouteToken rerouteToken = generateRerouteTokenWithGivenParcel(parcel);
+        rerouteTokenRepository.save(rerouteToken);
 
-        return parcel.getRecipientTelephone();
+
+        mailService.sendNotification(new ParcelNotification
+                ("Edycja danych przesyłki  " + parcel.getId(),
+                        rerouteRequest.getEmail(),
+                        "By edytować dane przesyłki prosimy udać się na stronę do przekierowywania " +
+                        "przesyłek i podać niżej wygenerowany token " +
+                        "\n" + rerouteToken.getToken()));
     }
 
-    public RerouteToken generateRerouteTokenWithGivenParcel(UUID id) {
-        final Parcel parcelRerouteToken = parcelRepository
-                .findById(id).orElseThrow(() -> new ParcelNotFound("Paczka nie zostala znaleziona"));
-        return generateReroutingToken(parcelRerouteToken);
+    public RerouteToken generateRerouteTokenWithGivenParcel(Parcel parcel) {
+        return generateReroutingToken(parcel);
     }
 
     public void updateParcel(ParcelDto parcel, UUID parcelId, Integer token) {
@@ -61,12 +66,15 @@ public class RerouteService {
         parcelRerouteToken.setRecipientStreet(parcel.getRecipientStreet());
 
         parcelRepository.save(parcelRerouteToken);
+
+        rerouteTokenRepository.deleteByToken(token);
     }
 
     public RerouteToken generateReroutingToken(Parcel parcel) {
         final RerouteToken rerouteToken = new RerouteToken();
         rerouteToken.setToken(rerouteToken.generateToken());
         rerouteToken.setCreatedDate(Instant.now());
+        rerouteToken.setExpiryDate(Instant.now().plusSeconds(SECONDS_TO_EXPIRE));
         rerouteToken.setParcel(parcel);
         return rerouteToken;
     }
@@ -76,7 +84,14 @@ public class RerouteService {
                 .orElseThrow(() -> new WarehouseException("Invalid rerouting Token"));
     }
 
+
     public void deleteReroutingToken(Integer token) {
         rerouteTokenRepository.deleteByToken(token);
+    }
+
+    @Scheduled(cron = "${purge.cron.expression}")
+    public void purgeExpired() {
+        final Date now = Date.from(Instant.now());
+        rerouteTokenRepository.deleteAllExpiredSince(now);
     }
 }
