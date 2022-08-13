@@ -77,7 +77,6 @@ public class ParcelRepositoryTest {
 
     @Test
     void shouldGetById() {
-
         // given: Parcel with random UUID
         final Parcel parcel = Parcel.builder()
                 .firstName("Test")

@@ -12,8 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-public
-class MailService {
+public class MailService {
 
     private final JavaMailSender mailSender;
 
@@ -32,10 +31,10 @@ class MailService {
         };
         try {
             mailSender.send(messagePreparator);
-            log.info("Powiadomienie wysłane");
+            log.info("Notification has been sent");
         } catch (MailException e) {
-            log.error("Błąd", e);
-            throw new WarehouseMailException("Blad  " + parcelNotification.getRecipient(), e);
+            log.error("Error", e);
+            throw new WarehouseMailException("Error  " + parcelNotification.getRecipient(), e);
         }
     }
 

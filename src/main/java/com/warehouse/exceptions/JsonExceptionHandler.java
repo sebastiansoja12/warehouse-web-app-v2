@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice
 public class JsonExceptionHandler {
 
-    @ExceptionHandler(WarehouseException.class)
+    @ExceptionHandler(Exception.class)
     @ResponseBody
-    public Object handleAllOtherErrors(WarehouseException exception) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ResponseEntity<Object> handleAllOtherErrors(Exception exception) {
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(new WarehouseException(exception.getMessage()));
+                .body(exception.getMessage());
     }
 
 }
