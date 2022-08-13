@@ -15,8 +15,10 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -113,8 +115,8 @@ public class RerouteService {
     }
 
     @Scheduled(cron = "${purge.cron.expression}")
+    @Transactional
     public void purgeExpired() {
-        final Date now = Date.from(Instant.now());
-        rerouteTokenRepository.deleteAllExpiredSince(now);
+        rerouteTokenRepository.deleteAllExpiredSince(Instant.now());
     }
 }
