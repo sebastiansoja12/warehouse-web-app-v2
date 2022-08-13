@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -15,6 +16,8 @@ import java.util.UUID;
 public interface RerouteTokenRepository extends JpaRepository<RerouteToken, Long> {
     Optional<RerouteToken> findByToken(Integer token);
     Optional<RerouteToken> findByParcelId(UUID parcel_id);
+    List<RerouteToken> findByParcelIdAndToken(UUID parcel_id, Integer token);
+
     void deleteByToken(Integer token);
 
     @Modifying

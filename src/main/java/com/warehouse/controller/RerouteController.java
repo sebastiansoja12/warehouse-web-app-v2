@@ -2,11 +2,12 @@ package com.warehouse.controller;
 
 
 import com.warehouse.dto.RerouteRequest;
+import com.warehouse.dto.TokenValidationRequest;
+import com.warehouse.entity.RerouteToken;
 import com.warehouse.service.RerouteService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.UUID;
 
 @RestController
 @AllArgsConstructor
@@ -16,8 +17,12 @@ public class RerouteController {
     private final RerouteService rerouteService;
 
     @PostMapping
-    public void sendReroutingInformation(@RequestBody RerouteRequest rerouteRequest) {
-        rerouteService.sendReroutingInformation(rerouteRequest);
+    public RerouteToken sendReroutingInformation(@RequestBody RerouteRequest rerouteRequest) {
+        return rerouteService.sendReroutingInformation(rerouteRequest);
     }
 
+    @PostMapping("/valid")
+    public boolean validationToken(@RequestBody TokenValidationRequest token) {
+        return rerouteService.tokenValidation(token);
+    }
 }
