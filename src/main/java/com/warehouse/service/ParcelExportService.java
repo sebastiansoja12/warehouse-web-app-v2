@@ -68,7 +68,7 @@ public class ParcelExportService {
         recipientTable.addCell(String.valueOf(parcel.getRecipientTelephone()));
         recipientTable.addCell((parcel.getRecipientCity()) + " " + parcel.getRecipientStreet());
         recipientTable.addCell(String.valueOf(parcel.getRecipientEmail()));
-        recipientTable.addCell(CodeService.generateQRCodeImage(parcel.getId()));
+        recipientTable.addCell(BarcodeGenerator.generateQRCodeImage(parcel.getId()));
 
 
     }

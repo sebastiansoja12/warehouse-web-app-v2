@@ -103,16 +103,15 @@ public class AuthService {
 
     }
 
-    public List<User> getCurrentUsers() {
-        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return userRepository.getUserByUsername(authentication.getName());
-
-    }
-
-    public Optional<User> getUser() {
+    public Optional<User> findCurrentLoggedInUser() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return userRepository.findByUsername(authentication.getName());
 
     }
 
+    public List<User> getCurrentUsers() {
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return userRepository.getUserByUsername(authentication.getName());
+
+    }
 }
