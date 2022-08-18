@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 @Service
 @AllArgsConstructor
@@ -33,6 +34,9 @@ public class AuthService {
     private final RefreshTokenService refreshTokenService;
     private final DepotRepository depotRepository;
     private final UserRepository userRepository;
+
+    private static final Logger LOGGER = Logger.getLogger("TokenService");
+
 
 
     public void signup(RegisterRequest registerRequest) {
@@ -90,6 +94,11 @@ public class AuthService {
                 .expiresAt(Instant.now().plusSeconds(jwtProvider.getJwtExpirationInMillis()))
                 .username(refreshTokenRequest.getUsername())
                 .build();
+    }
+    public void logout(RefreshTokenRequest refreshTokenRequest) {
+        refreshTokenService.deleteRefreshToken(refreshTokenRequest);
+        LOGGER.info("Token of user: " + refreshTokenRequest.getUsername() + " has been successfully deleted" +
+                ". Logging out");
     }
 
     public boolean isLoggedIn() {

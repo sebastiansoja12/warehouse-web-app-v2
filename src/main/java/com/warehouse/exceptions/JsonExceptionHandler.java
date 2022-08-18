@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice
 public class JsonExceptionHandler {
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(WarehouseException.class)
     @ResponseBody
-    public ResponseEntity<Object> handleAllOtherErrors(Exception exception) {
+    public Object handleAllOtherErrors(WarehouseException exception) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(new WarehouseException(exception.getMessage()));

@@ -1,7 +1,8 @@
 package com.warehouse.service;
 
-import com.warehouse.exceptions.WarehouseException;
+import com.warehouse.dto.RefreshTokenRequest;
 import com.warehouse.entity.RefreshToken;
+import com.warehouse.exceptions.WarehouseException;
 import com.warehouse.repository.RefreshTokenRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,6 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
-@Transactional
 public class RefreshTokenService {
 
     private final RefreshTokenRepository refreshTokenRepository;
@@ -30,7 +30,8 @@ public class RefreshTokenService {
                 .orElseThrow(() -> new WarehouseException("Invalid refresh Token"));
     }
 
-    public void deleteRefreshToken(String token) {
-        refreshTokenRepository.deleteByToken(token);
+    @Transactional
+    public void deleteRefreshToken(RefreshTokenRequest refreshTokenRequest) {
+        refreshTokenRepository.deleteByToken(refreshTokenRequest.getRefreshToken());
     }
 }
