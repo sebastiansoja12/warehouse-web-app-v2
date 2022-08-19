@@ -48,7 +48,6 @@ public class PaymentConfig {
         return context;
     }
 
-
     @Bean
     public PaymentInformation paymentInformation() {
         return new PaymentInformation();

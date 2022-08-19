@@ -6,7 +6,6 @@ import com.warehouse.dto.TokenValidationRequest;
 import com.warehouse.entity.Parcel;
 import com.warehouse.entity.ParcelNotification;
 import com.warehouse.entity.RerouteToken;
-import com.warehouse.entity.Route;
 import com.warehouse.exceptions.ParcelNotFound;
 import com.warehouse.exceptions.WarehouseException;
 import com.warehouse.repository.ParcelRepository;
@@ -18,8 +17,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Comparator;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @AllArgsConstructor
@@ -39,10 +39,8 @@ public class RerouteService {
                 .findByIdAndSenderEmail(rerouteRequest.getParcelId(), rerouteRequest.getEmail())
                 .orElseThrow(() -> new ParcelNotFound("Paczka nie zostala znaleziona"));
 
-        final RerouteToken rerouteToken = generateRerouteTokenWithGivenParcel(parcel);
-        rerouteTokenRepository.save(rerouteToken);
+        final RerouteToken rerouteToken = generateRerouteTokenWithGivenParcel(rerouteRequest);
         log.info("Token " + rerouteToken.getToken() + " saved");
-
 
         mailService.sendNotification(new ParcelNotification
                 ("Edycja danych przesyłki  " + parcel.getId(),
@@ -53,8 +51,8 @@ public class RerouteService {
         return rerouteToken;
     }
 
-    public RerouteToken generateRerouteTokenWithGivenParcel(Parcel parcel) {
-        return generateReroutingToken(parcel);
+    public RerouteToken generateRerouteTokenWithGivenParcel(RerouteRequest rerouteRequest) {
+        return generateReroutingToken(rerouteRequest);
     }
 
     public void updateParcel(ParcelDto parcel, UUID parcelId, Integer token) {
@@ -85,13 +83,13 @@ public class RerouteService {
         return rerouteToken.get().getExpiryDate().isAfter(Instant.now());
     }
 
-    public RerouteToken generateReroutingToken(Parcel parcel) {
+    public RerouteToken generateReroutingToken(RerouteRequest rerouteRequest) {
         final RerouteToken rerouteToken = new RerouteToken();
         rerouteToken.setToken(rerouteToken.generateToken());
         rerouteToken.setCreatedDate(Instant.now());
         rerouteToken.setExpiryDate(Instant.now().plusSeconds(SECONDS_TO_EXPIRE));
-        rerouteToken.setParcel(parcel);
-        return rerouteToken;
+        rerouteToken.setParcelId(rerouteRequest.getParcelId());
+        return rerouteTokenRepository.save(rerouteToken);
     }
 
     RerouteToken validateReroutingToken(Integer token) {

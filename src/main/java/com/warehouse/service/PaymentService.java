@@ -4,10 +4,9 @@ import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
 import com.warehouse.entity.Parcel;
-import com.warehouse.repository.PaymentRepository;
-import com.warehouse.enumeration.ParcelStatus;
-import com.warehouse.mapper.PaymentMapper;
 import com.warehouse.entity.PaymentInformation;
+import com.warehouse.enumeration.ParcelStatus;
+import com.warehouse.repository.PaymentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +22,6 @@ public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final String SUCCESS_URL = "/pay/success";
     private final String CANCEL_URL = "/pay/cancel";
-
-    private final PaymentMapper mapper;
 
     public Payment createPayment(
             String description,
