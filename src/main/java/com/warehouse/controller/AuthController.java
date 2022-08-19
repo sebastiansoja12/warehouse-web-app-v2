@@ -1,22 +1,18 @@
 package com.warehouse.controller;
 
 
+import com.warehouse.dto.AuthenticationResponse;
 import com.warehouse.dto.LoginRequest;
 import com.warehouse.dto.RefreshTokenRequest;
-import com.warehouse.service.AuthService;
-import com.warehouse.service.RefreshTokenService;
-import com.warehouse.dto.AuthenticationResponse;
 import com.warehouse.dto.RegisterRequest;
 import com.warehouse.entity.User;
+import com.warehouse.service.AuthService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
-
-import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/api/users")
@@ -25,7 +21,6 @@ public class AuthController {
 
 
     private final AuthService authService;
-    private final RefreshTokenService refreshTokenService;
 
     @PostMapping("/signup")
     public void signup(@RequestBody RegisterRequest registerRequest) {
@@ -43,9 +38,8 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<String> logout(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
-        refreshTokenService.deleteRefreshToken(refreshTokenRequest.getRefreshToken());
-        return ResponseEntity.status(OK).body("Refresh Token Deleted Successfully!!");
+    public void logout(@Valid @RequestBody RefreshTokenRequest refreshTokenRequest) {
+        authService.logout(refreshTokenRequest);
     }
 
 

@@ -3,11 +3,10 @@ package com.warehouse.service;
 import com.lowagie.text.DocumentException;
 import com.paypal.base.rest.PayPalRESTException;
 import com.warehouse.entity.Parcel;
-import com.warehouse.entity.RerouteToken;
-import com.warehouse.exceptions.ParcelNotFound;
 import com.warehouse.entity.ParcelNotification;
+import com.warehouse.exceptions.ParcelNotFound;
+import com.warehouse.exceptions.WarehouseException;
 import com.warehouse.repository.ParcelRepository;
-import com.warehouse.repository.RerouteTokenRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -32,10 +31,6 @@ public class ParcelService {
     private final MailService mailService;
     private final ParcelExportService parcelExportService;
     private final PaymentService paymentService;
-
-    private final RerouteTokenRepository rerouteTokenRepository;
-
-    private final RerouteService rerouteService;
 
     private final String url = "http://localhost:8080";
 
