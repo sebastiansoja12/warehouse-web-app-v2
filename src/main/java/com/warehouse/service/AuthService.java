@@ -11,6 +11,7 @@ import com.warehouse.entity.User;
 import com.warehouse.repository.DepotRepository;
 import com.warehouse.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,6 +27,7 @@ import java.util.logging.Logger;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class AuthService {
 
     private final PasswordEncoder passwordEncoder;
@@ -34,10 +36,6 @@ public class AuthService {
     private final RefreshTokenService refreshTokenService;
     private final DepotRepository depotRepository;
     private final UserRepository userRepository;
-
-    private static final Logger LOGGER = Logger.getLogger("TokenService");
-
-
 
     public void signup(RegisterRequest registerRequest) {
         final User user = new User();
@@ -52,7 +50,6 @@ public class AuthService {
         userRepository.save(user);
     }
 
-    // COUR-0001 will be changed in the next stories
 /*
     void fetchUserAndEnable(VerificationToken verificationToken) {
         String username = verificationToken.getUser().getUsername();
@@ -75,7 +72,10 @@ public class AuthService {
                 loginRequest.getUsername(),
                 loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authenticate);
+
         final String token = jwtProvider.generateToken(authenticate);
+        log.info("Token for user: " + loginRequest.getUsername() + " has been saved. Logging in");
+
         return AuthenticationResponse.builder()
                 .authenticationToken(token)
                 .role(userRepository.getRoleByUsername(loginRequest.getUsername()))
@@ -97,7 +97,7 @@ public class AuthService {
     }
     public void logout(RefreshTokenRequest refreshTokenRequest) {
         refreshTokenService.deleteRefreshToken(refreshTokenRequest);
-        LOGGER.info("Token of user: " + refreshTokenRequest.getUsername() + " has been successfully deleted" +
+        log.info("Token of user: " + refreshTokenRequest.getUsername() + " has been successfully deleted" +
                 ". Logging out");
     }
 
