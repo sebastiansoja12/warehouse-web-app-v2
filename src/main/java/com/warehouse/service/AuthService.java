@@ -12,7 +12,6 @@ import com.warehouse.repository.DepotRepository;
 import com.warehouse.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,7 +22,6 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 @Service
 @AllArgsConstructor
@@ -49,23 +47,6 @@ public class AuthService {
         user.setDepot(depot);
         userRepository.save(user);
     }
-
-/*
-    void fetchUserAndEnable(VerificationToken verificationToken) {
-        String username = verificationToken.getUser().getUsername();
-        User user = userRepository.findByUsername(username).orElseThrow(() ->
-                new WarehouseMailException("Uzytkownik nie znaleziony o nazwie - " + username));
-        user.setEnabled(true);
-        userRepository.save(user);
-    }
-
-
-    public void verifyAccount(String token) {
-        Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(token);
-        fetchUserAndEnable(verificationToken.orElseThrow(() -> new WarehouseMailException("Nieprawidlowy Token")));
-    }
-
- */
 
     public AuthenticationResponse login(LoginRequest loginRequest) {
         final Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -95,15 +76,11 @@ public class AuthService {
                 .username(refreshTokenRequest.getUsername())
                 .build();
     }
+
     public void logout(RefreshTokenRequest refreshTokenRequest) {
         refreshTokenService.deleteRefreshToken(refreshTokenRequest);
         log.info("Token of user: " + refreshTokenRequest.getUsername() + " has been successfully deleted" +
                 ". Logging out");
-    }
-
-    public boolean isLoggedIn() {
-        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return !(authentication instanceof AnonymousAuthenticationToken) && authentication.isAuthenticated();
     }
 
     public User getCurrentUser() {
