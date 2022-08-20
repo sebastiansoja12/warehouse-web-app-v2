@@ -20,7 +20,9 @@ import javax.transaction.Transactional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
-
+/*
+ This test will be changed in future tasks
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")

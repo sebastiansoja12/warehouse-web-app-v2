@@ -1,11 +1,6 @@
 package com.warehouse.dto;
 
-import com.warehouse.enumeration.ParcelType;
 import lombok.Data;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 
 @Data
 public class ParcelDto {

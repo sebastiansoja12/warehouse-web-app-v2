@@ -104,7 +104,7 @@ class DepotMvcTest {
         final MvcResult returnNothing = mockMvc.perform(
                         MockMvcRequestBuilders.get("/api/depots/" + depot.getDepotCode()))
                 .andDo(print())
-                .andExpect(status().is(500))
+                .andExpect(status().is(406))
                 .andReturn();
 
 

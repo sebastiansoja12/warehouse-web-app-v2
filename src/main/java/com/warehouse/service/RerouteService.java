@@ -3,6 +3,7 @@ package com.warehouse.service;
 import com.warehouse.dto.ParcelDto;
 import com.warehouse.dto.RerouteRequest;
 import com.warehouse.dto.TokenValidationRequest;
+import com.warehouse.dto.UpdateParcelRequest;
 import com.warehouse.entity.Parcel;
 import com.warehouse.entity.ParcelNotification;
 import com.warehouse.entity.RerouteToken;
@@ -55,24 +56,27 @@ public class RerouteService {
         return generateReroutingToken(rerouteRequest);
     }
 
-    public void updateParcel(ParcelDto parcel, UUID parcelId, Integer token) {
-        //validateReroutingToken(token);
-        final Parcel parcelRerouteToken = parcelRepository
+    @Transactional
+    public void updateParcel(UpdateParcelRequest parcelRequest) {
+        validateReroutingToken(parcelRequest.getToken());
+        rerouteTokenRepository.deleteByToken(parcelRequest.getToken());
+        final Parcel parcelToUpdate = validateParcel(parcelRequest.getId());
+        parcelToUpdate.setFirstName(parcelRequest.getParcel().getFirstName());
+        parcelToUpdate.setLastName(parcelRequest.getParcel().getLastName());
+        parcelToUpdate.setSenderTelephone(parcelRequest.getParcel().getSenderTelephone());
+        parcelToUpdate.setSenderEmail(parcelRequest.getParcel().getSenderEmail());
+        parcelToUpdate.setRecipientFirstName(parcelRequest.getParcel().getRecipientFirstName());
+        parcelToUpdate.setRecipientLastName(parcelRequest.getParcel().getRecipientLastName());
+        parcelToUpdate.setRecipientEmail(parcelRequest.getParcel().getRecipientEmail());
+        parcelToUpdate.setRecipientCity(parcelRequest.getParcel().getRecipientCity());
+        parcelToUpdate.setRecipientPostalCode(parcelRequest.getParcel().getRecipientPostalCode());
+        parcelToUpdate.setRecipientStreet(parcelRequest.getParcel().getRecipientStreet());
+        parcelRepository.save(parcelToUpdate);
+    }
+
+    private Parcel validateParcel(UUID parcelId) {
+        return parcelRepository
                 .findById(parcelId).orElseThrow(() -> new ParcelNotFound("Paczka nie zostala znaleziona"));
-        parcelRerouteToken.setFirstName(parcel.getFirstName());
-        parcelRerouteToken.setLastName(parcel.getLastName());
-        parcelRerouteToken.setSenderTelephone(parcel.getSenderTelephone());
-        parcelRerouteToken.setSenderEmail(parcel.getSenderEmail());
-        parcelRerouteToken.setRecipientFirstName(parcel.getRecipientFirstName());
-        parcelRerouteToken.setRecipientLastName(parcel.getRecipientLastName());
-        parcelRerouteToken.setRecipientEmail(parcel.getRecipientEmail());
-        parcelRerouteToken.setRecipientCity(parcel.getRecipientCity());
-        parcelRerouteToken.setRecipientPostalCode(parcel.getRecipientPostalCode());
-        parcelRerouteToken.setRecipientStreet(parcel.getRecipientStreet());
-
-        parcelRepository.save(parcelRerouteToken);
-
-        rerouteTokenRepository.deleteByToken(token);
     }
 
     public boolean tokenValidation(TokenValidationRequest tokenValidation) {

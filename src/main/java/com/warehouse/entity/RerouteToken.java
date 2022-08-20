@@ -14,7 +14,7 @@ import static javax.persistence.GenerationType.*;
 public class RerouteToken {
 
     @Id
-    @GeneratedValue(strategy = TABLE)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     private Integer token = generateToken();

@@ -69,7 +69,7 @@ class AuthControllerTest {
         MvcResult login = mockMvc.perform(post("/api/users/login").contentType(MediaType.APPLICATION_JSON)
                         .content(requestJson))
                         .andDo(print())
-                        .andExpect(status().is(500))
+                        .andExpect(status().is(406))
                         .andReturn();
         String errorMessage = login.getResponse().getErrorMessage();
         assertThat(errorMessage).isEqualTo(null);

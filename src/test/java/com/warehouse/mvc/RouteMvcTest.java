@@ -9,6 +9,5 @@ import org.springframework.test.context.TestPropertySource;
 @AutoConfigureMockMvc
 @TestPropertySource(locations = {"/application-test.properties"})
 @ActiveProfiles("test")
-public class AuthMvcTest {
-
+public class RouteMvcTest {
 }
