@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -13,7 +12,7 @@ import java.util.UUID;
 public class TokenValidationRequest {
 
     @NotNull
-    private UUID parcelId;
+    private String parcelId;
 
     @NotNull
     private Integer token;

@@ -1,7 +1,6 @@
 package com.warehouse.controller;
 
 
-import com.warehouse.dto.ParcelDto;
 import com.warehouse.dto.RerouteRequest;
 import com.warehouse.dto.TokenValidationRequest;
 import com.warehouse.dto.UpdateParcelRequest;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.UUID;
 
 
 @RestController

@@ -97,7 +97,7 @@ class DepotMvcTest {
         // when
         final MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/api/depots" + depot))
                 .andDo(print())
-                .andExpect(status().is(403))
+                .andExpect(status().is(404))
                 .andReturn();
 
         // AND expect

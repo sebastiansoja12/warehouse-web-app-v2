@@ -87,7 +87,7 @@ public class RerouteTokenRepositoryTest {
         rerouteToken.setToken(TOKEN);
         rerouteToken.setCreatedDate(Instant.now());
         rerouteToken.setExpiryDate(Instant.now().plusSeconds(SECONDS_TO_EXPIRE));
-        rerouteToken.setParcelId(UUID.fromString(PARCEL_ID));
+        rerouteToken.setParcelId(PARCEL_ID);
 
         return rerouteToken;
     }

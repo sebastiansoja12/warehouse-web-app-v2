@@ -37,7 +37,7 @@ public class RerouteService {
 
     public RerouteToken sendReroutingInformation(RerouteRequest rerouteRequest) {
         final Parcel parcel = parcelRepository
-                .findByIdAndSenderEmail(rerouteRequest.getParcelId(), rerouteRequest.getEmail())
+                .findByIdAndSenderEmail(UUID.fromString(rerouteRequest.getParcelId()), rerouteRequest.getEmail())
                 .orElseThrow(() -> new ParcelNotFound("Paczka nie zostala znaleziona"));
 
         final RerouteToken rerouteToken = generateRerouteTokenWithGivenParcel(rerouteRequest);
@@ -57,7 +57,7 @@ public class RerouteService {
     }
 
     @Transactional
-    public void updateParcel(UpdateParcelRequest parcelRequest) {
+    public Parcel updateParcel(UpdateParcelRequest parcelRequest) {
         validateReroutingToken(parcelRequest.getToken());
         rerouteTokenRepository.deleteByToken(parcelRequest.getToken());
         final Parcel parcelToUpdate = validateParcel(parcelRequest.getId());
@@ -71,25 +71,24 @@ public class RerouteService {
         parcelToUpdate.setRecipientCity(parcelRequest.getParcel().getRecipientCity());
         parcelToUpdate.setRecipientPostalCode(parcelRequest.getParcel().getRecipientPostalCode());
         parcelToUpdate.setRecipientStreet(parcelRequest.getParcel().getRecipientStreet());
-        parcelRepository.save(parcelToUpdate);
+        return parcelRepository.save(parcelToUpdate);
     }
 
     private Parcel validateParcel(UUID parcelId) {
         return parcelRepository
-                .findById(parcelId).orElseThrow(() -> new ParcelNotFound("Paczka nie zostala znaleziona"));
+                .findById(parcelId).orElseThrow(() -> new ParcelNotFound("Parcel was not found"));
     }
 
     public boolean tokenValidation(TokenValidationRequest tokenValidation) {
-         final Optional<RerouteToken> rerouteToken = rerouteTokenRepository
-                 .findByParcelIdAndToken(tokenValidation.getParcelId(), tokenValidation.getToken())
-                 .stream().max(Comparator.comparing(RerouteToken::getCreatedDate));
+        final Optional<RerouteToken> rerouteToken = rerouteTokenRepository
+                .findByParcelIdAndToken(tokenValidation.getParcelId(), tokenValidation.getToken())
+                .stream().max(Comparator.comparing(RerouteToken::getCreatedDate));
 
         return rerouteToken.get().getExpiryDate().isAfter(Instant.now());
     }
 
     public RerouteToken generateReroutingToken(RerouteRequest rerouteRequest) {
         final RerouteToken rerouteToken = new RerouteToken();
-        rerouteToken.setToken(rerouteToken.generateToken());
         rerouteToken.setCreatedDate(Instant.now());
         rerouteToken.setExpiryDate(Instant.now().plusSeconds(SECONDS_TO_EXPIRE));
         rerouteToken.setParcelId(rerouteRequest.getParcelId());
@@ -100,17 +99,6 @@ public class RerouteService {
        return rerouteTokenRepository.findByToken(token)
                 .orElseThrow(() -> new WarehouseException("Invalid rerouting Token"));
     }
-
-    RerouteToken validateReroutingTokenWithParcel(Parcel parcel) {
-        return rerouteTokenRepository.findByParcelId(parcel.getId())
-                .orElseThrow(() -> new WarehouseException("Invalid rerouting Token"));
-
-    }
-    public boolean ifReroutingTokenIsValid(Parcel parcel) {
-        final RerouteToken rerouteToken = validateReroutingTokenWithParcel(parcel);
-        return rerouteToken.getExpiryDate().isAfter(Instant.now());
-    }
-
 
     public void deleteReroutingToken(Integer token) {
         rerouteTokenRepository.deleteByToken(token);

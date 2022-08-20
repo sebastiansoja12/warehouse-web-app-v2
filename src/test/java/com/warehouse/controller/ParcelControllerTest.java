@@ -55,7 +55,7 @@ class ParcelControllerTest {
         Parcel parcel = new Parcel();
         parcelRepository.save(parcel);
         //when
-        MvcResult mvcResult = (MvcResult) mockMvc.perform(MockMvcRequestBuilders.get("/api/parcels/" + parcel.getId()))
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/api/parcels/" + parcel.getId()))
                 .andDo(print())
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andReturn();
