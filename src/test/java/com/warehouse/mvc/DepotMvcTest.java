@@ -23,8 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@TestPropertySource(locations = {"/application-test.properties"})
-@ActiveProfiles("test")
+@ActiveProfiles("dev")
 class DepotMvcTest {
 
     @Autowired

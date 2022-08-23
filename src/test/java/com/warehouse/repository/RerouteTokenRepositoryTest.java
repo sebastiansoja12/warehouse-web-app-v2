@@ -52,14 +52,14 @@ public class RerouteTokenRepositoryTest {
 
         // when
         final Optional<RerouteToken> rerouteToken1 = rerouteTokenRepository
-                .findByParcelId(UUID.fromString(PARCEL_ID));
+                .findByParcelId(PARCEL_ID);
 
         // then
         Assertions.assertTrue(rerouteToken1.isPresent());
         assertThat(rerouteToken1.get()).isNotNull();
         // and: ids of reroute tokens parcel and given parcel are equal
         assertThat(rerouteToken1.get().getParcelId())
-                .isEqualTo(UUID.fromString(PARCEL_ID));
+                .isEqualTo(PARCEL_ID);
         // and: check if generated token is Integer
         assertThat(rerouteToken.getToken()).isInstanceOf(Integer.class);
 

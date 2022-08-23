@@ -11,7 +11,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -23,9 +22,6 @@ public class SupplierRepositoryTest {
     private SupplierRepository supplierRepository;
     @Autowired
     private DepotRepository depotRepository;
-
-    @Autowired
-    private UserRepository userRepository;
 
     @AfterEach
     void tearDown() {
@@ -45,14 +41,14 @@ public class SupplierRepositoryTest {
         // and: save depot in db
         depotRepository.save(depot);
 
-        SupplierDto supplierDto = new SupplierDto();
+        final SupplierDto supplierDto = new SupplierDto();
         supplierDto.setSupplierCode("TS1");
         supplierDto.setDepotCode("TS1");
         supplierDto.setFirstName("Test");
         supplierDto.setLastName("Test");
         supplierDto.setTelephone("123");
 
-        Supplier supplier = Supplier.builder()
+        final Supplier supplier = Supplier.builder()
                 .supplierCode(supplierDto.getSupplierCode())
                 .firstName(supplierDto.getFirstName())
                 .lastName(supplierDto.getLastName())
@@ -80,14 +76,14 @@ public class SupplierRepositoryTest {
         // and: save depot in db
         depotRepository.save(depot);
 
-        SupplierDto supplierDto = new SupplierDto();
+        final SupplierDto supplierDto = new SupplierDto();
         supplierDto.setSupplierCode("TS1");
         supplierDto.setDepotCode("TS1");
         supplierDto.setFirstName("Test");
         supplierDto.setLastName("Test");
         supplierDto.setTelephone("123");
 
-        Supplier supplier = Supplier.builder()
+        final Supplier supplier = Supplier.builder()
                 .supplierCode(supplierDto.getSupplierCode())
                 .firstName(supplierDto.getFirstName())
                 .lastName(supplierDto.getLastName())
