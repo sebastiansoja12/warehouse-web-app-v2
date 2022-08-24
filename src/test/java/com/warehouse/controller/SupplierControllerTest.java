@@ -4,7 +4,6 @@ package com.warehouse.controller;
 import com.warehouse.dto.AuthenticationResponse;
 import com.warehouse.dto.LoginRequest;
 import com.warehouse.dto.RegisterRequest;
-import com.warehouse.dto.SupplierDto;
 import com.warehouse.entity.Supplier;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
