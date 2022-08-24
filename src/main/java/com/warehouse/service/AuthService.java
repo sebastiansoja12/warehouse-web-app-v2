@@ -3,6 +3,7 @@ package com.warehouse.service;
 
 import com.warehouse.dto.LoginRequest;
 import com.warehouse.dto.RefreshTokenRequest;
+import com.warehouse.exceptions.WarehouseException;
 import com.warehouse.security.JwtProvider;
 import com.warehouse.dto.AuthenticationResponse;
 import com.warehouse.dto.RegisterRequest;
@@ -81,6 +82,10 @@ public class AuthService {
         refreshTokenService.deleteRefreshToken(refreshTokenRequest);
         log.info("Token of user: " + refreshTokenRequest.getUsername() + " has been successfully deleted" +
                 ". Logging out");
+    }
+
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(() -> new WarehouseException("User not found"));
     }
 
     public User getCurrentUser() {
