@@ -2,7 +2,7 @@
 
 Technologies: 
 - JAVA 17
-- SPRING BOOT 2.7.1
+- SPRING BOOT 2.7.2
 - MySQL
 - Hibernate
 - Paypal API
