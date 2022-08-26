@@ -35,6 +35,8 @@ public class RerouteService {
 
     private final static Long SECONDS_TO_EXPIRE = 600L;
 
+    private final String url = "http://localhost:4200";
+
     public RerouteToken sendReroutingInformation(RerouteRequest rerouteRequest) {
         final Parcel parcel = parcelRepository
                 .findByIdAndSenderEmail(UUID.fromString(rerouteRequest.getParcelId()), rerouteRequest.getEmail())
@@ -46,9 +48,8 @@ public class RerouteService {
         mailService.sendNotification(new ParcelNotification
                 ("Edycja danych przesyłki  " + parcel.getId(),
                         rerouteRequest.getEmail(),
-                        "By edytować dane przesyłki prosimy udać się na stronę do przekierowywania " +
-                        "przesyłek i podać niżej wygenerowany token " +
-                        "\n" + rerouteToken.getToken()));
+                        "By edytować dane przesyłki prosimy udać się na stronę do przekierowywania przesyłek " +
+                                this.url + "/reroute-edit/" + parcel.getId() + "/" + rerouteToken.getToken()));
         return rerouteToken;
     }
 
