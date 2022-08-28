@@ -9,7 +9,7 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.warehouse</groupId>
-	<artifactId>warehouse</artifactId>
+	<artifactId>inparcel</artifactId>
 	<version>VERSION_2022.10-SNAPSHOT</version>
 	<name>warehouse</name>
 	<description>Inparcel Java Application</description>
