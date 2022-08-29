@@ -8,4 +8,6 @@ import org.mapstruct.Mapper;
 public interface RequestMapper {
 
     RerouteRequest map(RerouteRequestDto rerouteRequestDto);
+
+    RerouteRequestDto map(RerouteRequest rerouteRequest);
 }

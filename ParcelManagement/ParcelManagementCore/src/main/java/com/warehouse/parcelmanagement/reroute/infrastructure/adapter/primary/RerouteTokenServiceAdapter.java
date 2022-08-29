@@ -7,6 +7,8 @@ import com.warehouse.parcelmanagement.reroute.domain.port.primary.RerouteTokenPo
 import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.primary.mapper.RequestMapper;
 import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.primary.mapper.ResponseMapper;
 import com.warehouse.parcelmanagement.reroute.infrastructure.api.RerouteService;
+import com.warehouse.parcelmanagement.reroute.infrastructure.api.dto.ParcelDto;
+import com.warehouse.parcelmanagement.reroute.infrastructure.api.dto.ParcelResponseDto;
 import com.warehouse.parcelmanagement.reroute.infrastructure.api.dto.RerouteRequestDto;
 import com.warehouse.parcelmanagement.reroute.infrastructure.api.dto.RerouteResponseDto;
 import lombok.AllArgsConstructor;
@@ -25,5 +27,10 @@ public class RerouteTokenServiceAdapter implements RerouteService {
         final RerouteRequest request = requestMapper.map(requestDto);
         final RerouteResponse response = rerouteTokenPort.sendReroutingInformation(request);
         return responseMapper.map(response);
+    }
+
+    @Override
+    public ParcelResponseDto update(ParcelDto parcelDto) {
+        return null;
     }
 }

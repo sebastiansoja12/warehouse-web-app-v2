@@ -10,7 +10,7 @@ import java.util.UUID;
 import static javax.persistence.GenerationType.*;
 
 @Data
-@Entity
+@Entity(name = "another_token")
 public class RerouteToken {
 
     @Id

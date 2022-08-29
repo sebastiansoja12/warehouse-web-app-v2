@@ -31,17 +31,13 @@ public class RouteService {
 
     @Transactional
     public void save(Route route){
-        final Parcel parcel = parcelRepository.getById(route.getParcel().getId());
+        //final Parcel parcel = parcelRepository.getById(route.getParcel().getId());
         final Supplier supplier = supplierRepository.findBySupplierCode(route.getSupplier().getSupplierCode());
 
-        if (routeRepository.findByParcel_IdAndUser(route.getParcel().getId(),
-                authService.getCurrentUser()) != null) {
-            throw new WarehouseException("Paczka została już zarejestrowana w tym oddziale");
-        }
 
         route.setUser(getCurrentUser());
         route.setSupplier(supplier);
-        route.setParcel(parcel);
+        //route.setParcel(parcel);
         route.setCreated(LocalDateTime.now(ZoneId.of(String.valueOf(ZoneId.systemDefault()))));
         route.setDepot(findUsersDepot());
         routeRepository.save(route);

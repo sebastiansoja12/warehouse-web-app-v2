@@ -23,6 +23,6 @@ public interface RerouteTokenRepository extends JpaRepository<RerouteToken, Long
     void deleteByToken(Integer token);
 
     @Modifying
-    @Query("delete from RerouteToken t where t.expiryDate <= ?1")
+    @Query("delete from another_token t where t.expiryDate <= ?1")
     void deleteAllExpiredSince(Instant now);
 }

@@ -69,7 +69,7 @@ public class PaymentService {
                 "http://localhost:8080/api/payments" + CANCEL_URL,
                 "http://localhost:8080/api/payments" + SUCCESS_URL,
                          parcel);
-        paymentInformation.setParcel(parcel);
+        //paymentInformation.setParcel(parcel);
         paymentInformation.setParcelStatus(ParcelStatus.NOT_PAID);
         paymentInformation.setPaypalId(payment.getId());
         for (Links link : payment.getLinks()) {

@@ -18,8 +18,8 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Builder
+@Entity(name = "second_parcel")
 public class Parcel {
 
     @Id

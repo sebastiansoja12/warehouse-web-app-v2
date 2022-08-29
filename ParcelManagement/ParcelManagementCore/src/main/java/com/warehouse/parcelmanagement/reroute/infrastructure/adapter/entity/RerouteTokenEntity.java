@@ -33,7 +33,7 @@ public class RerouteTokenEntity {
     @Column(name = "timeout")
     private Instant expiryDate;
 
-    @Column(name = "parcel_id", nullable = false, insertable = false, updatable = false)
+    @Column(nullable = false, insertable = false, updatable = false)
     private String parcelId;
 
     public Integer generateToken() {

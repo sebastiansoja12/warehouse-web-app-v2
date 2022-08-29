@@ -5,27 +5,39 @@ import com.warehouse.parcelmanagement.reroute.domain.model.RerouteResponse;
 import com.warehouse.parcelmanagement.reroute.domain.port.primary.RerouteTokenPort;
 import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.primary.mapper.RequestMapper;
 import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.primary.mapper.ResponseMapper;
+import com.warehouse.parcelmanagement.reroute.infrastructure.api.RerouteService;
+import com.warehouse.parcelmanagement.reroute.infrastructure.api.dto.ParcelDto;
+import com.warehouse.parcelmanagement.reroute.infrastructure.api.dto.ParcelResponseDto;
+import com.warehouse.parcelmanagement.reroute.infrastructure.api.dto.RerouteRequestDto;
+import com.warehouse.parcelmanagement.reroute.infrastructure.api.dto.RerouteResponseDto;
 import lombok.AllArgsConstructor;
 
-import java.util.logging.Logger;
-
 @AllArgsConstructor
-public class RerouteTokenAdapter implements RerouteTokenPort {
+public class RerouteTokenAdapter implements RerouteService {
 
     private final RequestMapper requestMapper;
 
     private final ResponseMapper responseMapper;
 
-    private final Logger logger;
-
-    private final MailCreator mailCreator;
+    private final RerouteTokenPort port;
 
     @Override
-    public RerouteResponse sendReroutingInformation(RerouteRequest rerouteRequest) {
+    public RerouteResponseDto sendReroutingInformation(RerouteRequestDto rerouteRequest) {
         return buildReroutingInformation(rerouteRequest);
     }
 
-    private RerouteResponse buildReroutingInformation(RerouteRequest rerouteRequest) {
+    @Override
+    public ParcelResponseDto update(ParcelDto parcelDto) {
         return null;
+    }
+
+    private RerouteResponseDto buildReroutingInformation(RerouteRequestDto rerouteRequestDto) {
+        final RerouteRequest rerouteRequest = requestMapper.map(rerouteRequestDto);
+
+        final RerouteResponse response = port.sendReroutingInformation(rerouteRequest);
+
+        final RerouteResponseDto responseDto = responseMapper.map(response);
+
+        return new RerouteResponseDto(responseDto.getValue());
     }
 }
