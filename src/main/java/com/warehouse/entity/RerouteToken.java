@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.Random;
+import java.util.UUID;
 
 import static javax.persistence.GenerationType.*;
 
@@ -13,7 +14,7 @@ import static javax.persistence.GenerationType.*;
 public class RerouteToken {
 
     @Id
-    @GeneratedValue(strategy = TABLE)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
     private Integer token = generateToken();
@@ -23,9 +24,7 @@ public class RerouteToken {
     @Column(name = "timeout")
     private Instant expiryDate;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parcel_id", referencedColumnName = "id")
-    private Parcel parcel;
+    private String parcelId;
 
     public Integer generateToken() {
         final Random r = new Random( System.currentTimeMillis() );

@@ -19,14 +19,14 @@ public class SupplierMapperTest {
     @Test
     void givenSupplierDtoToSupplier() {
         // GIVEN
-        SupplierDto dto = new SupplierDto();
+        final SupplierDto dto = new SupplierDto();
         dto.setFirstName("Test");
         dto.setLastName("Test");
         dto.setSupplierCode("TT1");
         dto.setTelephone("123");
 
         // WHEN
-        Supplier entity = mapper.mapToDto(dto);
+        final Supplier entity = mapper.mapToDto(dto);
 
         // THEN
         // AND: Entity is not null

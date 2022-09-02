@@ -1,77 +1,91 @@
 package com.warehouse.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.SerializationFeature;
+import com.warehouse.dto.AuthenticationResponse;
 import com.warehouse.dto.LoginRequest;
+import com.warehouse.dto.RegisterRequest;
+import com.warehouse.entity.User;
+import com.warehouse.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.test.context.ActiveProfiles;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 class AuthControllerTest {
 
+
     @Autowired
-    private MockMvc mockMvc;
+    private AuthController authController;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Test
     @Transactional
-    void shouldLoginAndGetContent() throws Exception {
+    void shouldRegisterUser() {
         // given
-        LoginRequest loginRequest = new LoginRequest();
-        loginRequest.setUsername("inparcel-admin");
-        loginRequest.setPassword("test");
-        ObjectMapper mapper = new ObjectMapper();
+        final RegisterRequest registerRequest = createRegisterRequest();
+
         // when
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        String requestJson = ow.writeValueAsString(loginRequest);
+        authController.signup(registerRequest);
+        // then
+        final Optional<User> user = userRepository.findByUsername(registerRequest.getUsername());
+        assertTrue(user.isPresent());
+        assertThat(user.get()).isNotNull();
+    }
+
+    @Test
+    void shouldLoginAndGetContent() {
+        // given
+        final LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setUsername("s-soja");
+        loginRequest.setPassword("test");
+        // when
+        final AuthenticationResponse authenticationResponse = authController.login(loginRequest);
 
         // then
-        MvcResult login = mockMvc.perform(post("/api/users/login").contentType(MediaType.APPLICATION_JSON)
-                        .content(requestJson))
-                        .andDo(print())
-                        .andExpect(status().is(200))
-                        .andReturn();
-        String token = login.getResponse().getContentAsString();
-        assertThat(token).isNotNull();
+        assertThat(authenticationResponse.getUsername()).isEqualTo(loginRequest.getUsername());
+        assertThat(authenticationResponse.getRefreshToken()).isInstanceOf(String.class);
 
     }
     @Test
     @Transactional
-    void shouldLoginAndGetError() throws Exception {
+    void shouldLoginAndGetBadCredentialsError() {
         // given
-        LoginRequest loginRequest = new LoginRequest();
+        final LoginRequest loginRequest = new LoginRequest();
         loginRequest.setUsername(null);
         loginRequest.setPassword(null);
-        ObjectMapper mapper = new ObjectMapper();
+        final String exceptionMessage = "Bad credentials";
         // when
-        mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-        ObjectWriter ow = mapper.writer().withDefaultPrettyPrinter();
-        String requestJson = ow.writeValueAsString(loginRequest);
-
+        final BadCredentialsException exception = assertThrows(BadCredentialsException.class, () -> {
+            authController.login(loginRequest);
+        });
         // then
-        MvcResult login = mockMvc.perform(post("/api/users/login").contentType(MediaType.APPLICATION_JSON)
-                        .content(requestJson))
-                        .andDo(print())
-                        .andExpect(status().is(500))
-                        .andReturn();
-        String errorMessage = login.getResponse().getErrorMessage();
-        assertThat(errorMessage).isEqualTo(null);
+        assertThat(exception).isInstanceOf(BadCredentialsException.class);
+        assertThat(exception.getMessage()).isEqualTo(exceptionMessage);
     }
 
+    private RegisterRequest createRegisterRequest() {
+        final RegisterRequest registerRequest = new RegisterRequest();
+        registerRequest.setFirstName("test");
+        registerRequest.setLastName("test");
+        registerRequest.setUsername("test");
+        registerRequest.setPassword("test");
+        registerRequest.setDepotCode("KT1");
+        registerRequest.setEmail("test@test.pl");
+
+        return registerRequest;
+    }
 }

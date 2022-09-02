@@ -13,9 +13,9 @@ public class JsonExceptionHandler {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public ResponseEntity<Object> handleAllOtherErrors(Exception exception) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
                 .contentType(MediaType.APPLICATION_JSON)
-                .body(new WarehouseException(exception.getMessage()));
+                .body(exception.getMessage());
     }
 
 }

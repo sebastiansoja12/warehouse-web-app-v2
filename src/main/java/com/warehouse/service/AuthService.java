@@ -3,6 +3,7 @@ package com.warehouse.service;
 
 import com.warehouse.dto.LoginRequest;
 import com.warehouse.dto.RefreshTokenRequest;
+import com.warehouse.exceptions.WarehouseException;
 import com.warehouse.security.JwtProvider;
 import com.warehouse.dto.AuthenticationResponse;
 import com.warehouse.dto.RegisterRequest;
@@ -11,7 +12,7 @@ import com.warehouse.entity.User;
 import com.warehouse.repository.DepotRepository;
 import com.warehouse.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,6 +26,7 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class AuthService {
 
     private final PasswordEncoder passwordEncoder;
@@ -33,7 +35,6 @@ public class AuthService {
     private final RefreshTokenService refreshTokenService;
     private final DepotRepository depotRepository;
     private final UserRepository userRepository;
-
 
     public void signup(RegisterRequest registerRequest) {
         final User user = new User();
@@ -48,30 +49,15 @@ public class AuthService {
         userRepository.save(user);
     }
 
-    // COUR-0001 will be changed in the next stories
-/*
-    void fetchUserAndEnable(VerificationToken verificationToken) {
-        String username = verificationToken.getUser().getUsername();
-        User user = userRepository.findByUsername(username).orElseThrow(() ->
-                new WarehouseMailException("Uzytkownik nie znaleziony o nazwie - " + username));
-        user.setEnabled(true);
-        userRepository.save(user);
-    }
-
-
-    public void verifyAccount(String token) {
-        Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(token);
-        fetchUserAndEnable(verificationToken.orElseThrow(() -> new WarehouseMailException("Nieprawidlowy Token")));
-    }
-
- */
-
     public AuthenticationResponse login(LoginRequest loginRequest) {
         final Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginRequest.getUsername(),
                 loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authenticate);
+
         final String token = jwtProvider.generateToken(authenticate);
+        log.info("Token for user: " + loginRequest.getUsername() + " has been saved. Logging in");
+
         return AuthenticationResponse.builder()
                 .authenticationToken(token)
                 .role(userRepository.getRoleByUsername(loginRequest.getUsername()))
@@ -92,9 +78,14 @@ public class AuthService {
                 .build();
     }
 
-    public boolean isLoggedIn() {
-        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return !(authentication instanceof AnonymousAuthenticationToken) && authentication.isAuthenticated();
+    public void logout(RefreshTokenRequest refreshTokenRequest) {
+        refreshTokenService.deleteRefreshToken(refreshTokenRequest);
+        log.info("Token of user: " + refreshTokenRequest.getUsername() + " has been successfully deleted" +
+                ". Logging out");
+    }
+
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(() -> new WarehouseException("User not found"));
     }
 
     public User getCurrentUser() {
