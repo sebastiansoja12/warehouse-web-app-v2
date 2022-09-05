@@ -45,9 +45,9 @@ public class RerouteServiceTest {
 
     private static final Integer INVALID_TOKEN = 12346;
 
-    private static final String PARCEL_ID = "2e191c24-be5c-4b65-ac12-f3d806351f20";
+    private static final Long PARCEL_ID = 123456L;
 
-    private static final String INVALID_PARCEL_ID = "2e191c24-be5c-4b65-ac12-f3d806351f21";
+    private static final Long INVALID_PARCEL_ID = 12346L;
 
     private static final String EMAIL = "sebastian5152@wp.pl";
 
@@ -83,7 +83,7 @@ public class RerouteServiceTest {
         final RerouteToken rerouteToken = new RerouteToken();
         rerouteToken.setId(1L);
         rerouteToken.setToken(TOKEN);
-        rerouteToken.setParcelId(parcel.getId().toString());
+        rerouteToken.setParcelId(parcel.getId());
         rerouteToken.setCreatedDate(Instant.now());
         rerouteToken.setExpiryDate(Instant.now().plusSeconds(SECONDS_TO_EXPIRE));
 
@@ -110,7 +110,7 @@ public class RerouteServiceTest {
         final RerouteToken rerouteToken = new RerouteToken();
         rerouteToken.setId(1L);
         rerouteToken.setToken(TOKEN);
-        rerouteToken.setParcelId(parcel.getId().toString());
+        rerouteToken.setParcelId(parcel.getId());
         rerouteToken.setCreatedDate(Instant.now());
         rerouteToken.setExpiryDate(Instant.now().plusSeconds(SECONDS_TO_EXPIRE));
 
@@ -143,14 +143,13 @@ public class RerouteServiceTest {
         // and: save token in db
         rerouteTokenRepository.save(rerouteToken);
 
-        final Parcel updatedParcel = createUpdatedParcel();
-
         // when
-        final IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-                createUpdateParcelRequest(UUID.fromString("ID"), updatedParcel);
+        final NullPointerException exception = assertThrows(NullPointerException.class, () -> {
+                rerouteService.updateParcel(null);
         });
         // then
-        final String expectedMessage = "Invalid UUID string: ID";
+        final String expectedMessage = "Cannot invoke \"com.warehouse.dto.UpdateParcelRequest.getToken()\" because " +
+                "\"parcelRequest\" is null";
         assertThat(expectedMessage).isNotBlank();
         assertThat(expectedMessage).isEqualTo(exception.getMessage());
     }
@@ -169,7 +168,7 @@ public class RerouteServiceTest {
 
         final Parcel updatedParcel = createUpdatedParcel();
 
-        final UpdateParcelRequest updateParcelRequest = createUpdateParcelRequest(UUID.fromString(INVALID_PARCEL_ID),
+        final UpdateParcelRequest updateParcelRequest = createUpdateParcelRequest(INVALID_PARCEL_ID,
                 updatedParcel);
         // when
         final ParcelNotFound exception = assertThrows(ParcelNotFound.class, () -> {
@@ -207,12 +206,12 @@ public class RerouteServiceTest {
         // and: create validation request
         final TokenValidationRequest tokenValidationRequest = new TokenValidationRequest();
         tokenValidationRequest.setToken(TOKEN);
-        tokenValidationRequest.setParcelId(parcel.getId().toString());
+        tokenValidationRequest.setParcelId(parcel.getId());
 
         // and: create expired token
         final RerouteToken rerouteToken = new RerouteToken();
         rerouteToken.setToken(TOKEN);
-        rerouteToken.setParcelId(parcel.getId().toString());
+        rerouteToken.setParcelId(parcel.getId());
         rerouteToken.setCreatedDate(Instant.now().minusSeconds(SECONDS_TO_EXPIRE));
         rerouteToken.setExpiryDate(Instant.now());
 
@@ -238,12 +237,12 @@ public class RerouteServiceTest {
         // and: create validation request
         final TokenValidationRequest tokenValidationRequest = new TokenValidationRequest();
         tokenValidationRequest.setToken(TOKEN);
-        tokenValidationRequest.setParcelId(parcel.getId().toString());
+        tokenValidationRequest.setParcelId(parcel.getId());
 
         // and: create expired token
         final RerouteToken rerouteToken = createRerouteToken();
         rerouteToken.setToken(TOKEN);
-        rerouteToken.setParcelId(parcel.getId().toString());
+        rerouteToken.setParcelId(parcel.getId());
         rerouteToken.setCreatedDate(Instant.now());
         rerouteToken.setExpiryDate(Instant.now().plusSeconds(SECONDS_TO_EXPIRE));
 
@@ -314,7 +313,7 @@ public class RerouteServiceTest {
         return rerouteTokens;
     }
 
-    private UpdateParcelRequest createUpdateParcelRequest(UUID parcelId, Parcel parcel) {
+    private UpdateParcelRequest createUpdateParcelRequest(Long parcelId, Parcel parcel) {
         final UpdateParcelRequest updateParcelRequest = new UpdateParcelRequest();
         updateParcelRequest.setParcel(parcel);
         updateParcelRequest.setId(parcelId);
@@ -322,7 +321,7 @@ public class RerouteServiceTest {
         return updateParcelRequest;
     }
 
-    private UpdateParcelRequest createUpdateParcelRequestWithWrongToken(UUID parcelId, Parcel parcel, Integer token) {
+    private UpdateParcelRequest createUpdateParcelRequestWithWrongToken(Long parcelId, Parcel parcel, Integer token) {
         final UpdateParcelRequest updateParcelRequest = new UpdateParcelRequest();
         updateParcelRequest.setParcel(parcel);
         updateParcelRequest.setId(parcelId);

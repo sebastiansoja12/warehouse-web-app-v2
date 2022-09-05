@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 public class TokenValidationRequest {
 
     @NotNull
-    private String parcelId;
+    private Long parcelId;
 
     @NotNull
     private Integer token;

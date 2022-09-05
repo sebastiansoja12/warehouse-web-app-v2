@@ -43,7 +43,7 @@ public class ParcelRepositoryTest {
         // then
         assertThat(parcel.getId()).isNotNull();
         // and: id is instance of UUID class
-        assertThat(parcel.getId()).isInstanceOf(UUID.class);
+        assertThat(parcel.getId()).isInstanceOf(Long.class);
     }
 
     @Test
@@ -65,11 +65,11 @@ public class ParcelRepositoryTest {
 
         parcelRepository.save(parcel);
 
-        final UUID uuid = parcel.getId();
+        final Long id = parcel.getId();
 
         // when
         final boolean exists = parcelRepository
-                .existsById(uuid);
+                .existsById(id);
 
         // then
         assertTrue(exists);
@@ -94,7 +94,7 @@ public class ParcelRepositoryTest {
 
         parcelRepository.save(parcel);
 
-        final UUID uuid = parcel.getId();
+        final Long uuid = parcel.getId();
 
         // when
         final Parcel expected = parcelRepository.getById(uuid);
@@ -102,6 +102,6 @@ public class ParcelRepositoryTest {
         // then
         assertThat(expected).isNotNull();
         // and: id is instance of UUID class
-        assertThat(expected.getId()).isInstanceOf(UUID.class);
+        assertThat(expected.getId()).isInstanceOf(Long.class);
     }
 }

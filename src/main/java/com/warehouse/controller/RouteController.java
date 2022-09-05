@@ -47,14 +47,14 @@ public class RouteController {
     }
 
     @GetMapping("/{id}/parcelId")
-    public ResponseEntity<List<Route>> findByParcelId(@PathVariable UUID id) throws Exception {
+    public ResponseEntity<List<Route>> findByParcelId(@PathVariable Long id) {
         List<Route> route = routeService.findByParcelId(id);
         return new ResponseEntity<>(route, HttpStatus.OK);
     }
 
     @PostMapping("/{id}/parcelId")
     @Transactional
-    public ResponseEntity<String> deleteRouteByParcelId(@Valid @PathVariable UUID id) {
+    public ResponseEntity<String> deleteRouteByParcelId(@Valid @PathVariable Long id) {
         routeService.deleteRouteByParcelId(id);
         return ResponseEntity.status(OK).body("Zarejestrowana paczka usunięta");
     }

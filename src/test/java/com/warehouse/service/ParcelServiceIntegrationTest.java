@@ -43,7 +43,7 @@ public class ParcelServiceIntegrationTest {
     public void shouldFindInDatabase() {
         // GIVEN: Parcel with random UUID
         final Parcel parcel = Parcel.builder()
-                .id(UUID.fromString("b9c70ce3-025c-477d-8d27-19260433b84f"))
+                .id(100001L)
                 .firstName("Test")
                 .lastName("Test")
                 .senderTelephone("123456789")
@@ -61,9 +61,8 @@ public class ParcelServiceIntegrationTest {
 
         // WHEN: Parcel is saved
         final Optional<Parcel> parcelToFind = parcelRepository
-                .findById(UUID.fromString("b9c70ce3-025c-477d-8d27-19260433b84f"));
+                .findById(123456L);
         // THEN
         assertTrue(parcelToFind.isPresent());
-        assertThat(parcelToFind.get().getId().equals(UUID.fromString("b9c70ce3-025c-477d-8d27-19260433b84f")));
     }
 }

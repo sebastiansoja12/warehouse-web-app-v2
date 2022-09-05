@@ -41,7 +41,7 @@ public class RouteRepositoryTest {
 
         final Parcel parcel = createParcel();
         // and: set parcel id
-        parcel.setId(UUID.fromString("b9c70ce3-025c-477d-8d27-19260433b84f"));
+        parcel.setId(1000001L);
 
 
         final User user = createUser();
@@ -148,7 +148,7 @@ public class RouteRepositoryTest {
                 .build();
 
         routeRepository.save(route);
-        final UUID id = parcel.getId();
+        final Long id = parcel.getId();
 
         // when
         final List<Route> routes = routeRepository.findByParcelId(id);

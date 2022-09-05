@@ -7,9 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -23,9 +21,9 @@ import java.util.UUID;
 public class Parcel {
 
     @Id
-    @GeneratedValue()
-    @Type(type = "uuid-char")
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "Parcel_ID")
+    @TableGenerator(name = "Parcel_ID", initialValue = 1000000, allocationSize = 100)
+    private Long id;
 
     @Valid
     @NotBlank

@@ -16,16 +16,14 @@ public interface RouteRepository extends JpaRepository<Route, UUID> {
 
     List<Route> findByUser_username(String username);
 
-    List<Route> findByParcelId(final UUID id);
+    List<Route> findByParcelId(final Long id);
 
-    Route findByParcel_IdAndUser(UUID parcel_id, User user);
-
-    List<Route> findRoutesByUser_Username(String username);
+    Route findByParcel_IdAndUser(Long parcel_id, User user);
 
 
-    Optional<List<Route>> findAllByParcel_IdOrderByCreated(final UUID id);
+    Optional<List<Route>> findAllByParcel_IdOrderByCreated(final Long id);
 
-    void deleteByParcelIdAndDepot_DepotCode(final UUID parcelId, final String depotCode);
+    void deleteByParcelIdAndDepot_DepotCode(final Long parcelId, final String depotCode);
 
 
 }

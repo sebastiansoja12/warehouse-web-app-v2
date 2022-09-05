@@ -16,9 +16,9 @@ import java.util.UUID;
 public interface RerouteTokenRepository extends JpaRepository<RerouteToken, Long> {
     Optional<RerouteToken> findByToken(Integer token);
 
-    Optional<RerouteToken> findByParcelId(String parcel_id);
+    Optional<RerouteToken> findByParcelId(Long parcel_id);
 
-    List<RerouteToken> findByParcelIdAndToken(String parcel_id, Integer token);
+    List<RerouteToken> findByParcelIdAndToken(Long parcel_id, Integer token);
 
     void deleteByToken(Integer token);
 
