@@ -5,9 +5,9 @@ import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
 import com.warehouse.config.ApplicationUrlConfig;
 import com.warehouse.entity.Parcel;
-import com.warehouse.entity.PaymentInformation;
-import com.warehouse.enumeration.ParcelStatus;
 import com.warehouse.repository.PaymentRepository;
+import com.warehouse.enumeration.ParcelStatus;
+import com.warehouse.entity.PaymentInformation;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,7 +33,7 @@ public class PaymentService {
             Parcel parcel) throws PayPalRESTException {
         Amount amount = new Amount();
         amount.setCurrency("PLN");
-        amount.setTotal(String.format("%.3f", parcel.getPrice()));
+        amount.setTotal(String.format("%.2f", parcel.getPrice()));
 
         Transaction transaction = new Transaction();
         transaction.setDescription(description);
