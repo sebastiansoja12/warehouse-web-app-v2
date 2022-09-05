@@ -24,7 +24,7 @@ public class RerouteToken {
     @Column(name = "timeout")
     private Instant expiryDate;
 
-    private String parcelId;
+    private Long parcelId;
 
     public Integer generateToken() {
         final Random r = new Random( System.currentTimeMillis() );

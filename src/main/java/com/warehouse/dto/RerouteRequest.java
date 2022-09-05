@@ -14,7 +14,7 @@ import java.util.UUID;
 public class RerouteRequest {
 
     @NotNull
-    private String parcelId;
+    private Long parcelId;
 
     @NotNull
     private String email;

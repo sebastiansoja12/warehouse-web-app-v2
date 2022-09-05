@@ -3,6 +3,7 @@ package com.warehouse.service;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
+import com.warehouse.config.ApplicationUrlConfig;
 import com.warehouse.entity.Parcel;
 import com.warehouse.entity.PaymentInformation;
 import com.warehouse.enumeration.ParcelStatus;
@@ -22,6 +23,8 @@ public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final String SUCCESS_URL = "/pay/success";
     private final String CANCEL_URL = "/pay/cancel";
+
+    private final ApplicationUrlConfig config;
 
     public Payment createPayment(
             String description,
@@ -66,8 +69,8 @@ public class PaymentService {
         PaymentInformation paymentInformation = new PaymentInformation();
         Payment payment = createPayment("Payment for parcel: "
                         + parcel.getId(),
-                "http://localhost:8080/api/payments" + CANCEL_URL,
-                "http://localhost:8080/api/payments" + SUCCESS_URL,
+                config.springUrl + "/api/payments" + CANCEL_URL,
+                config.springUrl + "/api/payments" + SUCCESS_URL,
                          parcel);
         paymentInformation.setParcel(parcel);
         paymentInformation.setParcelStatus(ParcelStatus.NOT_PAID);

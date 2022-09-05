@@ -1,6 +1,6 @@
 package com.warehouse.service;
 
-import com.warehouse.dto.ParcelDto;
+import com.warehouse.config.ApplicationUrlConfig;
 import com.warehouse.dto.RerouteRequest;
 import com.warehouse.dto.TokenValidationRequest;
 import com.warehouse.dto.UpdateParcelRequest;
@@ -35,11 +35,11 @@ public class RerouteService {
 
     private final static Long SECONDS_TO_EXPIRE = 600L;
 
-    private final String url = "http://localhost:4200";
+    private final ApplicationUrlConfig url;
 
     public RerouteToken sendReroutingInformation(RerouteRequest rerouteRequest) {
         final Parcel parcel = parcelRepository
-                .findByIdAndSenderEmail(UUID.fromString(rerouteRequest.getParcelId()), rerouteRequest.getEmail())
+                .findByIdAndSenderEmail(rerouteRequest.getParcelId(), rerouteRequest.getEmail())
                 .orElseThrow(() -> new ParcelNotFound("Paczka nie zostala znaleziona"));
 
         final RerouteToken rerouteToken = generateRerouteTokenWithGivenParcel(rerouteRequest);
@@ -49,7 +49,7 @@ public class RerouteService {
                 ("Edycja danych przesyłki  " + parcel.getId(),
                         rerouteRequest.getEmail(),
                         "By edytować dane przesyłki prosimy udać się na stronę do przekierowywania przesyłek " +
-                                this.url + "/reroute-edit/" + parcel.getId() + "/" + rerouteToken.getToken()));
+                                url.guiUrl + "/reroute-edit/" + parcel.getId() + "/" + rerouteToken.getToken()));
         return rerouteToken;
     }
 
@@ -75,7 +75,7 @@ public class RerouteService {
         return parcelRepository.save(parcelToUpdate);
     }
 
-    private Parcel validateParcel(UUID parcelId) {
+    private Parcel validateParcel(Long parcelId) {
         return parcelRepository
                 .findById(parcelId).orElseThrow(() -> new ParcelNotFound("Parcel was not found"));
     }

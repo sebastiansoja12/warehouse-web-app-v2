@@ -14,7 +14,7 @@ public class InMemoryParcelDatabase {
 
     public List<Parcel> createParcel() {
          final Parcel parcel = Parcel.builder()
-                .id(UUID.fromString("b9c70ce3-025c-477d-8d27-19260433b84f"))
+                .id(100001L)
                 .firstName("Test")
                 .lastName("Test")
                 .senderTelephone("123456789")
@@ -32,8 +32,4 @@ public class InMemoryParcelDatabase {
 
     }
 
-    public Optional<Parcel> findParcelByUUID(String UUID) {
-        return parcelList.stream()
-                .filter(p -> p.getId().toString().equals(UUID)).findAny();
-    }
 }

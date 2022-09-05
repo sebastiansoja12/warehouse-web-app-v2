@@ -35,15 +35,15 @@ public class BarcodeGenerator {
 
     }
 
-    public static Image getQRCodeImage(String text) throws WriterException, IOException {
+    public static Image getQRCodeImage(Long text) throws WriterException, IOException {
         final QRCodeWriter qrCodeWriter = new QRCodeWriter();
-        final BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, 400, 400);
+        final BitMatrix bitMatrix = qrCodeWriter.encode(String.valueOf(text), BarcodeFormat.QR_CODE, 400, 400);
         final ByteArrayOutputStream pngOutputStream = new ByteArrayOutputStream();
         MatrixToImageWriter.writeToStream(bitMatrix, "PNG", pngOutputStream);
         return Image.getInstance(String.valueOf(bitMatrix));
     }
 
-    public static Image generateQRCodeImage(UUID barcodeText) throws Exception {
+    public static Image generateQRCodeImage(Long barcodeText) throws Exception {
         final BufferedImage image = new BufferedImage(250,
                 250,
                 BufferedImage.TYPE_BYTE_GRAY);
