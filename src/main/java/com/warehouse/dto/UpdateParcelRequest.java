@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class UpdateParcelRequest {
 
-    private UUID id;
+    private Long id;
     private Parcel parcel;
     private Integer token;
 

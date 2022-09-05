@@ -16,6 +16,7 @@ import java.util.Map;
 
 @Configuration
 @PropertySource("classpath:application.properties")
+@PropertySource("classpath:application-url.properties")
 public class PaymentConfig {
 
 
@@ -56,6 +57,11 @@ public class PaymentConfig {
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
         return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    @Bean
+    public ApplicationUrlConfig applicationUrlConfig() {
+        return new ApplicationUrlConfig();
     }
 
 }

@@ -2,10 +2,10 @@ package com.warehouse.service;
 
 import com.lowagie.text.DocumentException;
 import com.paypal.base.rest.PayPalRESTException;
+import com.warehouse.config.ApplicationUrlConfig;
 import com.warehouse.entity.Parcel;
 import com.warehouse.entity.ParcelNotification;
 import com.warehouse.exceptions.ParcelNotFound;
-import com.warehouse.exceptions.WarehouseException;
 import com.warehouse.repository.ParcelRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,9 +32,7 @@ public class ParcelService {
     private final ParcelExportService parcelExportService;
     private final PaymentService paymentService;
 
-    private final String url = "http://localhost:8080";
-
-    private final String managementUrl = "http://localhost:4200";
+    private final ApplicationUrlConfig config;
 
 
     @Transactional
@@ -49,9 +47,9 @@ public class ParcelService {
                         + parcel.getRecipientStreet() + "\n" +
                         "Kod Państwa paczki to: " + parcel.getId().toString()
                         + "\nProsimy wejść w poniższy link by pobrać etykietę: " +
-                        "\n" + url + "/api/parcels/" + parcel.getId().toString() + "/label" +
+                        "\n" + config.springUrl + "/api/parcels/" + parcel.getId().toString() + "/label" +
                           "\nAby opłacić przesyłkę prosimy wcisnąć w link: " + payment
-                            + "\nAby zarządzać przesyłką prosimy wejść w link: " + managementUrl +
+                            + "\nAby zarządzać przesyłką prosimy wejść w link: " + config.guiUrl +
                         "/parcel/client/management/" + parcel.getId().toString()));
 
         return payment;
@@ -64,10 +62,10 @@ public class ParcelService {
         return parcelRepository.findAll();
     }
 
-    public Parcel findById(UUID id) {
+    public Parcel findById(Long id) {
         return parcelRepository.findById(id).orElseThrow( () -> new ParcelNotFound("Paczka nie zostala znaleziona"));
     }
-    public void exportParcelToPdfById(HttpServletResponse response, UUID id) throws Exception {
+    public void exportParcelToPdfById(HttpServletResponse response, Long id) throws Exception {
 
         final Parcel parcel = parcelRepository.findById(id)
                 .orElseThrow(() -> new ParcelNotFound("Paczka o id " + id + " nie zostala znaleziona"));
@@ -75,20 +73,20 @@ public class ParcelService {
         final DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
         final String currentDateTime = dateFormatter.format(new java.util.Date());
         final String headerKey = "Content-Disposition";
-        final String headerValue = "attachment; filename=" + parcel.getId() + currentDateTime + ".pdf";
+        final String headerValue = "attachment; filename=" + parcel.getId() + "_" + currentDateTime + ".pdf";
         response.setHeader(headerKey, headerValue);
         parcelExportService.exportToPdf(response, parcel);
 
     }
 
-    public void exportParcelToCSVById(HttpServletResponse response, UUID id) throws DocumentException, IOException {
+    public void exportParcelToCSVById(HttpServletResponse response, Long id) throws DocumentException, IOException {
         final Parcel parcel = parcelRepository.findById(id)
                 .orElseThrow(() -> new ParcelNotFound("Paczka o id " + id + " nie zostala znaleziona"));
         response.setContentType("text/csv");
         final DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
         final String currentDateTime = dateFormatter.format(new Date());
         final String headerKey = "Content-Disposition";
-        final String headerValue = "attachment; filename=parcel_id" + parcel.getId() + currentDateTime + ".csv";
+        final String headerValue = "attachment; filename=parcel_id" + parcel.getId() + "_" + currentDateTime + ".csv";
         response.setHeader(headerKey, headerValue);
         parcelExportService.exportToCSV(response, parcel);
     }

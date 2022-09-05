@@ -18,7 +18,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 @Transactional
 public class RerouteTokenRepositoryTest {
 
-    private static final String PARCEL_ID = "13100ff0-d422-4b41-8f66-93ee00478ac2";
+    private static final Long PARCEL_ID = 123456L;
 
     private final static Long SECONDS_TO_EXPIRE = 100L;
 

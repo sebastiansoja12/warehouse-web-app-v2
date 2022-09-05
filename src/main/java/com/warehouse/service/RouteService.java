@@ -60,13 +60,13 @@ public class RouteService {
         return routeRepository.findAll();
     }
 
-    public List<Route> findByParcelId(UUID id) {
+    public List<Route> findByParcelId(Long id) {
         parcelRepository.findById(id).orElseThrow(() -> new ParcelNotFound("Paczka nie znaleziona"));
         return routeRepository.findAllByParcel_IdOrderByCreated(id).orElseThrow(
                 () -> new ParcelNotFound("Paczka nie zostala znaleziona lub jest jeszcze nie nadana"));
     }
 
-    public void deleteRouteByParcelId(UUID id) {
+    public void deleteRouteByParcelId(Long id) {
         final Route route = new Route();
         route.setUser(getCurrentUser());
         final String depotCode = getCurrentUser().getDepot().getDepotCode();

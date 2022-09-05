@@ -24,28 +24,23 @@ public class ParcelController {
         return parcelService.save(parcel);
     }
 
-    @PutMapping
-    public void updateParcel(@PathVariable UUID id) {
-       // parcelService(id);
-    }
-
     @GetMapping
     public List<Parcel> getAll() {
         return parcelService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Parcel findById(@PathVariable UUID id) {
+    public Parcel findById(@PathVariable Long id) {
         return parcelService.findById(id);
     }
 
     @GetMapping("/{id}/label")
-    public void exportParcelByIdToPdf(HttpServletResponse response, @PathVariable UUID id) throws Exception {
+    public void exportParcelByIdToPdf(HttpServletResponse response, @PathVariable Long id) throws Exception {
         parcelService.exportParcelToPdfById(response, id);
     }
 
     @GetMapping("/{id}/csv")
-    public void exportPostByIdToCSV(HttpServletResponse response, @PathVariable UUID id) throws DocumentException,
+    public void exportPostByIdToCSV(HttpServletResponse response, @PathVariable Long id) throws DocumentException,
             IOException {
         parcelService.exportParcelToCSVById(response, id);
     }
