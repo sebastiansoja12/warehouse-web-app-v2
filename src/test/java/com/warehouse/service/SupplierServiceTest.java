@@ -6,6 +6,7 @@ import com.warehouse.entity.Depot;
 import com.warehouse.entity.Supplier;
 import com.warehouse.exceptions.DepotNotFoundException;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -13,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @ActiveProfiles("dev")
@@ -117,9 +118,8 @@ public class SupplierServiceTest {
         supplierDto.setTelephone("123");
 
         // when: should not save because given depot does not exist
-        final DepotNotFoundException exception = assertThrows(DepotNotFoundException.class, () -> {
-            supplierService.save(supplierDto);
-        });
+        final Executable executable = () -> supplierService.save(supplierDto);
+        final DepotNotFoundException exception = assertThrows(DepotNotFoundException.class, executable);
 
         // then
         assertThat(exception).isNotNull();

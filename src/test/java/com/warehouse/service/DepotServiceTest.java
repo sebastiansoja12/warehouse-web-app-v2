@@ -80,20 +80,4 @@ class DepotServiceTest {
         return fakeDepots;
     }
 
-    public List<Depot> createWrongDepot() {
-        final List<Depot> fakeDepots = new ArrayList<>();
-
-        // depot 1
-        final Depot depot1 = Depot.builder()
-                .city(null)
-                .street(null)
-                .depotCode(null)
-                .country(null)
-                .build();
-
-        fakeDepots.add(depot1);
-
-        return fakeDepots;
-    }
-
 }

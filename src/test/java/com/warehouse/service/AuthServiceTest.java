@@ -8,8 +8,8 @@ import com.warehouse.dto.RegisterRequest;
 import com.warehouse.entity.RefreshToken;
 import com.warehouse.entity.User;
 import com.warehouse.repository.RefreshTokenRepository;
-import com.warehouse.repository.UserRepository;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -18,12 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintViolationException;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @ActiveProfiles("dev")
@@ -55,9 +52,8 @@ public class AuthServiceTest {
         final RegisterRequest registerRequest = createRegisterRequestWithoutEmail();
 
         // when
-        final ConstraintViolationException exception = assertThrows(ConstraintViolationException.class, () -> {
-            authService.signup(registerRequest);
-        });
+        final Executable executable = () -> authService.signup(registerRequest);
+        final ConstraintViolationException exception = assertThrows(ConstraintViolationException.class, executable);
         // then
         assertThat(exception).isInstanceOf(ConstraintViolationException.class);
         assertThat(exception.getMessage()).isEqualTo(constraintViolationExceptionMessage());

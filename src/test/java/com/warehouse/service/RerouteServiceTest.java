@@ -14,6 +14,7 @@ import com.warehouse.repository.RerouteTokenRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -23,10 +24,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @ActiveProfiles("dev")
@@ -171,9 +171,8 @@ public class RerouteServiceTest {
         final UpdateParcelRequest updateParcelRequest = createUpdateParcelRequest(INVALID_PARCEL_ID,
                 updatedParcel);
         // when
-        final ParcelNotFound exception = assertThrows(ParcelNotFound.class, () -> {
-            rerouteService.updateParcel(updateParcelRequest);
-        });
+        final Executable executable = () -> rerouteService.updateParcel(updateParcelRequest);
+        final ParcelNotFound exception = assertThrows(ParcelNotFound.class, executable);
         // then
         final String expectedMessage = "Parcel was not found";
         assertThat(expectedMessage).isNotBlank();
