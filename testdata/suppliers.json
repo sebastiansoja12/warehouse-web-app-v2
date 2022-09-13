@@ -18,5 +18,54 @@
     "lastName": "Kowalski",
     "telephone": "981273645",
     "depotCode": "WA1"
+  },
+  {
+    "supplierCode": "POL_KT1",
+    "firstName": "Pola",
+    "lastName": "Wisniowska",
+    "telephone": "1971643712",
+    "depotCode": "KT1"
+  },
+  {
+    "supplierCode": "DEN_GW1",
+    "firstName": "Denis",
+    "lastName": "Wozkowiak",
+    "telephone": "1971643323",
+    "depotCode": "GW1"
+  },
+  {
+    "supplierCode": "LOL_GD1",
+    "firstName": "Lola",
+    "lastName": "Nowak",
+    "telephone": "19731243323",
+    "depotCode": "GD1"
+  },
+  {
+    "supplierCode": "KAR_GD2",
+    "firstName": "Karolina",
+    "lastName": "Nowak",
+    "telephone": "19731241323",
+    "depotCode": "GD2"
+  },
+  {
+    "supplierCode": "ILO_TOR",
+    "firstName": "Ilona",
+    "lastName": "Kowalska",
+    "telephone": "19731211323",
+    "depotCode": "TOR"
+  },
+  {
+    "supplierCode": "ADM_WA3",
+    "firstName": "Adam",
+    "lastName": "Kowalczyk",
+    "telephone": "19731211324",
+    "depotCode": "WA3"
+  },
+  {
+    "supplierCode": "MAR_ZGR",
+    "firstName": "Marcin",
+    "lastName": "Kowal",
+    "telephone": "19711211324",
+    "depotCode": "ZGR"
   }
 ]
