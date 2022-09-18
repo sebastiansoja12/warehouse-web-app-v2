@@ -55,6 +55,6 @@ CREATE TABLE REROUTE_TOKEN (
 `id` bigint NOT NULL,
 `created_date` datetime DEFAULT NULL,
 `timeout` datetime DEFAULT NULL,
-`token` int DEFAULT NULL,
+`tokenDto` int DEFAULT NULL,
 `parcel_id` varchar(255) DEFAULT NULL
 );

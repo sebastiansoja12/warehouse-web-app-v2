@@ -1,40 +1,36 @@
 package com.warehouse.parcelmanagement.reroute.infrastructure.adapter.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.Instant;
 import java.util.Random;
 
 @Getter
 @Builder
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "reroute_token")
-@Entity(name = "RerouteToken")
+@Entity(name = "reroute.RerouteTokenEntity")
 public class RerouteTokenEntity {
 
     @Id
-    @Column(name = "id", nullable = false, unique = true, updatable = false, insertable = false)
+    @Column(name = "id", nullable = false, unique = true, updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "token", nullable = false, updatable = false, insertable = false)
+    @Column(name = "token", nullable = false, updatable = false)
     private Integer token = generateToken();
 
-    @Column(name = "created", nullable = false, updatable = false, insertable = false)
+    @Column(name = "created", updatable = false, columnDefinition = "null")
     private Instant createdDate;
 
-    @Column(name = "timeout")
+    @Column(name = "timeout", updatable = false, columnDefinition = "null")
     private Instant expiryDate;
 
-    @Column(nullable = false, insertable = false, updatable = false)
-    private String parcelId;
+    @Column(nullable = false, updatable = false)
+    private Long parcelId;
 
     public Integer generateToken() {
         final Random r = new Random( System.currentTimeMillis() );

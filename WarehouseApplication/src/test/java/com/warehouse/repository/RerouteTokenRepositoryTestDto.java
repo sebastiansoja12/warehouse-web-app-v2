@@ -16,7 +16,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @DataJpaTest
 @Transactional
-public class RerouteTokenRepositoryTest {
+public class RerouteTokenRepositoryTestDto {
 
     private static final Long PARCEL_ID = 123456L;
 

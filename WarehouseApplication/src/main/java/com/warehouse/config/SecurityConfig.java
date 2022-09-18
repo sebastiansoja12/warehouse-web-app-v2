@@ -45,6 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/parcels/**")
                 .permitAll()
+                .antMatchers("/reroute/**")
+                .permitAll()
                 .antMatchers("/api/users/login")
                 .not().authenticated()
                 .antMatchers("/api/users/logout")

@@ -56,7 +56,7 @@ public class AuthService {
         SecurityContextHolder.getContext().setAuthentication(authenticate);
 
         final String token = jwtProvider.generateToken(authenticate);
-        log.info("Token for user: " + loginRequest.getUsername() + " has been saved. Logging in");
+        log.info("TokenDto for user: " + loginRequest.getUsername() + " has been saved. Logging in");
 
         return AuthenticationResponse.builder()
                 .authenticationToken(token)
@@ -80,7 +80,7 @@ public class AuthService {
 
     public void logout(RefreshTokenRequest refreshTokenRequest) {
         refreshTokenService.deleteRefreshToken(refreshTokenRequest);
-        log.info("Token of user: " + refreshTokenRequest.getUsername() + " has been successfully deleted" +
+        log.info("TokenDto of user: " + refreshTokenRequest.getUsername() + " has been successfully deleted" +
                 ". Logging out");
     }
 

@@ -9,7 +9,9 @@ import java.util.Random;
 @EqualsAndHashCode
 @ToString
 @Builder
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class RerouteToken {
 
     private Long id;
@@ -19,7 +21,7 @@ public class RerouteToken {
 
     private Instant expiryDate;
 
-    private String parcelId;
+    private Long parcelId;
 
     public Integer generateToken() {
         final Random r = new Random( System.currentTimeMillis() );

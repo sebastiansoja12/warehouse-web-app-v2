@@ -1,6 +1,10 @@
 package com.warehouse.parcelmanagement.reroute.domain.port.secondary;
 
-import com.warehouse.parcelmanagement.reroute.domain.model.RerouteToken;
+import com.warehouse.parcelmanagement.reroute.domain.model.RerouteResponse;
+import com.warehouse.parcelmanagement.reroute.domain.model.Token;
+import com.warehouse.parcelmanagement.reroute.domain.model.UpdateParcelRequest;
+import com.warehouse.parcelmanagement.reroute.domain.vo.ParcelId;
+import com.warehouse.parcelmanagement.reroute.domain.vo.ParcelResponse;
 import com.warehouse.parcelmanagement.reroute.domain.vo.RerouteTokenResponse;
 
 import java.util.List;
@@ -8,7 +12,11 @@ import java.util.Optional;
 
 public interface RerouteTokenRepository {
 
-    List<RerouteToken> loadRerouteTokenByParcelIdAndToken(String parcelId, Integer token);
+    List<RerouteTokenResponse> loadByTokenAndParcelId(Token token, ParcelId parcelId);
 
-    Optional<RerouteTokenResponse> findByToken(Integer token);
+    Optional<RerouteTokenResponse> findByToken(Token token);
+
+    ParcelResponse update(UpdateParcelRequest parcelRequest);
+
+    RerouteResponse saveReroutingToken(Long parcelId);
 }

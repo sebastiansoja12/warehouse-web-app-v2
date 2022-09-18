@@ -1,13 +1,14 @@
 package com.warehouse.parcelmanagement.reroute.domain.model;
 
-import com.warehouse.parcelmanagement.parcel.domain.model.Recipient;
-import com.warehouse.parcelmanagement.parcel.domain.model.Sender;
 
+import com.warehouse.parcelmanagement.reroute.domain.enumeration.ParcelType;
+import com.warehouse.parcelmanagement.reroute.domain.vo.Recipient;
+import com.warehouse.parcelmanagement.reroute.domain.vo.Sender;
+import lombok.Value;
+
+@Value
 public class Parcel {
-
-    private Sender sender;
-    private Recipient recipient;
-    private Country country;
-    private String street;
-    private String postalCode;
+     Sender sender;
+     Recipient recipient;
+     ParcelType parcelType;
 }

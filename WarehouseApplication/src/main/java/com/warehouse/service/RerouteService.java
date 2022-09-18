@@ -22,7 +22,6 @@ import java.util.Comparator;
 import java.util.Optional;
 import java.util.UUID;
 
-@Service
 @AllArgsConstructor
 @Slf4j
 public class RerouteService {
@@ -43,7 +42,7 @@ public class RerouteService {
                 .orElseThrow(() -> new ParcelNotFound("Paczka nie zostala znaleziona"));
 
         final RerouteToken rerouteToken = generateRerouteTokenWithGivenParcel(rerouteRequest);
-        log.info("Token " + rerouteToken.getToken() + " saved");
+        log.info("TokenDto " + rerouteToken.getToken() + " saved");
 
         mailService.sendNotification(new ParcelNotification
                 ("Edycja danych przesyłki  " + parcel.getId(),
@@ -98,7 +97,7 @@ public class RerouteService {
 
     RerouteToken validateReroutingToken(Integer token) {
        return rerouteTokenRepository.findByToken(token)
-                .orElseThrow(() -> new WarehouseException("Invalid rerouting Token"));
+                .orElseThrow(() -> new WarehouseException("Invalid rerouting TokenDto"));
     }
 
     public void deleteReroutingToken(Integer token) {

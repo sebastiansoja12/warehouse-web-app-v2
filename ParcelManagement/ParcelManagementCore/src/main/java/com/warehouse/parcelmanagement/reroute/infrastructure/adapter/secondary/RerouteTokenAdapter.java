@@ -1,43 +1,58 @@
 package com.warehouse.parcelmanagement.reroute.infrastructure.adapter.secondary;
 
-import com.warehouse.parcelmanagement.reroute.domain.model.RerouteRequest;
-import com.warehouse.parcelmanagement.reroute.domain.model.RerouteResponse;
-import com.warehouse.parcelmanagement.reroute.domain.port.primary.RerouteTokenPort;
-import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.primary.mapper.RequestMapper;
-import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.primary.mapper.ResponseMapper;
-import com.warehouse.parcelmanagement.reroute.infrastructure.api.RerouteService;
-import com.warehouse.parcelmanagement.reroute.infrastructure.api.dto.ParcelDto;
-import com.warehouse.parcelmanagement.reroute.infrastructure.api.dto.ParcelResponseDto;
-import com.warehouse.parcelmanagement.reroute.infrastructure.api.dto.RerouteRequestDto;
-import com.warehouse.parcelmanagement.reroute.infrastructure.api.dto.RerouteResponseDto;
+import com.warehouse.parcelmanagement.reroute.domain.model.*;
+import com.warehouse.parcelmanagement.reroute.domain.port.secondary.RerouteTokenPort;
+import com.warehouse.parcelmanagement.reroute.domain.port.secondary.RerouteTokenRepository;
+import com.warehouse.parcelmanagement.reroute.domain.vo.ParcelId;
+import com.warehouse.parcelmanagement.reroute.domain.vo.ParcelResponse;
+import com.warehouse.parcelmanagement.reroute.domain.vo.RerouteTokenResponse;
+import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.secondary.exception.RerouteTokenNotFoundException;
+import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.secondary.mapper.RequestMapper;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class RerouteTokenAdapter implements RerouteService {
+public class RerouteTokenAdapter implements RerouteTokenPort {
 
     private final RequestMapper requestMapper;
 
-    private final ResponseMapper responseMapper;
+    private final MailCreator mailCreator;
 
-    private final RerouteTokenPort port;
+    private final RerouteTokenRepository repository;
 
-    @Override
-    public RerouteResponseDto sendReroutingInformation(RerouteRequestDto rerouteRequest) {
-        return buildReroutingInformation(rerouteRequest);
+    RerouteResponse buildReroutingInformation(RerouteRequest rerouteRequest) {
+        final ParcelId parcelId = requestMapper.map(rerouteRequest);
+        return repository.saveReroutingToken(parcelId.getParcelId());
+    }
+
+    private ParcelNotification parcelNotification(String subject, String recipient, String body) {
+        return new ParcelNotification(subject, recipient, body);
     }
 
     @Override
-    public ParcelResponseDto update(ParcelDto parcelDto) {
+    public ParcelResponse update(UpdateParcelRequest request) {
         return null;
     }
 
-    private RerouteResponseDto buildReroutingInformation(RerouteRequestDto rerouteRequestDto) {
-        final RerouteRequest rerouteRequest = requestMapper.map(rerouteRequestDto);
+    @Override
+    public RerouteTokenResponse findByToken(Token token) {
+        return repository.findByToken(token).orElseThrow(
+                () -> new RerouteTokenNotFoundException("Reroute token was not found"));
+    }
 
-        final RerouteResponse response = port.sendReroutingInformation(rerouteRequest);
 
-        final RerouteResponseDto responseDto = responseMapper.map(response);
+    @Override
+    public RerouteTokenResponse loadByTokenAndParcelId(Token token, ParcelId parcelId) {
+        return repository.loadByTokenAndParcelId(token, parcelId).stream().findFirst().orElseThrow(
+                () -> new RerouteTokenNotFoundException("Reroute token was not found"));
+    }
 
-        return new RerouteResponseDto(responseDto.getValue());
+    @Override
+    public RerouteResponse saveReroutingToken(Long parcelId) {
+        return repository.saveReroutingToken(parcelId);
+    }
+
+    @Override
+    public RerouteResponse sendReroutingInformation(RerouteRequest rerouteRequest) {
+        return buildReroutingInformation(rerouteRequest);
     }
 }

@@ -1,5 +1,9 @@
 package com.warehouse.parcelmanagement.reroute.infrastructure.api.dto;
 
-public class RerouteRequestDto {
+import lombok.Data;
 
+@Data
+public class RerouteRequestDto {
+    ParcelId parcelId;
+    EmailDto email;
 }

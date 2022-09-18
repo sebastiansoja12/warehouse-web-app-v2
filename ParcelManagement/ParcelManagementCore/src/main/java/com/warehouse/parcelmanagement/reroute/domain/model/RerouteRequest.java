@@ -1,20 +1,17 @@
 package com.warehouse.parcelmanagement.reroute.domain.model;
 
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
+import lombok.*;
 
-@Builder
+
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class RerouteRequest {
 
     @NonNull
-    private String id;
+    private Long parcelId;
 
     @NonNull
-    private Parcel parcel;
-
-    @NonNull
-    private Integer token;
+    private String email;
 }

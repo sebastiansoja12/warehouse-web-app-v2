@@ -103,7 +103,7 @@ public class RerouteServiceTest {
     @Transactional
     void shouldThrowInvalidTokenError() {
         // given
-        final String expectedMessage = "Invalid rerouting Token";
+        final String expectedMessage = "Invalid rerouting TokenDto";
         final Parcel parcel = createParcel();
         parcelRepository.save(parcel);
 

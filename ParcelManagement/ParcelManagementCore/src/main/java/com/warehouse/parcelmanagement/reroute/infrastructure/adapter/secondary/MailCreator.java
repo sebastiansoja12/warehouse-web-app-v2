@@ -4,14 +4,21 @@ import com.warehouse.parcelmanagement.reroute.domain.model.ParcelNotification;
 import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.secondary.exception.WarehouseMailException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
+
+/**
+ * Class for managing email sending.
+ * Used for parcels and reroutes.
+ */
 @Service
 @Slf4j
+@PropertySource("classpath:application.properties")
 public class MailCreator {
 
     private final JavaMailSender mailSender;
@@ -21,6 +28,10 @@ public class MailCreator {
         this.mailSender = mailSender;
     }
 
+    /**
+     * Sends email message to recipient/sender
+     * @param parcelNotification
+     */
     void sendNotification(ParcelNotification parcelNotification) {
         final MimeMessagePreparator messagePreparator = mimeMessage -> {
             final MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
@@ -34,7 +45,7 @@ public class MailCreator {
             log.info("Notification has been sent");
         } catch (MailException e) {
             log.error("Error", e);
-            throw new WarehouseMailException("Error  " + parcelNotification.getRecipient(), e);
+            throw new WarehouseMailException(e.getMessage());
         }
     }
 }

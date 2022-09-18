@@ -4,4 +4,6 @@ import lombok.Value;
 
 @Value
 public class RerouteTokenDto {
+    Long parcelId;
+    String email;
 }

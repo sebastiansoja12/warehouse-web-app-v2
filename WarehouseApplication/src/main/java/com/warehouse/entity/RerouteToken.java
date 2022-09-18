@@ -1,16 +1,24 @@
 package com.warehouse.entity;
 
-import lombok.Data;
+import lombok.*;
+import org.hibernate.Hibernate;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.time.Instant;
+import java.util.Objects;
 import java.util.Random;
-import java.util.UUID;
 
-import static javax.persistence.GenerationType.*;
+import static javax.persistence.GenerationType.IDENTITY;
 
-@Data
-@Entity
+@Getter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity(name = "warehouseapplication.RerouteTokenEntity")
+@Setter
 public class RerouteToken {
 
     @Id
