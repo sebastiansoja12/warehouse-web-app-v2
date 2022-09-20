@@ -1,7 +1,5 @@
-package com.warehouse.parcelmanagement.reroute.domain.controller;
+package com.warehouse.web.controller;
 
-import com.warehouse.parcelmanagement.reroute.domain.model.Token;
-import com.warehouse.parcelmanagement.reroute.domain.vo.ParcelId;
 import com.warehouse.parcelmanagement.reroute.infrastructure.api.RerouteService;
 import com.warehouse.parcelmanagement.reroute.infrastructure.api.dto.*;
 import lombok.AllArgsConstructor;

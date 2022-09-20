@@ -12,14 +12,16 @@
 	<artifactId>warehouse</artifactId>
 	<version>VERSION_2022.11-SNAPSHOT</version>
 	<name>warehouse</name>
-	<description>Inparcel Java Application</description>
+	<description>Pom file for all modules</description>
+
 	<modules>
 		<module>WarehouseApplication</module>
 		<module>ParcelManagement</module>
+		<module>WarehouseWeb</module>
 	</modules>
+
 	<packaging>pom</packaging>
-	<dependencies>
-	</dependencies>
+
 
 	<distributionManagement>
 		<repository>
@@ -49,25 +51,6 @@
 				<artifactId>maven-deploy-plugin</artifactId>
 				<configuration>
 					<skip>true</skip>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<release>10</release>
-					<annotationProcessorPaths>
-						<path>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-							<version>1.18.20</version>
-						</path>
-						<path>
-							<groupId>org.mapstruct</groupId>
-							<artifactId>mapstruct-processor</artifactId>
-							<version>1.4.2.Final</version>
-						</path>
-					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
 			<plugin>
