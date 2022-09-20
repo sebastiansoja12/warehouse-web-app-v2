@@ -16,7 +16,6 @@ import java.util.Map;
 
 @Configuration
 @PropertySource("classpath:application.properties")
-@PropertySource("classpath:application-url.properties")
 public class PaymentConfig {
 
 

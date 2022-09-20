@@ -7,6 +7,8 @@ import com.warehouse.parcelmanagement.reroute.domain.vo.ParcelId;
 import com.warehouse.parcelmanagement.reroute.domain.vo.ParcelResponse;
 import com.warehouse.parcelmanagement.reroute.domain.vo.RerouteTokenResponse;
 import com.warehouse.parcelmanagement.reroute.domain.model.Token;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 public interface RerouteService {
 
@@ -14,9 +16,9 @@ public interface RerouteService {
 
     ParcelResponse update(UpdateParcelRequest parcelRequest);
 
-    RerouteTokenResponse findByToken(Token token);
+    ParcelResponse loadByParcelId(Long parcelId);
 
-    RerouteResponse saveReroutingToken(Long parcelId);
+    RerouteTokenResponse findByToken(Token token);
 
     RerouteTokenResponse loadByTokenAndParcelId(Token token, ParcelId parcelId);
 

@@ -5,5 +5,6 @@ import lombok.Value;
 @Value
 public class RerouteResponseDto {
 
-    String value;
+    Integer token;
+    Long parcelId;
 }

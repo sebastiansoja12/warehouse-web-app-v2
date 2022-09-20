@@ -19,7 +19,7 @@ import javax.validation.constraints.Pattern;
 public class ParcelEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "Parcel_ID")
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "id")
     @TableGenerator(name = "id", initialValue = 1000000, allocationSize = 100)
     @Column(name = "id", nullable = false, unique = true, updatable = false)
     private Long id;
@@ -36,6 +36,19 @@ public class ParcelEntity {
     @Valid
     @Column(name = "senderEmail", nullable = false)
     private String senderEmail;
+
+    @Valid
+    @Column(name = "senderCity", nullable = false)
+    private String senderCity;
+
+    @Valid
+    @Column(name = "senderStreet", nullable = false)
+    private String senderStreet;
+
+    @Valid
+    @Pattern(regexp="\\d{2}-\\d{3}")
+    @Column(name = "senderPostalCode", nullable = false)
+    private String senderPostalCode;
 
     @Valid
     @Column(name = "recipientEmail", nullable = false)

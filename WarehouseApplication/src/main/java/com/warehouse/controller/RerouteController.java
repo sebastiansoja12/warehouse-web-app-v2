@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
-//@RestController("/api/reroute")
+@RestController("/api/reroute")
 @AllArgsConstructor
 public class RerouteController {
 /*
@@ -34,4 +34,5 @@ public class RerouteController {
     }
 
  */
+
 }

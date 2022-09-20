@@ -9,11 +9,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import javax.persistence.Entity;
 
-@SpringBootApplication
 @Async
 @EnableSwagger2
 @EntityScan(basePackages = {"com.warehouse.*"})
 @ComponentScan(basePackages = {"com.warehouse.*"})
+@SpringBootApplication(scanBasePackages = "com.warehouse.*")
 public class WarehouseApplication {
 
 	public static void main(String[] args) {

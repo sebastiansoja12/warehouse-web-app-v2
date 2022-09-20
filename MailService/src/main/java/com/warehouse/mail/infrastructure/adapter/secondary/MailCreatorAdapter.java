@@ -1,7 +1,8 @@
-package com.warehouse.parcelmanagement.reroute.infrastructure.adapter.secondary;
+package com.warehouse.mail.infrastructure.adapter.secondary;
 
-import com.warehouse.parcelmanagement.reroute.domain.model.ParcelNotification;
-import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.secondary.exception.WarehouseMailException;
+import com.warehouse.mail.domain.port.secondary.MailPort;
+import com.warehouse.mail.domain.vo.Notification;
+import com.warehouse.mail.infrastructure.adapter.secondary.exception.WarehouseMailException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
@@ -9,43 +10,46 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
-import org.springframework.stereotype.Service;
-
 
 /**
  * Class for managing email sending.
  * Used for parcels and reroutes.
  */
-@Service
 @Slf4j
 @PropertySource("classpath:application.properties")
-public class MailCreator {
+public class MailCreatorAdapter implements MailPort {
 
     private final JavaMailSender mailSender;
 
     @Autowired
-    public MailCreator(JavaMailSender mailSender) {
+    public MailCreatorAdapter(JavaMailSender mailSender) {
         this.mailSender = mailSender;
     }
 
     /**
      * Sends email message to recipient/sender
-     * @param parcelNotification
+     *
+     * @param notification
      */
-    void sendNotification(ParcelNotification parcelNotification) {
+    void sendMail(Notification notification) {
         final MimeMessagePreparator messagePreparator = mimeMessage -> {
             final MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
             messageHelper.setFrom("inparcel@inp.com");
-            messageHelper.setTo(parcelNotification.getRecipient());
-            messageHelper.setSubject(parcelNotification.getSubject());
-            messageHelper.setText(parcelNotification.getBody());
+            messageHelper.setTo(notification.getRecipient());
+            messageHelper.setSubject(notification.getSubject());
+            messageHelper.setText(notification.getBody());
         };
         try {
             mailSender.send(messagePreparator);
             log.info("Notification has been sent");
         } catch (MailException e) {
             log.error("Error", e);
-            throw new WarehouseMailException(e.getMessage());
+            throw new WarehouseMailException("E-mail was not sent because of: " + e.getMessage());
         }
+    }
+
+    @Override
+    public void sendNotification(Notification notification) {
+        sendMail(notification);
     }
 }

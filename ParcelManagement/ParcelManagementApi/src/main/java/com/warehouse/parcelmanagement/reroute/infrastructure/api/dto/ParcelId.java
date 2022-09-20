@@ -1,8 +1,8 @@
 package com.warehouse.parcelmanagement.reroute.infrastructure.api.dto;
 
-import lombok.Value;
+import lombok.Data;
 
-@Value
+@Data
 public class ParcelId {
     Long value;
 }

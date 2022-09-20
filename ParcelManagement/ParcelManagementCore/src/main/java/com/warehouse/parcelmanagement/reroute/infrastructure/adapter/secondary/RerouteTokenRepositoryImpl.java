@@ -3,12 +3,12 @@ package com.warehouse.parcelmanagement.reroute.infrastructure.adapter.secondary;
 import com.warehouse.parcelmanagement.reroute.domain.model.RerouteResponse;
 import com.warehouse.parcelmanagement.reroute.domain.model.RerouteToken;
 import com.warehouse.parcelmanagement.reroute.domain.model.Token;
-import com.warehouse.parcelmanagement.reroute.domain.model.UpdateParcelRequest;
+import com.warehouse.parcelmanagement.reroute.domain.port.secondary.ParcelRepository;
 import com.warehouse.parcelmanagement.reroute.domain.port.secondary.RerouteTokenRepository;
 import com.warehouse.parcelmanagement.reroute.domain.vo.ParcelId;
-import com.warehouse.parcelmanagement.reroute.domain.vo.ParcelResponse;
 import com.warehouse.parcelmanagement.reroute.domain.vo.RerouteTokenResponse;
 import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.entity.RerouteTokenEntity;
+import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.secondary.mapper.ParcelMapper;
 import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.secondary.mapper.RerouteTokenMapper;
 import lombok.AllArgsConstructor;
 
@@ -22,28 +22,23 @@ public class RerouteTokenRepositoryImpl implements RerouteTokenRepository {
 
     private final RerouteTokenMapper rerouteTokenMapper;
 
-    private final RerouteTokenReadRepository readRepository;
+    private final RerouteTokenReadRepository rerouteTokenReadRepository;
 
     @Override
     public List<RerouteTokenResponse> loadByTokenAndParcelId(Token token, ParcelId parcelId) {
-        return readRepository.loadByTokenAndParcelId(token.getValue(), parcelId.getParcelId())
+        return rerouteTokenReadRepository.loadByTokenAndParcelId(token.getValue(), parcelId.getParcelId())
                 .stream().map(rerouteTokenMapper::mapToResponse).collect(Collectors.toList());
     }
 
     @Override
     public Optional<RerouteTokenResponse> findByToken(Token token) {
-        return readRepository.findByToken(token.getValue()).stream().map(rerouteTokenMapper::mapToResponse).findFirst();
-    }
-
-    @Override
-    public ParcelResponse update(UpdateParcelRequest parcelRequest) {
-        return rerouteTokenMapper
-                .mapToParcelResponse(readRepository.save(rerouteTokenMapper.map(parcelRequest)));
+        return rerouteTokenReadRepository.findByToken(token.getValue())
+                .stream().map(rerouteTokenMapper::mapToResponse).findFirst();
     }
 
     @Override
     public RerouteResponse saveReroutingToken(Long parcelId) {
-        return rerouteTokenMapper.mapToRerouteResponse(readRepository.save(generateRerouteToken(parcelId)));
+        return rerouteTokenMapper.mapToRerouteResponse(rerouteTokenReadRepository.save(generateRerouteToken(parcelId)));
     }
 
     private RerouteTokenEntity generateRerouteToken(Long parcelId) {

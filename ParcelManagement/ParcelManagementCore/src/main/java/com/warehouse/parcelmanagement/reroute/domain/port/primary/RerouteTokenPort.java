@@ -16,6 +16,8 @@ public interface RerouteTokenPort {
 
     RerouteTokenResponse loadByTokenAndParcelId(Token token, ParcelId parcelId);
 
+    ParcelResponse loadByParcelId(Long parcelId);
+
 
     RerouteResponse sendReroutingInformation(RerouteRequest rerouteRequest);
 }

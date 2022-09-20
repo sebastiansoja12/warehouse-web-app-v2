@@ -1,6 +1,5 @@
 package com.warehouse.parcelmanagement.reroute.infrastructure.api.dto;
 
-import lombok.Value;
 
 public enum ParcelTypeDto {
 

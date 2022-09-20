@@ -9,6 +9,7 @@ import com.warehouse.parcelmanagement.reroute.domain.vo.ParcelResponse;
 import com.warehouse.parcelmanagement.reroute.domain.vo.RerouteTokenResponse;
 import com.warehouse.parcelmanagement.reroute.domain.model.Token;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
 public class RerouteServiceImpl implements RerouteService {
@@ -16,13 +17,13 @@ public class RerouteServiceImpl implements RerouteService {
     private final RerouteTokenPort rerouteTokenPort;
 
     @Override
-    public RerouteResponse sendReroutingInformation(RerouteRequest rerouteRequest) {
-        return rerouteTokenPort.sendReroutingInformation(rerouteRequest);
+    public ParcelResponse update(UpdateParcelRequest parcelRequest) {
+        return rerouteTokenPort.update(parcelRequest);
     }
 
     @Override
-    public ParcelResponse update(UpdateParcelRequest parcelRequest) {
-        return rerouteTokenPort.update(parcelRequest);
+    public ParcelResponse loadByParcelId(Long parcelId) {
+        return rerouteTokenPort.loadByParcelId(parcelId);
     }
 
     @Override
@@ -31,8 +32,8 @@ public class RerouteServiceImpl implements RerouteService {
     }
 
     @Override
-    public RerouteResponse saveReroutingToken(Long parcelId) {
-        return rerouteTokenPort.saveReroutingToken(parcelId);
+    public RerouteResponse sendReroutingInformation(RerouteRequest rerouteRequest) {
+        return rerouteTokenPort.sendReroutingInformation(rerouteRequest);
     }
 
     @Override

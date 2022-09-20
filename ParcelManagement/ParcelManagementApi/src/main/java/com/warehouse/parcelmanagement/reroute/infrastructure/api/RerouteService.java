@@ -6,9 +6,11 @@ public interface RerouteService {
 
     RerouteResponseDto sendReroutingInformation(RerouteRequestDto rerouteRequest);
 
-    ParcelResponseDto update(UpdateParcelRequestDto parcelDto);
+    ParcelResponseDto update(UpdateParcelRequestDto request);
 
-    RerouteTokenResponseDto findByToken(TokenDto tokenDto);
+    RerouteTokenResponseDto findByToken(TokenDto token);
 
-    RerouteTokenResponseDto loadByTokenAndParcelId(TokenDto tokenDto, ParcelIdDto parcelId);
+    ParcelResponseDto loadByParcelId(Long parcelId);
+
+    RerouteTokenResponseDto loadByTokenAndParcelId(TokenDto token, ParcelIdDto parcelId);
 }

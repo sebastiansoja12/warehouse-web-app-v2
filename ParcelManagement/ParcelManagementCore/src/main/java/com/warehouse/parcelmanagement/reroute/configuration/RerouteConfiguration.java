@@ -1,41 +1,44 @@
 package com.warehouse.parcelmanagement.reroute.configuration;
 
+import com.warehouse.mail.domain.port.secondary.MailPort;
+import com.warehouse.mail.domain.service.MailService;
+import com.warehouse.mail.domain.service.MailServiceImpl;
 import com.warehouse.parcelmanagement.reroute.domain.port.primary.RerouteTokenPort;
 import com.warehouse.parcelmanagement.reroute.domain.port.primary.RerouteTokenPortImpl;
+import com.warehouse.parcelmanagement.reroute.domain.port.secondary.ParcelRepository;
 import com.warehouse.parcelmanagement.reroute.domain.port.secondary.RerouteTokenRepository;
 import com.warehouse.parcelmanagement.reroute.domain.service.RerouteServiceImpl;
 import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.primary.RerouteTokenServiceAdapter;
 import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.primary.mapper.PrimaryRequestMapper;
 import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.primary.mapper.PrimaryResponseMapper;
-import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.secondary.MailCreator;
+import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.secondary.ParcelReadRepository;
 import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.secondary.RerouteTokenAdapter;
 import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.secondary.RerouteTokenReadRepository;
 import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.secondary.RerouteTokenRepositoryImpl;
+import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.secondary.mapper.ParcelMapper;
 import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.secondary.mapper.RequestMapper;
 import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.secondary.mapper.RerouteTokenMapper;
-import com.warehouse.parcelmanagement.reroute.infrastructure.adapter.secondary.mapper.ResponseMapper;
 import com.warehouse.parcelmanagement.reroute.infrastructure.api.RerouteService;
 import org.mapstruct.factory.Mappers;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 @Configuration
 public class RerouteConfiguration {
 
 
     @Bean
-    RerouteTokenAdapter rerouteTokenServicePort(RerouteTokenReadRepository repository) {
+    RerouteTokenAdapter rerouteTokenServicePort(RerouteTokenRepository rerouteTokenRepository,
+                                                ParcelRepository parcelRepository,
+                                                MailService mailService) {
         final RequestMapper requestMapper = Mappers.getMapper(RequestMapper.class);
-        final MailCreator mailCreator = new MailCreator(javaMailSender());
-        return new RerouteTokenAdapter(requestMapper, mailCreator, rerouteTokenRepository(repository));
+        return new RerouteTokenAdapter(requestMapper, rerouteTokenRepository, parcelRepository, mailService);
     }
+
     @Bean("rerouteToken.rerouteTokenRepository")
     public RerouteTokenRepository rerouteTokenRepository(RerouteTokenReadRepository repository) {
-        final RerouteTokenMapper mapper = Mappers.getMapper(RerouteTokenMapper.class);
-        return new RerouteTokenRepositoryImpl(mapper, repository);
+        final RerouteTokenMapper rerouteTokenMapper = Mappers.getMapper(RerouteTokenMapper.class);
+        return new RerouteTokenRepositoryImpl(rerouteTokenMapper, repository);
     }
 
 
@@ -51,7 +54,6 @@ public class RerouteConfiguration {
     public RerouteService rerouteTokenAdapter(RerouteTokenPort rerouteTokenPort) {
         final PrimaryRequestMapper primaryRequestMapper = Mappers.getMapper(PrimaryRequestMapper.class);
         final PrimaryResponseMapper primaryResponseMapper = Mappers.getMapper(PrimaryResponseMapper.class);
-        final MailCreator mailCreator = new MailCreator(javaMailSender());
 
         return new RerouteTokenServiceAdapter(rerouteTokenPort, primaryRequestMapper, primaryResponseMapper);
     }
@@ -60,10 +62,5 @@ public class RerouteConfiguration {
     public com.warehouse.parcelmanagement.reroute.domain.service.RerouteService rerouteService(
             com.warehouse.parcelmanagement.reroute.domain.port.secondary.RerouteTokenPort rerouteTokenPort) {
         return new RerouteServiceImpl(rerouteTokenPort);
-    }
-
-    @Bean
-    public JavaMailSender javaMailSender() {
-        return new JavaMailSenderImpl();
     }
 }

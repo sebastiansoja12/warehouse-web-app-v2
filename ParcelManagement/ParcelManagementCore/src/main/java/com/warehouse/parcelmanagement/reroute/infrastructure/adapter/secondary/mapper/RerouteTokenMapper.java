@@ -19,9 +19,6 @@ public interface RerouteTokenMapper {
     @Mapping(source = "parcelId", target = "parcelId")
     RerouteResponse mapToRerouteResponse(RerouteTokenEntity rerouteToken);
 
-
-    ParcelResponse mapToParcelResponse(RerouteTokenEntity rerouteToken);
-
     RerouteTokenEntity map(UpdateParcelRequest parcelRequest);
 
     @Mapping(source = "token", target = "token")

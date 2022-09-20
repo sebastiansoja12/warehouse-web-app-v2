@@ -12,10 +12,16 @@ public class RerouteTokenController {
 
     private final RerouteService rerouteService;
 
-    @PostMapping
+    @PostMapping("/information")
     RerouteResponseDto sendInformation(@RequestBody RerouteRequestDto request) {
         return rerouteService.sendReroutingInformation(request);
     }
+
+    @PostMapping()
+    ParcelResponseDto update(@RequestBody UpdateParcelRequestDto request) {
+        return rerouteService.update(request);
+    }
+
     @GetMapping("/token/{value}")
     RerouteTokenResponseDto getToken(TokenDto token) {
         return rerouteService.findByToken(token);

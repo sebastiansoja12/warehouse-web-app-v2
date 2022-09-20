@@ -14,6 +14,10 @@ public class RerouteTokenPortImpl implements RerouteTokenPort {
 
     @Override
     public ParcelResponse update(UpdateParcelRequest parcel) {
+        final ParcelResponse parcelResponse = loadByParcelId(parcel.getId());
+        if (parcelResponse == null) {
+            return null;
+        }
         return rerouteService.update(parcel);
     }
 
@@ -28,8 +32,13 @@ public class RerouteTokenPortImpl implements RerouteTokenPort {
     }
 
     @Override
+    public ParcelResponse loadByParcelId(Long parcelId) {
+        return rerouteService.loadByParcelId(parcelId);
+    }
+
+    @Override
     public RerouteResponse sendReroutingInformation(RerouteRequest rerouteRequest) {
-        return rerouteService.saveReroutingToken(rerouteRequest.getParcelId());
+        return rerouteService.sendReroutingInformation(rerouteRequest);
     }
 
 }

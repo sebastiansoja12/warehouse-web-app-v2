@@ -46,6 +46,12 @@ public class RerouteTokenServiceAdapter implements RerouteService {
     }
 
     @Override
+    public ParcelResponseDto loadByParcelId(Long parcelId) {
+        final ParcelResponse parcelResponse = rerouteTokenPort.loadByParcelId(parcelId);
+        return primaryResponseMapper.map(parcelResponse);
+    }
+
+    @Override
     public RerouteTokenResponseDto loadByTokenAndParcelId(TokenDto tokenDto, ParcelIdDto parcelIdDto) {
         final Token token = primaryRequestMapper.map(tokenDto);
         final ParcelId parcelId = primaryRequestMapper.map(parcelIdDto);

@@ -12,11 +12,11 @@ public interface RerouteTokenPort {
 
     ParcelResponse update(UpdateParcelRequest request);
 
+    ParcelResponse loadByParcelId(Long parcelId);
+
     RerouteTokenResponse findByToken(Token token);
 
     RerouteTokenResponse loadByTokenAndParcelId(Token token, ParcelId parcelId);
-
-    RerouteResponse saveReroutingToken(Long parcelId);
 
     RerouteResponse sendReroutingInformation(RerouteRequest rerouteRequest);
 }

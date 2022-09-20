@@ -18,6 +18,7 @@
 		<module>WarehouseApplication</module>
 		<module>ParcelManagement</module>
 		<module>WarehouseWeb</module>
+		<module>MailService</module>
 	</modules>
 
 	<packaging>pom</packaging>

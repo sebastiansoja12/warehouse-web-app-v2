@@ -7,11 +7,14 @@ import com.warehouse.parcelmanagement.reroute.infrastructure.api.dto.ParcelRespo
 import com.warehouse.parcelmanagement.reroute.infrastructure.api.dto.RerouteResponseDto;
 import com.warehouse.parcelmanagement.reroute.infrastructure.api.dto.RerouteTokenResponseDto;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper
 public interface PrimaryResponseMapper {
+
     RerouteResponseDto map(RerouteResponse rerouteResponse);
 
+    @Mapping(source = "parcelType", target = "parcelType")
     ParcelResponseDto map(ParcelResponse parcelResponse);
 
     RerouteTokenResponseDto map(RerouteTokenResponse rerouteTokenResponse);
