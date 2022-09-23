@@ -23,10 +23,10 @@ public class RerouteTokenEntity {
     @Column(name = "token", nullable = false, updatable = false)
     private Integer token = generateToken();
 
-    @Column(name = "created", updatable = false, columnDefinition = "null")
+    @Column(name = "created", updatable = false)
     private Instant createdDate;
 
-    @Column(name = "timeout", updatable = false, columnDefinition = "null")
+    @Column(name = "timeout", updatable = false)
     private Instant expiryDate;
 
     @Column(nullable = false, updatable = false)

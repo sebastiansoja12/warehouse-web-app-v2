@@ -13,6 +13,9 @@ CREATE TABLE IF NOT EXISTS PARCEL (
     `recipient_telephone` VARCHAR(255) NULL DEFAULT NULL,
     `sender_email` VARCHAR(255) NULL DEFAULT NULL,
     `sender_telephone` VARCHAR(255) NULL DEFAULT NULL,
+    `sender_city` VARCHAR(255) NULL DEFAULT NULL,
+    `sender_street` VARCHAR(255) NULL DEFAULT NULL,
+    `sender_postal_code` VARCHAR(255) NULL DEFAULT NULL,
     `price` DOUBLE NOT NULL,
     `parcel_status` INT NULL DEFAULT NULL,
     `parcel_size` VARCHAR(255) NULL DEFAULT NULL
@@ -55,6 +58,5 @@ CREATE TABLE REROUTE_TOKEN (
 `id` bigint NOT NULL,
 `created_date` datetime DEFAULT NULL,
 `timeout` datetime DEFAULT NULL,
-`tokenDto` int DEFAULT NULL,
-`parcel_id` varchar(255) DEFAULT NULL
+`parcel_id` number DEFAULT NULL
 );

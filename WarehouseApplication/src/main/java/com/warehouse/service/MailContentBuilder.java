@@ -1,15 +1,15 @@
 package com.warehouse.service;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-@Service
-@AllArgsConstructor
 public class MailContentBuilder {
 
-    private final TemplateEngine templateEngine;
+    @Autowired
+    private TemplateEngine templateEngine;
 
     public String build(String message) {
         final Context context = new Context();

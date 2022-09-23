@@ -17,7 +17,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @AllArgsConstructor
-@Component
 public class RerouteTokenAdapter implements RerouteTokenPort {
 
     private final RequestMapper requestMapper;

@@ -5,13 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -21,57 +18,70 @@ import java.util.UUID;
 public class Parcel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "Parcel_ID")
-    @TableGenerator(name = "Parcel_ID", initialValue = 1000000, allocationSize = 100)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "id")
+    @TableGenerator(name = "id", initialValue = 1000000, allocationSize = 100)
+    @Column(name = "id", nullable = false, unique = true, updatable = false)
     private Long id;
 
-    @Valid
-    @NotBlank
+    @Column(name = "firstName", nullable = false)
     private String firstName;
 
-    @Valid
-    @NotBlank
+    @Column(name = "lastName", nullable = false)
     private String lastName;
 
-    @Valid
-    @NotBlank
+    @Column(name = "senderTelephone", nullable = false)
     private String senderTelephone;
 
     @Valid
-    @NotBlank
+    @Column(name = "senderEmail", nullable = false)
     private String senderEmail;
 
     @Valid
-    @NotBlank
+    @Column(name = "senderCity", nullable = false)
+    private String senderCity;
+
+    @Valid
+    @Column(name = "senderStreet", nullable = false)
+    private String senderStreet;
+
+    @Valid
+    @Pattern(regexp="\\d{2}-\\d{3}")
+    @Column(name = "senderPostalCode", nullable = false)
+    private String senderPostalCode;
+
+    @Valid
+    @Column(name = "recipientEmail", nullable = false)
     private String recipientEmail;
 
     @Valid
-    @NotBlank
+    @Column(name = "recipientTelephone", nullable = false)
     private String recipientTelephone;
 
     @Valid
-    @NotBlank
+    @Column(name = "recipientFirstName", nullable = false)
     private String recipientFirstName;
 
     @Valid
-    @NotBlank
+    @Column(name = "recipientLastName", nullable = false)
     private String recipientLastName;
 
     @Valid
-    @NotBlank
+    @Column(name = "recipientCity", nullable = false)
     private String recipientCity;
 
     @Valid
-    @NotBlank
+    @Column(name = "recipientStreet", nullable = false)
     private String recipientStreet;
 
     @Valid
-    @NotBlank
     @Pattern(regexp="\\d{2}-\\d{3}")
+    @Column(name = "recipientPostalCode", nullable = false)
     private String recipientPostalCode;
 
+    @Column(name = "parcelType", nullable = false)
     private ParcelType parcelType;
 
+    @Column(name = "price", nullable = false)
     private double price;
 
 }

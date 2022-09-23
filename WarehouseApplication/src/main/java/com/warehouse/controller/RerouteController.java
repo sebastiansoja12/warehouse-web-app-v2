@@ -9,13 +9,15 @@ import com.warehouse.service.RerouteService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-@RestController("/api/reroute")
+@RestController
+@RequestMapping("/api/reroute")
 @AllArgsConstructor
 public class RerouteController {
-/*
+
     private final RerouteService rerouteService;
 
     @PostMapping("/information")
@@ -32,7 +34,5 @@ public class RerouteController {
     public void updateParcel(@RequestBody UpdateParcelRequest parcelRequest) {
         rerouteService.updateParcel(parcelRequest);
     }
-
- */
 
 }
