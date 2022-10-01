@@ -17,16 +17,16 @@ Returning list of all parcels in database.
 
 - /api/parcels/[:id]
 
-Example response from endpoint using specific parcels id (UUID). 
+Example response from endpoint using specific parcels id. 
 
-![](Desktop/warehouse-web-app/z_img/parcels/parcel.png)
+![](z_img/parcels/parcel.png)
 
 
 - /api/parcels/[:id]/label
 
 Example label for parcel with given id.
 
-![](Desktop/warehouse-web-app/z_img/parcels/parcel_label.png)
+![](z_img/parcels/parcel_label.png)
 
 - /api/parcels/[:id]/csv
 
