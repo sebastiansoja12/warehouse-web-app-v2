@@ -1,4 +1,4 @@
- **INPARCEL SPRING BOOT APPLICATION 1.3** 
+ **INPARCEL SPRING BOOT APPLICATION 1.4** 
 
 Technologies: 
 - JAVA 17
@@ -19,14 +19,14 @@ Returning list of all parcels in database.
 
 Example response from endpoint using specific parcels id (UUID). 
 
-![](img/parcels/parcel.png)
+![](Desktop/warehouse-web-app/z_img/parcels/parcel.png)
 
 
 - /api/parcels/[:id]/label
 
 Example label for parcel with given id.
 
-![](img/parcels/parcel_label.png)
+![](Desktop/warehouse-web-app/z_img/parcels/parcel_label.png)
 
 - /api/parcels/[:id]/csv
 
