@@ -15,10 +15,15 @@
 	<description>Pom file for all modules</description>
 
 	<modules>
-		<module>WarehouseApplication</module>
+		<module>Application</module>
 		<module>ParcelManagement</module>
 		<module>WarehouseWeb</module>
 		<module>MailService</module>
+		<module>AuthSecurity</module>
+		<module>DepotServices</module>
+		<module>RouteTrackerFlow</module>
+		<module>SupplierFlow</module>
+		<module>Utility</module>
 	</modules>
 
 	<packaging>pom</packaging>
