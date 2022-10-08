@@ -41,18 +41,49 @@ class ParcelControllerTest {
     @Test
     @Transactional
     void shouldSaveParcel(){
-        Parcel parcel = new Parcel();
-        parcel.setParcelType(ParcelType.TINY);
-        parcel.setPrice(parcel.getParcelType().getPrice());
+        final Parcel parcel = Parcel.builder()
+                .firstName("Test")
+                .lastName("Test")
+                .senderTelephone("123456789")
+                .senderEmail("test@test.test")
+                .senderCity("Test")
+                .senderStreet("Test")
+                .senderPostalCode("00-000")
+                .recipientFirstName("Test")
+                .recipientLastName("Test")
+                .recipientEmail("test@test.test")
+                .recipientTelephone("123456789")
+                .recipientCity("Test")
+                .recipientStreet("Test")
+                .recipientPostalCode("00-000")
+                .parcelType(ParcelType.AVERAGE)
+                .build();
+
         parcelRepository.save(parcel);
     }
 
     @Test
     @Transactional
     void shouldGetSingleParcel() throws Exception {
-        // will be implemented again in the next stories
         //given
-        Parcel parcel = new Parcel();
+        final Parcel parcel = Parcel.builder()
+                .firstName("Test")
+                .lastName("Test")
+                .senderTelephone("123456789")
+                .senderEmail("test@test.test")
+                .senderCity("Test")
+                .senderStreet("Test")
+                .senderPostalCode("00-000")
+                .recipientFirstName("Test")
+                .recipientLastName("Test")
+                .recipientEmail("test@test.test")
+                .recipientTelephone("123456789")
+                .recipientCity("Test")
+                .recipientStreet("Test")
+                .recipientPostalCode("00-000")
+                .parcelType(ParcelType.AVERAGE)
+                .build();
+
         parcelRepository.save(parcel);
         //when
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/api/parcels/" + parcel.getId()))

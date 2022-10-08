@@ -23,11 +23,6 @@ public class SupplierRepositoryTest {
     @Autowired
     private DepotRepository depotRepository;
 
-    @AfterEach
-    void tearDown() {
-        supplierRepository.deleteAll();
-    }
-
     @Test
     void shouldSaveSupplier() {
         // given
@@ -106,8 +101,7 @@ public class SupplierRepositoryTest {
         // given
         final List<Supplier> suppliers = fakeSuppliers();
 
-        // and: save suppliers in db
-        supplierRepository.saveAll(suppliers);
+        supplierRepository.save(suppliers.get(0));
 
         // and: user
         final User user = User.builder()

@@ -58,5 +58,5 @@ CREATE TABLE REROUTE_TOKEN (
 `id` bigint NOT NULL,
 `created_date` datetime DEFAULT NULL,
 `timeout` datetime DEFAULT NULL,
-`parcel_id` number DEFAULT NULL
+`parcel_id` bigint DEFAULT NULL
 );

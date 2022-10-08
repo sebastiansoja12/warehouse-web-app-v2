@@ -48,7 +48,7 @@ Returns a list with all suppliers saved in database.
 
 Returns a specific supplier using their supplier code.
 
-- /api/routes/[:id]/parcelId
+- /api/routes/[:id]/aParcelId
 
 Returns a route history with given parcel id.
 

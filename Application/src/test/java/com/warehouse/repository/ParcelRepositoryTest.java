@@ -1,6 +1,7 @@
 package com.warehouse.repository;
 
 import com.warehouse.entity.Parcel;
+import com.warehouse.enumeration.ParcelType;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,9 @@ public class ParcelRepositoryTest {
                 .lastName("Test")
                 .senderTelephone("123456789")
                 .senderEmail("test@test.test")
+                .senderCity("Test")
+                .senderStreet("Test")
+                .senderPostalCode("00-000")
                 .recipientFirstName("Test")
                 .recipientLastName("Test")
                 .recipientEmail("test@test.test")
@@ -37,6 +41,7 @@ public class ParcelRepositoryTest {
                 .recipientCity("Test")
                 .recipientStreet("Test")
                 .recipientPostalCode("00-000")
+                .parcelType(ParcelType.AVERAGE)
                 .build();
         // when
         parcelRepository.save(parcel);
@@ -54,6 +59,9 @@ public class ParcelRepositoryTest {
                 .lastName("Test")
                 .senderTelephone("123456789")
                 .senderEmail("test@test.test")
+                .senderCity("Test")
+                .senderStreet("Test")
+                .senderPostalCode("00-000")
                 .recipientFirstName("Test")
                 .recipientLastName("Test")
                 .recipientEmail("test@test.test")
@@ -61,6 +69,7 @@ public class ParcelRepositoryTest {
                 .recipientCity("Test")
                 .recipientStreet("Test")
                 .recipientPostalCode("00-000")
+                .parcelType(ParcelType.AVERAGE)
                 .build();
 
         parcelRepository.save(parcel);
@@ -83,6 +92,9 @@ public class ParcelRepositoryTest {
                 .lastName("Test")
                 .senderTelephone("123456789")
                 .senderEmail("test@test.test")
+                .senderCity("Test")
+                .senderStreet("Test")
+                .senderPostalCode("00-000")
                 .recipientFirstName("Test")
                 .recipientLastName("Test")
                 .recipientEmail("test@test.test")
@@ -90,6 +102,7 @@ public class ParcelRepositoryTest {
                 .recipientCity("Test")
                 .recipientStreet("Test")
                 .recipientPostalCode("00-000")
+                .parcelType(ParcelType.AVERAGE)
                 .build();
 
         parcelRepository.save(parcel);

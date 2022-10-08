@@ -1,6 +1,7 @@
 package com.warehouse.repository;
 
 import com.warehouse.entity.*;
+import com.warehouse.enumeration.ParcelType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -198,7 +199,7 @@ public class RouteRepositoryTest {
     }
 
     Parcel createParcel() {
-        return Parcel.builder()
+        return  Parcel.builder()
                 .firstName("Test")
                 .lastName("Test")
                 .senderTelephone("123456789")
@@ -213,6 +214,7 @@ public class RouteRepositoryTest {
                 .recipientCity("Test")
                 .recipientStreet("Test")
                 .recipientPostalCode("00-000")
+                .parcelType(ParcelType.AVERAGE)
                 .build();
     }
 

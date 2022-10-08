@@ -10,21 +10,19 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.stereotype.Service;
 
 /**
  * Class for managing email sending.
  * Used for parcels and reroutes.
  */
 @Slf4j
+@Service
 @PropertySource("classpath:application.properties")
 public class MailCreatorAdapter implements MailPort {
 
-    private final JavaMailSender mailSender;
-
     @Autowired
-    public MailCreatorAdapter(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
-    }
+    private JavaMailSender mailSender;
 
     /**
      * Sends email message to recipient/sender

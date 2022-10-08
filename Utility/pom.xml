@@ -11,6 +11,7 @@
     <modules>
         <module>BarcodeGenerator</module>
         <module>CsvFileGenerator</module>
+        <module>UrlConfigurator</module>
     </modules>
 
     <properties>

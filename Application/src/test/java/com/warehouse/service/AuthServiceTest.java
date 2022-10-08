@@ -12,11 +12,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.ConstraintViolationException;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -53,10 +53,11 @@ public class AuthServiceTest {
 
         // when
         final Executable executable = () -> authService.signup(registerRequest);
-        final ConstraintViolationException exception = assertThrows(ConstraintViolationException.class, executable);
+        final DataIntegrityViolationException exception =
+                assertThrows(DataIntegrityViolationException.class, executable);
         // then
-        assertThat(exception).isInstanceOf(ConstraintViolationException.class);
-        assertThat(exception.getMessage()).isEqualTo(constraintViolationExceptionMessage());
+        assertThat(exception).isInstanceOf(DataIntegrityViolationException.class);
+        assertThat(exception.getMessage()).isEqualTo(dataIntegrityViolationExceptionMessage());
     }
 
     @Test
@@ -160,13 +161,9 @@ public class AuthServiceTest {
         return registerRequest;
     }
 
-    public String constraintViolationExceptionMessage() {
-        return "Validation failed for classes [com.warehouse.entity.User] during persist time for groups " +
-                "[javax.validation.groups.Default, ]\n" +
-                "List of constraint violations:[\n" +
-                "\tConstraintViolationImpl{interpolatedMessage='darf nicht leer sein', propertyPath=email, " +
-                "rootBeanClass=class com.warehouse.entity.User, " +
-                "messageTemplate='{javax.validation.constraints.NotBlank.message}'}\n" +
-                "]";
+    public String dataIntegrityViolationExceptionMessage() {
+        return "not-null property references a null or transient value : com.warehouse.entity.User.email; " +
+                "nested exception is org.hibernate.PropertyValueException: " +
+                "not-null property references a null or transient value : com.warehouse.entity.User.email";
     }
 }

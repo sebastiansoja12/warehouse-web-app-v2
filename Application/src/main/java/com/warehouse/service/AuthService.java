@@ -43,7 +43,6 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setFirstName(registerRequest.getFirstName());
         user.setLastName(registerRequest.getLastName());
-        user.setRole("worker");
         final Depot depot = depotRepository.getByDepotCode(registerRequest.getDepotCode());
         user.setDepot(depot);
         userRepository.save(user);
@@ -56,7 +55,7 @@ public class AuthService {
         SecurityContextHolder.getContext().setAuthentication(authenticate);
 
         final String token = jwtProvider.generateToken(authenticate);
-        log.info("TokenDto for user: " + loginRequest.getUsername() + " has been saved. Logging in");
+        log.info("Token for user: " + loginRequest.getUsername() + " has been saved. Logging in");
 
         return AuthenticationResponse.builder()
                 .authenticationToken(token)
@@ -80,7 +79,7 @@ public class AuthService {
 
     public void logout(RefreshTokenRequest refreshTokenRequest) {
         refreshTokenService.deleteRefreshToken(refreshTokenRequest);
-        log.info("TokenDto of user: " + refreshTokenRequest.getUsername() + " has been successfully deleted" +
+        log.info("Token of user: " + refreshTokenRequest.getUsername() + " has been successfully deleted" +
                 ". Logging out");
     }
 

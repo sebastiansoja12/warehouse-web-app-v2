@@ -9,7 +9,6 @@
     <packaging>pom</packaging>
     <version>VERSION_2022.12-SNAPSHOT</version>
     <modules>
-        <module>RouteTrackerFlowApi</module>
         <module>RouteTrackerFlowCore</module>
     </modules>
 

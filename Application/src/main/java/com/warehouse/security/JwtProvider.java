@@ -2,7 +2,6 @@ package com.warehouse.security;
 
 
 import com.warehouse.exceptions.WarehouseException;
-import com.warehouse.repository.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
