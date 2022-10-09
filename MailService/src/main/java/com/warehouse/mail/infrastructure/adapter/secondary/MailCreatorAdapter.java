@@ -19,12 +19,8 @@ import org.springframework.mail.javamail.MimeMessagePreparator;
 @PropertySource("classpath:application.properties")
 public class MailCreatorAdapter implements MailPort {
 
-    private final JavaMailSender mailSender;
-
     @Autowired
-    public MailCreatorAdapter(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
-    }
+    private JavaMailSender mailSender;
 
     /**
      * Sends email message to recipient/sender
