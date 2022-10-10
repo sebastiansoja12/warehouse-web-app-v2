@@ -127,7 +127,7 @@ public class PaypalAdapterTest {
 
     public List<Transaction> transactions(Long parcelId, Amount amount) {
         final Transaction transaction = new Transaction();
-        transaction.setDescription("Payment for parcel: " + parcelId);
+        transaction.setDescription("Payment for shipment: " + parcelId);
         transaction.setAmount(amount);
 
         final List<Transaction> transactions = new ArrayList<>();

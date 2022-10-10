@@ -49,7 +49,7 @@ public class ParcelService {
                         "\n" + config.springUrl + "/api/parcels/" + parcel.getId().toString() + "/label" +
                           "\nAby opłacić przesyłkę prosimy wcisnąć w link: " + payment
                             + "\nAby zarządzać przesyłką prosimy wejść w link: " + config.guiUrl +
-                        "/parcel/client/management/" + parcel.getId().toString()));
+                        "/shipment/client/management/" + parcel.getId().toString()));
 
         return payment;
 

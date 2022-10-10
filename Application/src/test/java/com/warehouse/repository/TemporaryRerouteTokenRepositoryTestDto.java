@@ -56,7 +56,7 @@ public class TemporaryRerouteTokenRepositoryTestDto {
         // then
         Assertions.assertTrue(rerouteToken1.isPresent());
         assertThat(rerouteToken1.get()).isNotNull();
-        // and: ids of reroute tokens parcel and given parcel are equal
+        // and: ids of reroute tokens shipment and given shipment are equal
         assertThat(rerouteToken1.get().getParcelId())
                 .isEqualTo(PARCEL_ID);
         // and: check if generated token is Integer

@@ -29,7 +29,7 @@ public class RerouteTokenAdapterTest {
     private ResponseMapper responseMapper;
 
     @InjectMocks
-    private RerouteTokenAdapterService rerouteTokenAdapter;
+    private RerouteTokenAdapter rerouteTokenAdapter;
 
     @Test
     void shouldFindByToken() {
