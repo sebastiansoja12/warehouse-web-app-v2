@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<dataset>
+    <payment
+            ID="1"
+            PAYMENT_URL="test.pl"
+            PARCEL_ID="10001"
+            PARCEL_STATUS="PAID"
+            AMOUNT="1"
+            PAYMENT_ID="payment"
+    />
+</dataset>
