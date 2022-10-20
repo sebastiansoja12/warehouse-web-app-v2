@@ -80,7 +80,7 @@ public class AuthService {
 
     public void logout(RefreshTokenRequest refreshTokenRequest) {
         refreshTokenService.deleteRefreshToken(refreshTokenRequest);
-        log.info("TokenDto of user: " + refreshTokenRequest.getUsername() + " has been successfully deleted" +
+        log.info("Token of user: " + refreshTokenRequest.getUsername() + " has been successfully deleted" +
                 ". Logging out");
     }
 

@@ -19,7 +19,7 @@ public class JavaMailConfiguration {
     }
 
     @Bean
-    public MailPort mailPort(JavaMailSender javaMailSender) {
-        return new MailCreatorAdapter(javaMailSender);
+    public MailPort mailPort() {
+        return new MailCreatorAdapter();
     }
 }

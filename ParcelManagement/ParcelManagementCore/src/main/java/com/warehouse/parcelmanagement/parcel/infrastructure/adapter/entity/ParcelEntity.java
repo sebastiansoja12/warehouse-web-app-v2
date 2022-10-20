@@ -19,8 +19,7 @@ import javax.validation.constraints.Pattern;
 public class ParcelEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "Parcel_ID")
-    @TableGenerator(name = "Parcel_ID", initialValue = 1000000, allocationSize = 100)
+    @TableGenerator(name = "id", initialValue = 1000000, allocationSize = 100)
     @Column(name = "id", nullable = false, unique = true, updatable = false, insertable = false)
     private Long id;
 
