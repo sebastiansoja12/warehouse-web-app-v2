@@ -6,7 +6,7 @@
 
     <groupId>com.warehouse.auth</groupId>
     <artifactId>AuthSecurity</artifactId>
-    <version>VERSION_2022.12-SNAPSHOT</version>
+    <version>VERSION_2022.13-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

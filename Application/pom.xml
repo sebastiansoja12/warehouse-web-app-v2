@@ -9,7 +9,7 @@
     </parent>
     <groupId>com.warehouse</groupId>
     <artifactId>WarehouseApplication</artifactId>
-    <version>VERSION_2022.12-SNAPSHOT</version>
+    <version>VERSION_2022.13-SNAPSHOT</version>
     <name>WarehouseApplication</name>
     <description>Inparcel Java Application</description>
     <packaging>jar</packaging>
