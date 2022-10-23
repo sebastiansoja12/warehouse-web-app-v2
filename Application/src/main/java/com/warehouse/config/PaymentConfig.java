@@ -5,6 +5,9 @@ import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.OAuthTokenCredential;
 import com.paypal.base.rest.PayPalRESTException;
 import com.warehouse.entity.PaymentInformation;
+import com.warehouse.repository.PaymentRepository;
+import com.warehouse.service.ParcelExportService;
+import com.warehouse.service.PaymentService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -62,6 +65,18 @@ public class PaymentConfig {
     @Bean
     public ApplicationUrlConfig applicationUrlConfig() {
         return new ApplicationUrlConfig();
+    }
+
+    @Bean(name = "parcelPaymentService")
+    public PaymentService paymentService(APIContext apiContext,
+                                         PaymentRepository paymentRepository,
+                                         ApplicationUrlConfig config) {
+        return new PaymentService(apiContext, paymentRepository, config);
+    }
+
+    @Bean
+    public ParcelExportService parcelExportService() {
+        return new ParcelExportService();
     }
 
 }

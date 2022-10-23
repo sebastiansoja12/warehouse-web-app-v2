@@ -15,7 +15,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Builder
-@Table(name = "payment")
+@Table(name = "paypal")
 public class PaymentInformation {
 
     @Id
