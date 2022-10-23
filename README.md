@@ -1,4 +1,4 @@
- **INPARCEL SPRING BOOT APPLICATION 1.4** 
+ **INPARCEL SPRING BOOT APPLICATION 1.5** 
 
 Technologies: 
 - JAVA 17
@@ -48,7 +48,7 @@ Returns a list with all suppliers saved in database.
 
 Returns a specific supplier using their supplier code.
 
-- /api/routes/[:id]/parcelId
+- /api/routes/[:id]/aParcelId
 
 Returns a route history with given parcel id.
 

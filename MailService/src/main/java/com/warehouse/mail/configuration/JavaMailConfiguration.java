@@ -13,7 +13,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 public class JavaMailConfiguration {
 
 
-    @Bean(name = "mail")
+    @Bean(name="mail.mailService")
     public MailService mailService(MailPort mailPort) {
         return new MailServiceImpl(mailPort);
     }
@@ -21,5 +21,9 @@ public class JavaMailConfiguration {
     @Bean
     public MailPort mailPort() {
         return new MailCreatorAdapter();
+    }
+
+    public JavaMailSender javaMailSender() {
+        return new JavaMailSenderImpl();
     }
 }
