@@ -95,16 +95,11 @@ public class TemporaryReroute {
 
     RerouteToken validateReroutingToken(Integer token) {
        return temporaryRerouteTokenRepository.findByToken(token)
-                .orElseThrow(() -> new WarehouseException("Invalid rerouting TokenDto"));
+                .orElseThrow(() -> new WarehouseException("Invalid rerouting token"));
     }
 
     public void deleteReroutingToken(Integer token) {
         temporaryRerouteTokenRepository.deleteByToken(token);
     }
 
-    @Scheduled(cron = "${purge.cron.expression}")
-    @Transactional
-    public void purgeExpired() {
-        temporaryRerouteTokenRepository.deleteAllExpiredSince(Instant.now());
-    }
 }
