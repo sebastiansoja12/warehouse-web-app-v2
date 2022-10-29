@@ -30,11 +30,11 @@ public class RerouteConfiguration {
     }
 
     @Bean
-    public RerouteTokenAdapterService rerouteTokenAdapter(RerouteTokenRepository rerouteTokenRepository,
-                                                          MailService mailService) {
+    public RerouteTokenAdapter rerouteTokenAdapter(RerouteTokenRepository rerouteTokenRepository,
+                                                   MailService mailService) {
         final RequestMapper requestMapper = Mappers.getMapper(RequestMapper.class);
         final ResponseMapper responseMapper = Mappers.getMapper(ResponseMapper.class);
-        return new RerouteTokenAdapterService(requestMapper, rerouteTokenRepository, mailService, responseMapper);
+        return new RerouteTokenAdapter(requestMapper, rerouteTokenRepository, mailService, responseMapper);
     }
 
 
@@ -56,15 +56,16 @@ public class RerouteConfiguration {
     public ParcelValidatorService parcelValidatorService(ParcelReadRepository repository) {
         return new ParcelValidatorServiceImpl(repository);
     }
-    @Bean
-    public ParcelPort parcelPort(ParcelRepository parcelRepository) {
-        return new ParcelAdapter(parcelRepository);
-    }
 
-    @Bean("reroute.parcelRepository")
+    @Bean(name = "reroute.parcelRepository")
     public ParcelRepository parcelRepository(ParcelReadRepository repository) {
         final ParcelMapper parcelMapper = Mappers.getMapper(ParcelMapper.class);
         return new ParcelRepositoryImpl(parcelMapper, repository);
+    }
+
+    @Bean(name = "reroute.parcelPort")
+    public ParcelPort parcelPort(ParcelRepository parcelRepository) {
+        return new ParcelAdapter(parcelRepository);
     }
 
     @Bean(name = "apiRerouteService")
@@ -86,7 +87,7 @@ public class RerouteConfiguration {
     public RerouteTokenPort rerouteTokenPort(RerouteTokenRepository rerouteTokenRepository, MailService mailService) {
         final RequestMapper requestMapper = Mappers.getMapper(RequestMapper.class);
         final ResponseMapper responseMapper = Mappers.getMapper(ResponseMapper.class);
-        return new RerouteTokenAdapterService(requestMapper, rerouteTokenRepository, mailService, responseMapper);
+        return new RerouteTokenAdapter(requestMapper, rerouteTokenRepository, mailService, responseMapper);
     }
 
 }

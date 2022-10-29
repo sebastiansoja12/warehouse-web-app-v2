@@ -196,7 +196,7 @@ public class TemporaryRerouteTest {
     @Test
     @Transactional
     void tokenShouldBeExpired() {
-        // given: create parcel
+        // given: create shipment
         final Parcel parcel = createParcel();
 
         // and: save in db
@@ -227,7 +227,7 @@ public class TemporaryRerouteTest {
     @Test
     @Transactional
     void tokenShouldNotBeExpired() {
-        // given: create parcel
+        // given: create shipment
         final Parcel parcel = createParcel();
 
         // and: save in db

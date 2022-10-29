@@ -35,7 +35,7 @@ public class RerouteTokenReadRepositoryTest {
     private RerouteTokenReadRepository repository;
 
     @Test
-    @DatabaseSetup("/data/rerouteToken.xml")
+    @DatabaseSetup("/dataset/rerouteToken.xml")
     void shouldReturnRerouteToken() {
         // given
         final Token token = Token.builder()
@@ -45,6 +45,19 @@ public class RerouteTokenReadRepositoryTest {
         final Optional<RerouteTokenEntity> rerouteToken = repository.findByToken(token.getValue());
         // then
         assertThat(rerouteToken).isNotNull();
+    }
+
+    @Test
+    @DatabaseSetup("/dataset/rerouteToken.xml")
+    void shouldNotReturnRerouteToken() {
+        // given
+        final Token token = Token.builder()
+                .value(0)
+                .build();
+        // when
+        final Optional<RerouteTokenEntity> rerouteToken = repository.findByToken(token.getValue());
+        // then
+        assertThat(rerouteToken).isEmpty();
     }
 
 }

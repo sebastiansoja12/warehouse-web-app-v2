@@ -67,7 +67,7 @@ public class PaymentService {
 
     public String payment(Parcel parcel) throws PayPalRESTException {
         PaymentInformation paymentInformation = new PaymentInformation();
-        Payment payment = createPayment("Payment for parcel: "
+        Payment payment = createPayment("Payment for shipment: "
                         + parcel.getId(),
                 config.springUrl + "/api/payments" + CANCEL_URL,
                 config.springUrl + "/api/payments" + SUCCESS_URL,

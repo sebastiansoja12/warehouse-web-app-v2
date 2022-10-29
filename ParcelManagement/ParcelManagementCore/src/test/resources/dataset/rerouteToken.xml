@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<dataset>
+    <reroute_token
+        id = "1"
+        parcel_id="100001"
+        token="12345"
+    />
+
+    <reroute_token
+            id="2"
+            parcel_id="100001"
+            token="54321"
+    />
+</dataset>
