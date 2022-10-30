@@ -19,7 +19,6 @@ import java.util.Optional;
 @AllArgsConstructor
 public class AuthController {
 
-
     private final AuthService authService;
 
     @PostMapping("/signup")

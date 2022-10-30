@@ -1,26 +1,15 @@
-package com.warehouse.config;
+package com.warehouse.auth.configuration;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@Configuration
-@EnableWebMvc
+@Component
 @Slf4j
-public class WebConfig implements Filter, WebMvcConfigurer {
-
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**");
-    }
+public class CorsConfiguration implements Filter {
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) {
@@ -51,14 +40,14 @@ public class WebConfig implements Filter, WebMvcConfigurer {
                     "access-control-request-headers,access-control-request-method,accept,origin,authorization,x-requested-with,responseType,observe");
             response.setStatus(HttpServletResponse.SC_OK);
         }
-
     }
 
-
+    @Override
+    public void init(FilterConfig filterConfig) {
+    }
 
     @Override
     public void destroy() {
-
     }
 
 }
