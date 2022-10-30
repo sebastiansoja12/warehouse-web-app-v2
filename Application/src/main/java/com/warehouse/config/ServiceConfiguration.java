@@ -25,5 +25,4 @@ public class ServiceConfiguration {
                                               MailService mailService) {
         return new TemporaryReroute(temporaryRerouteTokenRepository, parcelRepository, mailService);
     }
-
 }

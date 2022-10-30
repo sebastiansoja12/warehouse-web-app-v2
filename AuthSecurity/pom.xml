@@ -4,9 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.warehouse.auth</groupId>
+    <groupId>com.warehouse</groupId>
     <artifactId>AuthSecurity</artifactId>
     <version>VERSION_2022.14-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>AuthSecurityCore</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
