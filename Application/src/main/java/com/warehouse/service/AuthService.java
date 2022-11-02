@@ -1,13 +1,14 @@
 package com.warehouse.service;
 
 
-import com.warehouse.dto.AuthenticationResponse;
+import com.warehouse.auth.domain.service.JwtProvider;
 import com.warehouse.dto.LoginRequest;
 import com.warehouse.dto.RefreshTokenRequest;
+import com.warehouse.exceptions.WarehouseException;
+import com.warehouse.dto.AuthenticationResponse;
 import com.warehouse.dto.RegisterRequest;
 import com.warehouse.entity.Depot;
 import com.warehouse.entity.User;
-import com.warehouse.exceptions.WarehouseException;
 import com.warehouse.repository.DepotRepository;
 import com.warehouse.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -16,8 +17,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +29,9 @@ import java.util.Optional;
 @Slf4j
 public class AuthService {
 
+    private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final JwtProvider jwtProvider;
     private final RefreshTokenService refreshTokenService;
     private final DepotRepository depotRepository;
     private final UserRepository userRepository;
@@ -35,7 +40,7 @@ public class AuthService {
         final User user = new User();
         user.setUsername(registerRequest.getUsername());
         user.setEmail(registerRequest.getEmail());
-        user.setPassword(registerRequest.getPassword());
+        user.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
         user.setFirstName(registerRequest.getFirstName());
         user.setLastName(registerRequest.getLastName());
         final Depot depot = depotRepository.getByDepotCode(registerRequest.getDepotCode());
@@ -49,25 +54,25 @@ public class AuthService {
                 loginRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authenticate);
 
-        final String token = null;
+        final String token = jwtProvider.generateToken(authenticate);
         log.info("Token for user: " + loginRequest.getUsername() + " has been saved. Logging in");
 
         return AuthenticationResponse.builder()
                 .authenticationToken(token)
                 .role(userRepository.getRoleByUsername(loginRequest.getUsername()))
                 .refreshToken(refreshTokenService.generateRefreshToken().getToken())
-                //.expiresAt(Instant.now().plusSeconds(oldJwtProvider.getJwtExpirationInMillis()))
+                //.expiresAt(Instant.now().plusSeconds(jwtProvider.ge()))
                 .username(loginRequest.getUsername())
                 .build();
     }
 
     public AuthenticationResponse refreshToken(RefreshTokenRequest refreshTokenRequest) {
         refreshTokenService.validateRefreshToken(refreshTokenRequest.getRefreshToken());
-        final String token = null;//oldJwtProvider.generateTokenWithUserName(refreshTokenRequest.getUsername());
+        final String token = jwtProvider.generateTokenWithUsername(refreshTokenRequest.getUsername());
         return AuthenticationResponse.builder()
                 .authenticationToken(token)
                 .refreshToken(refreshTokenRequest.getRefreshToken())
-                //.expiresAt(Instant.now().plusSeconds(oldJwtProvider.getJwtExpirationInMillis()))
+               // .expiresAt(Instant.now().plusSeconds(jwtProvider.getJwtExpirationInMillis()))
                 .username(refreshTokenRequest.getUsername())
                 .build();
     }

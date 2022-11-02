@@ -14,7 +14,7 @@ import java.time.Instant;
 @Builder
 public class AuthenticationResponse {
 
-    private AuthenticationToken authenticationToken;
+    private String authenticationToken;
     private String username;
     private String refreshToken;
     private Instant createdAt;

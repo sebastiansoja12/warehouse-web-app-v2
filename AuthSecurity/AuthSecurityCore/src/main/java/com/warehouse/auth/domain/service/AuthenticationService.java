@@ -7,8 +7,6 @@ import org.springframework.security.core.Authentication;
 
 public interface AuthenticationService {
 
-    String generateToken(Authentication authentication);
-
     AuthenticationResponse login(Authentication authentication);
 
     void signup(RegisterRequest registerRequest);
