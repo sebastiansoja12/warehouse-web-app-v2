@@ -1,3 +1,2 @@
-rsa:
-  private-key: classpath:token/private.pem
-  public-key: classpath:token/public.pem
+token:
+  lifetime: 3600
