@@ -1,12 +1,12 @@
 package com.warehouse.reroute.domain.vo;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.Value;
 
 @Value
-@Getter
-@Setter
+@Data
+@Builder
 public class RerouteTokenResponse {
     Integer token;
     ParcelId parcelId;

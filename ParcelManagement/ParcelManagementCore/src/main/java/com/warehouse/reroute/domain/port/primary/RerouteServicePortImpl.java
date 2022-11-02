@@ -44,11 +44,6 @@ public class RerouteServicePortImpl implements RerouteServicePort {
     }
 
     @Override
-    public ParcelResponse loadByParcelId(java.lang.Long aLong) {
-        return rerouteService.loadByParcelId(aLong);
-    }
-
-    @Override
     public RerouteResponse sendReroutingInformation(RerouteRequest rerouteRequest) {
         return rerouteService.sendReroutingInformation(rerouteRequest);
     }

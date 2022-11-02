@@ -64,8 +64,8 @@ public class RerouteConfiguration {
     }
 
     @Bean(name = "reroute.parcelPort")
-    public ParcelPort parcelPort(ParcelRepository parcelRepository) {
-        return new ParcelAdapter(parcelRepository);
+    public ParcelPort parcelPort(ParcelRepository parcelRepository, RerouteTokenRepository repository) {
+        return new ParcelAdapter(parcelRepository, repository);
     }
 
     @Bean(name = "apiRerouteService")

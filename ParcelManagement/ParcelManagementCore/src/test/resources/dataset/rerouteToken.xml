@@ -11,4 +11,25 @@
             parcel_id="100001"
             token="54321"
     />
+
+    <shipment
+            id = "100001"
+            first_name="test"
+            last_name="test"
+            SENDER_TELEPHONE="123"
+            SENDER_EMAIL="test@test.pl"
+            SENDER_CITY="test"
+            SENDER_STREET="test"
+            SENDER_POSTAL_CODE="00-000"
+            RECIPIENT_EMAIL="test@test.pl"
+            RECIPIENT_FIRST_NAME="test"
+            RECIPIENT_LAST_NAME="test"
+            RECIPIENT_TELEPHONE="123"
+            RECIPIENT_CITY="test"
+            RECIPIENT_STREET="test"
+            RECIPIENT_POSTAL_CODE="00-000"
+            PARCEL_TYPE="3"
+            PRICE="10"
+    />
+
 </dataset>

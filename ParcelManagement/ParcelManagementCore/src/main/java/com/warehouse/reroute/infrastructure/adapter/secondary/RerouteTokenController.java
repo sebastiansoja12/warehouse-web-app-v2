@@ -1,4 +1,4 @@
-package com.warehouse.web.controller;
+package com.warehouse.reroute.infrastructure.adapter.secondary;
 
 import com.warehouse.reroute.domain.model.RerouteRequest;
 import com.warehouse.reroute.domain.model.RerouteResponse;

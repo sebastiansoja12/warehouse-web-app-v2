@@ -6,7 +6,7 @@ import com.warehouse.reroute.domain.vo.ParcelId;
 
 public interface RerouteTokenRepository {
 
-    RerouteToken loadByTokenAndParcelId(Token token, ParcelId aParcelId);
+    RerouteToken loadByTokenAndParcelId(Token token, ParcelId parcelId);
 
     RerouteToken findByToken(Token token);
 

@@ -7,6 +7,4 @@ public interface ParcelPort {
 
     ParcelResponse update(UpdateParcelRequest request);
 
-    ParcelResponse loadByParcelId(Long parcelId);
-
 }
