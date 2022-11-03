@@ -5,6 +5,8 @@ import com.warehouse.auth.domain.model.RegisterRequest;
 import com.warehouse.auth.domain.port.secondary.AuthenticationPort;
 import com.warehouse.auth.domain.port.secondary.UserRepository;
 import com.warehouse.auth.domain.service.RefreshTokenService;
+import com.warehouse.auth.infrastructure.adapter.entity.UserEntity;
+import com.warehouse.auth.infrastructure.adapter.mapper.RequestToEntityMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 
@@ -15,9 +17,9 @@ public class AuthenticationAdapter implements AuthenticationPort {
 
     private final UserRepository userRepository;
 
-    private final String ROLE = "admin";
-
     private final RefreshTokenService refreshTokenService;
+
+    private final RequestToEntityMapper requestToEntityMapper;
 
     @Override
     public AuthenticationResponse login(Authentication authentication, String token) {
@@ -36,7 +38,8 @@ public class AuthenticationAdapter implements AuthenticationPort {
 
     @Override
     public void signup(RegisterRequest registerRequest) {
-        userRepository.signup(registerRequest);
+        final UserEntity entity = requestToEntityMapper.map(registerRequest);
+        userRepository.signup(entity);
     }
 
     @Override

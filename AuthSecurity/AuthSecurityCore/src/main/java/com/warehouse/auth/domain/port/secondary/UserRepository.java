@@ -12,7 +12,7 @@ public interface UserRepository {
 
     AuthenticationResponse login(AuthenticationResponse authentication);
 
-    void signup(RegisterRequest registerRequest);
+    void signup(UserEntity userEntity);
 
     void logout(String token);
 
