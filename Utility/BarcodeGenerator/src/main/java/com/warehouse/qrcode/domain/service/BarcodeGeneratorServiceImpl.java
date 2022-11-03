@@ -1,4 +1,4 @@
-package com.warehouse.barcode.domain.service;
+package com.warehouse.qrcode.domain.service;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -16,7 +16,6 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.UUID;
 
-import com.lowagie.text.pdf.PdfPCell;
 import net.glxn.qrgen.javase.QRCode;
 
 

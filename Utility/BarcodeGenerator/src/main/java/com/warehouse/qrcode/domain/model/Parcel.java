@@ -1,4 +1,4 @@
-package com.warehouse.barcode.domain.model;
+package com.warehouse.qrcode.domain.model;
 
 import com.warehouse.shipment.domain.enumeration.ParcelType;
 import com.warehouse.shipment.domain.model.Recipient;

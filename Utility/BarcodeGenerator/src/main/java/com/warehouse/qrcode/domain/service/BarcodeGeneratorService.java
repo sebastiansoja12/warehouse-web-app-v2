@@ -1,4 +1,4 @@
-package com.warehouse.barcode.domain.service;
+package com.warehouse.qrcode.domain.service;
 
 import com.google.zxing.WriterException;
 import com.itextpdf.text.BadElementException;

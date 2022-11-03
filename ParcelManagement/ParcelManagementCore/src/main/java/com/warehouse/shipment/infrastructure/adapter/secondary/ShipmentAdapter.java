@@ -45,7 +45,7 @@ public class ShipmentAdapter implements ShipmentPort {
 
     @Override
     public Parcel loadParcelById(Long parcelId) {
-        return null;
+        return parcelRepository.loadParcelById(parcelId);
     }
 
     private ShipmentResponse createParcel(ShipmentRequest request) {

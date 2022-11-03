@@ -18,6 +18,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.warehouse</groupId>
+            <artifactId>ParcelManagementCore</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
             <version>3.0.0</version>
@@ -61,7 +67,12 @@
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
-            <version>1.4.2.Final</version>
+            <version>1.5.3.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>1.5.3.Final</version>
         </dependency>
         <dependency>
             <groupId>com.google.zxing</groupId>
@@ -171,12 +182,6 @@
             <artifactId>javase</artifactId>
             <version>2.6.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.warehouse</groupId>
-            <artifactId>ParcelManagementCore</artifactId>
-            <version>VERSION_2022.13-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
     <artifactId>BarcodeGenerator</artifactId>
 
@@ -184,6 +189,5 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
-
 
 </project>

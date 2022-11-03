@@ -1,27 +1,25 @@
-package com.warehouse.barcode.domain.service;
+package com.warehouse.qrcode.domain.service;
 
-import com.lowagie.text.*;
 import com.lowagie.text.Font;
+import com.lowagie.text.*;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
-import com.warehouse.barcode.domain.model.Parcel;
-import com.warehouse.barcode.infrastructure.adapter.secondary.mapper.ParcelEntityMapper;
-import com.warehouse.shipment.infrastructure.adapter.entity.ParcelEntity;
+import com.warehouse.qrcode.domain.model.Parcel;
+import com.warehouse.qrcode.infrastructure.adapter.secondary.mapper.ParcelEntityMapper;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.supercsv.io.CsvBeanWriter;
-import org.supercsv.prefs.CsvPreference;
 
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
-import java.io.IOException;
 
 @Service
 @AllArgsConstructor
-public class ParcelExportService {
+@Slf4j
+public class ParcelExportServiceImpl implements ParcelExportService {
 
-    private final BarcodeGeneratorServiceImpl generatorService;
+    private final BarcodeGeneratorService generatorService;
 
     private final ParcelEntityMapper entityMapper;
 
@@ -79,7 +77,8 @@ public class ParcelExportService {
 
     }
 
-    public void exportToPdf(HttpServletResponse response, ParcelEntity parcelEntity) throws Exception {
+    @Override
+    public void exportToPdf(HttpServletResponse response, com.warehouse.shipment.domain.model.Parcel parcel) throws Exception {
         final Document document = new Document(PageSize.LETTER);
         PdfWriter.getInstance(document, response.getOutputStream());
 
@@ -101,13 +100,14 @@ public class ParcelExportService {
 
         writeTableHeader(senderTable, recipientTable);
 
-        final Parcel parcel = entityMapper.map(parcelEntity);
+        final Parcel barcodeParcel = entityMapper.map(parcel);
 
-        writeTableData(senderTable, recipientTable, parcel);
+        writeTableData(senderTable, recipientTable, barcodeParcel);
 
         document.add(senderTable);
         document.add(recipientTable);
         document.close();
+
     }
 }
 

@@ -47,6 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/reroute/**")
                 .permitAll()
+                .antMatchers("/barcode/**")
+                .permitAll()
                 .antMatchers("/api/users/login")
                 .not().authenticated()
                 .antMatchers("/api/users/logout")
