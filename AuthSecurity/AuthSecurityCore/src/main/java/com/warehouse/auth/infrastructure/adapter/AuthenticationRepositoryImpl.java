@@ -27,8 +27,8 @@ public class AuthenticationRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void signup(RegisterRequest registerRequest) {
-
+    public void signup(UserEntity userEntity) {
+        repository.save(userEntity);
     }
 
     @Override

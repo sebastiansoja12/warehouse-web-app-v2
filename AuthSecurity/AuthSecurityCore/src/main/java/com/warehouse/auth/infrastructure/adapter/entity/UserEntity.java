@@ -21,6 +21,7 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, nullable = false)
     private int id;
 
     @JsonProperty()
@@ -32,22 +33,22 @@ public class UserEntity {
     private String password;
 
 
-    @JsonProperty()
+    @Column(nullable = false)
     private String firstName;
 
-    @JsonProperty()
+    @Column(nullable = false)
     private String lastName;
 
     @Email
     @NotBlank
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String email;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String role;
 
-    @OneToOne()
-    private DepotEntity depot;
+    @Column(nullable = false)
+    private String depotCode;
 
 
 }
