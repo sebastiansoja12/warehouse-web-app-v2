@@ -22,7 +22,7 @@
 		<module>AuthSecurity</module>
 		<module>DepotServices</module>
 		<module>RouteTrackerFlow</module>
-		<module>SupplierFlow</module>
+		<module>SupplyOperation</module>
 		<module>PaymentManagement</module>
 		<module>Utility</module>
 	</modules>
