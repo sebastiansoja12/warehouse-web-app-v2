@@ -32,7 +32,6 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtProvider jwtProvider;
-    private final RefreshTokenService refreshTokenService;
     private final DepotRepository depotRepository;
     private final UserRepository userRepository;
 
@@ -60,14 +59,14 @@ public class AuthService {
         return AuthenticationResponse.builder()
                 .authenticationToken(token)
                 .role(userRepository.getRoleByUsername(loginRequest.getUsername()))
-                .refreshToken(refreshTokenService.generateRefreshToken().getToken())
+                //.refreshToken(refreshTokenService.generateRefreshToken().getToken())
                 //.expiresAt(Instant.now().plusSeconds(jwtProvider.ge()))
                 .username(loginRequest.getUsername())
                 .build();
     }
 
     public AuthenticationResponse refreshToken(RefreshTokenRequest refreshTokenRequest) {
-        refreshTokenService.validateRefreshToken(refreshTokenRequest.getRefreshToken());
+        //refreshTokenService.validateRefreshToken(refreshTokenRequest.getRefreshToken());
         final String token = jwtProvider.generateTokenWithUsername(refreshTokenRequest.getUsername());
         return AuthenticationResponse.builder()
                 .authenticationToken(token)
@@ -78,7 +77,7 @@ public class AuthService {
     }
 
     public void logout(RefreshTokenRequest refreshTokenRequest) {
-        refreshTokenService.deleteRefreshToken(refreshTokenRequest);
+        //refreshTokenService.deleteRefreshToken(refreshTokenRequest);
         log.info("Token of user: " + refreshTokenRequest.getUsername() + " has been successfully deleted" +
                 ". Logging out");
     }

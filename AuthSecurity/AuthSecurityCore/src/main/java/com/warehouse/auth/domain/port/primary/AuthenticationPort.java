@@ -1,9 +1,6 @@
 package com.warehouse.auth.domain.port.primary;
 
-import com.warehouse.auth.domain.model.AuthenticationResponse;
-import com.warehouse.auth.domain.model.LoginRequest;
-import com.warehouse.auth.domain.model.RefreshTokenRequest;
-import com.warehouse.auth.domain.model.RegisterRequest;
+import com.warehouse.auth.domain.model.*;
 
 public interface AuthenticationPort {
 
@@ -12,4 +9,8 @@ public interface AuthenticationPort {
     void signup(RegisterRequest registerRequest);
 
     void logout(RefreshTokenRequest refreshTokenRequest);
+
+    User findCurrentUser();
+
+    User findUserByUsername(String username);
 }

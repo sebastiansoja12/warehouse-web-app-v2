@@ -1,11 +1,10 @@
 package com.warehouse.auth.domain.service;
 
 import com.warehouse.auth.domain.port.secondary.UserRepository;
-import com.warehouse.auth.infrastructure.adapter.entity.UserEntity;
+import com.warehouse.auth.infrastructure.adapter.secondary.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

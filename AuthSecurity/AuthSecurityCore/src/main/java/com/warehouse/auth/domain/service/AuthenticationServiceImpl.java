@@ -2,6 +2,7 @@ package com.warehouse.auth.domain.service;
 
 import com.warehouse.auth.domain.model.AuthenticationResponse;
 import com.warehouse.auth.domain.model.RegisterRequest;
+import com.warehouse.auth.domain.model.User;
 import com.warehouse.auth.domain.port.secondary.AuthenticationPort;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -29,5 +30,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         authenticationPort.logout(token);
     }
 
+    @Override
+    public User findCurrentUser(String username) {
+        return authenticationPort.findCurrentUser(username);
+    }
 
 }

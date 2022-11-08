@@ -1,4 +1,4 @@
-package com.warehouse.auth.infrastructure.adapter.entity;
+package com.warehouse.auth.infrastructure.adapter.secondary.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

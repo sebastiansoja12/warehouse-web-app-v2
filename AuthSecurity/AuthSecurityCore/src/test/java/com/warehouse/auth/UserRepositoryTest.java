@@ -3,8 +3,8 @@ package com.warehouse.auth;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.warehouse.auth.configuration.AuthTestConfiguration;
-import com.warehouse.auth.infrastructure.adapter.secondary.RefreshTokenReadRepository;
-import com.warehouse.auth.infrastructure.adapter.secondary.entity.RefreshTokenEntity;
+import com.warehouse.auth.domain.port.secondary.UserRepository;
+import com.warehouse.auth.infrastructure.adapter.secondary.entity.UserEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,8 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @ExtendWith(SpringExtension.class)
@@ -30,30 +31,23 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
         TransactionalTestExecutionListener.class,
         DbUnitTestExecutionListener.class })
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class RefreshTokenReadRepositoryTest {
+public class UserRepositoryTest {
 
     @Autowired
-    private RefreshTokenReadRepository repository;
+    private UserRepository userRepository;
 
     @Test
-    @DatabaseSetup("/dataset/refresh_token.xml")
-    void shouldFindRefreshTokenById() {
+    @DatabaseSetup("/dataset/user_repository.xml")
+    void shouldFindByUsername() {
         // given
-        final Long id = 100001L;
+        final String username = "s-soja";
         // when
-        final Optional<RefreshTokenEntity> entity = repository.findById(id);
+        final Optional<UserEntity> userEntity = userRepository.findByUsername(username);
         // then
-        assertTrue(entity.isPresent());
-    }
-
-    @Test
-    @DatabaseSetup("/dataset/refresh_token.xml")
-    void shouldNotFindRefreshTokenById() {
-        // given
-        final Long id = 1L;
-        // when
-        final Optional<RefreshTokenEntity> entity = repository.findById(id);
-        // then
-        assertFalse(entity.isPresent());
+        assertAll(
+                () -> assertTrue(userEntity.isPresent()),
+                () -> assertThat(userEntity.get().getUsername()).isEqualTo(username),
+                () -> assertThat(userEntity.get().getDepotCode()).isEqualTo("Test")
+        );
     }
 }

@@ -1,6 +1,5 @@
 package com.warehouse.auth.domain.model;
 
-import com.warehouse.auth.domain.vo.AuthenticationToken;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

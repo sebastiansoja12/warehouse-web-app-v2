@@ -1,6 +1,6 @@
-package com.warehouse.auth.infrastructure.adapter;
+package com.warehouse.auth.infrastructure.adapter.secondary;
 
-import com.warehouse.auth.infrastructure.adapter.entity.RefreshTokenEntity;
+import com.warehouse.auth.infrastructure.adapter.secondary.entity.RefreshTokenEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

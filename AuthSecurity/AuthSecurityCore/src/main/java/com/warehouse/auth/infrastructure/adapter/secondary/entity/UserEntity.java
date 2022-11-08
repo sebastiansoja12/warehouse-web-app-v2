@@ -1,4 +1,4 @@
-package com.warehouse.auth.infrastructure.adapter.entity;
+package com.warehouse.auth.infrastructure.adapter.secondary.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.warehouse.auth.domain.model.Depot;
@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Data
 @AllArgsConstructor
@@ -25,10 +26,12 @@ public class UserEntity {
     private int id;
 
     @JsonProperty()
+    @NotEmpty
     @Column(unique = true, nullable = false)
     private String username;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @NotEmpty
     @Column(nullable = false)
     private String password;
 
