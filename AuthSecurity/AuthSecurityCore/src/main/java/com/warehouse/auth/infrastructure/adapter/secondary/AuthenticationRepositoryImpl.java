@@ -1,10 +1,9 @@
-package com.warehouse.auth.infrastructure.adapter;
+package com.warehouse.auth.infrastructure.adapter.secondary;
 
 import com.warehouse.auth.domain.model.AuthenticationResponse;
-import com.warehouse.auth.domain.model.RegisterRequest;
 import com.warehouse.auth.domain.port.secondary.UserRepository;
-import com.warehouse.auth.infrastructure.adapter.entity.RefreshTokenEntity;
-import com.warehouse.auth.infrastructure.adapter.entity.UserEntity;
+import com.warehouse.auth.infrastructure.adapter.secondary.entity.RefreshTokenEntity;
+import com.warehouse.auth.infrastructure.adapter.secondary.entity.UserEntity;
 import lombok.AllArgsConstructor;
 
 import java.util.Optional;

@@ -1,7 +1,7 @@
-package com.warehouse.auth.infrastructure.adapter.mapper;
+package com.warehouse.auth.infrastructure.adapter.secondary.mapper;
 
 import com.warehouse.auth.domain.model.RegisterRequest;
-import com.warehouse.auth.infrastructure.adapter.entity.UserEntity;
+import com.warehouse.auth.infrastructure.adapter.secondary.entity.UserEntity;
 import org.mapstruct.Mapper;
 
 @Mapper

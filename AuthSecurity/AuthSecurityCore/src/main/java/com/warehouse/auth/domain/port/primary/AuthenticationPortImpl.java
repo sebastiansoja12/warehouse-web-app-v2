@@ -1,9 +1,6 @@
 package com.warehouse.auth.domain.port.primary;
 
-import com.warehouse.auth.domain.model.AuthenticationResponse;
-import com.warehouse.auth.domain.model.LoginRequest;
-import com.warehouse.auth.domain.model.RefreshTokenRequest;
-import com.warehouse.auth.domain.model.RegisterRequest;
+import com.warehouse.auth.domain.model.*;
 import com.warehouse.auth.domain.service.AuthenticationService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,7 +35,7 @@ public class AuthenticationPortImpl implements AuthenticationPort {
 
     @Override
     public void signup(RegisterRequest registerRequest) {
-
+        authenticationService.signup(registerRequest);
     }
 
     @Override
@@ -46,5 +43,16 @@ public class AuthenticationPortImpl implements AuthenticationPort {
         authenticationService.logout(refreshTokenRequest.getRefreshToken());
         log.info("Token of user: " + refreshTokenRequest.getUsername() + " has been successfully deleted" +
                 ". Logging out");
+    }
+
+    @Override
+    public User findCurrentUser() {
+        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authenticationService.findCurrentUser(authentication.getName());
+    }
+
+    @Override
+    public User findUserByUsername(String username) {
+        return authenticationService.findCurrentUser(username);
     }
 }

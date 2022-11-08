@@ -1,8 +1,9 @@
 package com.warehouse.auth.mapper;
 
 import com.warehouse.auth.domain.model.RegisterRequest;
-import com.warehouse.auth.infrastructure.adapter.entity.UserEntity;
-import com.warehouse.auth.infrastructure.adapter.mapper.RequestToEntityMapper;
+import com.warehouse.auth.infrastructure.adapter.secondary.entity.UserEntity;
+import com.warehouse.auth.infrastructure.adapter.secondary.mapper.RequestToEntityMapper;
+import com.warehouse.auth.infrastructure.adapter.secondary.mapper.RequestToEntityMapperImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +18,7 @@ public class RequestToEntityMapperTest {
 
     @BeforeEach
     void setup() {
-
+        requestToEntityMapper = new RequestToEntityMapperImpl();
     }
 
     @Test

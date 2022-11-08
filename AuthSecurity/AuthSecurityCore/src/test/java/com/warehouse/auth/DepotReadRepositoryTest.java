@@ -3,8 +3,8 @@ package com.warehouse.auth;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.warehouse.auth.configuration.AuthTestConfiguration;
-import com.warehouse.auth.infrastructure.adapter.secondary.RefreshTokenReadRepository;
-import com.warehouse.auth.infrastructure.adapter.secondary.entity.RefreshTokenEntity;
+import com.warehouse.auth.infrastructure.adapter.secondary.DepotReadRepository;
+import com.warehouse.auth.infrastructure.adapter.secondary.entity.DepotEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +17,7 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
@@ -30,30 +27,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
         TransactionalTestExecutionListener.class,
         DbUnitTestExecutionListener.class })
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class RefreshTokenReadRepositoryTest {
+public class DepotReadRepositoryTest {
 
     @Autowired
-    private RefreshTokenReadRepository repository;
+    private DepotReadRepository repository;
 
     @Test
-    @DatabaseSetup("/dataset/refresh_token.xml")
-    void shouldFindRefreshTokenById() {
+    @DatabaseSetup("/dataset/depots.xml")
+    void shouldFindDepotByCode() {
         // given
-        final Long id = 100001L;
+        final String depotCode = "PL1";
         // when
-        final Optional<RefreshTokenEntity> entity = repository.findById(id);
+        final DepotEntity depot = repository.findByDepotCode(depotCode);
         // then
-        assertTrue(entity.isPresent());
-    }
-
-    @Test
-    @DatabaseSetup("/dataset/refresh_token.xml")
-    void shouldNotFindRefreshTokenById() {
-        // given
-        final Long id = 1L;
-        // when
-        final Optional<RefreshTokenEntity> entity = repository.findById(id);
-        // then
-        assertFalse(entity.isPresent());
+        assertThat(depot.getDepotCode()).isEqualTo(depotCode);
     }
 }
