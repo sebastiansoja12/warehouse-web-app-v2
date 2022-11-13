@@ -1,18 +1,12 @@
 package com.warehouse.reroute.domain.service;
 
-import com.warehouse.mail.domain.port.secondary.MailPort;
-import com.warehouse.mail.domain.service.MailService;
-import com.warehouse.mail.domain.service.MailServiceImpl;
-import com.warehouse.mail.infrastructure.adapter.secondary.MailCreatorAdapter;
+import com.warehouse.reroute.domain.model.RerouteToken;
 import com.warehouse.reroute.domain.model.Token;
 import com.warehouse.reroute.domain.port.secondary.ParcelPort;
 import com.warehouse.reroute.domain.port.secondary.RerouteTokenPort;
 import com.warehouse.reroute.domain.port.secondary.RerouteTokenRepository;
+import com.warehouse.reroute.domain.vo.ParcelId;
 import com.warehouse.reroute.domain.vo.RerouteTokenResponse;
-import com.warehouse.reroute.infrastructure.adapter.secondary.RerouteTokenAdapterService;
-import com.warehouse.reroute.infrastructure.adapter.secondary.RerouteTokenReadRepository;
-import com.warehouse.reroute.infrastructure.adapter.secondary.RerouteTokenRepositoryImpl;
-import com.warehouse.reroute.infrastructure.adapter.secondary.mapper.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -20,6 +14,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.time.Instant;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -30,26 +26,36 @@ public class RerouteServiceImplTest {
 
 
     @Mock
-    private RerouteTokenPort rerouteTokenPort;
-
-    @Mock
-    private ParcelPort parcelPort;
-
-    @Mock
-    private RerouteTokenRepository rerouteTokenRepository;
-
     private RerouteService service;
 
+    private final InMemoryRerouteTokenDatabase database = new InMemoryRerouteTokenDatabase();
+
     @Test
-    @Disabled
     void shouldFindByToken() {
         // given
         final Token token = Token.builder()
                 .value(12345)
                 .build();
-        when(service.findByToken(token)).thenReturn(mock(RerouteTokenResponse.class));
+
+        final RerouteToken rerouteToken = RerouteToken.builder()
+                .token(token.getValue())
+                .id(1L)
+                .createdDate(Instant.now())
+                .expiryDate(Instant.now().plusSeconds(100L))
+                .parcelId(100001L)
+                .build();
+
+        final RerouteTokenResponse expectedResponse = RerouteTokenResponse.builder()
+                .parcelId(new ParcelId(100001L))
+                .token(token.getValue())
+                .valid(true)
+                .build();
+
+        // insert into fake db
+        database.insertRerouteToken(rerouteToken);
+
         // when
-        final RerouteTokenResponse rerouteTokenResponse = service.findByToken(token);
+        final RerouteToken rerouteTokenResponse = database.findRerouteTokenByTokenValue(token.getValue());
         // then
         assertThat(rerouteTokenResponse.getToken()).isEqualTo(12345);
     }
@@ -57,46 +63,6 @@ public class RerouteServiceImplTest {
 
     @Test
     void shouldThrowRerouteTokenNotFoundException() {
-
-    }
-
-    @Test
-    void shouldLoadByTokenAndParcelId() {
-
-    }
-
-    @Test
-    void shouldThrowParcelAndTokenNotFoundException() {
-
-    }
-
-    @Test
-    void shouldLoadByParcelId() {
-
-    }
-
-    @Test
-    void shouldUpdateParcel() {
-
-    }
-
-    @Test
-    void shouldNotUpdateParcelWhenTokenIsExpired() {
-
-    }
-
-    @Test
-    void shouldThrowTokenExpiredException() {
-
-    }
-
-    @Test
-    void shouldSendReroutingInformation() {
-
-    }
-
-    @Test
-    void shouldNotSendReroutingInformationWhenRecipientIsEmpty() {
 
     }
 

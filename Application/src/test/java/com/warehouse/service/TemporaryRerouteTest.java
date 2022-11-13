@@ -17,7 +17,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -196,7 +195,7 @@ public class TemporaryRerouteTest {
     @Test
     @Transactional
     void tokenShouldBeExpired() {
-        // given: create parcel
+        // given: create shipment
         final Parcel parcel = createParcel();
 
         // and: save in db
@@ -227,7 +226,7 @@ public class TemporaryRerouteTest {
     @Test
     @Transactional
     void tokenShouldNotBeExpired() {
-        // given: create parcel
+        // given: create shipment
         final Parcel parcel = createParcel();
 
         // and: save in db
@@ -264,22 +263,6 @@ public class TemporaryRerouteTest {
 
         // then
         assertThat(temporaryRerouteTokenRepository.findByToken(rerouteToken.getToken())).isEmpty();
-    }
-
-    @Test
-    @Scheduled(cron = "${purge.cron.expression}")
-    void shouldDeleteAllTokensThatExpiredAndWereNotDeleted() {
-        // given
-        final List<RerouteToken> rerouteTokens = rerouteTokens();
-        // when
-        temporaryReroute.purgeExpired();
-        // then
-        // and: token 12345 doesnt exist
-        assertThat(temporaryRerouteTokenRepository.findByToken(rerouteTokens.get(0).getToken())).isEmpty();
-        // and: token 54321 doesnt exist
-        assertThat(temporaryRerouteTokenRepository.findByToken(rerouteTokens.get(1).getToken())).isEmpty();
-        // and: token 12346 doesnt exist
-        assertThat(temporaryRerouteTokenRepository.findByToken(rerouteTokens.get(2).getToken())).isEmpty();
     }
 
     List<RerouteToken> rerouteTokens() {

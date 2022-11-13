@@ -7,6 +7,8 @@ import com.warehouse.reroute.domain.vo.ParcelId;
 import com.warehouse.reroute.infrastructure.adapter.entity.RerouteTokenEntity;
 import com.warehouse.reroute.infrastructure.adapter.secondary.exception.RerouteTokenNotFoundException;
 import com.warehouse.reroute.infrastructure.adapter.secondary.mapper.RerouteTokenMapper;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 
@@ -46,6 +48,11 @@ public class RerouteTokenRepositoryImpl implements RerouteTokenRepository {
     @Override
     public void deleteByToken(Token token) {
         repository.deleteByToken(token.getValue());
+    }
+
+    @Scheduled(cron = "${purge.cron.expression}")
+    public void purgeExpired() {
+        repository.deleteAllExpiredSince(Instant.now());
     }
 
     private RerouteTokenEntity generateRerouteToken(Long parcelId) {

@@ -28,17 +28,13 @@ public class ParcelService {
 
     private final ParcelRepository parcelRepository;
     private final MailService mailService;
-    private final ParcelExportService parcelExportService;
-    private final PaymentService paymentService;
-
-    private final ApplicationUrlConfig config;
+    //private final ApplicationUrlConfig config;
 
 
     @Transactional
     public String save(Parcel parcel) throws HttpMessageNotReadableException, PayPalRESTException {
         parcel.setPrice(parcel.getParcelType().getPrice());
         parcelRepository.save(parcel);
-        final String payment = paymentService.payment(parcel);
         mailService.sendNotification(new ParcelNotification
                 ("Została przez Państwa nadana przesyłka ",
                         parcel.getRecipientEmail(), "Docelowa destynacja paczki to: " +
@@ -46,12 +42,12 @@ public class ParcelService {
                         + parcel.getRecipientStreet() + "\n" +
                         "Kod Państwa paczki to: " + parcel.getId().toString()
                         + "\nProsimy wejść w poniższy link by pobrać etykietę: " +
-                        "\n" + config.springUrl + "/api/parcels/" + parcel.getId().toString() + "/label" +
-                          "\nAby opłacić przesyłkę prosimy wcisnąć w link: " + payment
-                            + "\nAby zarządzać przesyłką prosimy wejść w link: " + config.guiUrl +
-                        "/parcel/client/management/" + parcel.getId().toString()));
+                        "\n" + "onfig.springUrl" + "/api/parcels/" + parcel.getId().toString() + "/label" +
+                          "\nAby opłacić przesyłkę prosimy wcisnąć w link: " + "payment"
+                            + "\nAby zarządzać przesyłką prosimy wejść w link: " + "config.guiUrl" +
+                        "/shipment/client/management/" + parcel.getId().toString()));
 
-        return payment;
+        return "payment";
 
     }
 
@@ -74,7 +70,7 @@ public class ParcelService {
         final String headerKey = "Content-Disposition";
         final String headerValue = "attachment; filename=" + parcel.getId() + "_" + currentDateTime + ".pdf";
         response.setHeader(headerKey, headerValue);
-        parcelExportService.exportToPdf(response, parcel);
+       // parcelExportService.exportToPdf(response, parcel);
 
     }
 
@@ -87,7 +83,7 @@ public class ParcelService {
         final String headerKey = "Content-Disposition";
         final String headerValue = "attachment; filename=parcel_id" + parcel.getId() + "_" + currentDateTime + ".csv";
         response.setHeader(headerKey, headerValue);
-        parcelExportService.exportToCSV(response, parcel);
+       // parcelExportService.exportToCSV(response, parcel);
     }
 
 }

@@ -55,9 +55,4 @@ public class BarcodeGenerator {
 
         return Image.getInstance(stream.toByteArray());
     }
-
-    @Bean
-    public HttpMessageConverter<BufferedImage> createImageHttpMessageConverter() {
-        return new BufferedImageHttpMessageConverter();
-    }
 }

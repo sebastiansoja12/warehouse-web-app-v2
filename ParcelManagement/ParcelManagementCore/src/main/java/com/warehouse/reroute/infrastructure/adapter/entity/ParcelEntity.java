@@ -14,7 +14,7 @@ import javax.validation.constraints.Pattern;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "parcel")
+@Table(name = "shipment")
 @Entity(name = "reroute.ParcelEntity")
 public class ParcelEntity {
 

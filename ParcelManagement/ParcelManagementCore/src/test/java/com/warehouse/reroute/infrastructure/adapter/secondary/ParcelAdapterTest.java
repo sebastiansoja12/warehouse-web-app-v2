@@ -2,9 +2,11 @@ package com.warehouse.reroute.infrastructure.adapter.secondary;
 
 import com.warehouse.reroute.domain.enumeration.ParcelType;
 import com.warehouse.reroute.domain.model.Parcel;
+import com.warehouse.reroute.domain.model.RerouteToken;
+import com.warehouse.reroute.domain.model.Token;
 import com.warehouse.reroute.domain.model.UpdateParcelRequest;
 import com.warehouse.reroute.domain.port.secondary.ParcelRepository;
-import com.warehouse.reroute.domain.vo.ParcelId;
+import com.warehouse.reroute.domain.port.secondary.RerouteTokenRepository;
 import com.warehouse.reroute.domain.vo.ParcelResponse;
 import com.warehouse.reroute.domain.vo.Recipient;
 import com.warehouse.reroute.domain.vo.Sender;
@@ -26,26 +28,12 @@ public class ParcelAdapterTest {
     @Mock
     private ParcelRepository parcelRepository;
 
+    @Mock
+    private RerouteTokenRepository rerouteTokenRepository;
+
     @InjectMocks
     private ParcelAdapter adapter;
 
-    @Test
-    void shouldLoadByParcelId() {
-        // given
-        final Long parcelId = 123456L;
-        final ParcelResponse parcelResponse = ParcelResponse.builder()
-                .parcelId(new ParcelId(parcelId))
-                .parcelType(ParcelType.AVERAGE)
-                .recipient(Recipient.builder().build())
-                .sender(Sender.builder().build())
-                .build();
-        when(parcelRepository.loadByParcelId(parcelId)).thenReturn(parcelResponse);
-        // when
-        final ParcelResponse loadedParcelResponse = adapter.loadByParcelId(parcelId);
-        // then
-        verify(parcelRepository).loadByParcelId(parcelId);
-        assertThat(parcelResponse.getParcelId()).isEqualTo(loadedParcelResponse.getParcelId());
-    }
 
     @Test
     void shouldUpdate() {
@@ -59,6 +47,10 @@ public class ParcelAdapterTest {
                 .id(parcelId)
                 .token(12345)
                 .build();
+        final Token token = Token.builder()
+                .value(12345).build();
+        final RerouteToken rerouteToken = new RerouteToken();
+        when(rerouteTokenRepository.findByToken(token)).thenReturn(rerouteToken);
         when(parcelRepository.update(request)).thenReturn(Optional.ofNullable(ParcelResponse.builder().build()));
         // when
         final ParcelResponse parcelResponse = adapter.update(request);

@@ -34,7 +34,7 @@ public class RerouteTokenRepositoryTest {
     private RerouteTokenRepository repository;
 
     @Test
-    @DatabaseSetup("/data/rerouteToken.xml")
+    @DatabaseSetup("/dataset/rerouteToken.xml")
     void shouldThrowException() {
         // given
         final String message = "Reroute token was not found";

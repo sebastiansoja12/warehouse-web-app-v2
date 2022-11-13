@@ -41,7 +41,7 @@ public class RouteRepositoryTest {
         depot.setId(1L);
 
         final Parcel parcel = createParcel();
-        // and: set parcel id
+        // and: set shipment id
         parcel.setId(1000001L);
 
 
@@ -88,7 +88,7 @@ public class RouteRepositoryTest {
         // and: set depot to supplier
         supplier.setDepot(depot);
 
-        // and: save parcel in db
+        // and: save shipment in db
         parcelRepository.save(parcel);
 
         // and: save supplier in db
@@ -134,7 +134,7 @@ public class RouteRepositoryTest {
         // and: set depot to supplier
         supplier.setDepot(depot);
 
-        // and: save parcel in db
+        // and: save shipment in db
         parcelRepository.save(parcel);
 
         // and: save supplier in db
@@ -167,7 +167,7 @@ public class RouteRepositoryTest {
 
         final Supplier supplier = createSupplier();
 
-        // and: save parcel in db
+        // and: save shipment in db
         parcelRepository.save(parcel);
 
         // and: save supplier in db
@@ -181,7 +181,7 @@ public class RouteRepositoryTest {
 
         routeRepository.save(route);
 
-        // when: delete by parcel id and depot code
+        // when: delete by shipment id and depot code
         routeRepository.deleteByParcelIdAndDepot_DepotCode(parcel.getId(), null);
         final boolean exists = routeRepository.existsById(route.getId());
         // then

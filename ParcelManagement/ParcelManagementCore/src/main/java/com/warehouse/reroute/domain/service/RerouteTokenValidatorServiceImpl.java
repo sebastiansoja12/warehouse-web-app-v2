@@ -1,7 +1,11 @@
 package com.warehouse.reroute.domain.service;
 
+import com.warehouse.reroute.infrastructure.adapter.entity.RerouteTokenEntity;
 import com.warehouse.reroute.infrastructure.adapter.secondary.RerouteTokenReadRepository;
 import lombok.AllArgsConstructor;
+
+import java.time.Instant;
+import java.util.Optional;
 
 @AllArgsConstructor
 public class RerouteTokenValidatorServiceImpl implements RerouteTokenValidatorService {
@@ -10,6 +14,7 @@ public class RerouteTokenValidatorServiceImpl implements RerouteTokenValidatorSe
 
     @Override
     public boolean validate(Integer token) {
-        return repository.findByToken(token).isPresent();
+        final Optional<RerouteTokenEntity> rerouteToken = repository.findByToken(token);
+        return rerouteToken.isPresent() && rerouteToken.get().getExpiryDate().isAfter(Instant.now());
     }
 }

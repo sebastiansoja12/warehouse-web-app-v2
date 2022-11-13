@@ -33,11 +33,6 @@ public class RerouteServiceImpl implements RerouteService {
     }
 
     @Override
-    public ParcelResponse loadByParcelId(Long parcelId) {
-        return parcelPort.loadByParcelId(parcelId);
-    }
-
-    @Override
     public RerouteTokenResponse findByToken(Token token) {
         return rerouteTokenPort.findByToken(token);
     }

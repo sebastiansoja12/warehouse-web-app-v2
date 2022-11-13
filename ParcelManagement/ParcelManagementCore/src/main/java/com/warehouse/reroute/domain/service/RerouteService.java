@@ -14,8 +14,6 @@ public interface RerouteService {
 
     ParcelResponse update(UpdateParcelRequest parcelRequest);
 
-    ParcelResponse loadByParcelId(java.lang.Long aLong);
-
     RerouteTokenResponse findByToken(Token token);
 
     RerouteTokenResponse loadByTokenAndParcelId(Token token, ParcelId aParcelId);

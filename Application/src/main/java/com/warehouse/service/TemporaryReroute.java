@@ -32,8 +32,6 @@ public class TemporaryReroute {
 
     private final static Long SECONDS_TO_EXPIRE = 600L;
 
-    private final ApplicationUrlConfig url;
-
     public RerouteToken sendReroutingInformation(RerouteRequest rerouteRequest) {
         final Parcel parcel = parcelRepository
                 .findByIdAndSenderEmail(rerouteRequest.getParcelId(), rerouteRequest.getEmail())
@@ -46,7 +44,7 @@ public class TemporaryReroute {
                 ("Edycja danych przesyłki  " + parcel.getId(),
                         rerouteRequest.getEmail(),
                         "By edytować dane przesyłki prosimy udać się na stronę do przekierowywania przesyłek " +
-                                url.guiUrl + "/reroute-edit/" + parcel.getId() + "/" + rerouteToken.getToken()));
+                                "url.guiUrl" + "/reroute-edit/" + parcel.getId() + "/" + rerouteToken.getToken()));
         return rerouteToken;
     }
 
@@ -95,16 +93,11 @@ public class TemporaryReroute {
 
     RerouteToken validateReroutingToken(Integer token) {
        return temporaryRerouteTokenRepository.findByToken(token)
-                .orElseThrow(() -> new WarehouseException("Invalid rerouting TokenDto"));
+                .orElseThrow(() -> new WarehouseException("Invalid rerouting token"));
     }
 
     public void deleteReroutingToken(Integer token) {
         temporaryRerouteTokenRepository.deleteByToken(token);
     }
 
-    @Scheduled(cron = "${purge.cron.expression}")
-    @Transactional
-    public void purgeExpired() {
-        temporaryRerouteTokenRepository.deleteAllExpiredSince(Instant.now());
-    }
 }

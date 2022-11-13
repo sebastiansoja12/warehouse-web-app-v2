@@ -16,7 +16,5 @@ public interface RerouteServicePort {
 
     RerouteTokenResponse loadByTokenAndParcelId(Token token, ParcelId aParcelId);
 
-    ParcelResponse loadByParcelId(java.lang.Long aLong);
-
     RerouteResponse sendReroutingInformation(RerouteRequest rerouteRequest);
 }
