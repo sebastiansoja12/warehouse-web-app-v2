@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dataset>
+    <refresh_token
+            id = "100001"
+            token = "12345"
+            created_date = "2018-05-25 20:23:54"
+    />
+</dataset>

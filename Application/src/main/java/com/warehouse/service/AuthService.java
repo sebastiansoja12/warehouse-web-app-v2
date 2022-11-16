@@ -1,10 +1,10 @@
 package com.warehouse.service;
 
 
+import com.warehouse.auth.domain.service.JwtProvider;
 import com.warehouse.dto.LoginRequest;
 import com.warehouse.dto.RefreshTokenRequest;
 import com.warehouse.exceptions.WarehouseException;
-import com.warehouse.security.JwtProvider;
 import com.warehouse.dto.AuthenticationResponse;
 import com.warehouse.dto.RegisterRequest;
 import com.warehouse.entity.Depot;
@@ -32,7 +32,6 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtProvider jwtProvider;
-    private final RefreshTokenService refreshTokenService;
     private final DepotRepository depotRepository;
     private final UserRepository userRepository;
 
@@ -60,25 +59,25 @@ public class AuthService {
         return AuthenticationResponse.builder()
                 .authenticationToken(token)
                 .role(userRepository.getRoleByUsername(loginRequest.getUsername()))
-                .refreshToken(refreshTokenService.generateRefreshToken().getToken())
-                .expiresAt(Instant.now().plusSeconds(jwtProvider.getJwtExpirationInMillis()))
+                //.refreshToken(refreshTokenService.generateRefreshToken().getToken())
+                //.expiresAt(Instant.now().plusSeconds(jwtProvider.ge()))
                 .username(loginRequest.getUsername())
                 .build();
     }
 
     public AuthenticationResponse refreshToken(RefreshTokenRequest refreshTokenRequest) {
-        refreshTokenService.validateRefreshToken(refreshTokenRequest.getRefreshToken());
-        final String token = jwtProvider.generateTokenWithUserName(refreshTokenRequest.getUsername());
+        //refreshTokenService.validateRefreshToken(refreshTokenRequest.getRefreshToken());
+        final String token = jwtProvider.generateTokenWithUsername(refreshTokenRequest.getUsername());
         return AuthenticationResponse.builder()
                 .authenticationToken(token)
                 .refreshToken(refreshTokenRequest.getRefreshToken())
-                .expiresAt(Instant.now().plusSeconds(jwtProvider.getJwtExpirationInMillis()))
+               // .expiresAt(Instant.now().plusSeconds(jwtProvider.getJwtExpirationInMillis()))
                 .username(refreshTokenRequest.getUsername())
                 .build();
     }
 
     public void logout(RefreshTokenRequest refreshTokenRequest) {
-        refreshTokenService.deleteRefreshToken(refreshTokenRequest);
+        //refreshTokenService.deleteRefreshToken(refreshTokenRequest);
         log.info("Token of user: " + refreshTokenRequest.getUsername() + " has been successfully deleted" +
                 ". Logging out");
     }

@@ -1,7 +1,7 @@
-package com.warehouse.service;
+package com.warehouse.auth.domain.service;
 
-import com.warehouse.entity.User;
-import com.warehouse.repository.UserRepository;
+import com.warehouse.auth.domain.port.secondary.UserRepository;
+import com.warehouse.auth.infrastructure.adapter.secondary.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,6 +16,7 @@ import java.util.Optional;
 
 import static java.util.Collections.singletonList;
 
+
 @AllArgsConstructor
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -25,17 +26,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) {
-        final Optional<User> userOptional = userRepository.
+        final Optional<UserEntity> userOptional = userRepository.
                 findByUsername(username);
-        final User user = userOptional
+
+        final UserEntity user = userOptional
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +
-                        "Found with username : " + username));
+                        "found with username: " + username));
 
         return new org.springframework.security
                 .core.userdetails.User(user.getUsername(), user.getPassword(),
                 true, true,
                 true, true,
-                getAuthorities("USER"));
+                getAuthorities(user.getRole()));
     }
 
     private Collection<? extends GrantedAuthority> getAuthorities(String role) {

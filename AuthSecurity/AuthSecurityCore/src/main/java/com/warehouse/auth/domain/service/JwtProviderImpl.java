@@ -1,13 +1,11 @@
-package com.warehouse.security;
+package com.warehouse.auth.domain.service;
 
-
-import com.warehouse.exceptions.WarehouseException;
+import com.warehouse.auth.domain.exception.WarehouseException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -20,17 +18,19 @@ import java.util.Date;
 import static io.jsonwebtoken.Jwts.parser;
 import static java.util.Date.from;
 
-@Service
-public class JwtProvider {
+public class JwtProviderImpl implements JwtProvider {
+
     private KeyStore keyStore;
-    @Value("3600000")
-    private Long jwtExpirationInMillis;
+
+    @Value("${token.lifetime}")
+    private Long jwtExpirationInSeconds;
+
 
     @PostConstruct
     public void init() {
         try {
             keyStore = KeyStore.getInstance("JKS");
-            InputStream resourceAsStream = getClass().getResourceAsStream("/springblog.jks");
+            final InputStream resourceAsStream = getClass().getResourceAsStream("/springblog.jks");
             keyStore.load(resourceAsStream, "secret".toCharArray());
         } catch (KeyStoreException | CertificateException | NoSuchAlgorithmException | IOException e) {
             throw new WarehouseException("Exception occurred while loading keystore");
@@ -39,16 +39,42 @@ public class JwtProvider {
 
     }
 
+    @Override
     public String generateToken(Authentication authentication) {
-        org.springframework.security.core.userdetails.User principal = (User) authentication.getPrincipal();
+        final User principal = (User) authentication.getPrincipal();
         return Jwts.builder()
                 .setSubject(principal.getUsername())
                 .setIssuedAt(from(Instant.now()))
                 .signWith(getPrivateKey())
-                .setExpiration(Date.from(Instant.now().plusSeconds(jwtExpirationInMillis)))
+                .setExpiration(Date.from(Instant.now().plusSeconds(jwtExpirationInSeconds)))
                 .compact();
     }
 
+    @Override
+    public boolean validateToken(String token) {
+        parser().setSigningKey(getPublickey()).parseClaimsJws(token);
+        return true;
+    }
+
+    @Override
+    public String getUsernameFromJwt(String jwt) {
+        final Claims claims = parser()
+                .setSigningKey(getPublickey())
+                .parseClaimsJws(jwt)
+                .getBody();
+
+        return claims.getSubject();
+    }
+
+    @Override
+    public String generateTokenWithUsername(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(from(Instant.now()))
+                .signWith(getPrivateKey())
+                .setExpiration(java.sql.Date.from(Instant.now().plusSeconds(jwtExpirationInSeconds)))
+                .compact();
+    }
 
     private PrivateKey getPrivateKey() {
         try {
@@ -56,11 +82,6 @@ public class JwtProvider {
         } catch (KeyStoreException | NoSuchAlgorithmException | UnrecoverableKeyException e) {
             throw new WarehouseException("Exception occured while retrieving public key from keystore");
         }
-    }
-
-    public boolean validateToken(String jwt) {
-        parser().setSigningKey(getPublickey()).parseClaimsJws(jwt);
-        return true;
     }
 
     private PublicKey getPublickey() {
@@ -72,25 +93,4 @@ public class JwtProvider {
         }
     }
 
-    public String getUsernameFromJwt(String token) {
-        Claims claims = parser()
-                .setSigningKey(getPublickey())
-                .parseClaimsJws(token)
-                .getBody();
-
-        return claims.getSubject();
-    }
-
-    public String generateTokenWithUserName(String username) {
-        return Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(from(Instant.now()))
-                .signWith(getPrivateKey())
-                .setExpiration(java.sql.Date.from(Instant.now().plusSeconds(jwtExpirationInMillis)))
-                .compact();
-    }
-
-    public Long getJwtExpirationInMillis() {
-        return jwtExpirationInMillis;
-    }
 }

@@ -27,10 +27,9 @@ public class RefreshTokenService {
 
     void validateRefreshToken(String token) {
         refreshTokenRepository.findByToken(token)
-                .orElseThrow(() -> new WarehouseException("Invalid refresh TokenDto"));
+                .orElseThrow(() -> new WarehouseException("Invalid refresh token"));
     }
 
-    @Transactional
     public void deleteRefreshToken(RefreshTokenRequest refreshTokenRequest) {
         refreshTokenRepository.deleteByToken(refreshTokenRequest.getRefreshToken());
     }

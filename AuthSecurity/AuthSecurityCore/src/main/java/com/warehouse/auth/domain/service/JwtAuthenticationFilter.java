@@ -1,6 +1,6 @@
-package com.warehouse.security;
+package com.warehouse.auth.domain.service;
 
-import com.warehouse.exceptions.WarehouseException;
+import com.warehouse.auth.domain.exception.WarehouseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -43,7 +43,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         } catch (Exception e) {
-            throw new WarehouseException("Zaloguj sie ponownie");
+            throw new WarehouseException(e.getMessage());
         }
         filterChain.doFilter(request, response);
     }
