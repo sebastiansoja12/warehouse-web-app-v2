@@ -1,6 +1,7 @@
 package com.warehouse.shipment.infrastructure.adapter.secondary.mapper;
 
 import com.warehouse.paypal.domain.model.PaymentResponse;
+import com.warehouse.route.infrastructure.api.dto.ShipmentRequestDto;
 import com.warehouse.shipment.domain.model.Parcel;
 import com.warehouse.shipment.domain.model.ShipmentRequest;
 import com.warehouse.shipment.domain.model.ShipmentResponse;
@@ -32,4 +33,7 @@ public interface ShipmentMapper {
     @Mapping(source = "parcelId", target = "parcelId")
     @Mapping(source = "paymentResponse.link.paymentUrl", target = "paymentUrl")
     ShipmentResponse map(Long parcelId, PaymentResponse paymentResponse);
+
+
+    ShipmentRequestDto mapToRequestDto(ShipmentResponse response);
 }

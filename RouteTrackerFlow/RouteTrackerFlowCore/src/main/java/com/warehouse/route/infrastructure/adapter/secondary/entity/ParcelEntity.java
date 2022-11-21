@@ -1,6 +1,6 @@
-package com.warehouse.shipment.infrastructure.adapter.entity;
+package com.warehouse.route.infrastructure.adapter.secondary.entity;
 
-import com.warehouse.shipment.domain.enumeration.ParcelType;
+import com.warehouse.route.infrastructure.adapter.secondary.enumeration.ParcelType;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -15,19 +15,19 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "parcel")
-@Entity(name = "parcel.ParcelEntity")
+@Entity(name = "route.ParcelEntity")
 @EntityListeners(AuditingEntityListener.class)
 public class ParcelEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceParcleIdGenerator")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceParcelIdGenerator")
     @GenericGenerator(
-            name = "sequenceParcleIdGenerator",
+            name = "sequenceParcelIdGenerator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
                     @Parameter(name = "sequence_name", value = "message_sequence"),
-                    @Parameter(name = "initial_value", value = "1000000"),
-                    @Parameter(name = "increment_size", value = "1")
+                    @Parameter(name = "initial_value", value = "1000000000"),
+                    @Parameter(name = "increment_size", value = "100")
             }
     )
     private Long id;

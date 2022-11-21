@@ -27,7 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) {
         final Optional<UserEntity> userOptional = userRepository.
-                findByUsername(username);
+                findUserEntityByUsername(username);
 
         final UserEntity user = userOptional
                 .orElseThrow(() -> new UsernameNotFoundException("No user " +

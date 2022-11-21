@@ -2,7 +2,7 @@ package com.warehouse.shipment;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.warehouse.shipment.domain.port.primary.ShipmentPort;
-import com.warehouse.shipment.infrastructure.adapter.secondary.ShipmentController;
+import com.warehouse.shipment.infrastructure.adapter.primary.ShipmentController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

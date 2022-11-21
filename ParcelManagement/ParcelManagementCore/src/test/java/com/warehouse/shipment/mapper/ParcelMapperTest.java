@@ -2,7 +2,7 @@ package com.warehouse.shipment.mapper;
 
 import com.warehouse.shipment.domain.enumeration.ParcelType;
 import com.warehouse.shipment.domain.model.Parcel;
-import com.warehouse.shipment.infrastructure.adapter.entity.ParcelEntity;
+import com.warehouse.shipment.infrastructure.adapter.secondary.entity.ParcelEntity;
 import com.warehouse.shipment.infrastructure.adapter.secondary.mapper.ParcelMapper;
 import com.warehouse.shipment.infrastructure.adapter.secondary.mapper.ParcelMapperImpl;
 import org.junit.jupiter.api.BeforeEach;

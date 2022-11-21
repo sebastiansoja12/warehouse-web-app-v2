@@ -8,10 +8,8 @@ import com.warehouse.paypal.domain.model.PaymentResponse;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -42,39 +40,6 @@ public class PaypalIntegrationTest {
     private final static Long PARCEL_ID = 100001L;
 
     private final static double PRICE = 25;
-
-
-    @Test
-    @Disabled
-    void shouldSendPaymentRequest() throws Exception {
-        // given
-        final PaymentRequest request = new PaymentRequest();
-        request.setParcelId(PARCEL_ID);
-        request.setPrice(PRICE);
-
-        final StringSource request1 = getJsonPaymentRequest(request);
-
-        final PaymentResponse response = PaymentResponse.builder()
-                .link(link())
-                .createTime("now")
-                .paymentMethod("test")
-                .failureReason("none")
-                .build();
-
-        final StringSource response1 = getJsonPaymentResponse(response);
-
-        // when
-        final MvcResult mvcResult = mockMvc.perform(post("/payment/pay")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(String.valueOf(request1)))
-                .andDo(print())
-                .andExpect(status().is(200))
-                .andReturn();
-        // then
-        final String responseJson = mvcResult.getResponse().getContentAsString();
-        assertThat(responseJson).isNotNull();
-        assertThat(responseJson).isEqualTo(response1.toString());
-    }
 
     @Test
     void shouldUpdatePayment() {

@@ -10,6 +10,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Slf4j
 public class AuthenticationPortImpl implements AuthenticationPort {
@@ -46,13 +48,13 @@ public class AuthenticationPortImpl implements AuthenticationPort {
     }
 
     @Override
-    public User findCurrentUser() {
+    public List<User> findCurrentUser() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authenticationService.findCurrentUser(authentication.getName());
     }
 
     @Override
     public User findUserByUsername(String username) {
-        return authenticationService.findCurrentUser(username);
+        return authenticationService.findCurrentUser(username).get(0);
     }
 }

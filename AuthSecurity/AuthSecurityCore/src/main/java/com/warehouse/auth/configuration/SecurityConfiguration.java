@@ -50,6 +50,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
+                .antMatchers("/route")
+                .permitAll()
                 .antMatchers("/shipment/**")
                 .permitAll()
                 .antMatchers("/barcode/**")
@@ -60,8 +62,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/auth/**")
                 .permitAll()
-                .anyRequest()
-                .authenticated();
+                .and().authorizeRequests();
     }
 
 

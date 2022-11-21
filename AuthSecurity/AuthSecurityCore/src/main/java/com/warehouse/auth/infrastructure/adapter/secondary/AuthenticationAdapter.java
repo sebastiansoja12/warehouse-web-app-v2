@@ -9,14 +9,13 @@ import com.warehouse.auth.domain.port.secondary.DepotRepository;
 import com.warehouse.auth.domain.port.secondary.UserRepository;
 import com.warehouse.auth.domain.service.RefreshTokenService;
 import com.warehouse.auth.infrastructure.adapter.secondary.entity.UserEntity;
-import com.warehouse.auth.infrastructure.adapter.secondary.mapper.RequestToEntityMapper;
 import com.warehouse.auth.infrastructure.adapter.secondary.mapper.UserMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.Instant;
-import java.util.Optional;
+import java.util.List;
 
 @AllArgsConstructor
 public class AuthenticationAdapter implements AuthenticationPort {
@@ -65,11 +64,12 @@ public class AuthenticationAdapter implements AuthenticationPort {
     }
 
     @Override
-    public User findCurrentUser(String username) {
-        final Optional<UserEntity> userEntity = userRepository.findByUsername(username);
-        final Depot depot = depotRepository.findDepotByCode(userEntity.get().getDepotCode());
-        final User user = userMapper.map(userEntity.get());
+    public List<User> findCurrentUser(String username) {
+        final List<UserEntity> userEntity = userRepository.findByUsername(username);
+        final Depot depot = depotRepository.findDepotByCode(userEntity.stream()
+                .map(UserEntity::getDepotCode).findAny().get());
+        final User user = userMapper.map(userEntity.get(0));
         user.setDepot(depot);
-        return user;
+        return List.of(user);
     }
 }

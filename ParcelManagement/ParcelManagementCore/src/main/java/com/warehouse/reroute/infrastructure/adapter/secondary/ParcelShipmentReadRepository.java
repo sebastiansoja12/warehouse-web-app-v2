@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ParcelReadRepository extends JpaRepository<ParcelEntity, Long> {
+public interface ParcelShipmentReadRepository extends JpaRepository<ParcelEntity, Long> {
 
     @Query("SELECT entity FROM reroute.ParcelEntity entity" +
             " WHERE entity.id=:parcelId")

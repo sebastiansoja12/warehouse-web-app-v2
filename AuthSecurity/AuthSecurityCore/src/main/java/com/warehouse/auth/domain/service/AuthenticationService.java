@@ -6,6 +6,8 @@ import com.warehouse.auth.domain.model.RegisterRequest;
 import com.warehouse.auth.domain.model.User;
 import org.springframework.security.core.Authentication;
 
+import java.util.List;
+
 public interface AuthenticationService {
 
     AuthenticationResponse login(Authentication authentication);
@@ -14,5 +16,5 @@ public interface AuthenticationService {
 
     void logout(String token);
 
-    User findCurrentUser(String username);
+    List<User> findCurrentUser(String username);
 }

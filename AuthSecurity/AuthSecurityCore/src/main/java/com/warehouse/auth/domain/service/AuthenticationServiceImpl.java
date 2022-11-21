@@ -7,6 +7,8 @@ import com.warehouse.auth.domain.port.secondary.AuthenticationPort;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 
+import java.util.List;
+
 @AllArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService {
 
@@ -31,7 +33,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public User findCurrentUser(String username) {
+    public List<User> findCurrentUser(String username) {
         return authenticationPort.findCurrentUser(username);
     }
 

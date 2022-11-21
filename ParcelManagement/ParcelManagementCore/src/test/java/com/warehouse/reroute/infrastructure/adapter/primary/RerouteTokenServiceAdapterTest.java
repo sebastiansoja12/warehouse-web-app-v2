@@ -1,7 +1,5 @@
 package com.warehouse.reroute.infrastructure.adapter.primary;
 
-import com.warehouse.reroute.domain.model.RerouteRequest;
-import com.warehouse.reroute.domain.model.RerouteResponse;
 import com.warehouse.reroute.domain.port.primary.RerouteServicePort;
 import com.warehouse.reroute.domain.port.primary.RerouteServicePortImpl;
 import com.warehouse.reroute.domain.service.*;
@@ -9,19 +7,16 @@ import com.warehouse.reroute.infrastructure.adapter.primary.mapper.PrimaryReques
 import com.warehouse.reroute.infrastructure.adapter.primary.mapper.PrimaryRequestMapperImpl;
 import com.warehouse.reroute.infrastructure.adapter.primary.mapper.PrimaryResponseMapper;
 import com.warehouse.reroute.infrastructure.adapter.primary.mapper.PrimaryResponseMapperImpl;
-import com.warehouse.reroute.infrastructure.adapter.secondary.ParcelReadRepository;
+import com.warehouse.reroute.infrastructure.adapter.secondary.ParcelShipmentReadRepository;
 import com.warehouse.reroute.infrastructure.adapter.secondary.RerouteTokenReadRepository;
 import com.warehouse.reroute.infrastructure.api.dto.*;
-import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class RerouteTokenServiceAdapterTest {
@@ -31,7 +26,7 @@ public class RerouteTokenServiceAdapterTest {
     private RerouteTokenServiceAdapter adapter;
 
     @Mock
-    private ParcelReadRepository parcelReadRepository;
+    private ParcelShipmentReadRepository parcelShipmentReadRepository;
 
     @Mock
     private RerouteTokenReadRepository rerouteTokenReadRepository;
@@ -44,7 +39,7 @@ public class RerouteTokenServiceAdapterTest {
     void setUp() {
         final PrimaryRequestMapper requestMapper = new PrimaryRequestMapperImpl();
         final PrimaryResponseMapper responseMapper = new PrimaryResponseMapperImpl();
-        final ParcelValidatorService parcelValidatorService = new ParcelValidatorServiceImpl(parcelReadRepository);
+        final ParcelValidatorService parcelValidatorService = new ParcelValidatorServiceImpl(parcelShipmentReadRepository);
         final RerouteTokenValidatorService rerouteTokenValidatorService =
                 new RerouteTokenValidatorServiceImpl(rerouteTokenReadRepository);
         final RerouteServicePort port = new RerouteServicePortImpl(rerouteService, parcelValidatorService,

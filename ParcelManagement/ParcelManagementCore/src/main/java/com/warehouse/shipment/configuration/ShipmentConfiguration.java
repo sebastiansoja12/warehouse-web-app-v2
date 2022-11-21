@@ -3,6 +3,7 @@ package com.warehouse.shipment.configuration;
 import com.warehouse.mail.domain.port.primary.MailPort;
 import com.warehouse.mail.domain.port.primary.MailPortImpl;
 import com.warehouse.paypal.domain.port.primary.PaypalPort;
+import com.warehouse.route.infrastructure.api.RouteLogEventPublisher;
 import com.warehouse.shipment.domain.port.primary.ShipmentPort;
 import com.warehouse.shipment.domain.port.primary.ShipmentPortImpl;
 import com.warehouse.shipment.domain.port.secondary.ShipmentRepository;
@@ -10,7 +11,6 @@ import com.warehouse.shipment.domain.service.NotificationCreatorService;
 import com.warehouse.shipment.domain.service.NotificationCreatorServiceImpl;
 import com.warehouse.shipment.domain.service.ShipmentService;
 import com.warehouse.shipment.domain.service.ShipmentServiceImpl;
-import com.warehouse.shipment.infrastructure.adapter.secondary.ShipmentController;
 import com.warehouse.shipment.infrastructure.adapter.secondary.ShipmentRepositoryImpl;
 import com.warehouse.shipment.infrastructure.adapter.secondary.ShipmentReadRepository;
 import com.warehouse.shipment.infrastructure.adapter.secondary.ShipmentAdapter;
@@ -28,12 +28,13 @@ public class ShipmentConfiguration {
     @Bean
     public ShipmentAdapter shipmentAdapter(ShipmentRepository shipmentRepository,
                                            MailPort mailPort, PaypalPort paypalPort,
-                                           NotificationCreatorService creatorService) {
+                                           NotificationCreatorService creatorService,
+                                           RouteLogEventPublisher routeLogEventPublisher) {
         final ShipmentMapper shipmentMapper = Mappers.getMapper(ShipmentMapper.class);
         final NotificationMapper notificationMapper = Mappers.getMapper(NotificationMapper.class);
         final PaymentMapper paymentMapper = Mappers.getMapper(PaymentMapper.class);
         return new ShipmentAdapter(shipmentMapper, shipmentRepository, mailPort, notificationMapper, paypalPort,
-                paymentMapper, creatorService);
+                paymentMapper, creatorService, routeLogEventPublisher);
     }
 
     @Bean

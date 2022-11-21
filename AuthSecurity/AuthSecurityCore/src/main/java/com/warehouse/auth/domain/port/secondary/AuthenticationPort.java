@@ -5,6 +5,8 @@ import com.warehouse.auth.domain.model.RegisterRequest;
 import com.warehouse.auth.domain.model.User;
 import org.springframework.security.core.Authentication;
 
+import java.util.List;
+
 public interface AuthenticationPort {
 
     AuthenticationResponse login(Authentication authentication, String token);
@@ -13,5 +15,5 @@ public interface AuthenticationPort {
 
     void logout(String token);
 
-    User findCurrentUser(String username);
+    List<User> findCurrentUser(String username);
 }

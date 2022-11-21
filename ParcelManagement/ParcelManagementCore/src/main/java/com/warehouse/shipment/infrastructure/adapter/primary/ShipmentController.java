@@ -1,4 +1,4 @@
-package com.warehouse.shipment.infrastructure.adapter.secondary;
+package com.warehouse.shipment.infrastructure.adapter.primary;
 
 import com.warehouse.shipment.domain.model.Parcel;
 import com.warehouse.shipment.domain.model.ShipmentRequest;

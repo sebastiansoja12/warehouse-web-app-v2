@@ -42,7 +42,7 @@ public class UserRepositoryTest {
         // given
         final String username = "s-soja";
         // when
-        final Optional<UserEntity> userEntity = userRepository.findByUsername(username);
+        final Optional<UserEntity> userEntity = userRepository.findUserEntityByUsername(username);
         // then
         assertAll(
                 () -> assertTrue(userEntity.isPresent()),

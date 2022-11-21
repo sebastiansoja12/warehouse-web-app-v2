@@ -4,6 +4,9 @@ import com.warehouse.mail.domain.port.primary.MailPort;
 import com.warehouse.paypal.domain.model.PaymentRequest;
 import com.warehouse.paypal.domain.model.PaymentResponse;
 import com.warehouse.paypal.domain.port.primary.PaypalPort;
+import com.warehouse.route.infrastructure.api.RouteLogEventPublisher;
+import com.warehouse.route.infrastructure.api.dto.ShipmentRequestDto;
+import com.warehouse.route.infrastructure.api.event.ShipmentLogEvent;
 import com.warehouse.shipment.domain.model.Parcel;
 import com.warehouse.shipment.domain.model.ShipmentRequest;
 import com.warehouse.shipment.domain.model.ShipmentResponse;
@@ -33,9 +36,13 @@ public class ShipmentAdapter implements ShipmentPort {
 
     private final NotificationCreatorService notificationCreatorService;
 
+    private final RouteLogEventPublisher routeLogEventPublisher;
+
     @Override
     public ShipmentResponse ship(ShipmentRequest request) {
-        return createParcel(request);
+        final ShipmentResponse shipmentResponse =  createParcel(request);
+        sendEvent(shipmentResponse);
+        return shipmentResponse;
     }
 
     @Override
@@ -79,6 +86,16 @@ public class ShipmentAdapter implements ShipmentPort {
         request.setPrice(price);
 
         return request;
+    }
+
+    public void sendEvent(ShipmentResponse shipmentResponse) {
+        routeLogEventPublisher.send(buildShipmentEvent(shipmentResponse));
+    }
+
+    public ShipmentLogEvent buildShipmentEvent(ShipmentResponse shipmentResponse) {
+        return ShipmentLogEvent.builder()
+                .shipmentRequest(shipmentMapper.mapToRequestDto(shipmentResponse))
+                .build();
     }
 
 }

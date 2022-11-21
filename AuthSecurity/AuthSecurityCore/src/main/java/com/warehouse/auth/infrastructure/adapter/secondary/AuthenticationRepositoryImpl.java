@@ -6,6 +6,7 @@ import com.warehouse.auth.infrastructure.adapter.secondary.entity.RefreshTokenEn
 import com.warehouse.auth.infrastructure.adapter.secondary.entity.UserEntity;
 import lombok.AllArgsConstructor;
 
+import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -36,7 +37,12 @@ public class AuthenticationRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Optional<UserEntity> findByUsername(String username) {
+    public List<UserEntity> findByUsername(String username) {
         return repository.findByUsername(username);
+    }
+
+    @Override
+    public Optional<UserEntity> findUserEntityByUsername(String username) {
+        return repository.getByUsername(username);
     }
 }

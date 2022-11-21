@@ -1,4 +1,4 @@
-package com.warehouse.auth.infrastructure.adapter.secondary;
+package com.warehouse.auth.infrastructure.adapter.primary;
 
 import com.warehouse.auth.domain.model.*;
 import com.warehouse.auth.domain.port.primary.AuthenticationPort;
@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/auth")
@@ -30,7 +31,7 @@ public class AuthenticationController {
     }
 
     @GetMapping("/current-user")
-    public User currentUser() {
+    public List<User> currentUser() {
         return authenticationPort.findCurrentUser();
     }
 

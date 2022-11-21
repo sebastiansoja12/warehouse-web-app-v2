@@ -15,14 +15,14 @@ public class ParcelRepositoryImpl implements ParcelRepository {
 
     private final ParcelMapper mapper;
 
-    private final ParcelReadRepository parcelReadRepository;
+    private final ParcelShipmentReadRepository parcelShipmentReadRepository;
 
     @Override
     public Optional<ParcelResponse> update(UpdateParcelRequest parcelRequest) {
 
         final Optional<ParcelEntity> parcelEntity = Optional.ofNullable(mapper.mapToParcelEntity(parcelRequest));
 
-        parcelReadRepository.save(parcelEntity.get());
+        parcelShipmentReadRepository.save(parcelEntity.get());
 
         return parcelEntity.map(mapper::mapFromParcelEntityToParcelResponse);
     }
@@ -30,7 +30,7 @@ public class ParcelRepositoryImpl implements ParcelRepository {
     @Override
     public ParcelResponse loadByParcelId(Long parcelId) {
 
-        final Optional<ParcelEntity> parcelEntity = parcelReadRepository.loadByParcelId(parcelId);
+        final Optional<ParcelEntity> parcelEntity = parcelShipmentReadRepository.loadByParcelId(parcelId);
 
         return parcelEntity.map(mapper::mapFromParcelEntityToParcelResponse).orElseThrow(
                 () -> new ParcelNotFoundException("Parcel was not found")
