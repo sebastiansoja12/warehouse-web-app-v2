@@ -10,60 +10,47 @@ Technologies:
 
 Endpoints:
 
-- /api/parcels
+SHIPMENT
+- POST /shipment <- saves parcel in db and sends notification
+- GET /parcels/[:id] <- returns parcel by given id
 
-Returning list of all parcels in database.
+BARCODE
+- GET /barcode/[:id]/label <- generates label for parcel with given id.
 
-
-- /api/parcels/[:id]
-
-Example response from endpoint using specific parcels id (UUID). 
-
-![](Desktop/warehouse-web-app/z_img/parcels/parcel.png)
+![](warehouse-web-app/z_img/parcels/parcel_label.png)
 
 
-- /api/parcels/[:id]/label
+ROUTE
 
-Example label for parcel with given id.
+- POST /route <- save route
+- GET /route/by-parcel/[:id] <- Returns a route history of parcel by given parcel ID
+- GET /route/by-username/[:username]/username <- returns a route history for parcel by username
 
-![](Desktop/warehouse-web-app/z_img/parcels/parcel_label.png)
+REROUTE
 
-- /api/parcels/[:id]/csv
+- POST /reroute <- updates parcel with given id and reroute token
+- POST /reroute/information <- sends request and rerouting information
+- GET /token/[:value] <- returns reroute token with given token value
+- GET /token/[:value]/parcel/[:parcelId] <- returns token by token value and parcel id
+- GET /valid/token/[:value]/parcel/[:parcelId] <- returns boolean value if token is valid
 
-Returns a csv file with parcel details.
+PAYMENT
+- POST /payment/pay <- sends payment request to Paypal
+- GET /payment/pay/success <- returns if payment was success
+- GET /payment/pay/cancel <- returns if payment failed
 
-- /api/depots/
 
-Returns a list with all depots saved in database.
+AUTH
 
-- /api/depots/[:id]
+- POST /auth/login -> login to application
+- GET /auth/current-user -> returns currently logged in user
+- POST /auth/signup -> signup with email and password
+- POST /auth/logout -> logout
+- GET /auth/[:username] -> returns user by given username
 
-Returns specific depot with given id.
 
-- /api/suppliers
 
-Returns a list with all suppliers saved in database.
 
-- /api/suppliers/[:supplierCode]
-
-Returns a specific supplier using their supplier code.
-
-- /api/routes/[:id]/aParcelId
-
-Returns a route history with given parcel id.
-
-- /api/routes/[:username]/username
-
-Returns a route history of the specific user.
-
-- /api/routes/all/users
-
-Returns all routes from all users.
-
-- /api/users/[:username]
-
-Returns specific user with given username.
-
-Basically this project is used for GUI application as a backend server that communicates with database. 
-If you want to find out more, check [GUI project](https://gitlab.com/sebastiansoja/warehouse-web-app-fr).
+This project is used for GUI application as a backend server that communicates with database. 
+Check [GUI project](https://gitlab.com/sebastiansoja/warehouse-web-app-fr) and Check [MG project](https://gitlab.com/sebastiansoja/warehouse-web-app-mg).
 
