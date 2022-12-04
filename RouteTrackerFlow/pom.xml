@@ -7,7 +7,7 @@
     <groupId>com.warehouse</groupId>
     <artifactId>RouteTrackerFlow</artifactId>
     <packaging>pom</packaging>
-    <version>VERSION_2022.14-SNAPSHOT</version>
+    <version>2022.15-SNAPSHOT</version>
     <modules>
         <module>RouteTrackerFlowCore</module>
         <module>RouteTrackerFlowApi</module>
