@@ -1,7 +1,7 @@
 package com.warehouse.shipment.infrastructure.adapter.secondary.mapper;
 
 import com.warehouse.shipment.domain.model.Parcel;
-import com.warehouse.shipment.infrastructure.adapter.entity.ParcelEntity;
+import com.warehouse.shipment.infrastructure.adapter.secondary.entity.ParcelEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

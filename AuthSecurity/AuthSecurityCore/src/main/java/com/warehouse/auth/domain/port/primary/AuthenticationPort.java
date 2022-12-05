@@ -2,6 +2,8 @@ package com.warehouse.auth.domain.port.primary;
 
 import com.warehouse.auth.domain.model.*;
 
+import java.util.List;
+
 public interface AuthenticationPort {
 
     AuthenticationResponse login(LoginRequest loginRequest);
@@ -10,7 +12,7 @@ public interface AuthenticationPort {
 
     void logout(RefreshTokenRequest refreshTokenRequest);
 
-    User findCurrentUser();
+    List<User> findCurrentUser();
 
     User findUserByUsername(String username);
 }

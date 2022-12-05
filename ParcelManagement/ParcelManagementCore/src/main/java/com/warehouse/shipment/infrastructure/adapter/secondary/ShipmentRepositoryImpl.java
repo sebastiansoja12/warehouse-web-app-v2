@@ -1,6 +1,6 @@
 package com.warehouse.shipment.infrastructure.adapter.secondary;
 
-import com.warehouse.shipment.infrastructure.adapter.entity.ParcelEntity;
+import com.warehouse.shipment.infrastructure.adapter.secondary.entity.ParcelEntity;
 import com.warehouse.shipment.infrastructure.adapter.secondary.mapper.ParcelMapper;
 import com.warehouse.shipment.domain.model.Parcel;
 import com.warehouse.shipment.domain.port.secondary.ShipmentRepository;

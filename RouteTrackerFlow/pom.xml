@@ -4,12 +4,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.warehouse.tracker</groupId>
+    <groupId>com.warehouse</groupId>
     <artifactId>RouteTrackerFlow</artifactId>
     <packaging>pom</packaging>
-    <version>VERSION_2022.13-SNAPSHOT</version>
+    <version>VERSION_2022.14-SNAPSHOT</version>
     <modules>
         <module>RouteTrackerFlowCore</module>
+        <module>RouteTrackerFlowApi</module>
     </modules>
 
     <properties>

@@ -53,12 +53,12 @@ public class RerouteConfiguration {
         return new RerouteTokenValidatorServiceImpl(repository);
     }
     @Bean
-    public ParcelValidatorService parcelValidatorService(ParcelReadRepository repository) {
+    public ParcelValidatorService parcelValidatorService(ParcelShipmentReadRepository repository) {
         return new ParcelValidatorServiceImpl(repository);
     }
 
     @Bean(name = "reroute.parcelRepository")
-    public ParcelRepository parcelRepository(ParcelReadRepository repository) {
+    public ParcelRepository parcelRepository(ParcelShipmentReadRepository repository) {
         final ParcelMapper parcelMapper = Mappers.getMapper(ParcelMapper.class);
         return new ParcelRepositoryImpl(parcelMapper, repository);
     }
