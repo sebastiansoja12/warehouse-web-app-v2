@@ -3,21 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.warehouse</groupId>
+        <artifactId>Utility</artifactId>
+        <version>2022.15-SNAPSHOT</version>
+    </parent>
 
-    <groupId>com.warehouse</groupId>
-    <artifactId>Utility</artifactId>
-    <packaging>pom</packaging>
-    <version>2022.15-SNAPSHOT</version>
-    <modules>
-        <module>BarcodeGenerator</module>
-        <module>CsvFileGenerator</module>
-        <module>UrlConfigurator</module>
-        <module>AddressDetermination</module>
-    </modules>
+    <artifactId>AddressDetermination</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
 </project>
