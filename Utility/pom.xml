@@ -12,7 +12,6 @@
         <module>BarcodeGenerator</module>
         <module>CsvFileGenerator</module>
         <module>UrlConfigurator</module>
-        <module>AddressDetermination</module>
     </modules>
 
     <properties>

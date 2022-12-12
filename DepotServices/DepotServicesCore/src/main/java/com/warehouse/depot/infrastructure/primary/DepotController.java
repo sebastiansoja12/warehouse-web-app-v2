@@ -1,0 +1,31 @@
+package com.warehouse.depot.infrastructure.primary;
+
+import com.warehouse.depot.api.DepotService;
+import com.warehouse.depot.api.dto.DepotCodeDto;
+import com.warehouse.depot.api.dto.DepotDto;
+import com.warehouse.depot.api.dto.DepotIdDto;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/depot")
+@AllArgsConstructor
+public class DepotController {
+
+    private final DepotService depotService;
+
+    @PostMapping("/save")
+    public void add(@RequestBody DepotDto depot) {
+        depotService.add(depot);
+    }
+
+    @GetMapping("/depotId/{value}")
+    public DepotDto viewDepotById(DepotIdDto depotId) {
+        return depotService.viewDepotById(depotId);
+    }
+
+    @GetMapping("/depotCode/{value}")
+    public DepotDto viewDepotByCode(DepotCodeDto depotCode) {
+        return depotService.viewDepotByCode(depotCode);
+    }
+}

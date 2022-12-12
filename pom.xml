@@ -33,6 +33,7 @@
 		<module>RouteTrackerFlow</module>
 		<module>SupplyOperation</module>
 		<module>PaymentManagement</module>
+		<module>AddressDetermination</module>
 		<module>Utility</module>
 	</modules>
 

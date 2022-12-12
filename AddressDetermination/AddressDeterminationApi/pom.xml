@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.warehouse</groupId>
-        <artifactId>Utility</artifactId>
+        <artifactId>AddressDetermination</artifactId>
         <version>2022.15-SNAPSHOT</version>
     </parent>
 
-    <artifactId>AddressDetermination</artifactId>
+    <artifactId>AddressDeterminationApi</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

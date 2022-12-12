@@ -1,9 +1,11 @@
 package com.warehouse.auth.infrastructure.adapter.secondary;
 
 import com.warehouse.auth.domain.model.AuthenticationResponse;
+import com.warehouse.auth.domain.model.User;
 import com.warehouse.auth.domain.port.secondary.UserRepository;
 import com.warehouse.auth.infrastructure.adapter.secondary.entity.RefreshTokenEntity;
 import com.warehouse.auth.infrastructure.adapter.secondary.entity.UserEntity;
+import com.warehouse.auth.infrastructure.adapter.secondary.mapper.UserMapper;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
@@ -15,6 +17,8 @@ public class AuthenticationRepositoryImpl implements UserRepository {
     private final AuthenticationReadRepository repository;
 
     private final RefreshTokenReadRepository refreshTokenReadRepository;
+
+    private final UserMapper userMapper;
 
 
     @Override
@@ -37,8 +41,8 @@ public class AuthenticationRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<UserEntity> findByUsername(String username) {
-        return repository.findByUsername(username);
+    public List<User> findByUsername(String username) {
+        return userMapper.mapToUserList(repository.findByUsername(username));
     }
 
     @Override

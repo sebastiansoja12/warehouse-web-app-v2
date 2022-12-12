@@ -1,10 +1,10 @@
-package com.warehouse.auth;
+package com.warehouse.depot;
 
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import com.warehouse.auth.configuration.AuthTestConfiguration;
-import com.warehouse.auth.infrastructure.adapter.secondary.DepotReadRepository;
-import com.warehouse.auth.infrastructure.adapter.secondary.entity.DepotEntity;
+import com.warehouse.depot.configuration.DepotTestConfiguration;
+import com.warehouse.depot.infrastructure.secondary.DepotReadRepository;
+import com.warehouse.depot.infrastructure.secondary.entity.DepotEntity;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +17,15 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
-@ContextConfiguration(classes = AuthTestConfiguration.class)
+@ContextConfiguration(classes = DepotTestConfiguration.class)
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
         DirtiesContextTestExecutionListener.class,
         TransactionalTestExecutionListener.class,
@@ -38,8 +42,9 @@ public class DepotReadRepositoryTest {
         // given
         final String depotCode = "PL1";
         // when
-        final DepotEntity depot = repository.findByDepotCode(depotCode);
+        final Optional<DepotEntity> depot = repository.findByDepotCode(depotCode);
         // then
-        assertThat(depot.getDepotCode()).isEqualTo(depotCode);
+        assertTrue(depot.isPresent());
+        assertEquals(depotCode, depot.get().getDepotCode());
     }
 }
