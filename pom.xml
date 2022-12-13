@@ -35,7 +35,8 @@
 		<module>PaymentManagement</module>
 		<module>AddressDetermination</module>
 		<module>Utility</module>
-	</modules>
+        <module>TokenStage</module>
+    </modules>
 
 	<packaging>pom</packaging>
 

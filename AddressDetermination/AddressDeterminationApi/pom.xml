@@ -8,6 +8,7 @@
         <artifactId>AddressDetermination</artifactId>
         <version>2022.15-SNAPSHOT</version>
     </parent>
+    <packaging>jar</packaging>
 
     <artifactId>AddressDeterminationApi</artifactId>
 
