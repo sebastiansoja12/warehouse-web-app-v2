@@ -7,6 +7,8 @@ import com.warehouse.depot.api.dto.DepotIdDto;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/depot")
 @AllArgsConstructor
@@ -28,4 +30,11 @@ public class DepotController {
     public DepotDto viewDepotByCode(DepotCodeDto depotCode) {
         return depotService.viewDepotByCode(depotCode);
     }
+
+    @GetMapping("/all")
+    public List<DepotDto> allDepots() {
+        return depotService.findAll();
+    }
+
+
 }

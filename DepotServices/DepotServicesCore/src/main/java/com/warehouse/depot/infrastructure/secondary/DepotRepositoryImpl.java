@@ -9,6 +9,7 @@ import com.warehouse.depot.infrastructure.secondary.exception.DepotNotFoundExcep
 import com.warehouse.depot.infrastructure.secondary.mapper.DepotMapper;
 import lombok.AllArgsConstructor;
 
+import java.util.List;
 import java.util.Optional;
 
 @AllArgsConstructor
@@ -36,5 +37,10 @@ public class DepotRepositoryImpl implements DepotRepository {
         return repository.findById(depotId.getValue()).map(depotMapper::map).orElseThrow(
                 () -> new DepotNotFoundException("Depot was not found")
         );
+    }
+
+    @Override
+    public List<Depot> findAll() {
+        return depotMapper.map(repository.findAll());
     }
 }

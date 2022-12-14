@@ -92,4 +92,7 @@ public class ParcelEntity {
 
     @Column(name = "price", nullable = false)
     private double price;
+
+    @Column(name = "destination")
+    private String destination;
 }

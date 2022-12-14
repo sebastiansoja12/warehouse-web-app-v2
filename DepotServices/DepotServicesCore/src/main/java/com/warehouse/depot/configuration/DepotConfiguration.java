@@ -26,7 +26,7 @@ public class DepotConfiguration {
         return new DepotRepositoryImpl(repository, depotMapper);
     }
 
-    @Bean
+    @Bean(name = "depotDepotService")
     public DepotService depotService(DepotPort depotPort) {
         final DepotRequestMapper requestMapper = Mappers.getMapper(DepotRequestMapper.class);
         final DepotResponseMapper responseMapper = Mappers.getMapper(DepotResponseMapper.class);

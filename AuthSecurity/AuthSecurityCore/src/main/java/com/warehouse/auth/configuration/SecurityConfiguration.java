@@ -64,6 +64,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/depot/**")
                 .permitAll()
+                .antMatchers("/address/**")
+                .permitAll()
                 .and().authorizeRequests();
     }
 

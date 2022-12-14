@@ -5,6 +5,8 @@ import com.warehouse.depot.infrastructure.secondary.entity.DepotEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper
 public interface DepotMapper {
 
@@ -16,4 +18,5 @@ public interface DepotMapper {
     @Mapping(target = "coordinates.lat", source = "lat")
     Depot map(DepotEntity depot);
 
+    List<Depot> map(List<DepotEntity> depots);
 }

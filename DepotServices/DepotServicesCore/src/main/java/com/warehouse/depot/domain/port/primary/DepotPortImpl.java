@@ -6,6 +6,8 @@ import com.warehouse.depot.domain.model.DepotId;
 import com.warehouse.depot.domain.port.secondary.DepotSecondaryPort;
 import lombok.AllArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 public class DepotPortImpl implements DepotPort {
 
@@ -25,5 +27,10 @@ public class DepotPortImpl implements DepotPort {
     @Override
     public Depot viewDepotByCode(DepotCode depotCode) {
         return depotSecondaryPort.viewByCode(depotCode);
+    }
+
+    @Override
+    public List<Depot> findAll() {
+        return depotSecondaryPort.findAll();
     }
 }

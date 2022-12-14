@@ -12,6 +12,8 @@ import com.warehouse.depot.infrastructure.primary.mapper.DepotRequestMapper;
 import com.warehouse.depot.infrastructure.primary.mapper.DepotResponseMapper;
 import lombok.AllArgsConstructor;
 
+import java.util.List;
+
 @AllArgsConstructor
 public class DepotServiceAdapter implements DepotService {
 
@@ -39,5 +41,10 @@ public class DepotServiceAdapter implements DepotService {
         final DepotCode depotCode = requestMapper.map(depotCodeDto);
         final Depot depot = depotPort.viewDepotByCode(depotCode);
         return responseMapper.map(depot);
+    }
+
+    @Override
+    public List<DepotDto> findAll() {
+        return responseMapper.map(depotPort.findAll());
     }
 }
