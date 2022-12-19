@@ -1,4 +1,4 @@
-package com.warehouse.addressdetermination.infrastructure.secondary;
+package com.warehouse.addressdetermination.infrastructure.adapter.secondary;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.warehouse.addressdetermination.domain.model.Coordinates;
@@ -10,8 +10,6 @@ import com.warehouse.depot.api.dto.DepotDto;
 import com.warehouse.positionstack.configuration.TokenStageProperties;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.web.JsonPath;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

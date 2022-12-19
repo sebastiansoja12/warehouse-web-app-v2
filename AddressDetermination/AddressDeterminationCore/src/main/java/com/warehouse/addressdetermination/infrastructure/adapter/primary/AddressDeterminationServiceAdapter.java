@@ -1,4 +1,4 @@
-package com.warehouse.addressdetermination.infrastructure.primary;
+package com.warehouse.addressdetermination.infrastructure.adapter.primary;
 
 import com.warehouse.addressdetermination.AddressDeterminationService;
 import com.warehouse.addressdetermination.domain.port.primary.AddressDeterminationPort;

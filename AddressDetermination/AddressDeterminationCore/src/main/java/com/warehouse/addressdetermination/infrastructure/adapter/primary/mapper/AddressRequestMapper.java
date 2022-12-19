@@ -1,4 +1,4 @@
-package com.warehouse.addressdetermination.infrastructure.primary.mapper;
+package com.warehouse.addressdetermination.infrastructure.adapter.primary.mapper;
 
 import com.warehouse.addressdetermination.domain.model.Coordinates;
 import com.warehouse.depot.api.dto.CoordinatesDto;
