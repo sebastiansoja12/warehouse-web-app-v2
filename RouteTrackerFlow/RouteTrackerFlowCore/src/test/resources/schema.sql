@@ -1,4 +1,13 @@
 
+CREATE TABLE IF NOT EXISTS ROUTE (
+id varchar(255) NOT NULL,
+created datetime DEFAULT NULL,
+depot_id bigint DEFAULT NULL,
+parcel_id bigint DEFAULT NULL,
+supplier_id bigint DEFAULT NULL,
+user_id int DEFAULT NULL,
+primary key(id)
+);
 CREATE TABLE IF NOT EXISTS USERS (
 id int NOT NULL,
 email varchar(255) NOT NULL,
@@ -46,8 +55,3 @@ price DOUBLE NOT NULL,
 parcel_type varchar(255) DEFAULT NULL,
 primary key (id)
 );
-CREATE TABLE IF NOT EXISTS REFRESH_TOKEN (
-id bigint NOT NULL,
-token varchar(255),
-created_date varchar(255)
-)

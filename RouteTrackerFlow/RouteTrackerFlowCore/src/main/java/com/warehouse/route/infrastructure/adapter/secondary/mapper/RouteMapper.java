@@ -1,5 +1,6 @@
 package com.warehouse.route.infrastructure.adapter.secondary.mapper;
 
+import com.warehouse.route.domain.model.Route;
 import com.warehouse.route.domain.model.RouteRequest;
 import com.warehouse.route.domain.model.RouteResponse;
 import com.warehouse.route.infrastructure.api.dto.RouteRequestDto;
@@ -14,4 +15,6 @@ public interface RouteMapper {
     RouteRequestDto map(RouteRequest request);
 
     RouteResponse mapToRouteResponse(RouteRequest routeRequest);
+
+    Route mapToRoute(RouteRequest request);
 }

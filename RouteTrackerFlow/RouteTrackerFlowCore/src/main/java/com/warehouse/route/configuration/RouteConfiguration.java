@@ -33,8 +33,9 @@ public class  RouteConfiguration {
     }
 
     @Bean
-    public RouteTrackerLogPort routeTrackerLogPort(RouteLogService routeLogService) {
-        return new RouteTrackerLogPortImpl(routeLogService);
+    public RouteTrackerLogPort routeTrackerLogPort(RouteLogService routeLogService,
+                                                   RouteTrackerServicePort trackerLogPort) {
+        return new RouteTrackerLogPortImpl(routeLogService, trackerLogPort);
     }
 
     @Bean
@@ -52,10 +53,8 @@ public class  RouteConfiguration {
     }
 
     @Bean
-    public RouteTrackerServicePort routeTrackerServicePort(RouteLogEventPublisher routeLogEventPublisher,
-                                                           RouteRepository routeRepository,
-                                                           AuthenticationPort authenticationPort) {
+    public RouteTrackerServicePort routeTrackerServicePort(RouteRepository routeRepository, AuthenticationPort authPort) {
         final RouteMapper routeMapper = Mappers.getMapper(RouteMapper.class);
-        return new RouteLogAdapter(routeMapper, routeLogEventPublisher, routeRepository, authenticationPort);
+        return new RouteLogAdapter(routeMapper, routeRepository, authPort);
     }
 }

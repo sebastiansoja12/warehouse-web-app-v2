@@ -20,16 +20,14 @@ public class RouteLogAdapter implements RouteTrackerServicePort {
 
     private final RouteMapper routeMapper;
 
-    private final RouteLogEventPublisher routeLogEventPublisher;
-
     private final RouteRepository routeRepository;
 
     private final AuthenticationPort authenticationPort;
 
     @Override
     public RouteResponse saveRoute(RouteRequest routeRequest) {
-        sendRouteEvent(routeRequest);
-        return routeMapper.mapToRouteResponse(routeRequest);
+        final Route route = routeMapper.mapToRoute(routeRequest);
+        return routeRepository.save(route);
     }
 
     @Override
@@ -56,16 +54,6 @@ public class RouteLogAdapter implements RouteTrackerServicePort {
         final String username = getUsername();
         final String depotCode = getDepotCode();
         routeRepository.deleteByParcelIdAndDepotCodeAndUsername(id, depotCode, username);
-    }
-
-    public void sendRouteEvent(RouteRequest routeRequest) {
-        routeLogEventPublisher.send(buildRouteRequest(routeRequest));
-    }
-
-    public RouteRequestEvent buildRouteRequest(RouteRequest request) {
-        return RouteRequestEvent.builder()
-                .routeRequestDto(routeMapper.map(request))
-                .build();
     }
 
     public String getUsername() {
