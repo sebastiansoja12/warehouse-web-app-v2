@@ -7,7 +7,7 @@ import com.warehouse.route.domain.port.secondary.RouteLogService;
 import com.warehouse.route.domain.port.secondary.RouteRepository;
 import com.warehouse.route.infrastructure.adapter.secondary.ParcelReadRepository;
 import com.warehouse.route.infrastructure.adapter.secondary.RouteDepotReadRepository;
-import com.warehouse.route.infrastructure.adapter.secondary.SupplierReadRepository;
+import com.warehouse.route.infrastructure.adapter.secondary.RouteSupplierReadRepository;
 import com.warehouse.route.infrastructure.adapter.secondary.UserReadRepository;
 import com.warehouse.route.infrastructure.adapter.secondary.entity.DepotEntity;
 import com.warehouse.route.infrastructure.adapter.secondary.entity.ParcelEntity;
@@ -46,7 +46,7 @@ public class RouteLogServiceTest {
     private RouteRepository repository;
 
     @Autowired
-    private SupplierReadRepository supplierReadRepository;
+    private RouteSupplierReadRepository routeSupplierReadRepository;
 
     @Autowired
     private RouteDepotReadRepository depotReadRepository;
@@ -69,7 +69,7 @@ public class RouteLogServiceTest {
         parcelReadRepository.save(parcel);
         // saving supplier in database so we can find it during saving parcels route
         supplier = createSupplierEntity();
-        supplierReadRepository.save(supplier);
+        routeSupplierReadRepository.save(supplier);
         // saving depot in database so we can find it during saving parcels route
         depot = createDepotEntity();
         depotReadRepository.save(depot);

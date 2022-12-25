@@ -25,7 +25,7 @@ public class RouteRepositoryImpl implements RouteRepository {
 
     private final ParcelReadRepository parcelReadRepository;
 
-    private final SupplierReadRepository supplierReadRepository;
+    private final RouteSupplierReadRepository routeSupplierReadRepository;
 
     private final UserReadRepository userReadRepository;
 
@@ -54,7 +54,7 @@ public class RouteRepositoryImpl implements RouteRepository {
     public RouteResponse saveSupplyRoute(Route route) {
         final ParcelEntity parcelEntity = parcelReadRepository.findById(route.getParcelId())
                 .orElseThrow( () -> new ParcelNotFoundException("Parcel does not exist"));
-        final SupplierEntity supplierEntity = supplierReadRepository
+        final SupplierEntity supplierEntity = routeSupplierReadRepository
                 .findBySupplierCode(route.getSupplierCode()).orElseThrow(
                         () -> new SupplierNotFoundException("Supplier does not exist"));
         final RouteEntity routeEntity = RouteEntity.builder()
@@ -110,7 +110,7 @@ public class RouteRepositoryImpl implements RouteRepository {
     }
 
     private SupplierEntity findSupplierEntity(Route route) {
-        return supplierReadRepository
+        return routeSupplierReadRepository
                 .findBySupplierCode(route.getSupplierCode()).orElse(null);
     }
 

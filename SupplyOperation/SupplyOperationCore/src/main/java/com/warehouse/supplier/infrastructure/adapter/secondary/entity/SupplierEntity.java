@@ -1,4 +1,4 @@
-package com.warehouse.route.infrastructure.adapter.secondary.entity;
+package com.warehouse.supplier.infrastructure.adapter.secondary.entity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "route.SupplierEntity")
+@Entity(name = "supplier.SupplierEntity")
 @Builder
 @Table(name = "supplier")
 public class SupplierEntity {
@@ -33,7 +33,7 @@ public class SupplierEntity {
     @Column(nullable = false)
     private String telephone;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "depot_id", referencedColumnName = "id")
     private DepotEntity depot;
 

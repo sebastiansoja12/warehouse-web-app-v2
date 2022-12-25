@@ -45,7 +45,7 @@ public class TrackerIntegrationTest {
     private RouteReadRepository routeReadRepository;
 
     @Autowired
-    private SupplierReadRepository supplierReadRepository;
+    private RouteSupplierReadRepository routeSupplierReadRepository;
 
     @Autowired
     private RouteDepotReadRepository depotReadRepository;
@@ -72,7 +72,7 @@ public class TrackerIntegrationTest {
         parcelReadRepository.save(parcel);
         // saving supplier in database, so we can find it during saving parcels route
         supplier = createSupplierEntity();
-        supplierReadRepository.save(supplier);
+        routeSupplierReadRepository.save(supplier);
         // saving depot in database, so we can find it during saving parcels route
         depot = createDepotEntity();
         depotReadRepository.save(depot);

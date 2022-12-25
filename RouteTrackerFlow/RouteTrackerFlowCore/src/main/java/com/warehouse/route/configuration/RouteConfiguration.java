@@ -14,6 +14,7 @@ import com.warehouse.route.infrastructure.adapter.secondary.mapper.RouteMapper;
 import com.warehouse.route.infrastructure.adapter.secondary.mapper.RouteModelMapper;
 import com.warehouse.route.infrastructure.api.RouteLogEventPublisher;
 import org.mapstruct.factory.Mappers;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,11 +26,11 @@ public class  RouteConfiguration {
     public RouteRepository routeRepository(RouteReadRepository routeReadRepository,
                                            RouteDepotReadRepository routeDepotReadRepository,
                                            ParcelReadRepository parcelReadRepository,
-                                           SupplierReadRepository supplierReadRepository,
+                                           RouteSupplierReadRepository routeSupplierReadRepository,
                                            UserReadRepository userReadRepository) {
         final RouteModelMapper routeModelMapper = Mappers.getMapper(RouteModelMapper.class);
         return new RouteRepositoryImpl(routeReadRepository, routeModelMapper, routeDepotReadRepository,
-                parcelReadRepository, supplierReadRepository, userReadRepository);
+                parcelReadRepository, routeSupplierReadRepository, userReadRepository);
     }
 
     @Bean
