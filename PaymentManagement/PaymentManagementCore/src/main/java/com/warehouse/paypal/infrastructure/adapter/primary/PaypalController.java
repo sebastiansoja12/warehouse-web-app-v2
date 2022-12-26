@@ -1,4 +1,4 @@
-package com.warehouse.paypal.infrastructure.adapter.secondary;
+package com.warehouse.paypal.infrastructure.adapter.primary;
 
 
 import com.warehouse.paypal.domain.model.PaymentRequest;
@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/payment")
+@RequestMapping("/v2/api/payments")
 @AllArgsConstructor
 public class PaypalController {
 

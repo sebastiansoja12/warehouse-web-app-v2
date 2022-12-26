@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
-@RequestMapping("/v2/api/barcode")
+@RequestMapping("/v2/api/barcodes")
 @AllArgsConstructor
 public class BarcodeGeneratorController {
 
