@@ -1,4 +1,4 @@
-package com.warehouse.qrcode.infrastructure.adapter.secondary;
+package com.warehouse.qrcode.infrastructure.adapter.primary;
 
 import com.warehouse.qrcode.domain.service.ParcelService;
 import lombok.AllArgsConstructor;
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 
-@RestController()
-@RequestMapping("/barcode")
+@RestController
+@RequestMapping("/v2/api/barcode")
 @AllArgsConstructor
 public class BarcodeGeneratorController {
 

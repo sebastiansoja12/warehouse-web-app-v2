@@ -4,7 +4,6 @@ import com.warehouse.route.domain.model.Route;
 import com.warehouse.route.domain.model.RouteRequest;
 import com.warehouse.route.domain.model.RouteResponse;
 import com.warehouse.route.domain.port.primary.RouteTrackerLogPort;
-import com.warehouse.route.domain.port.secondary.RouteTrackerServicePort;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +14,7 @@ import java.util.List;
 import static com.sun.mail.iap.Response.OK;
 
 @RestController
-@RequestMapping("/route")
+@RequestMapping("/v2/api/route")
 @AllArgsConstructor
 public class RouteController {
 

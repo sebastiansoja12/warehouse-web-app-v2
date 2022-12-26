@@ -1,4 +1,4 @@
-package com.warehouse.reroute.infrastructure.adapter.secondary;
+package com.warehouse.reroute.infrastructure.adapter.primary;
 
 import com.warehouse.reroute.domain.model.RerouteRequest;
 import com.warehouse.reroute.domain.model.RerouteResponse;
@@ -12,7 +12,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/reroute")
+@RequestMapping("/v2/api/reroute")
 @AllArgsConstructor
 public class RerouteTokenController {
 

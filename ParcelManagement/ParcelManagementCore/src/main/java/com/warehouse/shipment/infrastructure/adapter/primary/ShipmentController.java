@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/shipment")
+@RequestMapping("/v2/api/shipment")
 @AllArgsConstructor
 public class ShipmentController {
 

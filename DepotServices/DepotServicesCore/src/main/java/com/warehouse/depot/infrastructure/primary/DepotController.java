@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/depot")
+@RequestMapping("/v2/api/depot")
 @AllArgsConstructor
 public class DepotController {
 

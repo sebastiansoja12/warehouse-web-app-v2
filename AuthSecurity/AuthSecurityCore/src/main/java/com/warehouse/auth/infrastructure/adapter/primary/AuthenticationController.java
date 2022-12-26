@@ -9,7 +9,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/v2/api/auth")
 @AllArgsConstructor
 public class AuthenticationController {
 

@@ -1,4 +1,4 @@
-package com.warehouse.qrcode.infrastructure.adapter.secondary.mapper;
+package com.warehouse.qrcode.infrastructure.adapter.primary.mapper;
 
 import com.warehouse.qrcode.domain.model.Parcel;
 import org.mapstruct.Mapper;
