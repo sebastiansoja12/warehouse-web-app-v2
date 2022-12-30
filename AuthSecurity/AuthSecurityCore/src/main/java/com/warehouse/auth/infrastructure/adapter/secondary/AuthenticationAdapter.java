@@ -5,11 +5,14 @@ import com.warehouse.auth.domain.model.Depot;
 import com.warehouse.auth.domain.model.RegisterRequest;
 import com.warehouse.auth.domain.model.User;
 import com.warehouse.auth.domain.port.secondary.AuthenticationPort;
-import com.warehouse.auth.domain.port.secondary.DepotRepository;
 import com.warehouse.auth.domain.port.secondary.UserRepository;
 import com.warehouse.auth.domain.service.RefreshTokenService;
 import com.warehouse.auth.infrastructure.adapter.secondary.entity.UserEntity;
+import com.warehouse.auth.infrastructure.adapter.secondary.mapper.DepotEntityMapper;
 import com.warehouse.auth.infrastructure.adapter.secondary.mapper.UserMapper;
+import com.warehouse.depot.api.DepotService;
+import com.warehouse.depot.api.dto.DepotCodeDto;
+import com.warehouse.depot.api.dto.DepotDto;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,13 +25,15 @@ public class AuthenticationAdapter implements AuthenticationPort {
 
     private final UserRepository userRepository;
 
-    private final DepotRepository depotRepository;
-
     private final RefreshTokenService refreshTokenService;
 
     private final PasswordEncoder passwordEncoder;
 
     private final UserMapper userMapper;
+
+    private final DepotService depotService;
+
+    private final DepotEntityMapper depotMapper;
 
     @Override
     public AuthenticationResponse login(Authentication authentication, String token) {
@@ -65,10 +70,13 @@ public class AuthenticationAdapter implements AuthenticationPort {
 
     @Override
     public List<User> findCurrentUser(String username) {
-        final List<UserEntity> userEntity = userRepository.findByUsername(username);
-        final Depot depot = depotRepository.findDepotByCode(userEntity.stream()
-                .map(UserEntity::getDepotCode).findAny().get());
-        final User user = userMapper.map(userEntity.get(0));
+        final List<User> userList = userRepository.findByUsername(username);
+        final DepotCodeDto depotCode = new DepotCodeDto();
+        depotCode.setValue(userList.stream().map(
+                user -> user.getDepot().getDepotCode()).findAny().get());
+        final DepotDto depotDto = depotService.viewDepotByCode(depotCode);
+        final User user = userList.get(0);
+        final Depot depot = depotMapper.mapToDepotFromDepotDto(depotDto);
         user.setDepot(depot);
         return List.of(user);
     }

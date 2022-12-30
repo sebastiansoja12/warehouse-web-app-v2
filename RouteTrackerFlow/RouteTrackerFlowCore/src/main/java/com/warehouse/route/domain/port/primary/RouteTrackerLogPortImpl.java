@@ -4,16 +4,21 @@ import com.warehouse.route.domain.model.Route;
 import com.warehouse.route.domain.model.RouteRequest;
 import com.warehouse.route.domain.model.RouteResponse;
 import com.warehouse.route.domain.port.secondary.RouteLogService;
+import com.warehouse.route.domain.port.secondary.RouteRepository;
+import com.warehouse.route.domain.port.secondary.RouteTrackerServicePort;
 import com.warehouse.route.domain.vo.SupplyInformation;
 import lombok.AllArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @AllArgsConstructor
 public class RouteTrackerLogPortImpl implements RouteTrackerLogPort {
 
     private final RouteLogService routeLogService;
+
+    private final RouteTrackerServicePort trackerServicePort;
 
     @Override
     public void initializeRoute(Long parcelId) {
@@ -45,5 +50,20 @@ public class RouteTrackerLogPortImpl implements RouteTrackerLogPort {
                 .username(routeRequest.getUsername())
                 .build();
         return routeLogService.saveRoute(route);
+    }
+
+    @Override
+    public List<Route> findByParcelId(Long parcelId) {
+        return trackerServicePort.findByParcelId(parcelId);
+    }
+
+    @Override
+    public List<Route> findByUsername(String username) {
+        return trackerServicePort.findByUsername(username);
+    }
+
+    @Override
+    public void deleteRoute(Long id) {
+        trackerServicePort.deleteRoute(id);
     }
 }

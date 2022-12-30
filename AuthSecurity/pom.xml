@@ -6,7 +6,7 @@
 
     <groupId>com.warehouse</groupId>
     <artifactId>AuthSecurity</artifactId>
-    <version>VERSION_2022.14-SNAPSHOT</version>
+    <version>2022.15-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
         <module>AuthSecurityCore</module>

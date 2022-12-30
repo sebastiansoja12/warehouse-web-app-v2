@@ -1,5 +1,6 @@
 package com.warehouse.shipment.configuration;
 
+import com.warehouse.addressdetermination.AddressDeterminationService;
 import com.warehouse.mail.domain.port.primary.MailPort;
 import com.warehouse.mail.domain.port.primary.MailPortImpl;
 import com.warehouse.paypal.domain.port.primary.PaypalPort;
@@ -26,15 +27,15 @@ import org.springframework.context.annotation.Configuration;
 public class ShipmentConfiguration {
 
     @Bean
-    public ShipmentAdapter shipmentAdapter(ShipmentRepository shipmentRepository,
-                                           MailPort mailPort, PaypalPort paypalPort,
-                                           NotificationCreatorService creatorService,
-                                           RouteLogEventPublisher routeLogEventPublisher) {
+    public ShipmentAdapter shipmentAdapter(ShipmentRepository shipmentRepository, MailPort mailPort,
+                                           PaypalPort paypalPort, NotificationCreatorService creatorService,
+                                           RouteLogEventPublisher routeLogEventPublisher,
+                                           AddressDeterminationService addressDeterminationService) {
         final ShipmentMapper shipmentMapper = Mappers.getMapper(ShipmentMapper.class);
         final NotificationMapper notificationMapper = Mappers.getMapper(NotificationMapper.class);
         final PaymentMapper paymentMapper = Mappers.getMapper(PaymentMapper.class);
         return new ShipmentAdapter(shipmentMapper, shipmentRepository, mailPort, notificationMapper, paypalPort,
-                paymentMapper, creatorService, routeLogEventPublisher);
+                paymentMapper, creatorService, routeLogEventPublisher, addressDeterminationService);
     }
 
     @Bean

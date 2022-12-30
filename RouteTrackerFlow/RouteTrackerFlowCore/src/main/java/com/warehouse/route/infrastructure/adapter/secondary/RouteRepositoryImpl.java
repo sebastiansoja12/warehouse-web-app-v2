@@ -6,6 +6,7 @@ import com.warehouse.route.domain.port.secondary.RouteRepository;
 import com.warehouse.route.infrastructure.adapter.secondary.entity.*;
 import com.warehouse.route.infrastructure.adapter.secondary.exception.DepotNotFoundException;
 import com.warehouse.route.infrastructure.adapter.secondary.exception.ParcelNotFoundException;
+import com.warehouse.route.infrastructure.adapter.secondary.exception.SupplierNotFoundException;
 import com.warehouse.route.infrastructure.adapter.secondary.exception.UserNotFoundException;
 import com.warehouse.route.infrastructure.adapter.secondary.mapper.RouteModelMapper;
 import lombok.AllArgsConstructor;
@@ -24,7 +25,7 @@ public class RouteRepositoryImpl implements RouteRepository {
 
     private final ParcelReadRepository parcelReadRepository;
 
-    private final SupplierReadRepository supplierReadRepository;
+    private final RouteSupplierReadRepository routeSupplierReadRepository;
 
     private final UserReadRepository userReadRepository;
 
@@ -53,8 +54,9 @@ public class RouteRepositoryImpl implements RouteRepository {
     public RouteResponse saveSupplyRoute(Route route) {
         final ParcelEntity parcelEntity = parcelReadRepository.findById(route.getParcelId())
                 .orElseThrow( () -> new ParcelNotFoundException("Parcel does not exist"));
-        final SupplierEntity supplierEntity = supplierReadRepository
-                .findBySupplierCode(route.getSupplierCode()).orElse(null);
+        final SupplierEntity supplierEntity = routeSupplierReadRepository
+                .findBySupplierCode(route.getSupplierCode()).orElseThrow(
+                        () -> new SupplierNotFoundException("Supplier does not exist"));
         final RouteEntity routeEntity = RouteEntity.builder()
                 .created(route.getCreated())
                 .parcel(parcelEntity)
@@ -79,7 +81,10 @@ public class RouteRepositoryImpl implements RouteRepository {
                 .supplier(supplierEntity)
                 .build();
 
-        return mapper.mapToRouteResponse(routeReadRepository.save(routeEntity));
+
+        final RouteEntity entityToSave = routeReadRepository.save(routeEntity);
+
+        return mapper.mapToRouteResponse(entityToSave);
     }
 
     @Override
@@ -105,7 +110,7 @@ public class RouteRepositoryImpl implements RouteRepository {
     }
 
     private SupplierEntity findSupplierEntity(Route route) {
-        return supplierReadRepository
+        return routeSupplierReadRepository
                 .findBySupplierCode(route.getSupplierCode()).orElse(null);
     }
 

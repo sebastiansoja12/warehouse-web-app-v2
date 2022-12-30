@@ -1,6 +1,7 @@
 package com.warehouse.auth.domain.port.secondary;
 
 import com.warehouse.auth.domain.model.AuthenticationResponse;
+import com.warehouse.auth.domain.model.User;
 import com.warehouse.auth.infrastructure.adapter.secondary.entity.UserEntity;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface UserRepository {
 
     void logout(String token);
 
-    List<UserEntity> findByUsername(String username);
+    List<User> findByUsername(String username);
 
     Optional<UserEntity> findUserEntityByUsername(String username);
 }

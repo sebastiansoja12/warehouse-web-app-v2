@@ -9,7 +9,7 @@
     </parent>
     <groupId>com.warehouse</groupId>
     <artifactId>Application</artifactId>
-    <version>VERSION_2022.14-SNAPSHOT</version>
+    <version>2022.15-SNAPSHOT</version>
     <name>WarehouseApplication</name>
     <description>Inparcel Java Application</description>
     <packaging>jar</packaging>
@@ -24,6 +24,7 @@
         </repository>
     </repositories>
     <dependencies>
+
         <dependency>
             <groupId>com.warehouse</groupId>
             <artifactId>ParcelManagementCore</artifactId>
@@ -51,9 +52,22 @@
         </dependency>
         <dependency>
             <groupId>com.warehouse</groupId>
+            <artifactId>DepotServicesCore</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.warehouse</groupId>
             <artifactId>AuthSecurityCore</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.warehouse</groupId>
+            <artifactId>AddressDeterminationCore</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>

@@ -1,8 +1,8 @@
 package com.warehouse.qrcode.configuration;
 
 import com.warehouse.qrcode.domain.service.*;
-import com.warehouse.qrcode.infrastructure.adapter.secondary.mapper.ParcelEntityMapper;
-import com.warehouse.qrcode.infrastructure.adapter.secondary.mapper.ParcelEntityMapperImpl;
+import com.warehouse.qrcode.infrastructure.adapter.primary.mapper.ParcelEntityMapper;
+import com.warehouse.qrcode.infrastructure.adapter.primary.mapper.ParcelEntityMapperImpl;
 import com.warehouse.shipment.domain.port.primary.ShipmentPort;
 import org.mapstruct.factory.Mappers;
 import org.springframework.context.annotation.Bean;

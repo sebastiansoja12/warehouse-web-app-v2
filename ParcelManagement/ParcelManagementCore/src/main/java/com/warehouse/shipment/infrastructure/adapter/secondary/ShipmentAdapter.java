@@ -1,5 +1,6 @@
 package com.warehouse.shipment.infrastructure.adapter.secondary;
 
+import com.warehouse.addressdetermination.AddressDeterminationService;
 import com.warehouse.mail.domain.port.primary.MailPort;
 import com.warehouse.paypal.domain.model.PaymentRequest;
 import com.warehouse.paypal.domain.model.PaymentResponse;
@@ -38,6 +39,8 @@ public class ShipmentAdapter implements ShipmentPort {
 
     private final RouteLogEventPublisher routeLogEventPublisher;
 
+    private final AddressDeterminationService addressDeterminationService;
+
     @Override
     public ShipmentResponse ship(ShipmentRequest request) {
         final ShipmentResponse shipmentResponse =  createParcel(request);
@@ -58,6 +61,10 @@ public class ShipmentAdapter implements ShipmentPort {
     private ShipmentResponse createParcel(ShipmentRequest request) {
         final Parcel parcel = shipmentMapper.map(request);
 
+        final String fastestRoute = addressDeterminationService.findFastestRoute(parcel.getRecipient().getCity());
+
+        parcel.setDestination(fastestRoute);
+
         final Long parcelId = parcelRepository.save(parcel);
 
         final com.warehouse.shipment.domain.vo.PaymentRequest paymentRequest =
@@ -67,9 +74,8 @@ public class ShipmentAdapter implements ShipmentPort {
 
         final PaymentResponse payment = paypalPort.payment(request1);
 
-        final Notification notification = notificationCreatorService.createNotification(
-                parcel, payment.getLink().getPaymentUrl()
-        );
+        final Notification notification = notificationCreatorService.createNotification(parcel,
+                payment.getLink().getPaymentUrl());
 
         final com.warehouse.mail.domain.vo.Notification mailNotification = notificationMapper.map(notification);
 

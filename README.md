@@ -1,6 +1,6 @@
-**INPARCEL SPRING BOOT APPLICATION 1.6.1**
+ **INPARCEL SPRING BOOT APPLICATION 2.0** 
 
-Technologies:
+Technologies: 
 - JAVA 17
 - SPRING BOOT 2.7.2
 - MySQL
@@ -51,6 +51,6 @@ AUTH
 
 
 
-This project is used for GUI application as a backend server that communicates with database.
+This project is used for GUI application as a backend server that communicates with database. 
 Check [GUI project](https://gitlab.com/sebastiansoja/warehouse-web-app-fr) and Check [MG project](https://gitlab.com/sebastiansoja/warehouse-web-app-mg).
 

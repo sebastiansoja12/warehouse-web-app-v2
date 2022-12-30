@@ -6,7 +6,7 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import com.warehouse.qrcode.domain.model.Parcel;
-import com.warehouse.qrcode.infrastructure.adapter.secondary.mapper.ParcelEntityMapper;
+import com.warehouse.qrcode.infrastructure.adapter.primary.mapper.ParcelEntityMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

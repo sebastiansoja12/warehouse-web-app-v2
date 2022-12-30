@@ -7,6 +7,7 @@ import com.warehouse.auth.configuration.AuthTestConfiguration;
 import com.warehouse.auth.domain.model.LoginRequest;
 import com.warehouse.auth.domain.model.RegisterRequest;
 import com.warehouse.auth.domain.port.primary.AuthenticationPort;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,6 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = AuthTestConfiguration.class)
 @TestPropertySource(locations = {"/application-hsqlmem.properties"})
 @ActiveProfiles("hsqlmem")
+@Disabled
 public class AuthControllerTest {
 
     private MockMvc mockMvc;

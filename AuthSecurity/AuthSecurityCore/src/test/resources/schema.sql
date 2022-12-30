@@ -1,12 +1,4 @@
 
-CREATE TABLE IF NOT EXISTS ROUTE (
-id varchar(255) NOT NULL,
-created datetime DEFAULT NULL,
-depot_id bigint DEFAULT NULL,
-parcel_id varchar(255) DEFAULT NULL,
-supplier_id bigint DEFAULT NULL,
- user_id int DEFAULT NULL
-);
 CREATE TABLE IF NOT EXISTS USERS (
 id int NOT NULL,
 email varchar(255) NOT NULL,

@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.warehouse</groupId>
 	<artifactId>warehouse</artifactId>
-	<version>VERSION_2022.14-SNAPSHOT</version>
+	<version>2022.15-SNAPSHOT</version>
 	<name>warehouse</name>
 	<description>Pom file for all modules</description>
 	<properties>
@@ -33,8 +33,10 @@
 		<module>RouteTrackerFlow</module>
 		<module>SupplyOperation</module>
 		<module>PaymentManagement</module>
+		<module>AddressDetermination</module>
 		<module>Utility</module>
-	</modules>
+        <module>TokenStage</module>
+    </modules>
 
 	<packaging>pom</packaging>
 

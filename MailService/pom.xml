@@ -6,7 +6,7 @@
 
     <groupId>com.warehouse.mail</groupId>
     <artifactId>MailService</artifactId>
-    <version>VERSION_2022.14-SNAPSHOT</version>
+    <version>2022.15-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>

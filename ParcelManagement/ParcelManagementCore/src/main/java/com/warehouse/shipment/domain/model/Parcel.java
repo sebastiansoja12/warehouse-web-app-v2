@@ -16,6 +16,8 @@ public class Parcel {
     Recipient recipient;
     ParcelType parcelType;
 
+    String destination;
+
     double price;
 
     public double price() {
