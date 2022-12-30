@@ -19,8 +19,8 @@ pipeline {
     }
 
     environment{
-    GIT_REPOSITORY = "https://gitlab.com/sebastiansoja/warehouse-web-app.git"
-    GIT_CREDENTIALS = "4a61a551-124d-4498-898d-539fea2358a5"
+    GIT_REPOSITORY = "https://gitlab.com/sebastiansoja/warehouse-web-app-v2.git"
+    GIT_CREDENTIALS = ""
     GIT_BRANCH_NAME = "${env.GIT_BRANCH}"
     MAVEN_DEPLOY_NAME = "${GIT_BRANCH_NAME.replace('/', '-')}"
     }
