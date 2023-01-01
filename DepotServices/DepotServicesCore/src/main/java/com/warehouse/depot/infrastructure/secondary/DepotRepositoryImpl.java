@@ -10,7 +10,6 @@ import com.warehouse.depot.infrastructure.secondary.mapper.DepotMapper;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
-import java.util.Optional;
 
 @AllArgsConstructor
 public class DepotRepositoryImpl implements DepotRepository {
@@ -42,5 +41,11 @@ public class DepotRepositoryImpl implements DepotRepository {
     @Override
     public List<Depot> findAll() {
         return depotMapper.map(repository.findAll());
+    }
+
+    @Override
+    public void saveAll(List<Depot> depots) {
+        final List<DepotEntity> depotEntities = depotMapper.mapToDepotEntityList(depots);
+        repository.saveAll(depotEntities);
     }
 }
