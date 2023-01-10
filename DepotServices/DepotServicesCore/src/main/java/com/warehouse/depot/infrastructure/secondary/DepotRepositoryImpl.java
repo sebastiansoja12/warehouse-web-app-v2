@@ -10,6 +10,7 @@ import com.warehouse.depot.infrastructure.secondary.mapper.DepotMapper;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
+import java.util.Optional;
 
 @AllArgsConstructor
 public class DepotRepositoryImpl implements DepotRepository {
